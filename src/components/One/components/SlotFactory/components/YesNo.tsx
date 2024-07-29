@@ -10,7 +10,7 @@ import { useOneState } from "../../../context/StateProvider";
 import { useAsyncAction } from "../../../../../hooks/useAsyncAction";
 
 import { IYesNoSlot } from "../../../slots/YesNoSlot";
-import { TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 
 const OPTIONS = [
   "Yes",
@@ -129,6 +129,7 @@ export const YesNoField = ({
       caption={(dirty && (invalid || incorrect)) || description}
       placeholder={placeholder}
       label={title}
+      size="medium"
       status={error ? "danger" : undefined}
       onSelect={(index) => {
         if (index instanceof IndexPath) {
@@ -136,9 +137,9 @@ export const YesNoField = ({
         }
       }}
       accessoryRight={!noDeselect ? (
-        <TouchableOpacity onPress={() => handleChange(null)}>
+        <Pressable onPress={() => handleChange(null)}>
           <Icon name="close" />
-        </TouchableOpacity >
+        </Pressable >
       ) : undefined}
     >
       {OPTIONS.map((value) => (

@@ -33,6 +33,10 @@ const READY_CLASS = "rn-declarative__oneGenesisReady";
 const DEFAULT_READY = () => null;
 const DEFAULT_CHANGE = (data: IAnything) => console.log({ data });
 
+const defaultStyle = {
+  width: '100%',
+};
+
 /**
  * Represents the OneGenesis component.
  * @param props - The props for the component.
@@ -73,7 +77,7 @@ export const OneGenesis = <
 
   const payload = useSingleton(upperPayload);
 
-  const { style } = props;
+  const { style = defaultStyle } = props;
 
   const fieldsSnapshot = useMemo(() => fields, []);
 

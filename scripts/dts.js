@@ -27,7 +27,7 @@ fs.copyFileSync(
 
 fs.existsSync("demo") && fs.copyFileSync(
     'dist/index.d.ts',
-    'demo/src/rn-declarative.d.ts',
+    'demo/rn-declarative.d.ts',
 );
 
 rimraf.sync("dist/types");

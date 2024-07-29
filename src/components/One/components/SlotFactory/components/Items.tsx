@@ -6,7 +6,7 @@ import isObject from '../../../../../utils/isObject';
 
 import { Icon, IndexPath, Select, SelectItem } from "@ui-kitten/components";
 
-import { TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 
 import { useOneState } from '../../../context/StateProvider';
 import { useOneProps } from '../../../context/PropsProvider';
@@ -116,7 +116,7 @@ export const Items = ({
         return value
             .map((key) => {
                 const index = state.options.findIndex((value) => value === key);
-                return index ? new IndexPath(index) : undefined as never;
+                return index !== -1 ? new IndexPath(index) : undefined as never;
             })
             .filter(v => v);
     }, [value]);
@@ -197,6 +197,7 @@ export const Items = ({
         return (
             <Select
                 key={"loading"}
+                size="medium"
                 selectedIndex={DEFAULT_INDEX}
                 caption={(dirty && (invalid || incorrect)) || description}
                 placeholder={placeholder}
@@ -214,6 +215,7 @@ export const Items = ({
             multiSelect={true}
             disabled={disabled}
             selectedIndex={selectValue}
+            size="medium"
             caption={(dirty && (invalid || incorrect)) || description}
             placeholder={placeholder}
             label={title}
@@ -224,9 +226,9 @@ export const Items = ({
                 }
             }}
             accessoryRight={!noDeselect ? (
-                <TouchableOpacity onPress={() => handleChange(null)}>
+                <Pressable onPress={() => handleChange(null)}>
                     <Icon name="close" />
-                </TouchableOpacity >
+                </Pressable >
             ) : undefined}
         >
             {state.options.map((value) => (

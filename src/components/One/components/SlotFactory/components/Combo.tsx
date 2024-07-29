@@ -3,7 +3,7 @@ import { useMemo, useState, useRef, useEffect } from "react";
 
 import { Icon, IndexPath, Select, SelectItem } from "@ui-kitten/components";
 
-import { TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 
 import { useOneState } from "../../../context/StateProvider";
 import { useOneProps } from "../../../context/PropsProvider";
@@ -194,6 +194,7 @@ export const Combo = ({
     return (
       <Select
         key={"loading"}
+        size="medium"
         selectedIndex={DEFAULT_INDEX}
         caption={(dirty && (invalid || incorrect)) || description}
         placeholder={placeholder}
@@ -213,6 +214,7 @@ export const Combo = ({
       caption={(dirty && (invalid || incorrect)) || description}
       placeholder={placeholder}
       label={title}
+      size="medium"
       status={error ? "danger" : undefined}
       onSelect={(index) => {
         if (index instanceof IndexPath) {
@@ -220,9 +222,9 @@ export const Combo = ({
         }
       }}
       accessoryRight={!noDeselect ? (
-        <TouchableOpacity onPress={() => handleChange(null)}>
+        <Pressable onPress={() => handleChange(null)}>
           <Icon name="close" />
-        </TouchableOpacity >
+        </Pressable >
       ) : undefined}
     >
       {state.options.map((value) => (

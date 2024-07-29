@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useMemo } from "react";
 
-import { TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 
 import { Input } from '@ui-kitten/components';
 
@@ -64,18 +64,19 @@ export const Text = ({
       {...makeTestId(testId)}
       style={style}
       label={title}
+      size="medium"
       value={loading ? LOADING_LABEL : value}
       disabled={disabled || loading}
       multiline={inputMultiline}
       accessoryRight={TrailingIcon ? (
-        <TouchableOpacity onPress={() => tic && tic(value, object, payload, onChange, handleChange)}>
+        <Pressable onPress={() => tic && tic(value, object, payload, onChange, handleChange)}>
           <TrailingIcon />
-        </TouchableOpacity >
+        </Pressable >
       ) : undefined}
       accessoryLeft={LeadingIcon ? (
-        <TouchableOpacity onPress={() => lic && lic(value, object, payload, onChange, handleChange)}>
+        <Pressable onPress={() => lic && lic(value, object, payload, onChange, handleChange)}>
           <LeadingIcon />
-        </TouchableOpacity>
+        </Pressable>
       ) : undefined}
       onFocus={onFocus}
       onBlur={onBlur}

@@ -1,1 +1,1 @@
-export const FIELD_DEBOUNCE = 800;
+export const FIELD_DEBOUNCE = 600;
