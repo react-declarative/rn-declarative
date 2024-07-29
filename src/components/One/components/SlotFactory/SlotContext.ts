@@ -6,7 +6,6 @@ import Combo from './components/Combo';
 import Items from './components/Items';
 import Radio from './components/Radio';
 import Text from './components/Text';
-import Icon from './components/Icon';
 import Switch from './components/Switch';
 import YesNo from './components/YesNo';
 
@@ -30,7 +29,6 @@ export const defaultSlots: ISlotFactoryContext = {
     Radio,
     Button,
     Text,
-    Icon,
     Switch,
     YesNo,
 };

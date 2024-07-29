@@ -57,7 +57,6 @@ export type IOneApi<Data = IAnything> = IOneApiInternal<Data>;
 export type IOption<Payload = any> = IOptionInternal<Payload>;
 
 export { ActionButton } from './components';
-export { ActionIcon } from './components';
 
 export { Async } from './components';
 export { If } from './components';
