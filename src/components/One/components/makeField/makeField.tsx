@@ -41,6 +41,11 @@ import OneConfig, { GET_REF_SYMBOL } from '../OneConfig';
 const APPLY_ATTEMPTS = 35;
 const APPLY_DELAY = 10;
 
+const defaultStyles = {
+    marginRight: 8,
+    marginBottom: 8,
+} as const;
+
 /**
  * Represents the configuration options for makeField hoc.
  *
@@ -563,7 +568,8 @@ export function makeField(
               phoneStyle,
               tabletStyle,
               desktopStyle,
-            }
+            },
+            defaultStyles,
         );
 
         const computeReadonly = useCallback(() => {
