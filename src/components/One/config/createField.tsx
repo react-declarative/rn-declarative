@@ -14,7 +14,6 @@ import ItemsField from "../fields/ItemsField";
 import InitField from "../fields/InitField";
 import YesNoField from "../fields/YesNoField";
 import ButtonField from "../fields/ButtonField";
-import IconField from "../fields/IconField";
 
 const fieldMap: { [key in FieldType]?: React.ComponentType<IEntity> } = Object.create(null);
 
@@ -44,7 +43,6 @@ Object.assign(fieldMap, {
   [FieldType.YesNo]: YesNoField,
   [FieldType.Init]: InitField,
   [FieldType.Button]: ButtonField,
-  [FieldType.Icon]: IconField,
 });
 
 /**

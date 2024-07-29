@@ -61,7 +61,7 @@ export const fields: TypedField[] = [
                 sx: {
                     mt: 3
                 },
-                buttonVariant: 'contained',
+                buttonApperance: 'contained',
                 title: 'Submit',
                 press: (name, e, data, payload) => {
                     const errors = getInvalidFields(fields, data, payload);

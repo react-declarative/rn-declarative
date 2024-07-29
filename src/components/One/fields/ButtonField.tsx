@@ -16,7 +16,7 @@ import IField from '../../../model/IField';
  */
 export interface IButtonFieldProps<Data = IAnything, Payload = IAnything> {
   /**
-   * Retrieves the 'buttonVariant' property from the given variable.
+   * Retrieves the 'buttonApperance' property from the given variable.
    *
    * @template T - The type of the variable.
    * @template K - The key to pick from the variable.
@@ -25,7 +25,7 @@ export interface IButtonFieldProps<Data = IAnything, Payload = IAnything> {
    *
    * @returns - The picked property.
    */
-  buttonVariant?: PickProp<IField<Data, Payload>, 'buttonVariant'>;
+  buttonApperance?: PickProp<IField<Data, Payload>, 'buttonApperance'>;
 
   /**
    * Retrieves the 'buttonSize' property from the given variable.
@@ -39,29 +39,6 @@ export interface IButtonFieldProps<Data = IAnything, Payload = IAnything> {
    */
   buttonSize?: PickProp<IField<Data, Payload>, 'buttonSize'>;
 
-  /**
-   * Retrieves the 'buttonSize' property from the given variable.
-   *
-   * @template T - The type of the variable.
-   * @template K - The key to pick from the variable.
-   *
-   * @param variable - The variable to pick the property from.
-   *
-   * @returns - The picked property.
-   */
-  buttonColor?: PickProp<IField<Data, Payload>, 'buttonColor'>;
-
-  /**
-   * Retrieves the 'icon' property from the given variable.
-   *
-   * @template T - The type of the variable.
-   * @template K - The key to pick from the variable.
-   *
-   * @param variable - The variable to pick the property from.
-   *
-   * @returns - The picked property.
-   */
-  icon?: PickProp<IField<Data, Payload>, 'icon'>;
   /**
    * Retrieves the 'title' property from the given variable.
    *
@@ -118,12 +95,10 @@ export interface IButtonFieldPrivate<Data = IAnything> {
 export const ButtonField = ({
   disabled,
   press,
-  icon,
   title,
   value,
   buttonSize,
-  buttonVariant,
-  buttonColor,
+  buttonApperance,
   placeholder,
   onFocus,
   onBlur,
@@ -131,11 +106,9 @@ export const ButtonField = ({
   <Button
     disabled={disabled}
     press={press}
-    icon={icon}
     title={title}
     value={value}
-    buttonVariant={buttonVariant}
-    buttonColor={buttonColor}
+    buttonApperance={buttonApperance}
     buttonSize={buttonSize}
     placeholder={placeholder}
     onFocus={onFocus}

@@ -8,13 +8,11 @@ import { ITextSlot } from '../../slots/TextSlot';
 import { ISwitchSlot } from '../../slots/SwitchSlot';
 import { IYesNoSlot } from '../../slots/YesNoSlot';
 import { IButtonSlot } from '../../slots/ButtonSlot';
-import { IIconSlot } from '../../slots/IconSlot';
 
 /**
  * A context object that provides access to various component types used by the slot factory.
  * @typedef ISlotFactoryContext
  * @property Button - The component type for Button slots.
- * @property Icon - The component type for Icon slots.
  * @property CheckBox - The component type for Checkbox slots.
  * @property Combo - The component type for Combo slots.
  * @property YesNo - The component type for YesNo slots.
@@ -26,7 +24,6 @@ import { IIconSlot } from '../../slots/IconSlot';
 export interface ISlotFactoryContext {
     CheckBox: ComponentType<ICheckBoxSlot>;
     Button: ComponentType<IButtonSlot>;
-    Icon: ComponentType<IIconSlot>;
     Combo: ComponentType<IComboSlot>;
     YesNo: ComponentType<IYesNoSlot>;
     Items: ComponentType<IItemsSlot>;

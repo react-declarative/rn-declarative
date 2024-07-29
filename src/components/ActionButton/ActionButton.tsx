@@ -1,43 +1,17 @@
 import * as React from 'react';
 import { useState, useRef, useLayoutEffect } from 'react';
 
-import CircularProgress from '@mui/material/CircularProgress';
-import Button, { ButtonProps } from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
+import { Button, ButtonProps, Spinner } from '@ui-kitten/components';
+import { StyleSheet, View } from 'react-native';
 
 import useActualValue from '../../hooks/useActualValue';
 
-/**
- * Represents a component that displays a loading indicator and content.
- *
- * @param props - The properties of the component.
- * @param props.children - The content to be displayed.
- * @param props.loading - Whether or not to display the loading indicator.
- *
- * @returns The rendered component.
- */
-const ProgressDefault = ({
-    loading,
-    children,
-}: {
-    children: React.ReactNode;
-    loading: boolean;
-}) => (
-    <Stack direction="row" alignItems="center" spacing={1}>
-        {!!loading && (
-            <Box display="flex" alignItems="center">
-                <CircularProgress
-                    size="16px"
-                    color="inherit"
-                />
-            </Box>
-        )}
-        <Box>
-            {children}
-        </Box>
-    </Stack>
-);
+const styles = StyleSheet.create({
+    indicator: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+});
 
 /**
  * Represents the properties for an ActionButton component.
@@ -46,13 +20,18 @@ const ProgressDefault = ({
 interface IActionButtonProps extends Omit<ButtonProps, keyof {
     onPress: never;
 }> {
-    Progress?: typeof ProgressDefault;
     onLoadStart?: () => void;
     onLoadEnd?: (isOk: boolean) => void;
     onPress?: () => (void | Promise<void>);
     fallback?: (e: Error) => void;
     throwError?: boolean;
 };
+
+const LoadingIndicator = () => (
+    <View style={styles.indicator}>
+      <Spinner size='small' />
+    </View>
+);
 
 /**
  * Represents an action button component.
@@ -67,12 +46,10 @@ interface IActionButtonProps extends Omit<ButtonProps, keyof {
  * @param [props.children] - The content to be rendered inside the button.
  * @param [props.disabled] - Whether the button is disabled.
  * @param [props.throwError=false] - Whether to throw an error when an exception occurs.
- * @param [props.variant="outlined"] - The button style variant.
  *
  * @returns The rendered component.
  */
 export const ActionButton = ({
-    Progress = ProgressDefault,
     onPress = () => { },
     onLoadStart,
     onLoadEnd,
@@ -80,7 +57,6 @@ export const ActionButton = ({
     children,
     disabled,
     throwError = false,
-    variant = "outlined",
     ...otherProps
 }: IActionButtonProps) => {
 
@@ -123,16 +99,17 @@ export const ActionButton = ({
         }
     };
 
+    const iconProps: Record<string, unknown> = {};
+
     return (
         <Button
             {...otherProps}
             onPress={handlePress}
             disabled={!!loading || disabled}
-            variant={variant}
+            accessoryLeft={loading ? <LoadingIndicator /> : undefined}
+            {...iconProps}
         >
-            <Progress loading={!!loading}>
-                {children}
-            </Progress>
+            {children}
         </Button>
     );
 };

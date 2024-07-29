@@ -10,19 +10,15 @@ import { IButtonSlot } from '../../../slots/ButtonSlot';
 export const Button = ({
     disabled,
     press,
-    icon: Icon,
     title,
     value,
     placeholder,
-    buttonVariant,
+    buttonApperance,
     buttonSize,
-    buttonColor,
 }: IButtonSlot) => (
     <ActionButton
-        variant={buttonVariant}
+        appearance={buttonApperance}
         size={buttonSize}
-        color={buttonColor}
-        startIcon={Icon && <Icon />}
         disabled={disabled}
         onPress={press}
     >

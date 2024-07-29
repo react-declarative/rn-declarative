@@ -21,11 +21,6 @@ export type Value = string | string[] | number | boolean | null;
 export interface IField<Data = IAnything, Payload = IAnything> {
 
     /**
-     * Иконка для FieldType.Button и FieldType.Icon
-     */
-    icon?: React.ComponentType<any>;
-
-    /**
      * Размер иконки для FieldType.Icon
      */
     iconSize?: number;
@@ -43,17 +38,12 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     /**
      * Тип заливки кнопки для FieldType.Button
      */
-    buttonVariant?: 'text' | 'outlined' | 'contained';
+    buttonApperance?: 'filled' | 'outline' | 'ghost';
 
     /**
      * Тип размера кнопки для FieldType.Button
      */
     buttonSize?: 'small' | 'medium' | 'large';
-
-    /**
-     * Тип цвета кнопки для FieldType.Button
-     */
-    buttonColor?: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
 
     /**
      * Отменяет ожидание фокуса для валидации
