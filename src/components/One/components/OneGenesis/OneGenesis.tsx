@@ -27,8 +27,8 @@ import useActualValue from "../../../../hooks/useActualValue";
 
 import makeTestId from "../../helpers/makeTestId";
 
-const BASE_CLASS = "react-declarative__oneGenesis";
-const READY_CLASS = "react-declarative__oneGenesisReady";
+const BASE_CLASS = "rn-declarative__oneGenesis";
+const READY_CLASS = "rn-declarative__oneGenesisReady";
 
 const DEFAULT_READY = () => null;
 const DEFAULT_CHANGE = (data: IAnything) => console.log({ data });

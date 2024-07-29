@@ -60,7 +60,6 @@ const buildObj = <Data = IAnything, Payload = IAnything>(fields: IField<Data>[],
             .filter((field) => !features || !field.features || field.features.some((feature) => features.includes(feature)))
             .filter((field) => field.type !== FieldType.Phony)
             .filter((field) => field.type !== FieldType.Button)
-            .filter((field) => field.type !== FieldType.Icon)
             .forEach((f) => {
                 if (isStatefull(f as IField)) {
                     create(obj, f.name);

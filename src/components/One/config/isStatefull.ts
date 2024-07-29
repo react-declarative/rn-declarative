@@ -6,18 +6,9 @@ import IField from '../../../model/IField';
  */
 const layouts: Set<FieldType> = new Set([
     FieldType.Group,
-    FieldType.Box,
-    FieldType.Paper,
-    FieldType.Outline,
-    FieldType.Expansion,
-    FieldType.Div,
-    FieldType.Tabs,
-    FieldType.Hero,
     FieldType.Fragment,
-    FieldType.Center,
-    FieldType.Stretch,
-    FieldType.Condition,
     FieldType.Layout,
+    FieldType.Condition,
 ]);
 
 /**

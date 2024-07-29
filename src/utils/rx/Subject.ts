@@ -4,7 +4,7 @@ import Observer from "./Observer";
 import type TSubject from "../../model/TSubject";
 import TObserver, { TObservable } from "../../model/TObserver";
 
-export const SUBJECT_EVENT = Symbol('react-declarative-subject');
+export const SUBJECT_EVENT = Symbol('rn-declarative-subject');
 
 type Function = (...args: any[]) => void;
 

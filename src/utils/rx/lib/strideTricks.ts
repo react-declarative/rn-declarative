@@ -20,13 +20,13 @@ export const strideTricks = <T = any>(strideSize: number, step = Math.floor(stri
         totalSteps = Math.ceil((windowSize - strideSize) / step);
         needExtraStep = totalSteps * strideSize !== windowSize;
         resultSize = totalSteps + (needExtraStep ? 1 : 0);
-        if (strideSize > windowSize || step > strideSize) throw new Error('react-declarative strideTricks too big stride');
+        if (strideSize > windowSize || step > strideSize) throw new Error('rn-declarative strideTricks too big stride');
       }
     })
     .flatMap((buffer) => {
 
       if (buffer.length !== windowSize) {
-        throw new Error('react-declarative strideTricks unshaped data');
+        throw new Error('rn-declarative strideTricks unshaped data');
       }
 
       const strides: T[][] = [];

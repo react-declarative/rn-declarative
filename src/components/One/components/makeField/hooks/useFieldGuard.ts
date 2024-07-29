@@ -49,7 +49,7 @@ const DEFAULT_IS_READONLY = () => false;
 const createFallback = (name: string, prefix: string, source: string) => {
   const fieldName = `${prefix}(${name || 'unknown'})`;
   return (error: Error) => {
-    console.error(`react-declarative ${fieldName} ${source} exception`, error);
+    console.error(`rn-declarative ${fieldName} ${source} exception`, error);
   };
 };
 

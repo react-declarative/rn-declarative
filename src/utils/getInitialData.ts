@@ -28,7 +28,6 @@ export const getInitialData = <Data extends {} = IAnything, Payload extends IAny
         .filter(({ name }) => !!name)
         .filter(({ type }) => type !== FieldType.Phony)
         .filter(({ type }) => type !== FieldType.Button)
-        .filter(({ type }) => type !== FieldType.Icon)
         .forEach(({ type, name, defaultValue, hidden }) => {
             create(newData, name);
             if (typeof hidden === 'function' ? hidden(payload) : hidden) {
