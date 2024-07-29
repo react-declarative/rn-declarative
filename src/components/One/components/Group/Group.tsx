@@ -16,6 +16,7 @@ import makeTestId from "../../helpers/makeTestId";
 
 const defaultStyle =  {
   flexDirection: 'row',
+  flexWrap: 'wrap',
 } as const;
 
 /**
