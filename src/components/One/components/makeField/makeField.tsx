@@ -9,11 +9,6 @@ import set from '../../../../utils/set';
 import get from '../../../../utils/get';
 import deepCompare from '../../../../utils/deepCompare';
 
-import waitForBlur from '../../../../utils/wairForBlur';
-import waitForMove from '../../../../utils/waitForMove';
-import waitForTab from '../../../../utils/waitForTab';
-import waitForTouch from '../../../../utils/waitForTouch';
-
 import { makeStyles } from '../../../../styles';
 
 import { useDebounceConfig } from '../../context/DebounceProvider';
@@ -23,6 +18,7 @@ import { useOneState } from '../../context/StateProvider';
 import useDebounce from '../../hooks/useDebounce';
 
 import useManagedCompute from './hooks/useManagedCompute';
+import useSubject from '../../../../hooks/useSubject';
 import useFieldMemory from './hooks/useFieldMemory';
 import useFieldState from './hooks/useFieldState';
 import useFieldGuard from './hooks/useFieldGuard';
@@ -226,6 +222,9 @@ export function makeField(
 
         const { classes } = useStyles();
 
+        const focusSubject = useSubject<void>();
+        const blurSubject = useSubject<void>();
+
         const compute = useManagedCompute({
             compute: upperCompute,
             object,
@@ -318,36 +317,6 @@ export function makeField(
         oneConfig.WITH_DISMOUNT_LISTENER && useLayoutEffect(() => () => {
             memory.isMounted = false;
         }, []);
-
-        /**
-         * Если пользователь убрал мышь с поля ввода, следует
-         * применить изменения
-         */
-        oneConfig.WITH_WAIT_FOR_MOVE_LISTENER && useEffect(() => waitForMove(() => {
-            if (pending()) {
-                flush();
-            }
-        }), []);
-
-        /**
-         * Если пользователь нажал Tab, следует
-         * применить изменения
-         */
-        oneConfig.WITH_WAIT_FOR_TAB_LISTENER && useEffect(() => waitForTab(() => {
-            if (pending()) {
-                flush();
-            }
-        }), []);
-
-        /**
-         * Перед событием клика на сенсорных экранах
-         * следует применить изменение
-         */
-        oneConfig.WITH_WAIT_FOR_TOUCH_LISTENER && useEffect(() => waitForTouch(() => {
-            if (pending()) {
-                flush();
-            }
-        }), []);
 
         /**
          * Коллбек входящего изменения.
@@ -508,27 +477,13 @@ export function makeField(
             memory.lastDebouncedValue = debouncedValue;
         }, [debouncedValue, object]);
 
-        /*
-         * Флаг readonly позволяет управлять автокомплитом формы. На мобильных
-         * устройствах мы выключаем его до фокусировки input
-         */
-        oneConfig.WITH_MOBILE_READONLY_FALLBACK && useEffect(() => {
-            const handler = () => setFocusReadonly(false);
-            groupRef && groupRef.addEventListener('touchstart', handler, {
-                passive: false,
-            });
-            return () => groupRef && groupRef.removeEventListener('touchstart', handler);
-        }, [groupRef]);
-
         /**
          * Если всплытие события клика не сработает, флаг dirty уберется при
          * первом изменени значения
          */
         oneConfig.WITH_DIRTY_CLICK_LISTENER && useEffect(() => {
             if (!fieldConfig.skipDirtyClickListener) {
-                const handler = () => setDirty(true);
-                groupRef && groupRef.addEventListener('click', handler, { passive: true });
-                return () => groupRef && groupRef.removeEventListener('click', handler);
+                return focusSubject.once(() => setDirty(true));
             }
             return undefined;
         }, [groupRef]);
@@ -623,7 +578,6 @@ export function makeField(
         const handleFocus = useCallback(() => {
             const { fieldReadonly$: fieldReadonly } = memory;
             const { upperReadonly$: upperReadonly } = memory;
-            const { groupRef$: groupRef } = memory;
             if (!memory.isMounted) {
                 return;
             }
@@ -631,7 +585,7 @@ export function makeField(
                 setFocusReadonly(false);
             }
             if (!fieldConfig.skipFocusBlurCall) {
-                groupRef && waitForBlur(groupRef, oneConfig.FIELD_BLUR_DEBOUNCE).then(() => {
+                blurSubject.once(() => {
                     if (pending()) {
                         flush();
                     }
@@ -641,7 +595,7 @@ export function makeField(
                         }), changeObject);
                     }
                     setFocusReadonly(true);
-                });
+                })
                 if (focus) {
                     focus(name, memory.object$, payload, (value) => managedProps.onChange(value, {
                         skipReadonly: true,
@@ -649,6 +603,11 @@ export function makeField(
                 }
             }
         }, []);
+
+        /**
+         * Подписка на событие фокуса для поддержки dirty
+         */
+        useEffect(() => focusSubject.subscribe(handleFocus), []);
 
         /**
          * Коллбек для перехвата клика из поля. Используется только
@@ -711,6 +670,8 @@ export function makeField(
 
         const managedProps: IManaged<Data> = {
             onChange: fieldConfig.withApplyQueue ? handleChange : handleChangeSync,
+            onFocus: () => focusSubject.next(),
+            onBlur: () => blurSubject.next(),
             click: handleExternalClick,
             fallback,
             disabled: fieldDisabled || disabled,
@@ -766,7 +727,6 @@ export function makeField(
                 style={style}
                 className={classNames(className, classes.root, classMap)}
                 {...groupProps}
-                onFocus={handleFocus}
                 onClick={handleInternalClick}
             >
                 <Component {...componentProps as IManaged} />

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useMemo, useRef, useLayoutEffect } from "react";
 
 import IconButton from "@mui/material/IconButton";
 import MatTextField from "@mui/material/TextField";
@@ -15,10 +14,7 @@ import IManaged, { PickProp } from "../../../../../model/IManaged";
 import { IField } from "../../../../../model/IField";
 import IAnything from "../../../../../model/IAnything";
 
-import formatText from "../../../../../utils/formatText";
-
 const LOADING_LABEL = "Loading";
-const NEVER_POS = Symbol("never-pos");
 
 /**
  * Represents a set of icons.
@@ -149,16 +145,6 @@ const multiline = (inputRows: number) => ({
 });
 
 /**
- * Retrieves the current caret position within an HTML input or textarea element.
- *
- * @param element - The input or textarea element.
- * @returns - The current caret position.
- */
-const getCaretPos = (element: HTMLInputElement | HTMLTextAreaElement) => {
-  return element.selectionStart || element.value.length;
-};
-
-/**
  * Variable representing a text input component with various properties and functionalities.
  * @typedef  Text
  * @property invalid - Indicates if the input value is invalid.
@@ -215,16 +201,6 @@ export const Text = ({
   inputRows: rows = 1,
   placeholder = "",
   inputAutocomplete: autoComplete = "off",
-  inputFormatterSymbol: symbol = "0",
-  inputFormatterAllowed: allowed,
-  inputFormatterReplace: replace,
-  inputFormatterTemplate: template = "",
-  inputFormatter = (raw) =>
-    formatText(raw, template, {
-      symbol,
-      allowed,
-      replace,
-    }),
   dirty,
   loading,
   autoFocus,
@@ -233,78 +209,6 @@ export const Text = ({
 }: ITextSlot) => {
   const payload = useOnePayload();
   const { object, changeObject: handleChange } = useOneState<object>();
-
-  const inputElementRef = useRef<HTMLInputElement | null>();
-
-  /**
-   * Represents a caret manager for handling caret position in an input element.
-   * @typedef CaretManager
-   * @property render - Renders the caret position in the input element.
-   * @property pos - Gets the current caret position in the input element.
-   */
-  const caretManager = useMemo(() => {
-    let lastPos: symbol | number = NEVER_POS;
-
-    /**
-     * Calculates the adjustment for the cursor based on the position of a character in the template.
-     * The adjustment value represents the number of characters to skip before reaching the desired position.
-     *
-     * @param pos - The position of the character in the template. Must be a non-negative integer.
-     * @returns The adjustment value.
-     */
-    const getAdjust = (pos: number) => {
-      let adjust = 0;
-      for (let i = Math.max(pos - 1, 0); i < template.length; i++) {
-        const char = template[i];
-        if (char === symbol) {
-          break;
-        }
-        adjust += 1;
-      }
-      return adjust;
-    };
-
-    return {
-      render: () => {
-        if (inputType !== "text") {
-          return;
-        }
-        const { current: input } = inputElementRef;
-        if (typeof lastPos === "number") {
-          input?.setSelectionRange(lastPos, lastPos);
-          lastPos = NEVER_POS;
-        }
-      },
-      pos: () => {
-        const { current: input } = inputElementRef;
-        if (input) {
-          lastPos = getCaretPos(input);
-          lastPos += getAdjust(lastPos);
-        }
-        return lastPos;
-      },
-    };
-  }, []);
-
-  useLayoutEffect(() => {
-    if (!template) {
-      return;
-    }
-    const { current: input } = inputElementRef;
-    const handler = () => caretManager.pos();
-    input && input.addEventListener("keyup", handler);
-    input && input.addEventListener("click", handler);
-    return () => {
-      input && input.removeEventListener("keyup", handler);
-      input && input.removeEventListener("click", handler);
-    };
-  }, [inputElementRef.current]);
-
-  useLayoutEffect(() => {
-    if (template) {
-      caretManager.render();
-    }
-  }, [value]);
 
   return (
     <MatTextField
@@ -319,7 +223,6 @@ export const Text = ({
         }),
       }}
       inputRef={(input: HTMLInputElement | null) => {
-        inputElementRef.current = input;
         inputRef && inputRef(input);
       }}
       variant={outlined ? "outlined" : "standard"}
@@ -362,17 +265,8 @@ export const Text = ({
       autoComplete={autoComplete}
       value={loading ? LOADING_LABEL : String(value || "")}
       placeholder={placeholder}
-      onChange={({ target }) => {
-        let result = target.value;
-        if (template) {
-          result = "";
-          for (let i = 0; i < target.value.length; i++) {
-            result += target.value[i];
-            result = inputFormatter(result);
-          }
-          caretManager.pos();
-        }
-        onChange(result);
+      onChange={(e: any) => {
+        onChange(e.target.value);
       }}
       label={title}
       disabled={disabled}

@@ -11,16 +11,12 @@ import Autocomplete from "@mui/material/Autocomplete";
 import MatTextField from "@mui/material/TextField";
 import Radio from "@mui/material/Radio";
 
-import debounce from "../../../../../utils/hof/debounce";
-
 import { useOnePayload } from "../../../context/PayloadProvider";
 import { useOneProps } from "../../../context/PropsProvider";
 import { useOneState } from "../../../context/StateProvider";
 
-import { useReloadTrigger } from "../../../../../hooks/useReloadTrigger";
 import { useAsyncAction } from "../../../../../hooks/useAsyncAction";
 import { useActualValue } from "../../../../../hooks/useActualValue";
-import { useSubject } from "../../../../../hooks/useSubject";
 
 import RadioIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
@@ -29,8 +25,6 @@ import { IYesNoSlot } from "../../../slots/YesNoSlot";
 
 const icon = <RadioButtonUncheckedIcon fontSize="small" />;
 const checkedIcon = <RadioIcon fontSize="small" />;
-
-const MOUSE_OUT_DEBOUNCE = 45;
 
 const OPTIONS = [
   "Yes",
@@ -71,10 +65,7 @@ export const YesNoField = ({
   incorrect,
   onChange,
 }: IYesNoSlot) => {
-  const { reloadTrigger, doReload } = useReloadTrigger();
-
   const [labels, setLabels] = useState<Record<string, string>>({});
-  const [opened, setOpened] = useState(false);
 
   const initComplete = useRef(false);
 
@@ -213,29 +204,6 @@ export const YesNoField = ({
     );
   };
 
-  const changeSubject = useSubject<void>();
-
-  useEffect(() => {
-    if (!opened) {
-      return;
-    }
-    let unsubscribeRef = changeSubject.once(() => {
-      const handler = debounce(({ clientX, clientY }: MouseEvent) => {
-        const target = document.elementFromPoint(clientX, clientY);
-        if (!target?.closest(".MuiAutocomplete-popper")) {
-          setOpened(false);
-          doReload();
-        }
-      }, MOUSE_OUT_DEBOUNCE);
-      document.addEventListener("mousemove", handler);
-      unsubscribeRef = () => {
-        document.removeEventListener("mousemove", handler);
-        handler.clear();
-      };
-    });
-    return () => unsubscribeRef();
-  }, [opened]);
-
   /**
    * Handles the change in value.
    *
@@ -243,7 +211,6 @@ export const YesNoField = ({
    */
   const handleChange = (value: any) => {
     onChange(value === "Yes" ? true : value === "No" ? false : null);
-    changeSubject.next();
   };
 
   if (loading || !initComplete.current) {
@@ -265,9 +232,6 @@ export const YesNoField = ({
 
   return (
     <Autocomplete
-      key={reloadTrigger}
-      onOpen={() => setOpened(true)}
-      onClose={() => setOpened(false)}
       disableCloseOnSelect
       disableClearable={noDeselect}
       value={value || null}

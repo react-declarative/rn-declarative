@@ -33,13 +33,8 @@ import { useChangeSubject } from './hooks/useChangeSubject';
 import { useDeepChangeSubject } from './hooks/useDeepChangeSubject';
 import { useReloadTrigger } from './hooks/useReloadTrigger';
 import { useSingleton } from './hooks/useSingleton';
-import { useElementSize } from './hooks/useElementSize';
-import { useWindowSize } from './hooks/useWindowSize';
 import { useSubject } from './hooks/useSubject';
 import { useChange } from './hooks/useChange';
-
-export { useElementSize };
-export { useWindowSize };
 
 import IAnything from './model/IAnything';
 import IRowData, { RowId } from './model/IRowData';
@@ -115,9 +110,7 @@ export type IRadioSlot = IRadioSlotInternal;
 export type ISwitchSlot = ISwitchSlotInternal;
 export type ITextSlot = ITextSlotInternal;
 
-export { openBlank } from './utils/openBlank';
 export { randomString } from './utils/randomString';
-export { chooseFile } from './utils/chooseFile';
 export { compareFulltext } from './utils/compareFulltext';
 export { promiseState, promiseValue } from './utils/promiseState';
 
@@ -165,11 +158,7 @@ export type TObserver<Data = void> = TObserverInternal<Data>;
 export type TObservable<Data = void> = TObservableInternal<Data>;
 export type TBehaviorSubject<Data = unknown> = TBehaviorSubjectInternal<Data>;
 
-export { createCustomTag } from './utils/createCustomTag';
-
 import * as datetimeInternal from './utils/datetime';
-
-export { waitForMove } from "./utils/waitForMove";
 
 export const datetime = { ...datetimeInternal };
 

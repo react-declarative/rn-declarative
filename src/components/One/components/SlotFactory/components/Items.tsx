@@ -12,18 +12,15 @@ import Checkbox from '@mui/material/Checkbox';
 import Chip from "@mui/material/Chip";
 
 import compareArray from '../../../../../utils/compareArray';
-import debounce from '../../../../../utils/hof/debounce';
 import isObject from '../../../../../utils/isObject';
 
 import { useOneState } from '../../../context/StateProvider';
 import { useOneProps } from '../../../context/PropsProvider';
 import { useOnePayload } from '../../../context/PayloadProvider';
 
-import { useSubject } from '../../../../../hooks/useSubject';
 import { useAsyncAction } from '../../../../../hooks/useAsyncAction';
 import { useActualValue } from '../../../../../hooks/useActualValue';
 import { useRenderWaiter } from '../../../../../hooks/useRenderWaiter';
-import { useReloadTrigger } from '../../../../../hooks/useReloadTrigger';
 
 import useMediaContext from '../../../../../hooks/useMediaContext';
 
@@ -36,7 +33,6 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const EMPTY_ARRAY = [] as any;
-const MOUSE_OUT_DEBOUNCE = 45;
 
 const getArrayHash = (value: any) =>
     Object.values<string>(value || {})
@@ -94,8 +90,6 @@ export const Items = ({
 
     const { object } = useOneState();
     const payload = useOnePayload();
-
-    const { reloadTrigger, doReload } = useReloadTrigger();
 
     const [state, setState] = useState<IState>(() => ({
         options: [],
@@ -198,29 +192,6 @@ export const Items = ({
         readonly,
     ]);
 
-    const changeSubject = useSubject<void>();
-
-    useEffect(() => {
-        if (!opened) {
-            return;
-        }
-        let unsubscribeRef = changeSubject.once(() => {
-            const handler = debounce(({ clientX, clientY }: MouseEvent) => {
-                const target = document.elementFromPoint(clientX, clientY);
-                if (!target?.closest('.MuiAutocomplete-popper')) {
-                    setOpened(false);
-                    doReload();
-                }
-            }, MOUSE_OUT_DEBOUNCE);
-            document.addEventListener('mousemove', handler);
-            unsubscribeRef = () => {
-                document.removeEventListener('mousemove', handler);
-                handler.clear();
-            };
-        });
-        return () => unsubscribeRef();
-    }, [opened]);
-
     /**
      * Handles a change event by calling the provided onChange function with the value.
      * If the value is an empty string or undefined, null is passed to the onChange function.
@@ -231,7 +202,6 @@ export const Items = ({
      */
     const handleChange = (value: any) => {
         onChange(value?.length ? value : null);
-        changeSubject.next();
     };
 
     /**
@@ -354,7 +324,6 @@ export const Items = ({
 
     return (
         <Autocomplete
-            key={reloadTrigger}
             multiple
             loading={loading}
             disabled={disabled}

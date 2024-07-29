@@ -11,10 +11,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 import MatTextField from "@mui/material/TextField";
 import Radio from "@mui/material/Radio";
 
-import debounce from "../../../../../utils/hof/debounce";
-
-import useMediaContext from "../../../../../hooks/useMediaContext";
-
 import { useOneState } from "../../../context/StateProvider";
 import { useOneProps } from "../../../context/PropsProvider";
 import { useOnePayload } from "../../../context/PayloadProvider";
@@ -22,8 +18,6 @@ import { useOnePayload } from "../../../context/PayloadProvider";
 import { useAsyncAction } from "../../../../../hooks/useAsyncAction";
 import { useActualValue } from "../../../../../hooks/useActualValue";
 import { useRenderWaiter } from "../../../../../hooks/useRenderWaiter";
-import { useReloadTrigger } from "../../../../../hooks/useReloadTrigger";
-import { useSubject } from "../../../../../hooks/useSubject";
 
 import RadioIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
@@ -34,8 +28,6 @@ const icon = <RadioButtonUncheckedIcon fontSize="small" />;
 const checkedIcon = <RadioIcon fontSize="small" />;
 
 const EMPTY_ARRAY = [] as any;
-const MOUSE_OUT_DEBOUNCE = 45;
-
 /**
  * Returns a hash string generated from the values in an array.
  *
@@ -94,22 +86,16 @@ export const Combo = ({
   dirty,
   invalid,
   incorrect,
-  fieldReadonly,
   tr = (s) => s.toString(),
   onChange,
 }: IComboSlot) => {
-  const { isMobile } = useMediaContext();
   const { object } = useOneState();
   const payload = useOnePayload();
-
-  const { reloadTrigger, doReload } = useReloadTrigger();
 
   const [state, setState] = useState<IState>(() => ({
     options: [],
     labels: {},
   }));
-
-  const [opened, setOpened] = useState(false);
 
   const initComplete = useRef(false);
 
@@ -277,29 +263,6 @@ export const Combo = ({
     return labels[v] || `${v} (unknown)`;
   };
 
-  const changeSubject = useSubject<void>();
-
-  useEffect(() => {
-    if (!opened) {
-      return;
-    }
-    let unsubscribeRef = changeSubject.once(() => {
-      const handler = debounce(({ clientX, clientY }: MouseEvent) => {
-        const target = document.elementFromPoint(clientX, clientY);
-        if (!target?.closest(".MuiAutocomplete-popper")) {
-          setOpened(false);
-          doReload();
-        }
-      }, MOUSE_OUT_DEBOUNCE);
-      document.addEventListener("mousemove", handler);
-      unsubscribeRef = () => {
-        document.removeEventListener("mousemove", handler);
-        handler.clear();
-      };
-    });
-    return () => unsubscribeRef();
-  }, [opened]);
-
   /**
    * Handles the change of a value and triggers the corresponding
    * callback and event.
@@ -309,7 +272,6 @@ export const Combo = ({
    */
   const handleChange = (value: any) => {
     onChange(value || null);
-    changeSubject.next();
   };
 
   if (loading || !initComplete.current) {
@@ -332,17 +294,6 @@ export const Combo = ({
 
   return (
     <Autocomplete
-      key={reloadTrigger}
-      onOpen={() => {
-        if (fieldReadonly) {
-          return;
-        }
-        if (!isMobile) {
-          setOpened(true);
-          return;
-        }
-      }}
-      onClose={() => setOpened(false)}
       disableCloseOnSelect
       disableClearable={noDeselect}
       loading={loading}

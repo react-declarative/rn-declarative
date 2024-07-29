@@ -137,9 +137,9 @@ export const Async = <T extends any = object>({
                 executionRef.current = null;
                 if (isMounted.current) {
                     /** react-18 prevent batching */
-                    queueMicrotask(() => flushSync(() => {
+                    setTimeout(() => flushSync(() => {
                         setChild(result);
-                    }));
+                    }), 0);
                 }
             } catch (e) {
                 isMounted.current && setError(true);

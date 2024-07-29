@@ -411,6 +411,8 @@ export interface IManaged<Data = IAnything, Value = any> extends Omit<IEntity<Da
     onChange: (v: Value, config?: {
         skipReadonly?: boolean;
     }) => void;
+    onFocus: () => void;
+    onBlur: () => void;
 }
 
 export default IManaged;

@@ -611,17 +611,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     conditionElse?: React.ComponentType<{ data: Data; payload: Payload }>;
 
     /**
-     * mime тип выбираемого файла
-     */
-    fileAccept?: string;
-
-    /**
-     * Функция для загрузки файла на сервер
-     */
-    upload?: (file: File, data: Data, payload: Payload) => (Promise<string> | string);
-    view?: (file: string, data: Data, payload: Payload) => (Promise<void> | void);
-
-    /**
      * Функция для выбора документа из справочника
      * для useSearchModal
      */

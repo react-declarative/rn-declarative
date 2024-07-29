@@ -215,7 +215,7 @@ export const serializeTime = (time: Time | null) => {
  * @returns The current date in serialized format.
  */
 export const currentDate = () => {
-    const now = new window.Date();
+    const now = new globalThis.Date();
     const date = new Date(now.getDate(), now.getMonth() + 1, now.getFullYear());
     return serializeDate(date)!;
 };
@@ -226,7 +226,7 @@ export const currentDate = () => {
  * @returns The current time as a serialized string.
  */
 export const currentTime = () => {
-    const now = new window.Date();
+    const now = new globalThis.Date();
     const time = new Time(now.getHours(), now.getMinutes());
     return serializeTime(time)!;
 };
