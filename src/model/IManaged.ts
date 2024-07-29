@@ -126,19 +126,6 @@ export interface IManagedLayout<Data = IAnything, Payload = IAnything> extends I
      */
     desktopColumns?: PickProp<IField<Data, Payload>, 'desktopColumns'>;
     /**
-     * Represents the right margin of a field.
-     *
-     * @typedef FieldRightMargin
-     */
-    fieldRightMargin?: PickProp<IField<Data, Payload>, 'fieldRightMargin'>;
-    /**
-     * Represents the optional configuration for the bottom margin
-     * of a field.
-     *
-     * @typedef FieldBottomMargin
-     */
-    fieldBottomMargin?: PickProp<IField<Data, Payload>, 'fieldBottomMargin'>;
-    /**
      * Returns the picked 'features' property from the given variable.
      *
      * @template Data - The type of data.

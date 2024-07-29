@@ -33,8 +33,6 @@ interface IGroupLayoutPrivate {
  * @param props.phoneColumns - The number of phone columns for the component.
  * @param props.tabletColumns - The number of tablet columns for the component.
  * @param props.desktopColumns - The number of desktop columns for the component.
- * @param [props.fieldRightMargin='0'] - The right margin value for fields.
- * @param [props.fieldBottomMargin='0'] - The bottom margin value for fields.
  * @param [props.style] - The inline style object for the component.
  * @param [props.className] - The CSS class for the component.
  * @param props.children - The child components to be rendered.
@@ -45,8 +43,6 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
   phoneColumns,
   tabletColumns,
   desktopColumns,
-  fieldRightMargin = '0',
-  fieldBottomMargin = '0',
   style,
   testId,
   children,
@@ -60,8 +56,6 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
             phoneColumns={phoneColumns}
             tabletColumns={tabletColumns}
             desktopColumns={desktopColumns}
-            fieldRightMargin={fieldRightMargin}
-            fieldBottomMargin={fieldBottomMargin}
         >
           <Group
           >

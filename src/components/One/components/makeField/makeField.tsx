@@ -128,8 +128,6 @@ export function makeField(
         readonly: upperReadonly = false,
         autoFocus,
         style,
-        fieldRightMargin = fieldConfig.defaultProps?.fieldRightMargin,
-        fieldBottomMargin = fieldConfig.defaultProps?.fieldBottomMargin,
         testId = name,
         ...otherProps
     }: IEntity<Data>) => {
@@ -548,8 +546,6 @@ export function makeField(
             phoneColumns,
             tabletColumns,
             desktopColumns,
-            fieldRightMargin,
-            fieldBottomMargin,
         };
 
         const computeReadonly = useCallback(() => {

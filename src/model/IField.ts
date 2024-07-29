@@ -375,14 +375,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     defaultValue?: Value | ((payload: Payload) => Value);
 
     /**
-     * Позволяет выключить отступ. Можно использовать по аналогии
-     * с исключением последней запятой при склеивании массива
-     * руками, если раздражает
-     */
-    fieldRightMargin?: string;
-    fieldBottomMargin?: string;
-
-    /**
      * Коллбек, позволяющий применить собственную компоновку
      */
     customLayout?: (props: React.PropsWithChildren<Data & {

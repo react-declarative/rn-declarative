@@ -81,8 +81,6 @@ const useStyles = makeStyles()({
  * @param phoneColumns - The number of columns the item should occupy on phones.
  * @param tabletColumns - The number of columns the item should occupy on tablets.
  * @param desktopColumns - The number of columns the item should occupy on desktops.
- * @param fieldRightMargin - The right margin for the item.
- * @param fieldBottomMargin - The bottom margin for the item.
  * @param children - The child elements of the item.
  * @param onClick - The click event handler for the item.
  * @param onFocus - The focus event handler for the item.
@@ -97,8 +95,6 @@ export const Item = ({
   phoneColumns = "",
   tabletColumns = "",
   desktopColumns = "",
-  fieldRightMargin = '1',
-  fieldBottomMargin = '2',
   children,
   onClick,
   onFocus,
@@ -113,16 +109,13 @@ export const Item = ({
     md,
     lg,
     xl,
-    mr,
     mb,
-  } = useMemo(() => {
+  } = useMemo((): any => {
     const xs = n(phoneColumns || columns || FULL_ROW);
     const sm = n(tabletColumns || columns || FULL_ROW);
     const md = n(tabletColumns || columns || FULL_ROW);
     const lg = n(desktopColumns || columns || FULL_ROW);
     const xl = n(desktopColumns || columns || FULL_ROW);
-    const mr = n(fieldRightMargin);
-    const mb = n(fieldBottomMargin);
     /**
      * Configuration object for defining responsive breakpoints and margin values.
      * @property xs - The extra small breakpoint value in pixels.
@@ -130,7 +123,6 @@ export const Item = ({
      * @property md - The medium breakpoint value in pixels.
      * @property lg - The large breakpoint value in pixels.
      * @property xl - The extra large breakpoint value in pixels.
-     * @property mr - The margin right value in pixels.
      * @property mb - The margin bottom value in pixels.
      */
     return {
@@ -139,7 +131,6 @@ export const Item = ({
       md,
       lg,
       xl,
-      mr,
       mb,
     };
   }, []);
@@ -162,7 +153,6 @@ export const Item = ({
     >
       <Box
         className={classes.container}
-        mr={mr}
         mb={mb}
       >
         {children}

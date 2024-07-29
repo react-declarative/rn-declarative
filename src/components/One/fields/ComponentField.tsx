@@ -23,8 +23,6 @@ import classNames from "../../../utils/classNames";
 
 type FieldIgnoreParam = keyof Omit<IManaged, keyof IField> | "readonly" | "dirty";
 
-const FIELD_NEVER_MARGIN = "0";
-
 const FIELD_INTERNAL_PARAMS: FieldIgnoreParam[] = [
   "dirty",
   "fallback",
@@ -210,10 +208,6 @@ export const ComponentField = ({
 ComponentField.displayName = "ComponentField";
 
 export default makeField(ComponentField, {
-  defaultProps: {
-    fieldRightMargin: FIELD_NEVER_MARGIN,
-    fieldBottomMargin: FIELD_NEVER_MARGIN,
-  },
   withApplyQueue: true,
   skipDirtyClickListener: true,
   skipFocusReadonly: true,

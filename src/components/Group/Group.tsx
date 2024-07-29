@@ -45,8 +45,6 @@ interface IGroupPrivate {
  * @property isItem - Whether the group is an item
  * @property style - The style object of the group
  * @property sx - The sx property of the group
- * @property fieldRightMargin - The right margin of the field
- * @property fieldBottomMargin - The bottom margin of the field
  * @property onClick - The onClick event handler of the group
  * @property onFocus - The onFocus event handler of the group
  * @property onContextMenu - The onContextMenu event handler of the group
@@ -65,8 +63,6 @@ export const Group = (
     children,
     isItem,
     style,
-    fieldRightMargin = '1',
-    fieldBottomMargin = '2',
     onClick,
     onFocus,
     onContextMenu,
@@ -84,8 +80,6 @@ export const Group = (
         phoneColumns={phoneColumns}
         tabletColumns={tabletColumns}
         desktopColumns={desktopColumns}
-        fieldRightMargin={fieldRightMargin}
-        fieldBottomMargin={fieldBottomMargin}
         onFocus={onFocus}
         onClick={onClick}
         onContextMenu={onContextMenu}
