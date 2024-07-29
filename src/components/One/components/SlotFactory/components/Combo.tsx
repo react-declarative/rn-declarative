@@ -1,33 +1,21 @@
 import * as React from "react";
 import { useMemo, useState, useRef, useEffect } from "react";
 
-import {
-  AutocompleteRenderInputParams,
-  AutocompleteRenderOptionState,
-} from "@mui/material/Autocomplete";
+import { Icon, IndexPath, Select, SelectItem } from "@ui-kitten/components";
 
-import CircularProgress from "@mui/material/CircularProgress";
-import Autocomplete from "@mui/material/Autocomplete";
-import MatTextField from "@mui/material/TextField";
-import Radio from "@mui/material/Radio";
+import { TouchableOpacity } from "react-native";
 
 import { useOneState } from "../../../context/StateProvider";
 import { useOneProps } from "../../../context/PropsProvider";
 import { useOnePayload } from "../../../context/PayloadProvider";
 
 import { useAsyncAction } from "../../../../../hooks/useAsyncAction";
-import { useActualValue } from "../../../../../hooks/useActualValue";
 import { useRenderWaiter } from "../../../../../hooks/useRenderWaiter";
-
-import RadioIcon from "@mui/icons-material/RadioButtonChecked";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
 import { IComboSlot } from "../../../slots/ComboSlot";
 
-const icon = <RadioButtonUncheckedIcon fontSize="small" />;
-const checkedIcon = <RadioIcon fontSize="small" />;
+const DEFAULT_INDEX = new IndexPath(0);
 
-const EMPTY_ARRAY = [] as any;
 /**
  * Returns a hash string generated from the values in an array.
  *
@@ -97,8 +85,6 @@ export const Combo = ({
 
   const waitForRender = useRenderWaiter([state], 10);
 
-  const labels$ = useActualValue(state.labels);
-
   /**
    * Returns a memoized value based on the given `upperValue`.
    *
@@ -111,6 +97,22 @@ export const Combo = ({
       return first;
     }
     return upperValue;
+  }, [upperValue]);
+
+  const selectValue = useMemo(() => {
+    if (Array.isArray(upperValue)) {
+      const [first] = upperValue;
+      const index = state.options.findIndex((value) => value === first);
+      if (index === undefined) {
+        return undefined;
+      }
+      return first ? new IndexPath(index) : undefined;
+    }
+    const index = state.options.findIndex((value) => value === upperValue);
+    if (index === undefined) {
+      return undefined;
+    }
+    return upperValue ? new IndexPath(index) : undefined;
   }, [upperValue]);
 
   const { fallback } = useOneProps();
@@ -169,95 +171,7 @@ export const Combo = ({
     execute(object);
   }, [valueHash, disabled, dirty, invalid, incorrect, object, readonly]);
 
-  /**
-   * Creates a render input function for an Autocomplete component.
-   *
-   * @param loading - Indicates if the Autocomplete is in a loading state.
-   * @param readonly - Indicates if the Autocomplete is in a readonly state.
-   * @returns A render input function for the Autocomplete component.
-   * @param params - The Autocomplete render input parameters.
-   * @returns The rendered input element.
-   */
-  const createRenderInput =
-    (loading: boolean, readonly: boolean) =>
-    (params: AutocompleteRenderInputParams) =>
-      (
-        <MatTextField
-          {...params}
-          sx={{
-            ...(!outlined && {
-              position: "relative",
-              mt: 1,
-              "& .MuiFormHelperText-root": {
-                position: "absolute",
-                top: "100%",
-              },
-            }),
-          }}
-          variant={outlined ? "outlined" : "standard"}
-          placeholder={loading ? undefined : placeholder}
-          label={title}
-          helperText={(dirty && (invalid || incorrect)) || description}
-          error={dirty && (invalid !== null || incorrect !== null)}
-          InputProps={{
-            ...params.InputProps,
-            readOnly: readonly,
-            endAdornment: (
-              <>
-                {loading ? (
-                  <CircularProgress color="inherit" size={20} />
-                ) : null}
-                {params.InputProps.endAdornment}
-              </>
-            ),
-          }}
-          InputLabelProps={{
-            ...params.InputLabelProps,
-            ...(labelShrink && { shrink: true }),
-          }}
-        />
-      );
-
-  /**
-   * Renders an option for the Autocomplete component.
-   *
-   * @param props - The HTML attributes for the <li> element.
-   * @param option - The option to render.
-   * @param state - The state of the render option.
-   * @returns - The rendered option.
-   */
-  const renderOption = (
-    props: React.HTMLAttributes<HTMLLIElement>,
-    option: any,
-    state: AutocompleteRenderOptionState
-  ) => {
-    const { current: labels } = labels$;
-    return (
-      <li {...props}>
-        <Radio
-          icon={icon}
-          checkedIcon={checkedIcon}
-          style={{ marginRight: 8 }}
-          checked={state.selected}
-        />
-        {freeSolo ? option : labels[option] || `${option} (unknown)`}
-      </li>
-    );
-  };
-
-  /**
-   * Retrieves the label for a given value.
-   *
-   * @param v - The value for which to retrieve the label.
-   * @returns The label corresponding to the given value.
-   */
-  const getOptionLabel = (v: string) => {
-    const { current: labels } = labels$;
-    if (freeSolo) {
-      return v;
-    }
-    return labels[v] || `${v} (unknown)`;
-  };
+  const error = useMemo(() => dirty && (invalid !== null || incorrect !== null), [dirty, invalid, incorrect]);
 
   /**
    * Handles the change of a value and triggers the corresponding
@@ -267,42 +181,54 @@ export const Combo = ({
    * @returns
    */
   const handleChange = (value: any) => {
+    if (readonly) {
+      return;
+    }
+    if (disabled) {
+      return;
+    }
     onChange(value || null);
   };
 
   if (loading || !initComplete.current) {
     return (
-      <Autocomplete
-        disableCloseOnSelect
-        disableClearable={noDeselect}
+      <Select
+        key={"loading"}
+        selectedIndex={DEFAULT_INDEX}
+        caption={(dirty && (invalid || incorrect)) || description}
+        placeholder={placeholder}
+        label={title}
+        status={error ? "danger" : undefined}
         disabled
-        loading
-        value={null}
-        options={EMPTY_ARRAY}
-        onChange={() => null}
-        freeSolo={freeSolo}
-        getOptionLabel={getOptionLabel}
-        renderInput={createRenderInput(true, true)}
-        renderOption={renderOption}
-      />
+      >
+        <SelectItem title='Loading' />
+      </Select>
     );
   }
 
   return (
-    <Autocomplete
-      disableCloseOnSelect
-      disableClearable={noDeselect}
-      loading={loading}
-      value={value || null}
-      onChange={({}, v) => handleChange(v)}
-      getOptionLabel={getOptionLabel}
-      freeSolo={freeSolo}
-      options={state.options}
+    <Select
       disabled={disabled}
-      readOnly={readonly}
-      renderInput={createRenderInput(false, readonly)}
-      renderOption={renderOption}
-    />
+      selectedIndex={selectValue}
+      caption={(dirty && (invalid || incorrect)) || description}
+      placeholder={placeholder}
+      label={title}
+      status={error ? "danger" : undefined}
+      onSelect={(index) => {
+        if (index instanceof IndexPath) {
+          handleChange(state.options[index.row]);
+        }
+      }}
+      accessoryRight={!noDeselect ? (
+        <TouchableOpacity onPress={() => handleChange(null)}>
+          <Icon name="close" />
+        </TouchableOpacity >
+      ) : undefined}
+    >
+      {state.options.map((value) => (
+        <SelectItem key={value} title={state.labels[value] || value} />
+      ))}
+    </Select>
   );
 };
 
