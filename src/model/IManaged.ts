@@ -103,23 +103,6 @@ export interface IWrappedLayout<Data = IAnything, Payload = IAnything> {
  */
 export interface IManagedLayout<Data = IAnything, Payload = IAnything> extends IWrappedLayout<Data, Payload> {
     /**
-     * Represents override columns configuration for a field.
-     *
-     * @typedef columnsOverride
-     *
-     * @property - The name of the field for which the columns are overridden.
-     */
-    columnsOverride?: PickProp<IField<Data, Payload>, 'columnsOverride'>;
-    /**
-     * Represents the 'sx' property of the 'PickProp' type.
-     *
-     * @typedef IFieldKey
-     * @typedef PickProp<IField<Data, Payload>, 'sx'> SxProp
-     *
-     * @property sx - The key of the 'IField' type that represents the 'sx' property.
-     */
-    sx?: PickProp<IField<Data, Payload>, 'sx'>;
-    /**
      * Retrieves the specific columns from a given object.
      */
     columns?: PickProp<IField<Data, Payload>, 'columns'>;

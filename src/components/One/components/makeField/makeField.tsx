@@ -94,7 +94,6 @@ export function makeField(
     const Component = memo(originalComponent) as unknown as React.FC<IManaged>;
     const oneConfig = OneConfig[GET_REF_SYMBOL]();
     const component = <Data extends IAnything = IAnything>({
-        sx,
         columns = '',
         phoneColumns = '',
         tabletColumns = '',
@@ -561,7 +560,6 @@ export function makeField(
             desktopColumns,
             fieldRightMargin,
             fieldBottomMargin,
-            sx: { ...sx, ...fieldConfig.defaultProps?.sx },
         };
 
         const computeReadonly = useCallback(() => {

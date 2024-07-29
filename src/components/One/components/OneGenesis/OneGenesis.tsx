@@ -74,7 +74,7 @@ export const OneGenesis = <
 
   const payload = useSingleton(upperPayload);
 
-  const { className, style, sx } = props;
+  const { className, style } = props;
 
   const fieldsSnapshot = useMemo(() => fields, []);
 
@@ -188,7 +188,6 @@ export const OneGenesis = <
                       <Container
                         className={className}
                         style={style}
-                        sx={sx}
                       >
                         <Group
                           data-testid={rendered ? READY_CLASS : BASE_CLASS}

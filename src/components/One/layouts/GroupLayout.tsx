@@ -30,8 +30,6 @@ interface IGroupLayoutPrivate {
  * @template Data - The type of data passed to the component.
  * @param props - The props to configure the GroupLayout component.
  * @param props.columns - The number of columns for the component.
- * @param props.columnsOverride - The number of columns to override for specific items.
- * @param props.sx - The sx value to pass to the component.
  * @param props.phoneColumns - The number of phone columns for the component.
  * @param props.tabletColumns - The number of tablet columns for the component.
  * @param props.desktopColumns - The number of desktop columns for the component.
@@ -44,8 +42,6 @@ interface IGroupLayoutPrivate {
  */
 export const GroupLayout = <Data extends IAnything = IAnything>({
   columns,
-  columnsOverride,
-  sx,
   phoneColumns,
   tabletColumns,
   desktopColumns,
@@ -59,7 +55,6 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
         <Group
             data-testid={testId}
             style={style}
-            sx={sx}
             isItem={true}
             columns={columns}
             phoneColumns={phoneColumns}
@@ -69,7 +64,6 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
             fieldBottomMargin={fieldBottomMargin}
         >
           <Group
-            columnsOverride={columnsOverride}
           >
             {children}
             <BaselineAdjust />

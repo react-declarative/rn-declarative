@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { SxProps } from '@mui/material';
-
 import IField, { Value } from './IField';
 import IEntity from './IEntity';
 import IAnything from './IAnything';
@@ -73,10 +71,6 @@ export interface IOneProps<Data = IAnything, Payload = IAnything, Field = IField
    * Стиль корневой группы
    */
   style?: React.CSSProperties;
-  /**
-   * SX для корневой группы
-   */
-  sx?: SxProps<any>;
   /**
    * Позволяет загружать данные в компонент
    */

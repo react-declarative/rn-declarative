@@ -89,18 +89,6 @@ export interface IComponentFieldProps<Data = IAnything, Payload = IAnything> {
    * @returns - The picked property value.
    */
   style?: PickProp<IField<Data, Payload>, "style">;
-  /**
-   * Represents the 'sx' property of a PickProp.
-   *
-   * @template IField - The input field type.
-   * @template Data - The data type.
-   * @template Payload - The payload type.
-   *
-   * @param - The input field.
-   *
-   * @returns - The value of the 'sx' property.
-   */
-  sx?: PickProp<IField<Data, Payload>, "sx">;
 }
 
 /**

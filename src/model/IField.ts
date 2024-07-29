@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { SxProps } from '@mui/material';
 
 import type ComponentFieldInstance  from './ComponentFieldInstance';
 import type { IDebug }  from './ComponentFieldInstance';
@@ -314,16 +313,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     phoneColumns?: string;
     tabletColumns?: string;
     desktopColumns?: string;
-
-    /**
-     * Специальное поле только для MUI
-     */
-    sx?: SxProps<any>;
-
-    /**
-     * Произвольное количество колонок в строке
-     */
-    columnsOverride?: string;
 
     /**
      * Дочерние поля для групп

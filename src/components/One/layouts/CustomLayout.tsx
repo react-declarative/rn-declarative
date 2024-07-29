@@ -18,7 +18,6 @@ import makeLayout from "../components/makeLayout/makeLayout";
 export interface ICustomLayoutProps<Data = IAnything, Payload = IAnything>
   extends IWrappedLayout<Data, Payload> {
   style?: PickProp<IField<Data, Payload>, "style">;
-  sx?: PickProp<IField<Data, Payload>, "sx">;
   customLayout?: PickProp<IField<Data, Payload>, "customLayout">;
   hidden?: PickProp<IField<Data, Payload>, 'hidden'>;
 }
@@ -84,7 +83,6 @@ const Fragment = ({ children }: React.PropsWithChildren<{}>) => <>{children}</>;
 export const CustomLayout = <Data extends IAnything = IAnything>({
   children,
   style,
-  sx,
   testId,
   customLayout: CustomLayout = Fragment,
   ...otherProps
@@ -109,7 +107,7 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
   }, [object]);
 
   return (
-    <Box className={classes.root} data-testid={testId} style={style} sx={sx}>
+    <Box className={classes.root} data-testid={testId} style={style}>
         <CustomLayout {...props}>
             {children}
         </CustomLayout>

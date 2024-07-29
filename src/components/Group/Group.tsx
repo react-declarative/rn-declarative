@@ -44,7 +44,6 @@ interface IGroupPrivate {
  * @property children - The children of the group
  * @property isItem - Whether the group is an item
  * @property style - The style object of the group
- * @property columnsOverride - The columns override property of the group
  * @property sx - The sx property of the group
  * @property fieldRightMargin - The right margin of the field
  * @property fieldBottomMargin - The bottom margin of the field
@@ -66,8 +65,6 @@ export const Group = (
     children,
     isItem,
     style,
-    columnsOverride,
-    sx,
     fieldRightMargin = '1',
     fieldBottomMargin = '2',
     onClick,
@@ -92,7 +89,6 @@ export const Group = (
         onFocus={onFocus}
         onClick={onClick}
         onContextMenu={onContextMenu}
-        sx={sx}
       >
         {children}
       </Item>
@@ -102,12 +98,10 @@ export const Group = (
       <Container
         {...otherProps}
         ref={ref}
-        columnsOverride={columnsOverride}
         style={style}
         onFocus={onFocus}
         onContextMenu={onContextMenu}
         onClick={onClick}
-        sx={sx}
       >
         {children}
       </Container>

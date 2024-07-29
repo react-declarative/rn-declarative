@@ -93,7 +93,6 @@ const useStyles = makeStyles()({
  */
 export const Item = ({
   style,
-  sx,
   columns = "",
   phoneColumns = "",
   tabletColumns = "",
@@ -159,7 +158,6 @@ export const Item = ({
       md={md}
       lg={lg}
       xl={xl}
-      sx={sx}
       onContextMenu={onContextMenu}
     >
       <Box
