@@ -184,7 +184,7 @@ export const TextField = ({
   trailingIcon,
   leadingIconPress,
   trailingIconPress,
-  inputMultiline = true,
+  inputMultiline = false,
   placeholder = "",
   style,
   testId,

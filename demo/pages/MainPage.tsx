@@ -4,7 +4,7 @@ const fields: TypedField[] = [
     {
         type: FieldType.Text,
         style: {
-            width: '45%',
+            width: '50%',
         },
         name: 'text',
         title: 'text',
@@ -32,7 +32,62 @@ const fields: TypedField[] = [
         name: 'items',
         title: 'Items',
         description: 'test',
-    }
+    },
+    {
+        type: FieldType.Radio,
+        name: 'radio',
+        radioValue: '1',
+        title: 'Radio 1',
+    },
+    {
+        type: FieldType.Radio,
+        name: 'radio',
+        radioValue: '2',
+        title: 'Radio 2',
+    },
+    {
+        type: FieldType.Radio,
+        name: 'radio',
+        radioValue: '3',
+        title: 'Radio 3',
+    },
+    {
+        type: FieldType.Combo,
+        style: {
+            width: '100%',
+        },
+        name: 'combo',
+        title: 'combo',
+        placeholder: 'combo',
+        itemList: [
+            'Test 1',
+            'Test 2',
+            'Test 3',
+        ]
+    },
+    {
+        type: FieldType.Switch,
+        name: 'switch',
+    },
+    {
+        type: FieldType.Checkbox,
+        name: 'checkbox1',
+    },
+    {
+        type: FieldType.Checkbox,
+        name: 'checkbox2',
+    },
+    {
+        type: FieldType.YesNo,
+        name: 'yesno',
+        placeholder: 'Unset',
+    },
+    {
+        type: FieldType.Button,
+        name: 'btn',
+        title: 'Submit',
+        press: (name, data) => console.log({ data }),
+    },
 ];
 
 export const MainPage = () => {

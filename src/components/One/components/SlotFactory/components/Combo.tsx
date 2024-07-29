@@ -100,6 +100,10 @@ export const Combo = ({
     return upperValue;
   }, [upperValue]);
 
+  const displayValue = useMemo(() => {
+    return value ? state.labels[value] || value || undefined : undefined;
+}, [value]);
+
   const selectValue = useMemo(() => {
     if (Array.isArray(upperValue)) {
       const [first] = upperValue;
@@ -196,6 +200,7 @@ export const Combo = ({
       <Select
         key={"loading"}
         size="medium"
+        value="Loading"
         style={style}
         selectedIndex={DEFAULT_INDEX}
         caption={(dirty && (invalid || incorrect)) || description}
@@ -218,6 +223,7 @@ export const Combo = ({
       placeholder={placeholder}
       label={title}
       size="medium"
+      value={displayValue}
       status={error ? "danger" : undefined}
       onSelect={(index) => {
         if (index instanceof IndexPath) {

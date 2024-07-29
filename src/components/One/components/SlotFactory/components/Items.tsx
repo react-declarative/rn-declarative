@@ -122,6 +122,10 @@ export const Items = ({
             .filter(v => v);
     }, [value]);
 
+    const displayValue = useMemo(() => {
+        return value.map((k) => state.labels[k] || k).join(', ') || undefined;
+    }, [value]);
+
     const {
         fallback,
     } = useOneProps();
@@ -199,6 +203,7 @@ export const Items = ({
             <Select
                 key={"loading"}
                 style={style}
+                value="Loading"
                 size="medium"
                 selectedIndex={DEFAULT_INDEX}
                 caption={(dirty && (invalid || incorrect)) || description}
@@ -217,6 +222,7 @@ export const Items = ({
             multiSelect={true}
             disabled={disabled}
             selectedIndex={selectValue}
+            value={displayValue}
             size="medium"
             style={style}
             caption={(dirty && (invalid || incorrect)) || description}

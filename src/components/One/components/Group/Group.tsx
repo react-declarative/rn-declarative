@@ -15,6 +15,7 @@ import useManagedStyle from "../../hooks/useManagedStyle";
 import makeTestId from "../../helpers/makeTestId";
 
 const defaultStyle =  {
+  alignItems: 'flex-end',
   flexDirection: 'row',
   flexWrap: 'wrap',
 } as const;

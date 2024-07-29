@@ -42,8 +42,8 @@ const APPLY_ATTEMPTS = 35;
 const APPLY_DELAY = 10;
 
 const defaultStyles = {
-    marginRight: 8,
-    marginBottom: 8,
+    paddingRight: 8,
+    paddingBottom: 8,
 } as const;
 
 /**

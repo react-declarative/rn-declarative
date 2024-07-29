@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     content: {
+        alignItems: 'flex-end',
         flexDirection: 'row',
         flexWrap: 'wrap',
     },

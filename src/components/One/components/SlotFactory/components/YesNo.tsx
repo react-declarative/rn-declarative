@@ -47,6 +47,7 @@ export const YesNoField = ({
   dirty,
   invalid,
   incorrect,
+  style,
   onChange,
 }: IYesNoSlot) => {
   const [labels, setLabels] = useState<Record<string, string>>({});
@@ -65,6 +66,16 @@ export const YesNoField = ({
     }
     return undefined;
   }, [upperValue]);
+
+  const displayValue = useMemo(() => {
+    if (upperValue === true) {
+      return OPTIONS[0];
+    }
+    if (upperValue === false) {
+      return OPTIONS[1];
+    }
+    return undefined;
+  }, [value]);
 
   const { fallback } = useOneProps();
 
@@ -110,6 +121,8 @@ export const YesNoField = ({
     return (
       <Select
         key={"loading"}
+        value="Loading"
+        style={style}
         selectedIndex={DEFAULT_INDEX}
         caption={(dirty && (invalid || incorrect)) || description}
         placeholder={placeholder}
@@ -126,6 +139,8 @@ export const YesNoField = ({
     <Select
       disabled={disabled}
       selectedIndex={value}
+      value={displayValue}
+      style={style}
       caption={(dirty && (invalid || incorrect)) || description}
       placeholder={placeholder}
       label={title}
