@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useCallback, useEffect, useMemo } from 'react';
 
 import { Radio as UiRadio } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
 
 import { useOneRadio } from '../../../context/RadioProvider';
 
@@ -10,6 +11,12 @@ import useActualValue from '../../../../../hooks/useActualValue';
 import { IRadioSlot } from '../../../slots/RadioSlot';
 
 import makeTestId from '../../../helpers/makeTestId';
+
+const styles = StyleSheet.create({
+    root: {
+        height: 45,
+    },
+});
 
 /**
  * Represents a radio component.
@@ -78,7 +85,7 @@ export const Radio = ({
             onChange={() => handleChange(radioValue || null)}
             onFocus={onFocus}
             onBlur={onBlur}
-            style={style}
+            style={[styles.root, style]}
             {...makeTestId(testId)}
         >
             {title}

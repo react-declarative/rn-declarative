@@ -1,10 +1,17 @@
 import * as React from 'react';
 
 import { CheckBox as UiCheckBox } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
 
 import { ICheckBoxSlot } from '../../../slots/CheckBoxSlot';
 
 import makeTestId from '../../../helpers/makeTestId';
+
+const styles = StyleSheet.create({
+    root: {
+        height: 45,
+    },
+});
 
 /**
  * Represents a checkbox component.
@@ -31,7 +38,7 @@ export const CheckBox = ({
         onChange={() => onChange(!value)}
         onFocus={onFocus}
         onBlur={onBlur}
-        style={style}
+        style={[styles.root, style]}
         {...makeTestId(testId)}
     >
         {title}
