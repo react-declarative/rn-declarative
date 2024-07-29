@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useMemo, useState, useEffect, useRef } from "react";
 
-import VirtualListBox from "../../common/VirtualListBox";
-
 import {
   AutocompleteRenderInputParams,
   AutocompleteRenderOptionState,
@@ -48,7 +46,6 @@ const OPTIONS = [
  * @property description - The description of the YesNoField.
  * @property placeholder - The placeholder text of the YesNoField.
  * @property outlined - Indicates whether the YesNoField is outlined.
- * @property virtualListBox - Indicates whether to use the virtual list box for the YesNoField.
  * @property labelShrink - Indicates whether the label should shrink for the YesNoField.
  * @property noDeselect - Indicates whether deselection is allowed for the YesNoField.
  * @property title - The title of the YesNoField.
@@ -65,7 +62,6 @@ export const YesNoField = ({
   description = "",
   placeholder = "",
   outlined = false,
-  virtualListBox,
   labelShrink,
   noDeselect,
   title = "",
@@ -77,7 +73,7 @@ export const YesNoField = ({
 }: IYesNoSlot) => {
   const { reloadTrigger, doReload } = useReloadTrigger();
 
-  const [labels, setLabels] = useState({});
+  const [labels, setLabels] = useState<Record<string, string>>({});
   const [opened, setOpened] = useState(false);
 
   const initComplete = useRef(false);
@@ -260,7 +256,6 @@ export const YesNoField = ({
         value={null}
         options={OPTIONS}
         onChange={() => null}
-        ListboxComponent={virtualListBox ? VirtualListBox : undefined}
         getOptionLabel={getOptionLabel}
         renderInput={createRenderInput(true, true)}
         renderOption={renderOption}
@@ -280,7 +275,6 @@ export const YesNoField = ({
       options={OPTIONS}
       disabled={disabled}
       readOnly={readonly}
-      ListboxComponent={virtualListBox ? VirtualListBox : undefined}
       getOptionLabel={getOptionLabel}
       renderInput={createRenderInput(false, readonly)}
       renderOption={renderOption}

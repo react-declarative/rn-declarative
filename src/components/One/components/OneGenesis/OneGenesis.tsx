@@ -6,7 +6,7 @@ import { makeStyles } from "../../../../styles";
 import { ThemeProvider } from "../../../../styles";
 
 import OneInternal from "../OneInternal";
-import Group from "../../../common/Group";
+import Group from "../../../Group";
 
 import IOneProps from "../../../../model/IOneProps";
 import IAnything from "../../../../model/IAnything";
@@ -16,7 +16,6 @@ import FieldType from "../../../../model/FieldType";
 import classNames from "../../../../utils/classNames";
 import deepFlat from "../../../../utils/deepFlat";
 
-import MenuProvider from "../../context/MenuProvider";
 import StateProvider from "../../context/StateProvider";
 import FeatureProvider from "../../context/FeatureProvider";
 import PayloadProvider from "../../context/PayloadProvider";
@@ -213,27 +212,25 @@ export const OneGenesis = <
               <FeatureProvider features={features}>
                 <PayloadProvider payload={payload}>
                   <StateProvider<Data, Payload, Field> {...stateParams}>
-                    <MenuProvider>
-                      <SlotFactory {...slots}>
-                        <Container
-                          className={className}
-                          style={style}
-                          sx={sx}
+                    <SlotFactory {...slots}>
+                      <Container
+                        className={className}
+                        style={style}
+                        sx={sx}
+                      >
+                        <Group
+                          isBaselineAlign={isBaselineAlign}
+                          className={classNames(BASE_CLASS, {
+                            [READY_CLASS]: rendered,
+                            [classes.readonly]: props.readonly,
+                            [classes.rendering]: !rendered,
+                          })}
+                          data-testid={rendered ? READY_CLASS : BASE_CLASS}
                         >
-                          <Group
-                            isBaselineAlign={isBaselineAlign}
-                            className={classNames(BASE_CLASS, {
-                              [READY_CLASS]: rendered,
-                              [classes.readonly]: props.readonly,
-                              [classes.rendering]: !rendered,
-                            })}
-                            data-testid={rendered ? READY_CLASS : BASE_CLASS}
-                          >
-                            <OneInternal<Data, Payload, Field> {...viewParams} />
-                          </Group>
-                        </Container>
-                      </SlotFactory>
-                    </MenuProvider>
+                          <OneInternal<Data, Payload, Field> {...viewParams} />
+                        </Group>
+                      </Container>
+                    </SlotFactory>
                   </StateProvider>
                 </PayloadProvider>
               </FeatureProvider>

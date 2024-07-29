@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { forwardRef, useMemo } from 'react';
 
-import { makeStyles } from '../../../styles';
+import { makeStyles } from '../../styles';
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-import classNames from '../../../utils/classNames';
+import classNames from '../../utils/classNames';
 
-import { IManagedLayout, PickProp } from '../../../model/IManaged';
+import { IManagedLayout, PickProp } from '../../model/IManaged';
 
-import IField from '../../../model/IField';
+import IField from '../../model/IField';
 
 const FULL_ROW = '12';
 

@@ -3,8 +3,8 @@ import { forwardRef, useMemo } from 'react';
 
 import { Grid } from '@mui/material';
 
-import { PickProp } from '../../../model/IManaged';
-import IField from '../../../model/IField';
+import { PickProp } from '../../model/IManaged';
+import IField from '../../model/IField';
 
 /**
  * Interface representing the props for the Container component.

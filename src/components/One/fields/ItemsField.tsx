@@ -72,13 +72,6 @@ export interface IItemsFieldProps<Data = IAnything, Payload = IAnything> {
    */
   freeSolo?: PickProp<IField<Data, Payload>, "freeSolo">;
   /**
-   * Represents the configuration for a virtual list box field in a form.
-   *
-   * @typedef VirtualListBoxConfig
-   * @property virtualListBox - The value of the virtualListBox property.
-   */
-  virtualListBox?: PickProp<IField<Data, Payload>, "virtualListBox">;
-  /**
    * Represents an optional readonly flag of a field.
    *
    * @typedef readonly
@@ -163,7 +156,6 @@ export interface IItemsFieldPrivate<Data = IAnything> {
   invalid: PickProp<IManaged<Data>, "invalid">;
   incorrect: PickProp<IManaged<Data>, "incorrect">;
   fieldReadonly: PickProp<IManaged<Data>, "fieldReadonly">;
-  withContextMenu: PickProp<IManaged<Data>, "withContextMenu">;
 }
 
 /**
@@ -178,7 +170,6 @@ export interface IItemsFieldPrivate<Data = IAnything> {
  * @param [props.outlined=false] - Whether the component is outlined or not.
  * @param [props.itemList=[]] - The list of items to display.
  * @param [props.freeSolo=false] - Whether the component allows free text input or not.
- * @param [props.virtualListBox=true] - Whether to use a virtual list box for efficiency or not.
  * @param [props.labelShrink] - Whether the label should shrink when there is a value or not.
  * @param [props.watchItemList] - A function to watch the itemList property for changes.
  * @param [props.noDeselect] - Whether to prevent deselecting an item or not.
@@ -186,7 +177,6 @@ export interface IItemsFieldPrivate<Data = IAnything> {
  * @param [props.invalid] - Whether the component's value is invalid or not.
  * @param [props.incorrect] - Whether the component's value is incorrect or not.
  * @param [props.title] - The title for the component.
- * @param [props.withContextMenu] - Whether to show a context menu for the component or not.
  * @param [props.tr=(s) => s.toString()] - A translation function for translating strings.
  * @param [props.onChange] - A callback function called when the component's value changes.
  *
@@ -201,7 +191,6 @@ export const ItemsField = ({
   outlined = false,
   itemList = [],
   freeSolo = false,
-  virtualListBox = true,
   labelShrink,
   watchItemList,
   noDeselect,
@@ -210,7 +199,6 @@ export const ItemsField = ({
   incorrect,
   title,
   fieldReadonly,
-  withContextMenu,
   tr = (s) => s.toString(),
   onChange,
 }: IItemsFieldProps & IItemsFieldPrivate) => (
@@ -225,7 +213,6 @@ export const ItemsField = ({
     itemList={itemList}
     noDeselect={noDeselect}
     labelShrink={labelShrink}
-    virtualListBox={virtualListBox}
     watchItemList={watchItemList}
     freeSolo={freeSolo}
     dirty={dirty}
@@ -234,7 +221,6 @@ export const ItemsField = ({
     title={title}
     tr={tr}
     onChange={onChange}
-    withContextMenu={withContextMenu}
   />
 );
 

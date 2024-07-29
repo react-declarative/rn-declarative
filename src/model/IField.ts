@@ -8,10 +8,7 @@ import { ISizeCallback } from './ISize';
 
 import FieldType from './FieldType';
 import IAnything from './IAnything';
-import ISearchItem from '../components/SearchView/model/ISearchItem';
-import ISearchViewProps from '../components/SearchView/model/ISearchViewProps';
 import IFieldMenu from './IFieldMenu';
-import ITreeNode from './ITreeNode';
 import IValidation from './IValidation';
 
 /**
@@ -395,19 +392,9 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     freeSolo?: boolean;
 
     /**
-     * Позволяет включить виртуализацию для FieldType.List и FieldType.Combo
-     */
-    virtualListBox?: boolean;
-
-    /**
      * Варианты выбора для ComboField и ItemsField
      */
     itemList?: string[] | ((data: Data, payload: Payload) => string[]) | ((data: Data, payload: Payload) => Promise<string[]>),
-
-    /**
-     * Вариант выбора для TreeField
-     */
-    itemTree?: ITreeNode[] | ((data: Data, payload: Payload) => ITreeNode[]) | ((data: Data, payload: Payload) => Promise<ITreeNode[]>);
 
     /**
      * Отключает возможность сброса выбора значения для Items и Combo
@@ -562,72 +549,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      * Значение по-умолчанию для поля
      */
     defaultValue?: Value | ((payload: Payload) => Value);
-
-    /**
-     * Позволяет задать limit для поля справочника
-     */
-    dictLimit?: number;
-
-    /**
-     * Позволяет задать задержку для api запросов поля справочника
-     */
-    dictDelay?: number;
-  
-    /**
-     * Обработчик запроса справочника. Если число объектов
-     * меньше dictLimit, подразумевается, что все данные выгружены
-     * на фронт и новые запросы не выполняются
-     */
-    dictSearch?: (dto: {
-      search: string;
-      limit: number;
-      offset: number;
-      initial: boolean;
-      rows: ISearchItem[];
-      data: Data;
-      payload: Payload;
-    }) => ISearchItem[] | Promise<ISearchItem[]>;
-
-    /**
-     * Поле справочника позволяет создавать новые записи, если
-     * поиск не дал результата
-     */
-    dictOnAppend?: (search: string, data: Data, payload: Payload, onValueChange: (value: string | null) => void, onChange: (value: Data) => void) => void;
-
-    /**
-     * Функция вызывается на каждое изменение текста. Подразумевается
-     * запись в целевой объект. Для контекстного поиска по label, value можно записать в другое поле
-     */
-    dictOnText?: (text: string, data: Data, payload: Payload, onValueChange: (value: string | null) => void, onChange: (data: Data) => void) => void;
-
-    /**
-     * Функция вызывается на каждый выбор из модалки. Подразумевается
-     * запись в целевой объект. Для контекстного поиска по label, value можно записать в другое поле
-     */
-    dictOnItem?: (value: string | null, data: Data, payload: Payload, onValueChange: (value: string | null) => void, onChange: (data: Data) => void) => void;
-
-    /**
-     * Функция позволяет загрузить label для выбранного элемента асинхронно
-     */
-    dictValue?: (value: string, data: Data, payload: Payload) => (ISearchItem | Promise<ISearchItem>);
-
-    /**
-     * Функция позволяет загрузить searchText для выбранного элемента асинхронно
-     */
-    dictSearchText?: (data: Data, payload: Payload) => (string | Promise<string>);
-
-    /**
-     * Функция позволяет переопределить компонент элемента списка
-     * из модалки
-     */
-    dictSearchItem?: ISearchViewProps['SearchItem'];
-
-    
-    /**
-     * Функция позволяет переопределить компонент создание записи
-     * в словарь из модалки
-     */
-    dictCreateButton?: ISearchViewProps['CreateButton'];
 
     /**
      * Позволяет выключить отступ. Можно использовать по аналогии

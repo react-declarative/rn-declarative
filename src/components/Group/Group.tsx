@@ -1,13 +1,13 @@
 import * as React from "react";
 import { forwardRef } from "react";
 
-import { makeStyles } from "../../../styles";
+import { makeStyles } from "../../styles";
 
-import { IManagedLayout, PickProp } from "../../../model/IManaged";
-import IAnything from "../../../model/IAnything";
-import IField from "../../../model/IField";
+import { IManagedLayout, PickProp } from "../../model/IManaged";
+import IAnything from "../../model/IAnything";
+import IField from "../../model/IField";
 
-import classNames from '../../../utils/classNames';
+import classNames from '../../utils/classNames';
 
 import Item from "./Item";
 import Container from "./Container";

@@ -19,7 +19,6 @@ import { makeStyles } from '../../../../styles';
 import { useDebounceConfig } from '../../context/DebounceProvider';
 import { useOnePayload } from '../../context/PayloadProvider';
 import { useOneState } from '../../context/StateProvider';
-import { useOneMenu } from '../../context/MenuProvider';
 
 import useDebounce from '../../hooks/useDebounce';
 
@@ -28,7 +27,7 @@ import useFieldMemory from './hooks/useFieldMemory';
 import useFieldState from './hooks/useFieldState';
 import useFieldGuard from './hooks/useFieldGuard';
 
-import Group, { IGroupProps } from '../../../common/Group';
+import Group, { IGroupProps } from '../../../Group';
 
 import IAnything from '../../../../model/IAnything';
 import IManaged from '../../../../model/IManaged';
@@ -206,7 +205,6 @@ export function makeField(
     }: IEntity<Data>) => {
         const { object: stateObject, changeObject } = useOneState<Data>();
         const payload = useOnePayload();
-        const { createContextMenu } = useOneMenu();
 
         const {
             isDisabled,
@@ -653,18 +651,6 @@ export function makeField(
         }, []);
 
         /**
-         * Коллбек для управления контекстным меню
-         */
-        const handleMenu = useMemo(() => menuItems ? createContextMenu({
-            name,
-            menu,
-            menuItems: menuItems!,
-            onValueChange: (value) => managedProps.onChange(value, {
-                skipReadonly: true,
-            }),
-        }) : undefined, []);
-
-        /**
          * Коллбек для перехвата клика из поля. Используется только
          * для FieldType.Button и FieldType.Icon
          */
@@ -740,7 +726,6 @@ export function makeField(
             prefix,
             outlinePaper,
             transparentPaper,
-            withContextMenu: menuItems?.length ? true : undefined,
             ...otherProps,
             fieldReadonly: computeFieldReadonly(),
         };
@@ -782,7 +767,6 @@ export function makeField(
                 className={classNames(className, classes.root, classMap)}
                 {...groupProps}
                 onFocus={handleFocus}
-                onContextMenu={handleMenu}
                 onClick={handleInternalClick}
             >
                 <Component {...componentProps as IManaged} />

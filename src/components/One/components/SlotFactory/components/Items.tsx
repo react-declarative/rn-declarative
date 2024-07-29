@@ -11,8 +11,6 @@ import MatTextField from "@mui/material/TextField";
 import Checkbox from '@mui/material/Checkbox';
 import Chip from "@mui/material/Chip";
 
-import VirtualListBox from '../../common/VirtualListBox';
-
 import compareArray from '../../../../../utils/compareArray';
 import debounce from '../../../../../utils/hof/debounce';
 import isObject from '../../../../../utils/isObject';
@@ -20,7 +18,6 @@ import isObject from '../../../../../utils/isObject';
 import { useOneState } from '../../../context/StateProvider';
 import { useOneProps } from '../../../context/PropsProvider';
 import { useOnePayload } from '../../../context/PayloadProvider';
-import { useOneMenu } from '../../../context/MenuProvider';
 
 import { useSubject } from '../../../../../hooks/useSubject';
 import { useAsyncAction } from '../../../../../hooks/useAsyncAction';
@@ -28,15 +25,12 @@ import { useActualValue } from '../../../../../hooks/useActualValue';
 import { useRenderWaiter } from '../../../../../hooks/useRenderWaiter';
 import { useReloadTrigger } from '../../../../../hooks/useReloadTrigger';
 
-import useItemModal from '../../../../../hooks/useItemModal';
 import useMediaContext from '../../../../../hooks/useMediaContext';
 
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
 import { IItemsSlot } from '../../../slots/ItemsSlot';
-
-import FieldType from '../../../../../model/FieldType';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -65,7 +59,6 @@ interface IState {
  * @param Items.itemList - The list of items to be populated in the autocomplete dropdown.
  * @param Items.freeSolo - Determines whether the user can input values that are not in the itemList.
  * @param Items.noDeselect - Determines whether the user can deselect values in the autocomplete field.
- * @param Items.virtualListBox - Determines whether to use a virtual listbox for rendering the autocomplete dropdown.
  * @param Items.watchItemList - Determines whether to watch for changes in the itemList.
  * @param Items.labelShrink - Determines whether to shrink the label when the autocomplete field has a value.
  * @param Items.dirty - Determines whether the autocomplete field has been modified.
@@ -74,7 +67,6 @@ interface IState {
  * @param Items.title - The title text of the autocomplete field.
  * @param Items.tr - A translation function that takes a string and returns a translated string.
  * @param Items.onChange - A callback function that is called when the value of the autocomplete field changes.
- * @param Items.withContextMenu - Determines whether to show a context menu for the autocomplete field.
  * @returns The Autocomplete component.
  */
 export const Items = ({
@@ -87,7 +79,6 @@ export const Items = ({
     itemList = [],
     freeSolo,
     noDeselect,
-    virtualListBox,
     watchItemList,
     labelShrink,
     dirty,
@@ -97,15 +88,12 @@ export const Items = ({
     fieldReadonly,
     tr = (s) => s.toString(),
     onChange,
-    withContextMenu,
 }: IItemsSlot) => {
 
     const { isMobile } = useMediaContext();
 
     const { object } = useOneState();
     const payload = useOnePayload();
-
-    const { requestSubject } = useOneMenu();
 
     const { reloadTrigger, doReload } = useReloadTrigger();
 
@@ -139,20 +127,6 @@ export const Items = ({
         }
         return [];
     }, [upperValue]);
-
-    const pickModal = useItemModal({
-        data: object,
-        payload,
-        itemList,
-        keepRaw: false,
-        onValueChange: onChange,
-        placeholder,
-        tip: undefined,
-        title,
-        tr,
-        type: FieldType.Items,
-        value: arrayValue,
-    });
 
     const prevValue = useRef(arrayValue);
 
@@ -246,10 +220,6 @@ export const Items = ({
         });
         return () => unsubscribeRef();
     }, [opened]);
-
-    useEffect(() => withContextMenu && requestSubject.subscribe(() => {
-        setOpened(false);
-    }), []);
 
     /**
      * Handles a change event by calling the provided onChange function with the value.
@@ -374,7 +344,6 @@ export const Items = ({
                 onChange={() => null}
                 value={EMPTY_ARRAY}
                 options={EMPTY_ARRAY}
-                ListboxComponent={virtualListBox ? VirtualListBox : undefined}
                 getOptionLabel={getOptionLabel}
                 renderTags={renderTags}
                 renderInput={createRenderInput(true, true)}
@@ -403,11 +372,9 @@ export const Items = ({
                     setOpened(true)
                     return;
                 }
-                pickModal();
             }}
             onClose={() => setOpened(false)}
             getOptionLabel={getOptionLabel}
-            ListboxComponent={virtualListBox ? VirtualListBox : undefined}
             value={value}
             options={state.options}
             renderTags={renderTags}

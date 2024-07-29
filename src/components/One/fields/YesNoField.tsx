@@ -74,17 +74,6 @@ export interface IYesNoFieldProps<Data = IAnything, Payload = IAnything> {
    */
   noDeselect?: PickProp<IField<Data, Payload>, "noDeselect">;
   /**
-   * Represents the configuration options for a virtual list box component.
-   *
-   * @typedef virtualListBox
-   * @property fieldName - The name of the field associated with the virtual list box.
-   * @property pageSize - The number of items to display per page in the virtual list box.
-   * @property showSearch - Determines whether to display a search input in the virtual list box.
-   * @property multiSelect - Determines whether the virtual list box allows multiple selection.
-   * @property selectedItems - The array of selected item values in the virtual list box.
-   */
-  virtualListBox?: PickProp<IField<Data, Payload>, "virtualListBox">;
-  /**
    * Represents the "tr" property of an object.
    *
    * @typeparam IField - Represents the object type containing the "tr" property.
@@ -164,7 +153,6 @@ export interface IYesNoFieldPrivate<Data = IAnything>  {
  * @param props.description - The description or tooltip text for the field.
  * @param props.placeholder - The text to display when the field is empty.
  * @param props.outlined - Determines if the field is outlined.
- * @param props.virtualListBox - Determines if the field uses a virtual list box.
  * @param props.noDeselect - Determines if the field allows deselecting the value.
  * @param props.labelShrink - Determines if the label should shrink when the field has a value.
  * @param props.title - The title attribute of the field.
@@ -183,7 +171,6 @@ export const YesNoField = ({
   description = "",
   placeholder = "",
   outlined = false,
-  virtualListBox = true,
   noDeselect,
   labelShrink,
   title = "",
@@ -201,7 +188,6 @@ export const YesNoField = ({
     placeholder={placeholder}
     outlined={outlined}
     noDeselect={noDeselect}
-    virtualListBox={virtualListBox}
     labelShrink={labelShrink}
     tr={tr}
     title={title}

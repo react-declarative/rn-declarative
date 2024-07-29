@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { makeStyles } from "../../../styles";
 
-import Group, { IGroupProps } from "../../../components/common/Group";
+import Group, { IGroupProps } from "../../../components/Group";
 import BaselineAdjust from "../components/common/BaselineAdjust";
 
 import classNames from "../../../utils/classNames";

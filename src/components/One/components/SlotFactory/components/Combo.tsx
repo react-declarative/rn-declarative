@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useMemo, useState, useRef, useEffect } from "react";
 
-import VirtualListBox from "../../common/VirtualListBox";
-
 import {
   AutocompleteRenderInputParams,
   AutocompleteRenderOptionState,
@@ -15,12 +13,10 @@ import Radio from "@mui/material/Radio";
 
 import debounce from "../../../../../utils/hof/debounce";
 
-import useItemModal from "../../../../../hooks/useItemModal";
 import useMediaContext from "../../../../../hooks/useMediaContext";
 
 import { useOneState } from "../../../context/StateProvider";
 import { useOneProps } from "../../../context/PropsProvider";
-import { useOneMenu } from "../../../context/MenuProvider";
 import { useOnePayload } from "../../../context/PayloadProvider";
 
 import { useAsyncAction } from "../../../../../hooks/useAsyncAction";
@@ -33,8 +29,6 @@ import RadioIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
 import { IComboSlot } from "../../../slots/ComboSlot";
-
-import FieldType from "../../../../../model/FieldType";
 
 const icon = <RadioButtonUncheckedIcon fontSize="small" />;
 const checkedIcon = <RadioIcon fontSize="small" />;
@@ -72,7 +66,6 @@ interface IState {
  * @param placeholder - The placeholder text of the Combo input.
  * @param outlined - Whether the Combo is outlined or not.
  * @param itemList - The list of items/options for the Combo.
- * @param virtualListBox - Whether to use a virtual list box for the Combo or not.
  * @param watchItemList - Whether to watch the itemList for changes or not.
  * @param labelShrink - Whether to shrink the label of the Combo or not.
  * @param noDeselect - Whether to allow deselecting an item or not.
@@ -81,7 +74,6 @@ interface IState {
  * @param dirty - Whether the Combo value is dirty/changed or not.
  * @param invalid - Whether the Combo value is invalid or not.
  * @param incorrect - Whether the Combo value is incorrect or not.
- * @param withContextMenu - Whether to show a context menu for the Combo or not.
  * @param tr - The translation function for the Combo.
  * @param onChange - The change event handler for the Combo.
  * @returns The Combo component.
@@ -94,7 +86,6 @@ export const Combo = ({
   placeholder = "",
   outlined = false,
   itemList = [],
-  virtualListBox,
   watchItemList,
   labelShrink,
   noDeselect,
@@ -104,14 +95,12 @@ export const Combo = ({
   invalid,
   incorrect,
   fieldReadonly,
-  withContextMenu,
   tr = (s) => s.toString(),
   onChange,
 }: IComboSlot) => {
   const { isMobile } = useMediaContext();
   const { object } = useOneState();
   const payload = useOnePayload();
-  const { requestSubject } = useOneMenu();
 
   const { reloadTrigger, doReload } = useReloadTrigger();
 
@@ -141,24 +130,6 @@ export const Combo = ({
     }
     return upperValue;
   }, [upperValue]);
-
-  const arrayValue = useMemo(() => {
-    return value ? [value] : value;
-  }, [value]);
-
-  const pickModal = useItemModal({
-    data: object,
-    payload,
-    itemList,
-    keepRaw: false,
-    onValueChange: onChange,
-    placeholder,
-    tip: undefined,
-    title,
-    tr,
-    type: FieldType.Combo,
-    value: arrayValue,
-  });
 
   const { fallback } = useOneProps();
 
@@ -329,10 +300,6 @@ export const Combo = ({
     return () => unsubscribeRef();
   }, [opened]);
 
-  useEffect(() => withContextMenu && requestSubject.subscribe(() => {
-    setOpened(false);
-  }), []);
-
   /**
    * Handles the change of a value and triggers the corresponding
    * callback and event.
@@ -356,7 +323,6 @@ export const Combo = ({
         options={EMPTY_ARRAY}
         onChange={() => null}
         freeSolo={freeSolo}
-        ListboxComponent={virtualListBox ? VirtualListBox : undefined}
         getOptionLabel={getOptionLabel}
         renderInput={createRenderInput(true, true)}
         renderOption={renderOption}
@@ -375,7 +341,6 @@ export const Combo = ({
           setOpened(true);
           return;
         }
-        pickModal();
       }}
       onClose={() => setOpened(false)}
       disableCloseOnSelect
@@ -388,7 +353,6 @@ export const Combo = ({
       options={state.options}
       disabled={disabled}
       readOnly={readonly}
-      ListboxComponent={virtualListBox ? VirtualListBox : undefined}
       renderInput={createRenderInput(false, readonly)}
       renderOption={renderOption}
     />
