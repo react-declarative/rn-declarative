@@ -14,7 +14,6 @@ import IOneProps from "../../../../../model/IOneProps";
  * @interface
  */
 interface IState {
-  groupRef: HTMLDivElement;
   focusReadonly: boolean;
   fieldReadonly: boolean;
   disabled: boolean;
@@ -42,7 +41,6 @@ interface IInitialData
   extends Omit<
     IState,
     keyof {
-      groupRef: never;
       fieldReadonly: never;
       focusReadonly: never;
       invalid: never;
@@ -143,7 +141,6 @@ export const useFieldState = (initialData: IInitialData, config: IParams) => {
   const [state, setState] = useState<IState>(() => {
     const params = readState(config);
     return {
-      groupRef: null as never,
       focusReadonly: true,
       loading: false,
       ...params,
@@ -159,8 +156,6 @@ export const useFieldState = (initialData: IInitialData, config: IParams) => {
    */
   const action = useMemo(
     () => ({
-      setGroupRef: (groupRef: IState["groupRef"]) =>
-        setState((prevState) => ({ ...prevState, groupRef })),
       setFocusReadonly: (focusReadonly: IState["focusReadonly"]) =>
         setState((prevState) => ({ ...prevState, focusReadonly })),
       setFieldReadonly: (fieldReadonly: IState["fieldReadonly"]) =>

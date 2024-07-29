@@ -27,18 +27,6 @@ export interface ISwitchFieldProps<Data = IAnything, Payload = IAnything>  {
    */
   title?: PickProp<IField<Data, Payload>, 'title'>;
   /**
-   * Retrieves the 'groupRef' property from an object based on the given type.
-   *
-   * @template Data - The type of data in the object containing the 'groupRef' property.
-   * @template Payload - The type representing the payload of the 'groupRef' property.
-   * @template IField - The interface describing the object structure.
-   *
-   * @param groupRef - The object containing the 'groupRef' property to retrieve.
-   *
-   * @returns - The 'groupRef' property from the given object.
-   */
-  groupRef?: PickProp<IField<Data, Payload>, 'groupRef'>;
-  /**
    * Represents the readonly property of an IField object.
    *
    * @typedef readonly?

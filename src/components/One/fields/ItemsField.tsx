@@ -120,14 +120,6 @@ export interface IItemsFieldProps<Data = IAnything, Payload = IAnything> {
    */
   tr?: PickProp<IField<Data, Payload>, "tr">;
   /**
-   * Retrieves the value of the 'groupRef' property from the given object 'fieldData'.
-   *
-   * @param fieldData - The object containing the 'groupRef' property.
-   *
-   * @returns - The value of the 'groupRef' property from 'fieldData', or undefined if it doesn't exist.
-   */
-  groupRef?: PickProp<IField<Data, Payload>, 'groupRef'>;
-  /**
    * Represents the optional "labelShrink" property of an object that implements the `IField<Data>` interface.
    * The "labelShrink" property is of type `PickProp<IField<Data>, "labelShrink">`, which picks the "labelShrink" property
    * from the `IField<Data>` interface.

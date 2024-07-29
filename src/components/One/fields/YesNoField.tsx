@@ -121,13 +121,6 @@ export interface IYesNoFieldProps<Data = IAnything, Payload = IAnything> {
    * @returns - The value of the "title" property.
    */
   title?: PickProp<IField<Data, Payload>, "title">;
-  /**
-   * Represents the `groupRef` property of an object.
-   *
-   * @typedef GroupRef
-   * @property groupRef - The reference to a group of fields.
-   */
-  groupRef?: PickProp<IField<Data, Payload>, 'groupRef'>;
 }
 
 /**

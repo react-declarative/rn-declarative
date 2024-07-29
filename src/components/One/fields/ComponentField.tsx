@@ -69,12 +69,6 @@ export interface IComponentFieldProps<Data = IAnything, Payload = IAnything> {
    */
   element?: PickProp<IField<Data, Payload>, "element">;
   /**
-   * Represents a property of an object, where the key is "groupRef" and the value is of type PickProp<IField<Data, Payload>, "groupRef">.
-   *
-   * @property groupRef - The 'groupRef' property of the object.
-   */
-  groupRef?: PickProp<IField<Data, Payload>, "groupRef">;
-  /**
    * Represents the contextual information for watching a single field in a data structure.
    * @typedef watchOneContext?
    */

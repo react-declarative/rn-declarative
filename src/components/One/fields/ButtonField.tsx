@@ -95,13 +95,6 @@ export interface IButtonFieldProps<Data = IAnything, Payload = IAnything> {
    * @returns
    */
   disabled?: PickProp<IField<Data, Payload>, "disabled">;
-  /**
-   * Represents the optional property `groupRef` from the `IField` interface.
-   * The `groupRef` property is a subset of the `PickProp` type with the 'groupRef' key.
-   *
-   * @typedef groupRef
-   */
-  groupRef?: PickProp<IField<Data, Payload>, 'groupRef'>;
 }
 
 /**

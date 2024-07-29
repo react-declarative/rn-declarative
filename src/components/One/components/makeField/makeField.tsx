@@ -71,7 +71,6 @@ const DEFAULT_FALLBACK = () => null;
 const DEFAULT_READY = () => null;
 const DEFAULT_MAP = (data: IAnything) => data;
 const DEFAULT_CLICK = () => {};
-const DEFAULT_REF = () => null;
 const DEFAULT_READTRANSFORM = (value: Value) => value;
 const DEFAULT_WRITETRANSFORM = (value: Value) => value;
 
@@ -129,7 +128,6 @@ export function makeField(
         readonly: upperReadonly = false,
         autoFocus,
         style,
-        groupRef: ref = DEFAULT_REF,
         fieldRightMargin = fieldConfig.defaultProps?.fieldRightMargin,
         fieldBottomMargin = fieldConfig.defaultProps?.fieldBottomMargin,
         testId = name,
@@ -177,7 +175,6 @@ export function makeField(
                 disabled,
                 fieldReadonly,
                 focusReadonly,
-                groupRef,
                 invalid,
                 incorrect,
                 loading,
@@ -189,7 +186,6 @@ export function makeField(
                 setDisabled,
                 setFieldReadonly,
                 setFocusReadonly,
-                setGroupRef,
                 setInvalid,
                 setIncorrect,
                 setLoading,
@@ -233,7 +229,6 @@ export function makeField(
             invalid$: invalid,
             object$: object,
             upperReadonly$: upperReadonly,
-            groupRef$: groupRef,
             value$: value,
         })
 
@@ -422,7 +417,7 @@ export function makeField(
                 return focusSubject.once(() => setDirty(true));
             }
             return undefined;
-        }, [groupRef]);
+        }, []);
 
         /**
          * При редактировании больших форм изменение целевого объекта
@@ -493,17 +488,6 @@ export function makeField(
                 return;
             }
             setValue(newValue);
-        }, []);
-
-        /**
-         * Ссылка на группу хранится в useState для
-         * правильной работы эффекта
-         */
-        const handleGroupRef = useCallback((element: HTMLDivElement | null) => {
-            if (element) {
-                setGroupRef(element);
-            }
-            ref(element);
         }, []);
 
         /**
@@ -646,7 +630,6 @@ export function makeField(
 
         return (
             <Group
-                ref={handleGroupRef}
                 data-testid={testId}
                 data-path={memory.fieldName}
                 isItem

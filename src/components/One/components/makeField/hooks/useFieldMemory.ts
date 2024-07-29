@@ -23,7 +23,6 @@ interface IMemory {
     invalid$: string | null;
     object$: IAnything;
     value$: Value;
-    groupRef$: HTMLDivElement;
 }
 
 /**
@@ -57,7 +56,6 @@ interface IMemoryData extends Omit<IMemory, keyof {
  * @param memoryData.object$ - The observable for the object of the memory field.
  * @param memoryData.upperReadonly$ - The observable for the readonly state of the upper field.
  * @param memoryData.value$ - The observable for the value of the memory field.
- * @param memoryData.groupRef$ - The observable for the group reference of the memory field.
  * @returns - The memory object.
  */
 export const useFieldMemory = ({
@@ -72,7 +70,6 @@ export const useFieldMemory = ({
     object$,
     upperReadonly$,
     value$,
-    groupRef$,
 }: IMemoryData) => {
     /**
      * Variable representing the memory object.
@@ -91,7 +88,6 @@ export const useFieldMemory = ({
      * @property object$ - Represents the object value.
      * @property upperReadonly$ - Represents the upper readonly value.
      * @property value$ - Represents the value.
-     * @property groupRef$ - Represents the group reference value.
      */
     const memory = useMemo((): IMemory => ({
         inputUpdate: false,
@@ -108,7 +104,6 @@ export const useFieldMemory = ({
         object$: null as never,
         upperReadonly$: null as never,
         value$: null as never,
-        groupRef$: null as never,
     }), []);
     memory.debouncedValue$ = debouncedValue$;
     memory.fieldReadonly$ = fieldReadonly$;
@@ -117,7 +112,6 @@ export const useFieldMemory = ({
     memory.object$ = object$;
     memory.upperReadonly$ = upperReadonly$;
     memory.value$ = value$;
-    memory.groupRef$ = groupRef$;
     memory.clickDisabled = clickDisabled;
     return { memory };
 }

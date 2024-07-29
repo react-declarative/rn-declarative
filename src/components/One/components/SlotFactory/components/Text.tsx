@@ -176,7 +176,6 @@ const multiline = (inputRows: number) => ({
  * @property dirty - Indicates if the input value has been changed.
  * @property loading - Indicates if the input is currently loading.
  * @property autoFocus - Indicates if the input should be focused automatically.
- * @property inputRef - A ref callback for the input element.
  * @property onChange - The change event handler for the input.
  */
 export const Text = ({
@@ -203,7 +202,6 @@ export const Text = ({
   dirty,
   loading,
   autoFocus,
-  inputRef,
   onChange,
 }: ITextSlot) => {
   const payload = useOnePayload();
@@ -220,9 +218,6 @@ export const Text = ({
             top: "100%",
           },
         }),
-      }}
-      inputRef={(input: HTMLInputElement | null) => {
-        inputRef && inputRef(input);
       }}
       variant={outlined ? "outlined" : "standard"}
       helperText={(dirty && (invalid || incorrect)) || description}

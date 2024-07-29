@@ -111,13 +111,6 @@ export interface IComboFieldProps<Data = IAnything, Payload = IAnything> {
    * @typedef tr
    */
   tr?: PickProp<IField<Data, Payload>, "tr">;
-  /**
-   * This variable represents a reference to a group within a field's data payload.
-   * It is an optional property and is of type `PickProp<IField<Data, Payload>, 'groupRef'>`.
-   *
-   * @typedef groupRef
-   */
-  groupRef?: PickProp<IField<Data, Payload>, 'groupRef'>;
 }
 
 /**

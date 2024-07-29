@@ -30,13 +30,6 @@ export interface IRadioFieldProps<Data = IAnything, Payload = IAnything> {
    */
   radioValue?: PickProp<IField<Data, Payload>, "radioValue">;
   /**
-   * Represents a reference to a group in a field object.
-   *
-   * @typedef groupRef
-   * @property groupRef - The reference to the group.
-   */
-  groupRef?: PickProp<IField<Data, Payload>, 'groupRef'>;
-  /**
    * Type definition for the "readonly" property of a field.
    *
    * @typedef ReadonlyProp

@@ -140,12 +140,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     outlined?: boolean;
 
     /**
-     * Передает ссылку при перерисовках
-     */
-    groupRef?: (element?: HTMLDivElement | null) => void;
-    inputRef?: (element?: HTMLInputElement | null) => void;
-
-    /**
      * Автофокус и постоянное отключение поля
      */
     autoFocus?: boolean;

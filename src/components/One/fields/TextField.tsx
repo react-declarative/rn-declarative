@@ -180,20 +180,6 @@ export interface ITextFieldProps<Data = IAnything, Payload = IAnything> {
    */
   disabled?: PickProp<IField<Data, Payload>, "disabled">;
   /**
-   * Represents the reference to a group in a field.
-   *
-   * @typedef GroupRef
-   * @property groupRef - The reference to the group.
-   */
-  groupRef?: PickProp<IField<Data, Payload>, 'groupRef'>;
-  /**
-   * Represents the input reference property of a field.
-   *
-   * @typedef InputRef
-   * @property current - A reference to the input element.
-   */
-  inputRef?: PickProp<IField<Data, Payload>, 'inputRef'>;
-  /**
    * Shrink option for labels.
    *
    * @typedef labelShrink
@@ -249,7 +235,6 @@ export interface ITextFieldPrivate<Data = IAnything> {
  * @param loading - Indicates if the input field is in a loading state
  * @param onChange - The function to call when the input value changes
  * @param autoFocus - Indicates if the input field should be automatically focused
- * @param inputRef - The reference to the input element
  * @param name - The name of the input field
  * @returns - The TextField component
  */
@@ -276,12 +261,10 @@ export const TextField = ({
   loading,
   onChange,
   autoFocus,
-  inputRef,
   name,
 }: ITextFieldProps & ITextFieldPrivate) => (
   <Text
     autoFocus={autoFocus}
-    inputRef={inputRef}
     invalid={invalid}
     incorrect={incorrect}
     value={value}
