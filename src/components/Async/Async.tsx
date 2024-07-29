@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
-import { flushSync } from 'react-dom';
 
 import cancelable, { IWrappedFn, CANCELED_SYMBOL } from '../../utils/hof/cancelable';
 
@@ -137,9 +136,9 @@ export const Async = <T extends any = object>({
                 executionRef.current = null;
                 if (isMounted.current) {
                     /** react-18 prevent batching */
-                    setTimeout(() => flushSync(() => {
+                    setTimeout(() => {
                         setChild(result);
-                    }), 0);
+                    }, 0);
                 }
             } catch (e) {
                 isMounted.current && setError(true);

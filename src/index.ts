@@ -54,8 +54,6 @@ export type IOneApi<Data = IAnything> = IOneApiInternal<Data>;
 
 export type IOption<Payload = any> = IOptionInternal<Payload>;
 
-export { default as dayjs } from 'dayjs';
-
 export { ActionButton } from './components';
 export { ActionIcon } from './components';
 
@@ -157,13 +155,4 @@ export type TObserver<Data = void> = TObserverInternal<Data>;
 export type TObservable<Data = void> = TObservableInternal<Data>;
 export type TBehaviorSubject<Data = unknown> = TBehaviorSubjectInternal<Data>;
 
-import * as datetimeInternal from './utils/datetime';
-
-export const datetime = { ...datetimeInternal };
-
 export { compose } from './utils/compose';
-
-export { getMomentStamp, fromMomentStamp } from './utils/getMomentStamp';
-export { getTimeStamp, fromTimeStamp } from './utils/getTimeStamp';
-export { getGenesisStamp } from './utils/getGenesisStamp';
-export { addUtcOffset, removeUtcOffset } from './utils/addUtcOffset';

@@ -68,20 +68,12 @@
     "NOTES.md"
   ],
   "peerDependencies": {
-    "@emotion/react": "^11.8.1",
-    "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.5.0",
-    "@mui/material": "^5.5.0",
-    "@mui/system": "^5.5.0",
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0",
-    "tss-react": ">=4.3.4"
+    "react": "*",
+    "react-native": "*",
+    "react-native-paper": "*"
   },
   "devDependencies": {
     "@types/react": "18.0.21",
-    "@types/react-dom": "18.0.6",
-    "@types/uuid": "8.3.4",
-    "@types/mapbox-gl": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "6.5.0",
     "@typescript-eslint/parser": "6.5.0",
     "dts-bundle": "0.7.3",
@@ -91,10 +83,13 @@
     "eslint": "8.57.0",
     "eslint-plugin-jsdoc": "48.2.1",
     "prettier": "3.2.5",
-    "typescript": "4.6.2"
+    "typescript": "4.6.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.71.6",
+    "react-native-paper": "5.12.5"
   },
   "dependencies": {
-    "dayjs": "1.11.5",
     "rimraf": "3.0.2",
     "uuid": "9.0.0"
   }
