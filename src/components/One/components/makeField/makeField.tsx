@@ -23,8 +23,6 @@ import useFieldMemory from './hooks/useFieldMemory';
 import useFieldState from './hooks/useFieldState';
 import useFieldGuard from './hooks/useFieldGuard';
 
-import Group, { IGroupProps } from '../Group';
-
 import IAnything from '../../../../model/IAnything';
 import IManaged from '../../../../model/IManaged';
 import IEntity from '../../../../model/IEntity';
@@ -33,6 +31,8 @@ import IField, { Value } from '../../../../model/IField';
 import cancelable, { CANCELED_SYMBOL } from '../../../../utils/hof/cancelable';
 import queued from '../../../../utils/hof/queued';
 import sleep from '../../../../utils/sleep';
+
+import Subject from '../../../../utils/rx/Subject';
 
 import nameToTitle from '../../helpers/nameToTitle';
 
@@ -66,6 +66,8 @@ interface IConfig<Data = IAnything> {
 interface IChangeConfig {
     skipReadonly?: boolean;
 }
+
+const changeFocusSubject = new Subject<void>();
 
 const DEFAULT_CHANGE = (v: IAnything) => console.log({ v });
 const DEFAULT_FALLBACK = () => null;
@@ -246,6 +248,16 @@ export function makeField(
         oneConfig.WITH_DISMOUNT_LISTENER && useLayoutEffect(() => () => {
             memory.isMounted = false;
         }, []);
+
+        /**
+         * Если пользователь нажал Tab, следует
+         * применить изменения
+         */
+        oneConfig.WITH_WAIT_FOR_TAB_LISTENER && useEffect(() => changeFocusSubject.subscribe(() => {
+            if (pending()) {
+                flush();
+            }
+        }), []);
 
         /**
          * Коллбек входящего изменения.
@@ -499,6 +511,7 @@ export function makeField(
             if (!memory.isMounted) {
                 return;
             }
+            changeFocusSubject.next();
             if (!fieldReadonly && !upperReadonly) {
                 setFocusReadonly(false);
             }

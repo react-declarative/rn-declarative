@@ -6,6 +6,7 @@ import { FIELD_DEBOUNCE } from "../../config/config";
  * @interface IConfig
  */
 export interface IConfig {
+    WITH_WAIT_FOR_TAB_LISTENER: boolean;
     WITH_DIRTY_PRESS_LISTENER: boolean;
     WITH_DISMOUNT_LISTENER: boolean;
     WITH_SYNC_COMPUTE: boolean;
@@ -26,6 +27,7 @@ export interface IConfig {
  * @property FIELD_BLUR_DEBOUNCE - The field blur debounce time for the module. Default is BLUR_DEBOUNCE.
  */
 const INITIAL_CONFIG: IConfig = {
+    WITH_WAIT_FOR_TAB_LISTENER: true,
     WITH_DIRTY_PRESS_LISTENER: true,
     WITH_DISMOUNT_LISTENER: true,
     WITH_SYNC_COMPUTE: false,

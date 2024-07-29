@@ -54,6 +54,13 @@ export interface IComponentFieldProps<Data = IAnything, Payload = IAnything> {
    */
   placeholder?: PickProp<IField<Data, Payload>, "placeholder">;
   /**
+   * Type definition for the `placeholder` property of a field.
+   *
+   * @template Data - The type of data associated with the field.
+   * @template Payload - The type of payload used for updating the field.
+   */
+  title?: PickProp<IField<Data, Payload>, "title">;
+  /**
    * Retrieves the "element" property from the given object
    *
    * @param element - The object to extract the "element" property from
@@ -164,7 +171,7 @@ export const ComponentField = ({
       features,
     } as const;
   }, [
-    object, disabled, invalid, incorrect, readonly
+    object, disabled, invalid, incorrect, readonly, style
   ]);
 
   if (watchOneContext) {

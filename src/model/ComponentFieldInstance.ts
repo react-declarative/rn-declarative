@@ -1,3 +1,5 @@
+import type CompiledStyles from "./CompiledStyles";
+
 import type IField from "./IField";
 import type IManaged from "./IManaged";
 
@@ -7,6 +9,10 @@ import type IManaged from "./IManaged";
  * @template Payload - The payload type of the field.
  */
 export type ComponentFieldInstance<Data = any, Payload = any> = Data & {
+  onFocus: () => void;
+  onBlur: () => void;
+  style: CompiledStyles;
+  testId: string;
   /**
    * A callback function type that is called when a change event occurs.
    *

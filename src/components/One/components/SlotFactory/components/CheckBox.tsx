@@ -32,7 +32,7 @@ export const CheckBox = ({
         onFocus={onFocus}
         onBlur={onBlur}
         style={style}
-        {...makeTestId}
+        {...makeTestId(testId)}
     >
         {title}
     </UiCheckBox>
