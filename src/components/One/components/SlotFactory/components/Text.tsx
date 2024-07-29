@@ -6,6 +6,7 @@ import { useOnePayload } from "../../../context/PayloadProvider";
 import { useOneState } from "../../../context/StateProvider";
 
 import { ITextSlot } from "../../../slots/TextSlot";
+import { TouchableOpacity, View } from "react-native";
 
 const LOADING_LABEL = "Loading";
 
@@ -75,7 +76,11 @@ export const Text = ({
   return (
     <Input
       multiline={inputMultiline}
-      accessoryRight={TrailingIcon ? <TrailingIcon /> : undefined}
+      accessoryRight={TrailingIcon ? (
+        <TouchableOpacity  onPress={}>
+          <TrailingIcon />
+        </TouchableOpacity >
+      ) : undefined}
       accessoryLeft={LeadingIcon ? <LeadingIcon /> : undefined}
     />
   );
