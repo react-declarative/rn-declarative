@@ -82,6 +82,8 @@ export interface IIconFieldProps<Data = IAnything, Payload = IAnything> {
  */
 export interface IIconFieldPrivate<Data = IAnything> {
   click: PickProp<IManaged<Data>, 'click'>;
+  onFocus: PickProp<IManaged<Data>, 'onFocus'>;
+  onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
 
 /**
@@ -97,6 +99,8 @@ export const IconField = ({
   iconSize,
   iconColor,
   iconBackground,
+  onFocus,
+  onBlur,
 }: IIconFieldProps & IIconFieldPrivate) => (
   <Icon
     iconSize={iconSize}
@@ -105,6 +109,8 @@ export const IconField = ({
     click={click}
     disabled={disabled}
     icon={icon}
+    onFocus={onFocus}
+    onBlur={onBlur}
   />
 );
 

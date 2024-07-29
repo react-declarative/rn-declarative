@@ -22,7 +22,7 @@ import useFieldMemory from './hooks/useFieldMemory';
 import useFieldState from './hooks/useFieldState';
 import useFieldGuard from './hooks/useFieldGuard';
 
-import Group, { IGroupProps } from '../../../Group';
+import Group, { IGroupProps } from '../Group';
 
 import IAnything from '../../../../model/IAnything';
 import IManaged from '../../../../model/IManaged';
@@ -94,10 +94,10 @@ export function makeField(
     const Component = memo(originalComponent) as unknown as React.FC<IManaged>;
     const oneConfig = OneConfig[GET_REF_SYMBOL]();
     const component = <Data extends IAnything = IAnything>({
-        columns = '',
-        phoneColumns = '',
-        tabletColumns = '',
-        desktopColumns = '',
+        style,
+        phoneStyle,
+        tabletStyle,
+        desktopStyle,
         phoneHidden: upperPhoneHidden = false,
         tabletHidden: upperTabletHidden = false,
         desktopHidden: upperDesktopHidden = false,
@@ -127,7 +127,6 @@ export function makeField(
         disabled: fieldDisabled = false,
         readonly: upperReadonly = false,
         autoFocus,
-        style,
         testId = name,
         ...otherProps
     }: IEntity<Data>) => {
@@ -542,10 +541,10 @@ export function makeField(
 
         const groupProps: IGroupProps<Data> = {
             ...fieldConfig.defaultProps,
-            columns,
-            phoneColumns,
-            tabletColumns,
-            desktopColumns,
+            style,
+            phoneStyle,
+            tabletStyle,
+            desktopStyle,
         };
 
         const computeReadonly = useCallback(() => {
@@ -626,10 +625,7 @@ export function makeField(
 
         return (
             <Group
-                data-testid={testId}
-                data-path={memory.fieldName}
-                isItem
-                style={style}
+                testId={testId}
                 {...groupProps}
             >
                 <Component {...componentProps as IManaged} />

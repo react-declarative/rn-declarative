@@ -3,6 +3,7 @@ export type { ISize } from './model/ISize';
 import { TypedField as TypedFieldInternal } from './model/TypedField';
 import { IValidation as IValidationInternal } from './model/IValidation';
 import { IInvalidField as IInvalidFieldInternal } from './model/IInvalidField';
+import { StyleProperties as StylePropertiesInternal } from './model/StyleProperties';
 import { IField as IFieldInternal } from './model/IField';
 import { IEntity as IEntityInternal } from './model/IEntity';
 import { IManaged as IManagedInternal } from './model/IManaged';
@@ -47,6 +48,7 @@ export type IFieldEntity<Data = IAnything, Payload = IAnything> = IEntityInterna
 export type IFieldManaged<Data = IAnything, Value = IAnything> = IManagedInternal<Data, Value>;
 export type IInvalidField<Data = IAnything, Payload = IAnything> = IInvalidFieldInternal<Data, Payload>;
 export type IValidation = IValidationInternal;
+export type StyleProperties = StylePropertiesInternal;
 
 export type OneHandler<Data = IAnything> = OneHandlerInternal<Data>;
 

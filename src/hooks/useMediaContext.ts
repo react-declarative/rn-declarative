@@ -1,6 +1,73 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Theme, useMediaQuery } from '@mui/material';
+import { Dimensions } from 'react-native';
+
+import BehaviorSubject from '../utils/rx/BehaviorSubject';
+
+import singleshot from '../utils/hof/singleshot';
+
+import useSingleton from './useSingleton';
+
+const BREAKPOINTS = {
+    xs: 0,
+    sm: 600,
+    md: 960,
+    lg: 1280,
+    xl: 1536,
+};
+
+const GRID_MAX_WIDTH = Number.POSITIVE_INFINITY;
+
+interface IConstraint {
+    isPhone: boolean;
+    isTablet: boolean;
+    isDesktop: boolean;
+    isWide: boolean;
+    isMobile: boolean;
+}
+
+/**
+ * Represents a function that returns a boolean value indicating whether a given width falls within a specified range.
+ *
+ * @param from - The lower bound of the range (inclusive).
+ * @param to - The upper bound of the range (exclusive).
+ * @returns - A function that takes a width and returns true if it is within the specified range, false otherwise.
+ */
+const match = (from: number, to: number) => (width: number) => width >= from && width < to;
+
+const getConstraintSource = singleshot(() => {
+    const result = new BehaviorSubject<IConstraint>();
+
+    const matchPhone = match(BREAKPOINTS.xs, BREAKPOINTS.sm);
+    const matchTablet = match(BREAKPOINTS.sm, BREAKPOINTS.lg);
+    const matchDesktop = match(BREAKPOINTS.lg, GRID_MAX_WIDTH);
+
+    const compute = (width: number) => {
+        const isPhone = matchPhone(width);
+        const isTablet = matchTablet(width);
+        const isDesktop = matchDesktop(width);
+        const isWide = isTablet || isDesktop;
+        const isMobile = isPhone;
+        return {
+            isPhone,
+            isTablet,
+            isDesktop,
+            isWide,
+            isMobile,
+        };
+    };
+
+    Dimensions.addEventListener(
+        'change',
+        ({ window }) => {
+          result.next(compute(window.width));
+        },
+    );
+
+    result.next(compute(Dimensions.get('window').width));
+
+    return result;
+});
 
 /**
  * Returns an object containing information about the current media context.
@@ -13,27 +80,10 @@ import { Theme, useMediaQuery } from '@mui/material';
  * @property isMobile - Indicates whether the current device is a phone.
  */
 export const useMediaContext = () => {
-    
-    const isPhone = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
-    const isTablet = useMediaQuery((theme: Theme) => theme.breakpoints.between("sm", "lg"));
-    const isDesktop = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
-
-    const isWide = isTablet || isDesktop;
-    const isMobile = isPhone;
-
-    return useMemo(() => ({
-        isPhone,
-        isTablet,
-        isDesktop,
-        isWide,
-        isMobile,
-    }), [
-        isWide,
-        isMobile,
-        isPhone,
-        isTablet,
-        isDesktop,
-    ]);
+    const constraintSource = useSingleton(getConstraintSource);
+    const [constraint, setConstraint] = useState(constraintSource.data!);
+    useEffect(constraintSource.subscribe(setConstraint), []);
+    return constraint;
 };
 
 export default useMediaContext;

@@ -64,6 +64,8 @@ export interface IRadioFieldPrivate<Data = IAnything> {
   value: PickProp<IManaged<Data>, "value">;
   onChange: PickProp<IManaged<Data>, "onChange">;
   name?: PickProp<IManaged<Data>, 'name'>;
+  onFocus: PickProp<IManaged<Data>, 'onFocus'>;
+  onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
 
 /**
@@ -86,6 +88,8 @@ export const RadioField = ({
   title,
   radioValue,
   name = '',
+  onFocus,
+  onBlur,
 }: IRadioFieldProps & IRadioFieldPrivate) => (
   <Radio
     value={value}
@@ -93,6 +97,8 @@ export const RadioField = ({
     onChange={onChange}
     title={title}
     radioValue={radioValue}
+    onFocus={onFocus}
+    onBlur={onBlur}
     name={name}
   />
 );

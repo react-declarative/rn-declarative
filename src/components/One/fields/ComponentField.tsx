@@ -2,10 +2,6 @@ import * as React from "react";
 import { Fragment } from "react";
 import { useMemo } from "react";
 
-import { makeStyles } from "../../../styles";
-
-import Box from "@mui/material/Box";
-
 import makeField from "../components/makeField";
 
 import { useOnePayload } from "../../../components/One/context/PayloadProvider";
@@ -18,8 +14,6 @@ import IAnything from "../../../model/IAnything";
 import IManaged, { PickProp } from "../../../model/IManaged";
 
 import type { ComponentFieldInstanceProps } from "../../../model/ComponentFieldInstance";
-
-import classNames from "../../../utils/classNames";
 
 type FieldIgnoreParam = keyof Omit<IManaged, keyof IField> | "readonly" | "dirty";
 
@@ -96,30 +90,9 @@ interface IComponentFieldPrivate<Data = IAnything> {
   incorrect: PickProp<IManaged<Data>, "incorrect">;
   readonly: PickProp<IManaged<Data>, "readonly">;
   onChange: PickProp<IManaged<Data>, "onChange">;
+  onFocus: PickProp<IManaged<Data>, 'onFocus'>;
+  onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
-
-/**
- * A function that returns a style object based on the given configuration
- *
- * @returns The style object containing the defined CSS properties
- */
-const useStyles = makeStyles()({
-  root: {
-    display: "flex",
-    alignItems: "stretch",
-    justifyContent: "stretch",
-    "& > *": {
-      flex: 1,
-    },
-  },
-  disabled: {
-    pointerEvents: "none",
-    opacity: 0.5,
-  },
-  readonly: {
-    pointerEvents: "none",
-  },
-});
 
 const ComponentContextInstance = ({
     Element,
@@ -157,14 +130,12 @@ export const ComponentField = ({
   onChange: onValueChange,
   ...otherProps
 }: IComponentFieldProps & IComponentFieldPrivate) => {
-  const { classes } = useStyles();
-
   const { changeObject: handleChange } = useOneState();
   const payload = useOnePayload();
   const features = useOneFeatures();
 
   const componentProps = useMemo(() => {
-    const _fieldParams = Object.entries(otherProps as IField)
+    const _fieldParams = Object.entries(otherProps as unknown as IField)
       .filter(
         ([key]) => !FIELD_INTERNAL_PARAMS.includes(key as FieldIgnoreParam)
       )
@@ -186,23 +157,10 @@ export const ComponentField = ({
     object, disabled, invalid, incorrect, readonly
   ]);
 
-  const renderNode = () => {
-    if (watchOneContext) {
-      return <ComponentContextInstance {...componentProps} value={value} Element={Element} />
-    }
-    return <Element {...componentProps} value={value} context={DEFAULT_VALUE} />
-  };
-
-  return (
-    <Box
-      className={classNames(classes.root, {
-        [classes.disabled]: disabled,
-        [classes.readonly]: readonly,
-      })}
-    >
-      {renderNode()}
-    </Box>
-  );
+  if (watchOneContext) {
+    return <ComponentContextInstance {...componentProps} value={value} Element={Element} />
+  }
+  return <Element {...componentProps} value={value} context={DEFAULT_VALUE} />
 };
 
 ComponentField.displayName = "ComponentField";

@@ -103,28 +103,23 @@ export interface IWrappedLayout<Data = IAnything, Payload = IAnything> {
  */
 export interface IManagedLayout<Data = IAnything, Payload = IAnything> extends IWrappedLayout<Data, Payload> {
     /**
-     * Retrieves the specific columns from a given object.
+     * Retrieves the specific style from a given object.
      */
-    columns?: PickProp<IField<Data, Payload>, 'columns'>;
+    style?: PickProp<IField<Data, Payload>, 'style'>;
     /**
-     * Represents the phone columns configuration for a field
+     * Represents the phone style configuration for a field
      */
-    phoneColumns?: PickProp<IField<Data, Payload>, 'phoneColumns'>;
+    phoneStyle?: PickProp<IField<Data, Payload>, 'phoneStyle'>;
     /**
-     * Represents the number of columns for the "tablet" viewport size of a field.
-     * This property is optional.
+     * Represents the tablet style configuration for a field
      *
      * @typedef tabletColumns
      */
-    tabletColumns?: PickProp<IField<Data, Payload>, 'tabletColumns'>;
+    tabletStyle?: PickProp<IField<Data, Payload>, 'tabletStyle'>;
     /**
-     * Represents the number of columns on a desktop layout for a field in a data payload object.
-     *
-     * @typedef desktopColumns
-     * @property desktopColumns - The number of columns on a desktop layout.
-     * @property desktopColumns - Optional property to pick the 'desktopColumns' property from 'IField<Data, Payload>' interface.
+     * Represents the desktop style configuration for a field
      */
-    desktopColumns?: PickProp<IField<Data, Payload>, 'desktopColumns'>;
+    desktopStyle?: PickProp<IField<Data, Payload>, 'desktopStyle'>;
     /**
      * Returns the picked 'features' property from the given variable.
      *

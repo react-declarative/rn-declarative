@@ -1,10 +1,6 @@
 import * as React from "react";
 import { useMemo } from "react";
 
-import { makeStyles } from '../../../styles';
-
-import Box from "@mui/material/Box";
-
 import { useOneState } from "../context/StateProvider";
 import { useOnePayload } from "../context/PayloadProvider";
 
@@ -46,23 +42,6 @@ interface ICustomLayoutPrivate<Data = IAnything> extends IEntity<Data> {
   children?: React.ReactNode;
 }
 
-/**
- * The useStyles variable is a function that returns an object containing CSS styles.
- *
- * @type {function(): object}
- * @return {object} The object containing CSS styles.
- */
-const useStyles = makeStyles()({
-    root: {
-        display: 'flex',
-        alignItems: 'stretch',
-        justifyContent: 'stretch',
-        '& > *': {
-            flex: 1,
-        },
-    },
-});
-
 const Fragment = ({ children }: React.PropsWithChildren<{}>) => <>{children}</>;
 
 /**
@@ -87,7 +66,6 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
   customLayout: CustomLayout = Fragment,
   ...otherProps
 }: ICustomLayoutProps<Data> & ICustomLayoutPrivate<Data>) => {
-  const { classes } = useStyles();
   const { object, changeObject: handleChange } = useOneState<any>();
   const _payload = useOnePayload();
 
@@ -107,11 +85,9 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
   }, [object]);
 
   return (
-    <Box className={classes.root} data-testid={testId} style={style}>
-        <CustomLayout {...props}>
-            {children}
-        </CustomLayout>
-    </Box>
+    <CustomLayout {...props}>
+        {children}
+    </CustomLayout>
   );
 };
 

@@ -6,6 +6,7 @@ import type { IDebug }  from './ComponentFieldInstance';
 import FieldType from './FieldType';
 import IAnything from './IAnything';
 import IValidation from './IValidation';
+import StyleProperties from './StyleProperties';
 
 /**
  * Represents any possible variable value of <One /> component field.
@@ -152,16 +153,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     radioValue?: string;
 
     /**
-     * Отключает цвет для Switch
-     */
-    switchNoColor?: boolean;
-
-    /**
-     * Применяет к Switch второй title
-     */
-    switchActiveLabel?: string;
-
-    /**
      * Поле type для MatTextField
      */
     inputType?: keyof {
@@ -283,11 +274,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     type: FieldType;
 
     /**
-     * Стиль корневого элемента для поля (опционально)
-     */
-    style?: React.CSSProperties;
-
-    /**
      * Заголовок и описание, если возможен вывод у поля
      */
     title?: string;
@@ -303,10 +289,10 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      * Если указано поле columns, то остальные приравниваются к
      * его значению
      */
-    columns?: string;
-    phoneColumns?: string;
-    tabletColumns?: string;
-    desktopColumns?: string;
+    style?: StyleProperties;
+    phoneStyle?: StyleProperties;
+    tabletStyle?: StyleProperties;
+    desktopStyle?: StyleProperties;
 
     /**
      * Дочерние поля для групп

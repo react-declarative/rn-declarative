@@ -125,6 +125,8 @@ export interface IComboFieldPrivate<Data = IAnything>  {
   dirty: PickProp<IManaged<Data>, "dirty">;
   invalid: PickProp<IManaged<Data>, "invalid">;
   incorrect: PickProp<IManaged<Data>, "incorrect">;
+  onFocus: PickProp<IManaged<Data>, 'onFocus'>;
+  onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
 
 /**
@@ -170,6 +172,8 @@ export const ComboField = ({
   fieldReadonly,
   tr = (s) => s.toString(),
   onChange,
+  onFocus,
+  onBlur,
 }: IComboFieldProps & IComboFieldPrivate) => (
   <Combo
     value={value}
@@ -190,6 +194,8 @@ export const ComboField = ({
     fieldReadonly={fieldReadonly}
     tr={tr}
     onChange={onChange}
+    onFocus={onFocus}
+    onBlur={onBlur}
   />
 );
 

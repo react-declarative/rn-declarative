@@ -1,10 +1,8 @@
 import * as React from "react";
 import { useRef, useMemo, useState, useCallback } from "react";
 
-import { ThemeProvider } from "../../../../styles";
-
 import OneInternal from "../OneInternal";
-import Group from "../../../Group";
+import Group from "../Group";
 
 import IOneProps from "../../../../model/IOneProps";
 import IAnything from "../../../../model/IAnything";
@@ -22,8 +20,6 @@ import DebounceProvider from "../../context/DebounceProvider";
 import OneContextProvider from "../../context/OneContextProvider";
 
 import SlotFactory from "../SlotFactory";
-
-import Container from "../common/Container";
 
 import useSingleton from "../../../../hooks/useSingleton";
 import useActualValue from "../../../../hooks/useActualValue";
@@ -74,7 +70,7 @@ export const OneGenesis = <
 
   const payload = useSingleton(upperPayload);
 
-  const { className, style } = props;
+  const { style } = props;
 
   const fieldsSnapshot = useMemo(() => fields, []);
 
@@ -163,47 +159,41 @@ export const OneGenesis = <
   };
 
   return (
-    <ThemeProvider>
-      <CacheProvider>
-        <DebounceProvider payload={fieldDebounce}>
-          <OneContextProvider context={context}>
-            <RadioProvider
-              initialState={() =>
-                deepFlat(fields)
-                  .filter(({ type }) => type === FieldType.Radio)
-                  .filter(({ name }) => name)
-                  .reduce<Record<string, string | null>>(
-                    (acm, { name, defaultValue }) => ({
-                      ...acm,
-                      [name!]: acm[name!] || String(defaultValue) || null,
-                    }),
-                    {}
-                  )
-              }
-            >
-              <FeatureProvider features={features}>
-                <PayloadProvider payload={payload}>
-                  <StateProvider<Data, Payload, Field> {...stateParams}>
-                    <SlotFactory {...slots}>
-                      <Container
-                        className={className}
-                        style={style}
-                      >
-                        <Group
-                          data-testid={rendered ? READY_CLASS : BASE_CLASS}
-                        >
-                          <OneInternal<Data, Payload, Field> {...viewParams} />
-                        </Group>
-                      </Container>
-                    </SlotFactory>
-                  </StateProvider>
-                </PayloadProvider>
-              </FeatureProvider>
-            </RadioProvider>
-          </OneContextProvider>
-        </DebounceProvider>
-      </CacheProvider>
-    </ThemeProvider>
+    <CacheProvider>
+      <DebounceProvider payload={fieldDebounce}>
+        <OneContextProvider context={context}>
+          <RadioProvider
+            initialState={() =>
+              deepFlat(fields)
+                .filter(({ type }) => type === FieldType.Radio)
+                .filter(({ name }) => name)
+                .reduce<Record<string, string | null>>(
+                  (acm, { name, defaultValue }) => ({
+                    ...acm,
+                    [name!]: acm[name!] || String(defaultValue) || null,
+                  }),
+                  {}
+                )
+            }
+          >
+            <FeatureProvider features={features}>
+              <PayloadProvider payload={payload}>
+                <StateProvider<Data, Payload, Field> {...stateParams}>
+                  <SlotFactory {...slots}>
+                    <Group
+                      testId={rendered ? READY_CLASS : BASE_CLASS}
+                      style={style}
+                    >
+                      <OneInternal<Data, Payload, Field> {...viewParams} />
+                    </Group>
+                  </SlotFactory>
+                </StateProvider>
+              </PayloadProvider>
+            </FeatureProvider>
+          </RadioProvider>
+        </OneContextProvider>
+      </DebounceProvider>
+    </CacheProvider>
   );
 };
 

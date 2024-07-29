@@ -202,6 +202,8 @@ export interface ITextFieldPrivate<Data = IAnything> {
   disabled: PickProp<IManaged<Data>, "disabled">;
   dirty: PickProp<IManaged<Data>, "dirty">;
   name: PickProp<IManaged<Data>, "name">;
+  onFocus: PickProp<IManaged<Data>, 'onFocus'>;
+  onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
 
 /**
@@ -262,6 +264,8 @@ export const TextField = ({
   onChange,
   autoFocus,
   name,
+  onFocus,
+  onBlur,
 }: ITextFieldProps & ITextFieldPrivate) => (
   <Text
     autoFocus={autoFocus}
@@ -286,6 +290,8 @@ export const TextField = ({
     dirty={dirty}
     loading={loading}
     onChange={onChange}
+    onFocus={onFocus}
+    onBlur={onBlur}
     name={name}
   />
 );

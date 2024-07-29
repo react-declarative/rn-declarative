@@ -42,19 +42,6 @@ export interface ISwitchFieldProps<Data = IAnything, Payload = IAnything>  {
    * @typedef disabled
    */
   disabled?: PickProp<IField<Data, Payload>, "disabled">;
-  /**
-   * The switchNoColor property of the Field interface.
-   *
-   * @typedef switchNoColor
-   */
-  switchNoColor?: PickProp<IField<Data, Payload>, "switchNoColor">;
-  /**
-   * Gets the value of the switchActiveLabel property from the given field.
-   *
-   * @param field - The field object from which to get the switchActiveLabel property.
-   * @returns - The value of the switchActiveLabel property.
-   */
-  switchActiveLabel?: PickProp<IField<Data, Payload>, "switchActiveLabel">;
 }
 
 /**
@@ -65,6 +52,8 @@ export interface ISwitchFieldProps<Data = IAnything, Payload = IAnything>  {
 export interface ISwitchFieldPrivate<Data = IAnything>  {
   onChange: PickProp<IManaged<Data>, 'onChange'>;
   value: PickProp<IManaged<Data>, 'value'>;
+  onFocus: PickProp<IManaged<Data>, 'onFocus'>;
+  onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
 
 /**
@@ -86,17 +75,17 @@ export const SwitchField = ({
   value,
   readonly,
   onChange,
-  switchNoColor,
-  switchActiveLabel,
   title,
+  onFocus,
+  onBlur,
 }: ISwitchFieldProps & ISwitchFieldPrivate) => (
   <Switch
     readonly={readonly}
     disabled={disabled}
     value={value}
     onChange={onChange}
-    switchNoColor={switchNoColor}
-    switchActiveLabel={switchActiveLabel}
+    onFocus={onFocus}
+    onBlur={onBlur}
     title={title}
   />
 );

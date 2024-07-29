@@ -105,6 +105,8 @@ export interface IButtonFieldProps<Data = IAnything, Payload = IAnything> {
 export interface IButtonFieldPrivate<Data = IAnything> {
   value: PickProp<IManaged<Data>, 'value'>;
   click: PickProp<IManaged<Data>, 'click'>;
+  onFocus: PickProp<IManaged<Data>, 'onFocus'>;
+  onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
 
 /**
@@ -123,6 +125,8 @@ export const ButtonField = ({
   buttonVariant,
   buttonColor,
   placeholder,
+  onFocus,
+  onBlur,
 }: IButtonFieldProps & IButtonFieldPrivate) => (
   <Button
     disabled={disabled}
@@ -134,6 +138,8 @@ export const ButtonField = ({
     buttonColor={buttonColor}
     buttonSize={buttonSize}
     placeholder={placeholder}
+    onFocus={onFocus}
+    onBlur={onBlur}
   />
 );
 

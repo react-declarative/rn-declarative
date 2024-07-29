@@ -3,6 +3,7 @@ import React from 'react';
 import IField, { Value } from './IField';
 import IEntity from './IEntity';
 import IAnything from './IAnything';
+import StyleProperties from './StyleProperties';
 import IOneApi from './IOneApi';
 
 import { TSubject } from '../utils/rx/Subject';
@@ -70,7 +71,7 @@ export interface IOneProps<Data = IAnything, Payload = IAnything, Field = IField
   /**
    * Стиль корневой группы
    */
-  style?: React.CSSProperties;
+  style?: StyleProperties;
   /**
    * Позволяет загружать данные в компонент
    */

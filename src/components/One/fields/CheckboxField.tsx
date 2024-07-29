@@ -60,6 +60,8 @@ export interface ICheckboxFieldProps<Data = IAnything, Payload = IAnything> {
 export interface ICheckboxFieldPrivate<Data = IAnything>  {
   value: PickProp<IManaged<Data>, 'value'>;
   onChange: PickProp<IManaged<Data>, 'onChange'>;
+  onFocus: PickProp<IManaged<Data>, 'onFocus'>;
+  onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
 
 /**
@@ -73,13 +75,17 @@ export const CheckboxField = ({
   value,
   readonly,
   onChange,
-  title
+  title,
+  onFocus,
+  onBlur,
 }: ICheckboxFieldProps & ICheckboxFieldPrivate) => (
   <CheckBox
     disabled={disabled}
     value={value}
     readonly={readonly}
     onChange={onChange}
+    onFocus={onFocus}
+    onBlur={onBlur}
     title={title}
   />
 );
