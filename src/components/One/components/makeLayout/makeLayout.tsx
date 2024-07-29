@@ -4,6 +4,8 @@ import { memo, cloneElement, useEffect, useMemo } from 'react';
 import { useOnePayload } from '../../context/PayloadProvider';
 import { useOneState } from '../../context/StateProvider';
 
+import OneConfig, { GET_REF_SYMBOL } from '../OneConfig';
+
 import useLayoutState from './useLayoutState';
 import useMediaContext from '../../../../hooks/useMediaContext';
 
@@ -35,6 +37,8 @@ export function makeLayout<T extends ILayout<any>>(
 ) {
 
     const Component = memo(originalComponent) as unknown as React.FC<ILayout>;
+
+    const oneConfig = OneConfig[GET_REF_SYMBOL]();
 
     /**
      * Renders a component based on input data and conditions.
@@ -83,7 +87,7 @@ export function makeLayout<T extends ILayout<any>>(
             };
         }, []);
 
-        const { isPhone = false, isTablet = false, isDesktop = false } = useMediaContext();
+        const { isPhone = false, isTablet = false, isDesktop = false } = useMediaContext(oneConfig.BREAKPOINTS);
 
         const object = stateObject || upperObject;
 

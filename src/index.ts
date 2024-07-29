@@ -133,12 +133,16 @@ export { trycatch } from './utils/hof/trycatch';
 export { sleep } from './utils/sleep';
 export { deepFlat } from './utils/deepFlat';
 
+export type { IBreakpoints } from './hooks/useMediaContext';
+
 export { BehaviorSubject } from './utils/rx/BehaviorSubject';
 export { EventEmitter } from './utils/rx/EventEmitter';
 export { Observer } from './utils/rx/Observer';
 export { Operator } from './utils/rx/Operator';
 export { Subject } from './utils/rx/Subject';
 export { Source } from './utils/rx/Source';
+
+export { makeTestId } from './components';
 
 export { getAvailableFields } from './utils/getAvailableFields';
 export { getInitialData } from './utils/getInitialData';

@@ -59,6 +59,7 @@ export const Items = ({
     noDeselect,
     watchItemList,
     dirty,
+    style,
     invalid,
     incorrect,
     title,
@@ -197,6 +198,7 @@ export const Items = ({
         return (
             <Select
                 key={"loading"}
+                style={style}
                 size="medium"
                 selectedIndex={DEFAULT_INDEX}
                 caption={(dirty && (invalid || incorrect)) || description}
@@ -216,6 +218,7 @@ export const Items = ({
             disabled={disabled}
             selectedIndex={selectValue}
             size="medium"
+            style={style}
             caption={(dirty && (invalid || incorrect)) || description}
             placeholder={placeholder}
             label={title}

@@ -1,3 +1,5 @@
+import { IBreakpoints } from "../../../../hooks/useMediaContext";
+
 import { FIELD_DEBOUNCE } from "../../config/config";
 
 /**
@@ -11,6 +13,7 @@ export interface IConfig {
     WITH_DISMOUNT_LISTENER: boolean;
     WITH_SYNC_COMPUTE: boolean;
     CUSTOM_FIELD_DEBOUNCE: number;
+    BREAKPOINTS: IBreakpoints | undefined;
 }
 
 /**
@@ -32,6 +35,7 @@ const INITIAL_CONFIG: IConfig = {
     WITH_DISMOUNT_LISTENER: true,
     WITH_SYNC_COMPUTE: false,
     CUSTOM_FIELD_DEBOUNCE: FIELD_DEBOUNCE,
+    BREAKPOINTS: undefined,
 };
 
 /**

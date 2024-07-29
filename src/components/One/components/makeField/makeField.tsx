@@ -132,7 +132,7 @@ export function makeField(
         testId = name,
         ...otherProps
     }: IEntity<Data>) => {
-        const { isPhone = false, isTablet = false, isDesktop = false } = useMediaContext();
+        const { isPhone = false, isTablet = false, isDesktop = false } = useMediaContext(oneConfig.BREAKPOINTS);
 
         const { object: stateObject, changeObject } = useOneState<Data>();
         const payload = useOnePayload();

@@ -8,7 +8,7 @@ import singleshot from '../utils/hof/singleshot';
 
 import useSingleton from './useSingleton';
 
-const BREAKPOINTS = {
+const BREAKPOINTS: IBreakpoints = {
     xs: 0,
     sm: 600,
     md: 960,
@@ -26,6 +26,14 @@ interface IConstraint {
     isMobile: boolean;
 }
 
+export interface IBreakpoints {
+    xs: number;
+    sm: number;
+    md: number;
+    lg: number;
+    xl: number;
+}
+
 /**
  * Represents a function that returns a boolean value indicating whether a given width falls within a specified range.
  *
@@ -35,12 +43,12 @@ interface IConstraint {
  */
 const match = (from: number, to: number) => (width: number) => width >= from && width < to;
 
-const getConstraintSource = singleshot(() => {
+const getConstraintSource = singleshot((breakpoints: IBreakpoints) => {
     const result = new BehaviorSubject<IConstraint>();
 
-    const matchPhone = match(BREAKPOINTS.xs, BREAKPOINTS.sm);
-    const matchTablet = match(BREAKPOINTS.sm, BREAKPOINTS.lg);
-    const matchDesktop = match(BREAKPOINTS.lg, GRID_MAX_WIDTH);
+    const matchPhone = match(breakpoints.xs, breakpoints.sm);
+    const matchTablet = match(breakpoints.sm, breakpoints.lg);
+    const matchDesktop = match(breakpoints.lg, GRID_MAX_WIDTH);
 
     const compute = (width: number) => {
         const isPhone = matchPhone(width);
@@ -79,8 +87,8 @@ const getConstraintSource = singleshot(() => {
  * @property isWide - Indicates whether the current device is a tablet or desktop.
  * @property isMobile - Indicates whether the current device is a phone.
  */
-export const useMediaContext = () => {
-    const constraintSource = useSingleton(getConstraintSource);
+export const useMediaContext = (breakpoints: IBreakpoints = BREAKPOINTS) => {
+    const constraintSource = useSingleton(() => getConstraintSource(breakpoints));
     const [constraint, setConstraint] = useState(constraintSource.data!);
     useEffect(constraintSource.subscribe(setConstraint), []);
     return constraint;

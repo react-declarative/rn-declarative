@@ -16,30 +16,6 @@ import IField from '../../../model/IField';
  */
 export interface IButtonFieldProps<Data = IAnything, Payload = IAnything> {
   /**
-   * Retrieves the 'buttonApperance' property from the given variable.
-   *
-   * @template T - The type of the variable.
-   * @template K - The key to pick from the variable.
-   *
-   * @param variable - The variable to pick the property from.
-   *
-   * @returns - The picked property.
-   */
-  buttonApperance?: PickProp<IField<Data, Payload>, 'buttonApperance'>;
-
-  /**
-   * Retrieves the 'buttonSize' property from the given variable.
-   *
-   * @template T - The type of the variable.
-   * @template K - The key to pick from the variable.
-   *
-   * @param variable - The variable to pick the property from.
-   *
-   * @returns - The picked property.
-   */
-  buttonSize?: PickProp<IField<Data, Payload>, 'buttonSize'>;
-
-  /**
    * Retrieves the 'title' property from the given variable.
    *
    * @template T - The type of the variable.
@@ -99,8 +75,6 @@ export const ButtonField = ({
   press,
   title,
   value,
-  buttonSize,
-  buttonApperance,
   placeholder,
   style,
   testId,
@@ -112,8 +86,6 @@ export const ButtonField = ({
     press={press}
     title={title}
     value={value}
-    buttonApperance={buttonApperance}
-    buttonSize={buttonSize}
     placeholder={placeholder}
     onFocus={onFocus}
     onBlur={onBlur}

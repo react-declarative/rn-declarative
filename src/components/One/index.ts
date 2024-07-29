@@ -1,5 +1,6 @@
 export * from './One';
 export * from './slots';
+export { makeTestId } from './helpers/makeTestId';
 export { OneConfig } from './components/OneConfig';
 export { createField } from './config/createField';
 export { makeField } from './components/makeField';

@@ -3,14 +3,17 @@ import { One, FieldType, TypedField } from 'rn-declarative';
 const fields: TypedField[] = [
     {
         type: FieldType.Text,
-        phoneStyle: {
-            width: '100%',
+        style: {
+            width: '45%',
         },
-        tabletStyle: {
-            width: '75%',
-        },
-        desktopStyle: {
-            width: '25%',
+        name: 'text',
+        title: 'text',
+        description: 'test',
+    },
+    {
+        type: FieldType.Text,
+        style: {
+            width: '50%',
         },
         name: 'text',
         title: 'text',
@@ -18,6 +21,9 @@ const fields: TypedField[] = [
     },
     {
         type: FieldType.Items,
+        style: {
+            width: '50%',
+        },
         itemList: [
             "Foo",
             "Bar",

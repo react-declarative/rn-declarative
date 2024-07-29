@@ -66,6 +66,7 @@ export const Combo = ({
   watchItemList,
   noDeselect,
   freeSolo,
+  style,
   title = "",
   dirty,
   invalid,
@@ -195,6 +196,7 @@ export const Combo = ({
       <Select
         key={"loading"}
         size="medium"
+        style={style}
         selectedIndex={DEFAULT_INDEX}
         caption={(dirty && (invalid || incorrect)) || description}
         placeholder={placeholder}
@@ -210,6 +212,7 @@ export const Combo = ({
   return (
     <Select
       disabled={disabled}
+      style={style}
       selectedIndex={selectValue}
       caption={(dirty && (invalid || incorrect)) || description}
       placeholder={placeholder}

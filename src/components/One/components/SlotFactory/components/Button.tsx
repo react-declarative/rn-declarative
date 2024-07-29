@@ -15,16 +15,12 @@ export const Button = ({
     title,
     value,
     placeholder,
-    buttonApperance,
-    buttonSize,
     onFocus,
     onBlur,
     style,
     testId,
 }: IButtonSlot) => (
     <ActionButton
-        appearance={buttonApperance}
-        size={buttonSize}
         disabled={disabled}
         onPress={press}
         onFocus={onFocus}

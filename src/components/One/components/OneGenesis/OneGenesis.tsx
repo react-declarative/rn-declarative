@@ -35,7 +35,7 @@ const DEFAULT_CHANGE = (data: IAnything) => console.log({ data });
 
 const defaultStyle = {
   width: '100%',
-};
+} as const;
 
 /**
  * Represents the OneGenesis component.

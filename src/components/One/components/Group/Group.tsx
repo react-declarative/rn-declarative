@@ -6,10 +6,17 @@ import { IManagedLayout, PickProp } from "../../../../model/IManaged";
 import IAnything from "../../../../model/IAnything";
 import IField from "../../../../model/IField";
 
+import OneConfig, { GET_REF_SYMBOL } from "../OneConfig";
+
 import useMediaContext from "../../../../hooks/useMediaContext";
+import useSingleton from "../../../../hooks/useSingleton";
 import useManagedStyle from "../../hooks/useManagedStyle";
 
 import makeTestId from "../../helpers/makeTestId";
+
+const defaultStyle =  {
+  flexDirection: 'row',
+} as const;
 
 /**
  * Represents the props for a group component.
@@ -54,7 +61,9 @@ export const Group = ({
   children,
 }: IGroupProps & IGroupPrivate) => {
 
-  const { isPhone, isTablet, isDesktop } = useMediaContext();
+  const oneConfig = useSingleton(OneConfig[GET_REF_SYMBOL]);
+
+  const { isPhone, isTablet, isDesktop } = useMediaContext(oneConfig.BREAKPOINTS);
 
   const computedStyle = useManagedStyle(
     {
@@ -67,7 +76,8 @@ export const Group = ({
       phoneStyle,
       tabletStyle,
       desktopStyle,
-    }
+    },
+    defaultStyle,
   );
 
   return (

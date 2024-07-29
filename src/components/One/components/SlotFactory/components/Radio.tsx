@@ -38,8 +38,8 @@ export const Radio = ({
     const radioMap$ = useActualValue(radioMap);
 
     const checked = useMemo(() => {
-        return value === radioValue;
-    }, [value]);
+        return radioMap[name] === radioValue;
+    }, [radioMap]);
 
     /**
      * Sets the value of a radio map.

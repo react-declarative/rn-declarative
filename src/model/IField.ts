@@ -20,16 +20,6 @@ export type Value = string | string[] | number | boolean | null;
  */
 export interface IField<Data = IAnything, Payload = IAnything> {
     /**
-     * Тип заливки кнопки для FieldType.Button
-     */
-    buttonApperance?: 'filled' | 'outline' | 'ghost';
-
-    /**
-     * Тип размера кнопки для FieldType.Button
-     */
-    buttonSize?: 'small' | 'medium' | 'large';
-
-    /**
      * Отменяет ожидание фокуса для валидации
      */
     dirty?: boolean;
