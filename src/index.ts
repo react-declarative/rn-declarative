@@ -120,7 +120,6 @@ export { isObject } from './utils/isObject';
 export { createValueProvider } from './utils/createValueProvider';
 export { createStateProvider } from './utils/createStateProvider';
 
-export { normalizeText } from './utils/normalizeText';
 export { formatText } from './utils/formatText';
 
 export { singleshot } from './utils/hof/singleshot';

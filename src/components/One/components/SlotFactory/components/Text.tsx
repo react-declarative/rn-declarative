@@ -200,7 +200,6 @@ export const Text = ({
   trailingIconRipple: tir = true,
   inputRows: rows = 1,
   placeholder = "",
-  inputAutocomplete: autoComplete = "off",
   dirty,
   loading,
   autoFocus,
@@ -229,7 +228,6 @@ export const Text = ({
       helperText={(dirty && (invalid || incorrect)) || description}
       error={dirty && (invalid !== null || incorrect !== null)}
       InputProps={{
-        autoComplete: autoComplete,
         readOnly: readonly,
         inputMode,
         autoFocus,
@@ -262,7 +260,6 @@ export const Text = ({
       }
       type={inputType}
       focused={autoFocus}
-      autoComplete={autoComplete}
       value={loading ? LOADING_LABEL : String(value || "")}
       placeholder={placeholder}
       onChange={(e: any) => {

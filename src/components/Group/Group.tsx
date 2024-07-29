@@ -1,13 +1,9 @@
 import * as React from "react";
 import { forwardRef } from "react";
 
-import { makeStyles } from "../../styles";
-
 import { IManagedLayout, PickProp } from "../../model/IManaged";
 import IAnything from "../../model/IAnything";
 import IField from "../../model/IField";
-
-import classNames from '../../utils/classNames';
 
 import Item from "./Item";
 import Container from "./Container";
@@ -21,7 +17,6 @@ import Container from "./Container";
  */
 export interface IGroupProps<Data = IAnything, Payload = IAnything> extends IManagedLayout<Data, Payload> {
   style?: PickProp<IField<Data, Payload>, 'style'>;
-  className?: PickProp<IField<Data, Payload>, 'className'>;
 }
 
 /**
@@ -32,26 +27,10 @@ export interface IGroupProps<Data = IAnything, Payload = IAnything> extends IMan
 interface IGroupPrivate {
   children: React.ReactNode;
   isItem?: boolean;
-  isBaselineAlign?: boolean;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   onFocus?: () => void;
   onContextMenu?: React.MouseEventHandler<HTMLDivElement>;
 }
-
-/**
- * Returns the styles for a component.
- *
- * @function useStyles
- * @returns The styles for a component.
- */
-const useStyles = makeStyles()({
-  root: {
-    position: "relative",
-    '& > *': {
-      width: '100%',
-    },
-  },
-});
 
 /**
  * Group component
@@ -64,7 +43,6 @@ const useStyles = makeStyles()({
  * @property desktopColumns - The desktop columns property of the group
  * @property children - The children of the group
  * @property isItem - Whether the group is an item
- * @property isBaselineAlign - Whether to align the group baseline
  * @property style - The style object of the group
  * @property columnsOverride - The columns override property of the group
  * @property sx - The sx property of the group
@@ -81,14 +59,12 @@ const useStyles = makeStyles()({
  */
 export const Group = (
   {
-    className = "",
     columns = "",
     phoneColumns = "",
     tabletColumns = "",
     desktopColumns = "",
     children,
     isItem,
-    isBaselineAlign,
     style,
     columnsOverride,
     sx,
@@ -101,13 +77,11 @@ export const Group = (
   }: IGroupProps & IGroupPrivate,
   ref: React.Ref<HTMLDivElement>
 ) => {
-  const { classes } = useStyles();
   if (isItem) {
     return (
       <Item
         {...otherProps}
         ref={ref}
-        className={classNames(classes.root, className)}
         style={style}
         columns={columns}
         phoneColumns={phoneColumns}
@@ -128,8 +102,6 @@ export const Group = (
       <Container
         {...otherProps}
         ref={ref}
-        className={classNames(classes.root, className)}
-        isBaselineAlign={isBaselineAlign}
         columnsOverride={columnsOverride}
         style={style}
         onFocus={onFocus}

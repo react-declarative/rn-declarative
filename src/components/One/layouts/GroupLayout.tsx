@@ -1,11 +1,7 @@
 import * as React from "react";
 
-import { makeStyles } from "../../../styles";
-
 import Group, { IGroupProps } from "../../../components/Group";
 import BaselineAdjust from "../components/common/BaselineAdjust";
-
-import classNames from "../../../utils/classNames";
 
 import IAnything from "../../../model/IAnything";
 
@@ -25,32 +21,8 @@ export interface IGroupLayoutProps<Data = IAnything, Payload = IAnything> extend
  * @interface
  */
 interface IGroupLayoutPrivate {
-  isBaselineAlign: boolean;
   children?: React.ReactNode;
 }
-
-/**
- * The variable useStyles is used to create and retrieve CSS styles
- * using the makeStyles function from the Material-UI library.
- * It returns an object containing the generated CSS classes.
- *
- * @type {function(): object} - A function that returns an object of CSS classes.
- *
- * @returns - An object containing the generated CSS classes.
- *
- */
-const useStyles = makeStyles()({
-  root: {
-    position: "relative",
-    display: "flex",
-    alignItems: "stretch",
-    justifyContent: "stretch",
-  },
-  content: {
-    flexGrow: 1,
-    width: "100%",
-  },
-});
 
 /**
  * Represents a layout component used for grouping and organizing child components.
@@ -63,7 +35,6 @@ const useStyles = makeStyles()({
  * @param props.phoneColumns - The number of phone columns for the component.
  * @param props.tabletColumns - The number of tablet columns for the component.
  * @param props.desktopColumns - The number of desktop columns for the component.
- * @param props.isBaselineAlign - Indicates whether the items should be baseline aligned.
  * @param [props.fieldRightMargin='0'] - The right margin value for fields.
  * @param [props.fieldBottomMargin='0'] - The bottom margin value for fields.
  * @param [props.style] - The inline style object for the component.
@@ -78,18 +49,14 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
   phoneColumns,
   tabletColumns,
   desktopColumns,
-  isBaselineAlign,
   fieldRightMargin = '0',
   fieldBottomMargin = '0',
   style,
   testId,
-  className,
   children,
 }: IGroupLayoutProps<Data> & IGroupLayoutPrivate) => {
-    const { classes } = useStyles();
     return (
         <Group
-            className={classNames(className, classes.root)}
             data-testid={testId}
             style={style}
             sx={sx}
@@ -102,8 +69,6 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
             fieldBottomMargin={fieldBottomMargin}
         >
           <Group
-            className={classes.content}
-            isBaselineAlign={isBaselineAlign}
             columnsOverride={columnsOverride}
           >
             {children}

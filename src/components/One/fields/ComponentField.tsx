@@ -75,14 +75,6 @@ export interface IComponentFieldProps<Data = IAnything, Payload = IAnything> {
    */
   groupRef?: PickProp<IField<Data, Payload>, "groupRef">;
   /**
-   * Retrieves the "className" property from an object of type PickProp<IField<Data, Payload>, "className">.
-   *
-   * @param obj - The input object containing the "className" property.
-   * @returns - The value of the "className" property if present, otherwise undefined.
-   * @throws If the input object is not of the expected type.
-   */
-  className?: PickProp<IField<Data, Payload>, "className">;
-  /**
    * Represents the contextual information for watching a single field in a data structure.
    * @typedef watchOneContext?
    */
@@ -124,8 +116,6 @@ interface IComponentFieldPrivate<Data = IAnything> {
   incorrect: PickProp<IManaged<Data>, "incorrect">;
   readonly: PickProp<IManaged<Data>, "readonly">;
   onChange: PickProp<IManaged<Data>, "onChange">;
-  outlinePaper?: PickProp<IField<Data>, "outlinePaper">;
-  transparentPaper?: PickProp<IField<Data>, "transparentPaper">;
 }
 
 /**
@@ -171,8 +161,6 @@ const ComponentContextInstance = ({
  * @param props.readonly - Indicates if the field is readonly.
  * @param props.watchOneContext - Indicates if the field should watch the One context.
  * @param props.element - The element to render, default is Fragment.
- * @param props.outlinePaper - Indicates if the field should have an outline paper.
- * @param props.transparentPaper - Indicates if the field should have a transparent paper.
  * @param props.object - A generic object to pass to the field.
  * @param props.otherProps - Other props to pass to the field.
  * @param - The rendered field component.
@@ -185,8 +173,6 @@ export const ComponentField = ({
   value,
   watchOneContext,
   element: Element = () => <Fragment />,
-  outlinePaper,
-  transparentPaper,
   object,
   onChange: onValueChange,
   ...otherProps
@@ -209,8 +195,6 @@ export const ComponentField = ({
       onValueChange,
       _fieldParams,
       _fieldData: object,
-      outlinePaper,
-      transparentPaper,
       invalid,
       incorrect,
       payload,

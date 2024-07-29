@@ -108,13 +108,9 @@ export interface IOneProps<Data = IAnything, Payload = IAnything, Field = IField
   readTransform?: (value: Value, name: string, data: Data, payload: Payload) => Value;
   writeTransform?: (value: Value, name: string, data: Data, payload: Payload) => Value;
   /**
-   * Коллбек для управления контекстным меню
-   */
-  menu?: (name: string, action: string, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void) => void;
-  /**
    * Коллбек для перехвата клика по полю
    */
-  click?: (name: string, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void, e: React.MouseEvent) => (void | Promise<void>);
+  click?: (name: string, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void) => (void | Promise<void>);
   /**
    * Вызывается, когда все поля успели отрисоваться
    * в первый раз, после появления формы
@@ -139,11 +135,6 @@ export interface IOneProps<Data = IAnything, Payload = IAnything, Field = IField
    */
   loadStart?: (source: string) => void;
   loadEnd?: (isOk: boolean, source: string) => void;
-  /**
-   * Превращает FieldType.Paper в FieldType.Outline
-   */
-  outlinePaper?: boolean;
-  transparentPaper?: boolean;
   /**
    * Блокирует ввод данных
    */

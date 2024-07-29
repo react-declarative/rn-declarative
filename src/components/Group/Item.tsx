@@ -6,8 +6,6 @@ import { makeStyles } from '../../styles';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-import classNames from '../../utils/classNames';
-
 import { IManagedLayout, PickProp } from '../../model/IManaged';
 
 import IField from '../../model/IField';
@@ -23,7 +21,6 @@ const n = (v: string) => Number(v) as any;
  * @extends Omit<IManagedLayout, 'hidden'>
  */
 interface IItemProps extends Omit<IManagedLayout, 'hidden'> {
-  className: PickProp<IField, 'className'>;
   style: PickProp<IField, 'style'>;
   children: React.ReactNode;
   onFocus?: () => void;
@@ -95,7 +92,6 @@ const useStyles = makeStyles()({
  * @returns - The rendered item element.
  */
 export const Item = ({
-  className,
   style,
   sx,
   columns = "",
@@ -154,7 +150,7 @@ export const Item = ({
       {...otherProps}
       ref={ref}
       item={true}
-      className={classNames(className, classes.root)}
+      className={classes.root}
       style={style}
       onFocus={onFocus}
       onClick={onClick}

@@ -4,11 +4,8 @@ import { SxProps } from '@mui/material';
 import type ComponentFieldInstance  from './ComponentFieldInstance';
 import type { IDebug }  from './ComponentFieldInstance';
 
-import { ISizeCallback } from './ISize';
-
 import FieldType from './FieldType';
 import IAnything from './IAnything';
-import IFieldMenu from './IFieldMenu';
 import IValidation from './IValidation';
 
 /**
@@ -87,11 +84,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     debug?: (params: IDebug<Data, Payload>) => void;
 
     /**
-     * Позволяет создать контекстное меню
-     */
-    menuItems?: IFieldMenu[];
-
-    /**
      * Флаг, убирающий поле из древа отрисовки. Следует использовать для
      * создания динамических значений полей компонента
      */
@@ -136,17 +128,11 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      */
     focus?: (name: string, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void) => void;
     blur?: (name: string, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void) => void;
-
-    /**
-     * Коллбек для обработки клика по элементу контекстного меню
-     */
-    menu?: (name: string, action: string, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void) => void;
-
     /**
      * Перехват клика по полю, следует использовать для копирования значения
      * у карточек просмотра без редактирования
      */
-    click?: (name: string, e: React.MouseEvent<HTMLElement>, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void) => (void | Promise<void>);
+    click?: (name: string, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void) => (void | Promise<void>);
 
     /**
      * Флаг только на чтение и "круглой окаймовки"
@@ -221,82 +207,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     };
 
     /**
-     * Форматтер, преобразующий пользовательский
-     * ввод к нужному шаблону
-     */
-    inputFormatter?: (input: string) => string;
-
-    /**
-     * Шаблонов для форматтера
-     */
-    inputFormatterTemplate?: string;
-
-    /**
-     * Разделитель шаблона форматтера,
-     * по дефолту 0
-     */
-    inputFormatterSymbol?: string;
-
-    /**
-     * Разрешенные к вводу символы
-     */
-    inputFormatterAllowed?: RegExp | ((char: string, idx: number) => boolean);
-
-    /**
-     * Замена символов для форматерра, например
-     * запятую на точку в числе
-     */
-    inputFormatterReplace?: (char: string) => string | null;
-
-    inputAutocomplete?: keyof {
-      'new-password': never,
-      'on': never,
-      'off': never,
-      'false': never,
-    };
-
-    /**
-     * Список вкладок для TabLayout
-     */
-    tabList?: string[];
-
-    /**
-     * Номер активной вкладки по-умолчанию
-     */
-    tabIndex?: number;
-
-    /**
-     * Вариант вывода вкладок для TabLayout
-     */
-    tabVariant?: "fullWidth" | "standard" | "scrollable";
-
-    /**
-     * Цвет вкладок для TabLayout
-     */
-    tabColor?: "primary" | "secondary";
-
-    /**
-     * Позволяет содержимому растягивать высоту блока
-     * у TabLayout
-     */
-    tabKeepFlow?: boolean;
-
-    /**
-     * Событие изменения вкладки
-     */
-    tabChange?: (idx: number) => void;
-
-    /**
-     * Отделяет табы отчерком у TabLayout
-     */
-    tabLine?: boolean;
-
-    /**
-     * Закрашивает фон TabLayout в темный цвет
-     */
-    tabBackground?: boolean;
-
-    /**
      * Делает TextField многострочным, если
      * inputRows больше единицы
      */
@@ -321,70 +231,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      */
     leadingIconClick?: (value: Value, data: Data, payload: Payload, onValueChange: (v: Value) => void, onChange: (data: Data) => void) => void;
     trailingIconClick?: (value: Value, data: Data, payload: Payload, onValueChange: (v: Value) => void, onChange: (data: Data) => void) => void;
-
-    /**
-     * Максимальное число для высчитывания процента
-     * (минимальное число всегда ноль)
-     */
-    maxPercent?: number;
-
-    /**
-     * Отключает отчерк у линии
-     */
-    lineTransparent?: boolean;
-
-    /**
-     * Показывает процент числом слева
-     */
-    showPercentLabel?: boolean;
-
-    /**
-     * Внутренние отступы для Paper
-     */
-    innerPadding?: string;
-
-    /**
-     * Превращает FieldType.Paper в FieldType.Outline
-     */
-    outlinePaper?: boolean;
-    transparentPaper?: boolean;
-
-    /**
-     * - Коллбеки, позволяющий перекрасить SliderField.
-     * Работают только если заданы все вместе
-     * - ВНИМАНИЕ! Потенциально возможна просадка производительности,
-     * так как осуществляет рекомпиляцию стилей material-ui
-     */
-    sliderThumbColor?: (v: number) => string,
-    sliderTrackColor?: (v: number) => string,
-    sliderRailColor?: (v: number) => string,
-
-    /**
-     *  - Коллбеки, позволяющие перекрасить ProgressField.
-     * Работают только если заданы все вместе
-     *  - ВНИМАНИЕ! Потенциально возможна просадка производительности,
-     * так как осуществляет рекомпиляцию стилей material-ui
-     */
-    progressColor?: (v: number) => string,
-    progressBarColor?: (v: number) => string,
-
-    /**
-     * Поля, специфичные для SliderField
-     */
-    minSlider?: number;
-    maxSlider?: number;
-    stepSlider?: number;
-    labelFormatSlider?: (v: number) => string | number;
-
-    /**
-     * Подсказки для CompleteField
-     */
-    tip?: string[] | ((value: string, data: Data, payload: Payload) => (string[] | Promise<string[]>));
-
-    /**
-     * Коллбек выбора элемента из CompleteField
-     */
-    tipSelect?: (value: string, data: Data, payload: Payload, onChange: (data: Data) => void) => void;
 
     /**
      * Поле, позволяющее передавать собственные значения в FieldType.Items и FieldType.Combo
@@ -442,11 +288,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      * Тип поля для логического ветвления при рендеринге
      */
     type: FieldType;
-
-    /**
-     * Наименование класса для корневого элемента поля (опционально)
-     */
-    className?: string;
 
     /**
      * Стиль корневого элемента для поля (опционально)
@@ -559,28 +400,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     fieldBottomMargin?: string;
 
     /**
-     * Шрифт для поля Typography
-     */
-    typoVariant?: keyof {
-      h1: 'h1',
-      h2: 'h2',
-      h3: 'h3',
-      h4: 'h4',
-      h5: 'h5',
-      h6: 'h6',
-      subtitle1: 'subtitle1',
-      subtitle2: 'subtitle2',
-      body1: 'body1',
-      body2: 'body2',
-      caption: 'caption',
-    };
-
-    /**
-     * Поле для ExpansionLayout
-     */
-    expansionOpened?: boolean;
-
-    /**
      * Коллбек, позволяющий применить собственную компоновку
      */
     customLayout?: (props: React.PropsWithChildren<Data & {
@@ -609,64 +428,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      * Компонент отображения else для condition
      */
     conditionElse?: React.ComponentType<{ data: Data; payload: Payload }>;
-
-    /**
-     * Функция для выбора документа из справочника
-     * для useSearchModal
-     */
-    choose?: (data: Data, payload: Payload) => (Promise<string | string[] | null> | string | string[] | null);
-
-    /**
-     * Свойства для компоновки Hero - инструмента настройки отступов
-     */
-    top?: string | ISizeCallback<Data>;
-    phoneTop?: string | ISizeCallback<Data>;
-    tabletTop?: string | ISizeCallback<Data>;
-    desktopTop?: string | ISizeCallback<Data>;
-    left?: string | ISizeCallback<Data>;
-    phoneLeft?: string | ISizeCallback<Data>;
-    tabletLeft?: string | ISizeCallback<Data>;
-    desktopLeft?: string | ISizeCallback<Data>;
-    right?: string | ISizeCallback<Data>;
-    phoneRight?: string | ISizeCallback<Data>;
-    tabletRight?: string | ISizeCallback<Data>;
-    desktopRight?: string | ISizeCallback<Data>;
-    bottom?: string | ISizeCallback<Data>;
-    phoneBottom?: string | ISizeCallback<Data>;
-    tabletBottom?: string | ISizeCallback<Data>;
-    desktopBottom?: string | ISizeCallback<Data>;
-    height?: string | ISizeCallback<Data>;
-    phoneHeight?: string | ISizeCallback<Data>;
-    tabletHeight?: string | ISizeCallback<Data>;
-    desktopHeight?: string | ISizeCallback<Data>;
-    minHeight?: string | ISizeCallback<Data>;
-    phoneMinHeight?: string | ISizeCallback<Data>;
-    tabletMinHeight?: string | ISizeCallback<Data>;
-    desktopMinHeight?: string | ISizeCallback<Data>;
-    maxHeight?: string | ISizeCallback<Data>;
-    phoneMaxHeight?: string | ISizeCallback<Data>;
-    tabletMaxHeight?: string | ISizeCallback<Data>;
-    desktopMaxHeight?: string | ISizeCallback<Data>;
-    width?: string | ISizeCallback<Data>;
-    phoneWidth?: string | ISizeCallback<Data>;
-    tabletWidth?: string | ISizeCallback<Data>;
-    desktopWidth?: string | ISizeCallback<Data>;
-    minWidth?: string | ISizeCallback<Data>;
-    phoneMinWidth?: string | ISizeCallback<Data>;
-    tabletMinWidth?: string | ISizeCallback<Data>;
-    desktopMinWidth?: string | ISizeCallback<Data>;
-    maxWidth?: string | ISizeCallback<Data>;
-    phoneMaxWidth?: string | ISizeCallback<Data>;
-    tabletMaxWidth?: string | ISizeCallback<Data>;
-    desktopMaxWidth?: string | ISizeCallback<Data>;
-    heroOuterStyle?: React.CSSProperties;
-    heroOuterPhoneStyle?: React.CSSProperties;
-    heroOuterTabletStyle?: React.CSSProperties;
-    heroOuterDesktopStyle?: React.CSSProperties;
-    heroInnerStyle?: React.CSSProperties;
-    heroInnerPhoneStyle?: React.CSSProperties;
-    heroInnerTabletStyle?: React.CSSProperties;
-    heroInnerDesktopStyle?: React.CSSProperties;
   }
 
 export default IField;

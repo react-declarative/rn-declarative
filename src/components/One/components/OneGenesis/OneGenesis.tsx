@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useRef, useMemo, useState, useCallback } from "react";
 
-import { makeStyles } from "../../../../styles";
-
 import { ThemeProvider } from "../../../../styles";
 
 import OneInternal from "../OneInternal";
@@ -13,7 +11,6 @@ import IAnything from "../../../../model/IAnything";
 import IField from "../../../../model/IField";
 import FieldType from "../../../../model/FieldType";
 
-import classNames from "../../../../utils/classNames";
 import deepFlat from "../../../../utils/deepFlat";
 
 import StateProvider from "../../context/StateProvider";
@@ -31,24 +28,8 @@ import Container from "../common/Container";
 import useSingleton from "../../../../hooks/useSingleton";
 import useActualValue from "../../../../hooks/useActualValue";
 
-import isBaseline from "../../config/isBaseline";
-
 const BASE_CLASS = "react-declarative__oneGenesis";
 const READY_CLASS = "react-declarative__oneGenesisReady";
-
-/**
- * The variable `useStyles` is a function that returns a makeStyles hook. This hook is used to create classes for styling components using the Material-UI library.
- *
- * @returns A makeStyles hook function.
- */
-const useStyles = makeStyles()({
-  readonly: {
-    pointerEvents: "none",
-  },
-  rendering: {
-    pointerEvents: "none",
-  },
-});
 
 const DEFAULT_READY = () => null;
 const DEFAULT_CHANGE = (data: IAnything) => console.log({ data });
@@ -79,8 +60,6 @@ export const OneGenesis = <
   const isReady = useRef(false);
 
   const [rendered, setRendered] = useState(false);
-
-  const { classes } = useStyles();
 
   const {
     change = DEFAULT_CHANGE,
@@ -183,13 +162,6 @@ export const OneGenesis = <
     rendered,
   };
 
-  /**
-   * Determines if the baseline alignment is true.
-   *
-   * @typedef isBaselineAlign
-   */
-  const isBaselineAlign = useMemo(() => fieldsSnapshot.some(isBaseline), []);
-
   return (
     <ThemeProvider>
       <CacheProvider>
@@ -219,12 +191,6 @@ export const OneGenesis = <
                         sx={sx}
                       >
                         <Group
-                          isBaselineAlign={isBaselineAlign}
-                          className={classNames(BASE_CLASS, {
-                            [READY_CLASS]: rendered,
-                            [classes.readonly]: props.readonly,
-                            [classes.rendering]: !rendered,
-                          })}
                           data-testid={rendered ? READY_CLASS : BASE_CLASS}
                         >
                           <OneInternal<Data, Payload, Field> {...viewParams} />

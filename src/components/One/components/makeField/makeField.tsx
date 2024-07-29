@@ -9,8 +9,6 @@ import set from '../../../../utils/set';
 import get from '../../../../utils/get';
 import deepCompare from '../../../../utils/deepCompare';
 
-import { makeStyles } from '../../../../styles';
-
 import { useDebounceConfig } from '../../context/DebounceProvider';
 import { useOnePayload } from '../../context/PayloadProvider';
 import { useOneState } from '../../context/StateProvider';
@@ -31,7 +29,6 @@ import IEntity from '../../../../model/IEntity';
 import IField, { Value } from '../../../../model/IField';
 
 import cancelable, { CANCELED_SYMBOL } from '../../../../utils/hof/cancelable';
-import classNames from '../../../../utils/classNames';
 import queued from '../../../../utils/hof/queued';
 import sleep from '../../../../utils/sleep';
 
@@ -41,61 +38,6 @@ import OneConfig, { GET_REF_SYMBOL } from '../OneConfig';
 
 const APPLY_ATTEMPTS = 35;
 const APPLY_DELAY = 10;
-
-/**
- * Variable representing a CSS style object for stretching elements in a flex container.
- *
- * @type {Object}
- * @property display - The CSS value for the display property, set to 'flex'.
- * @property alignItems - The CSS value for the alignItems property, set to 'stretch'.
- * @property justifyContent - The CSS value for the justifyContent property, set to 'stretch'.
- */
-const stretch = {
-    display: 'flex',
-    alignItems: 'stretch',
-    justifyContent: 'stretch',
-};
-
-/**
- * Custom hook for generating CSS-in-JS styles using makeStyles function from Material-UI library.
- * @returns The generated styles object.
- */
-const useStyles = makeStyles()((theme) => ({
-    root: {
-      ...stretch,
-      '& > *': {
-        ...stretch,
-        flexGrow: 1,
-      },
-      '& > * > *': {
-        flexGrow: 1,
-      },
-      pointerEvents: 'all',
-    },
-    hidden: {
-      display: 'none !important',
-    },
-    fieldReadonly: {
-        '& > *': {
-            pointerEvents: 'none !important' as 'none',
-        },
-    },
-    phoneHidden: {
-        [theme.breakpoints.only('xs')]: {
-            display: 'none !important',
-        }
-    },
-    tabletHidden: {
-        [theme.breakpoints.between("sm", "lg")]: {
-            display: 'none !important',
-        }
-    },
-    desktopHidden: {
-        [theme.breakpoints.up('lg')]: {
-            display: 'none !important',
-        }
-    },
-}));
 
 /**
  * Represents the configuration options for makeField hoc.
@@ -129,7 +71,6 @@ const DEFAULT_READY = () => null;
 const DEFAULT_MAP = (data: IAnything) => data;
 const DEFAULT_CLICK = () => {};
 const DEFAULT_REF = () => null;
-const DEFAULT_MENU = () => null;
 const DEFAULT_READTRANSFORM = (value: Value) => value;
 const DEFAULT_WRITETRANSFORM = (value: Value) => value;
 
@@ -153,7 +94,6 @@ export function makeField(
     const Component = memo(originalComponent) as unknown as React.FC<IManaged>;
     const oneConfig = OneConfig[GET_REF_SYMBOL]();
     const component = <Data extends IAnything = IAnything>({
-        className = '',
         sx,
         columns = '',
         phoneColumns = '',
@@ -179,7 +119,6 @@ export function makeField(
         object: upperObject,
         name = '',
         title = nameToTitle(name) || undefined,
-        menu = DEFAULT_MENU,
         debug,
         focus,
         blur,
@@ -190,12 +129,9 @@ export function makeField(
         readonly: upperReadonly = false,
         autoFocus,
         style,
-        menuItems,
         groupRef: ref = DEFAULT_REF,
         fieldRightMargin = fieldConfig.defaultProps?.fieldRightMargin,
         fieldBottomMargin = fieldConfig.defaultProps?.fieldBottomMargin,
-        outlinePaper = false,
-        transparentPaper = false,
         testId = name,
         ...otherProps
     }: IEntity<Data>) => {
@@ -220,8 +156,6 @@ export function makeField(
 
         const object = stateObject || upperObject;
 
-        const { classes } = useStyles();
-
         const focusSubject = useSubject<void>();
         const blurSubject = useSubject<void>();
 
@@ -234,9 +168,6 @@ export function makeField(
 
         const {
             state: {
-                phoneHidden,
-                tabletHidden,
-                desktopHidden,
                 dirty,
                 disabled,
                 fieldReadonly,
@@ -613,24 +544,13 @@ export function makeField(
          * Коллбек для перехвата клика из поля. Используется только
          * для FieldType.Button и FieldType.Icon
          */
-        const handleExternalClick = useCallback(async (e: React.MouseEvent<any>) => {
+        const handleExternalClick = useCallback(async () => {
             if (memory.clickDisabled) {
                 return;
             }
-            await click(name, e, memory.object$, payload, (value) => managedProps.onChange(value, {
+            await click(name, memory.object$, payload, (value) => managedProps.onChange(value, {
                 skipReadonly: true,
             }), changeObject);
-        }, []);
-
-        /**
-         * Коллбек для перехвата клика по группе поля. Используется для всех
-         * полей кроме FieldType.Button и FieldType.Icon
-         */
-        const handleInternalClick = useCallback(async (e: React.MouseEvent<any>) => {
-            if (fieldConfig.skipClickListener) {
-                return;
-            }
-            return await handleExternalClick(e);
         }, []);
 
         const groupProps: IGroupProps<Data> = {
@@ -685,8 +605,6 @@ export function makeField(
             loading,
             object,
             prefix,
-            outlinePaper,
-            transparentPaper,
             ...otherProps,
             fieldReadonly: computeFieldReadonly(),
         };
@@ -699,14 +617,6 @@ export function makeField(
             originalComponent,
             payload,
         });
-
-        const classMap = {
-            [classes.hidden]: !visible,
-            [classes.fieldReadonly]: fieldReadonly,
-            [classes.phoneHidden]: phoneHidden,
-            [classes.tabletHidden]: tabletHidden,
-            [classes.desktopHidden]: desktopHidden,
-        };
 
         const componentProps = {
             ...fieldConfig.defaultProps,
@@ -725,9 +635,7 @@ export function makeField(
                 data-path={memory.fieldName}
                 isItem
                 style={style}
-                className={classNames(className, classes.root, classMap)}
                 {...groupProps}
-                onClick={handleInternalClick}
             >
                 <Component {...componentProps as IManaged} />
             </Group>

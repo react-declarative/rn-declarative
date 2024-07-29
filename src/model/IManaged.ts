@@ -316,22 +316,6 @@ export interface IManagedShallow<Data = IAnything, Payload = IAnything> extends 
      */
     blur?: PickProp<IField<Data, Payload>, 'blur'>;
     /**
-     * Represents the menuItems property of a field in a form.
-     *
-     * @typedef menuItems
-     */
-    menuItems?: PickProp<IField<Data, Payload>, 'menuItems'>;
-    /**
-     * Represents the 'menu' variable.
-     *
-     * @typedef menu
-     * @property - The original field object from which the 'menu' property was picked
-     * @property menu - The 'menu' property of the field object
-     * @property menu.data - The data associated with the 'menu' property
-     * @property menu.payload - The payload associated with the 'menu' property
-     */
-    menu?: PickProp<IField<Data, Payload>, 'menu'>;
-    /**
      * Represents a map property of a field.
      *
      * @template Data - The type of data object associated with the field.
@@ -407,7 +391,7 @@ export interface IManaged<Data = IAnything, Value = any> extends Omit<IEntity<Da
     incorrect: string | null;
     invalid: string | null;
     object: Data;
-    click: (e: React.MouseEvent<any>) => void | Promise<void>;
+    click: () => void | Promise<void>;
     onChange: (v: Value, config?: {
         skipReadonly?: boolean;
     }) => void;

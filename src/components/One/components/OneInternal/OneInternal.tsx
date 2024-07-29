@@ -4,7 +4,6 @@ import { memo, useRef, useCallback, useEffect, Fragment, useMemo } from "react";
 import isStatefull, { isLayout } from "../../config/isStatefull";
 import createFieldInternal from "../../config/createField";
 import createLayoutInternal from "../../config/createLayout";
-import isBaseline from "../../config/isBaseline";
 
 import { useOneState } from "../../context/StateProvider";
 import { useOneCache } from "../../context/CacheProvider";
@@ -116,13 +115,10 @@ const makeTr = (field: IField, payload: IAnything) => {
  * @property prefix - The prefix string
  * @property invalidity - The invalidity callback function
  * @property fallback - The fallback callback function
- * @property outlinePaper - Whether to use outline paper
- * @property transparentPaper - Whether to use transparent paper
  * @property readonly - Whether the fields are readonly
  * @property focus - The focus callback function
  * @property blur - The blur callback function
  * @property click - The click callback function
- * @property menu - The menu callback function
  * @property createField - The createField function
  * @property createLayout - The createLayout function
  * @property withNamedPlaceholders - Whether to use named placeholders
@@ -140,8 +136,6 @@ export const OneInternal = <
   prefix = "root",
   invalidity = DEFAULT_INVALIDITY_CALLBACK,
   fallback = DEFAULT_FALLBACK,
-  outlinePaper: upperOutlinePaper = false,
-  transparentPaper: upperTransparentPaper = false,
   readonly,
   disabled,
   readTransform,
@@ -149,7 +143,6 @@ export const OneInternal = <
   focus,
   blur,
   click,
-  menu,
   createField = createFieldInternal,
   createLayout = createLayoutInternal,
   withNamedPlaceholders,
@@ -163,8 +156,6 @@ export const OneInternal = <
   const {
     focusMap,
     blurMap,
-    menuMap,
-    baselineMap,
     fieldsMap,
     clickMap,
     statefullMap,
@@ -264,26 +255,10 @@ export const OneInternal = <
             change: handleChange,
             ready: handleReady,
             fallback,
-            /**
-             * Checks if a given field is baseline aligned.
-             *
-             * @param field - The field object to check.
-             * @param baselineMap - The map containing the baseline information.
-             * @param fields - The array of fields to check for baselines.
-             * @returns Returns true if the field is baseline aligned, false otherwise.
-             */
-            isBaselineAlign:
-              baselineMap.get(field) === undefined
-                ? !!baselineMap
-                    .set(field, !field.noBaseline && fields.some(isBaseline))
-                    .get(field)
-                : !!baselineMap.get(field),
             ...field,
             placeholder: withNamedPlaceholders
               ? `${field.name || "unknown"}`
               : field.placeholder,
-            outlinePaper: field.outlinePaper || upperOutlinePaper,
-            transparentPaper: field.transparentPaper || upperTransparentPaper,
             /**
              * Retrieves the function associated with the given field from the click map.
              * If no function is found, returns the click map itself.
@@ -294,12 +269,12 @@ export const OneInternal = <
             click: clickMap.has(field)
               ? clickMap.get(field)
               : clickMap
-                  .set(field, async (name, e, data, payload, onValueChange, onChange) => {
+                  .set(field, async (name, data, payload, onValueChange, onChange) => {
                     if (field.click) {
-                      await field.click(name, e, data, payload, onValueChange, onChange);
+                      await field.click(name, data, payload, onValueChange, onChange);
                     }
                     if (click) {
-                      await click(name, data, payload, onValueChange, onChange, e);
+                      await click(name, data, payload, onValueChange, onChange);
                     }
                   })
                   .get(field),
@@ -341,23 +316,6 @@ export const OneInternal = <
                   })
                   .get(field),
             /**
-             * Checks if field exists in the menuMap. If it exists, return the menu function associated with the field.
-             * If it does not exist, create a new entry in the menuMap and associate it with a new menu function defined
-             * by the provided parameters and return the menu function.
-             *
-             * @param field - The field to check in the menuMap.
-             *
-             * @returns - The menu function associated with the field in the menuMap.
-             */
-            menu: menuMap.has(field)
-              ? menuMap.get(field)
-              : menuMap
-                  .set(field, (name, action, data, payload, onValueChange, onChange) => {
-                    field.menu && field.menu(name, action, data, payload, onValueChange, onChange);
-                    menu && menu(name, action, data, payload, onValueChange, onChange);
-                  })
-                  .get(field),
-            /**
              * Checks if a field exists in the trMap. If the field exists, it returns the corresponding translation. If the field does not exist, it creates a new translation using the `makeTr`
              * function, stores it in the trMap, and returns the translation.
              *
@@ -392,8 +350,6 @@ export const OneInternal = <
            * @property ready - Callback function for when the component is ready.
            * @property prefix - The current path prefix.
            * @property readonly - Determines if the component is readonly.
-           * @property outlinePaper - Determines if the entity has an outline paper.
-           * @property transparentPaper - Determines if the entity has a transparent paper.
            * @property withNamedPlaceholders - Determines if the component has named placeholders.
            * @property createField - Function for creating a field.
            * @property createLayout - Function for creating a layout.
@@ -415,8 +371,6 @@ export const OneInternal = <
             writeTransform,
             readonly: readonly || field.readonly,
             disabled: disabled || field.disabled,
-            outlinePaper: entity.outlinePaper,
-            transparentPaper: entity.transparentPaper,
             withNamedPlaceholders,
             createField,
             createLayout,
@@ -426,7 +380,6 @@ export const OneInternal = <
             invalidity,
             focus,
             click,
-            menu,
             blur,
             dirty: field.dirty || dirty,
           };

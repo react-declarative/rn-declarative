@@ -19,7 +19,6 @@ import createLayoutInternal from './config/createLayout';
 
 const DEFAULT_ONFOCUS = () => null;
 const DEFAULT_ONBLUR = () => null;
-const DEFAULT_ONMENU = () => null;
 const DEFAULT_ONCLICK = () => null;
 const DEFAULT_ONREADY = () => null;
 const DEFAULT_ONCHANGE = () => null;
@@ -67,7 +66,6 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
 
     const onFocus = useActualCallback(props.onFocus || DEFAULT_ONFOCUS);
     const onBlur = useActualCallback(props.onBlur || DEFAULT_ONBLUR);
-    const onMenu = useActualCallback(props.onMenu || DEFAULT_ONMENU);
     const onClick = useActualCallback(props.onClick || DEFAULT_ONCLICK);
     const onReady = useActualCallback(props.onReady || DEFAULT_ONREADY);
     const onChange = useActualCallback(props.onChange || DEFAULT_ONCHANGE);
@@ -78,7 +76,6 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
     const {
         focus = onFocus,
         blur = onBlur,
-        menu = onMenu,
         click = onClick,
         ready = onReady,
         change = onChange,
@@ -138,7 +135,6 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
     const wrappedProps = {
         focus,
         blur,
-        menu,
         click,
         ready,
         change,

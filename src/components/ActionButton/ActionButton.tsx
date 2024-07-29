@@ -49,7 +49,7 @@ interface IActionButtonProps extends Omit<ButtonProps, keyof {
     Progress?: typeof ProgressDefault;
     onLoadStart?: () => void;
     onLoadEnd?: (isOk: boolean) => void;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (void | Promise<void>);
+    onClick?: () => (void | Promise<void>);
     fallback?: (e: Error) => void;
     throwError?: boolean;
 };
@@ -100,7 +100,7 @@ export const ActionButton = ({
      * @param event - The click event.
      * @returns - Promise that resolves when the click handling is completed.
      */
-    const handleClick = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleClick = async () => {
         const { current: loading } = loading$;
         if (loading) {
             return;
@@ -109,7 +109,7 @@ export const ActionButton = ({
         try {
             onLoadStart && onLoadStart();
             isMounted.current && setLoading((loading) => loading + 1);
-            await onClick(event);
+            await onClick();
         } catch (e: any) {
             isOk = false;
             if (!throwError) {

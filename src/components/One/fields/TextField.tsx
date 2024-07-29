@@ -53,50 +53,6 @@ export interface ITextFieldProps<Data = IAnything, Payload = IAnything> {
    */
   inputPattern?: PickProp<IField<Data, Payload>, "inputPattern">;
   /**
-   * Represents an optional input autocomplete feature for a field.
-   *
-   * @template Data - The type of data associated with the field.
-   * @template Payload - The type of payload associated with the field.
-   * @typedef InputAutocomplete
-   * @property inputAutocomplete - Specifies whether the input should have autocomplete feature.
-   */
-  inputAutocomplete?: PickProp<IField<Data, Payload>, "inputAutocomplete">;
-  /**
-   * Represents the input formatter function for a specific field in the Data object.
-   *
-   * @template Data - The type of the data object.
-   * @template Payload - The type of the payload object.
-   * @param inputFormatter - The input formatter function for the field.
-   */
-  inputFormatter?: PickProp<IField<Data, Payload>, "inputFormatter">;
-  /**
-   * Specifies the input formatter symbol for a given field.
-   *
-   * @typedef inputFormatterSymbol
-   */
-  inputFormatterSymbol?: PickProp<IField<Data, Payload>, "inputFormatterSymbol">;
-  /**
-   * Represents the allowed input formatters for a field.
-   *
-   * @typedef inputFormatterAllowed
-   * @property allowedFormatters - An array of strings representing the allowed formatter names.
-   */
-  inputFormatterAllowed?: PickProp<IField<Data, Payload>, "inputFormatterAllowed">;
-  /**
-   * Represents an input formatter template used in a field.
-   *
-   * @typedef InputFormatterTemplate
-   */
-  inputFormatterTemplate?: PickProp<IField<Data, Payload>, "inputFormatterTemplate">;
-  /**
-   * Defines the input formatter replace configuration for a field.
-   *
-   * @typedef inputFormatterReplace
-   * @property inputFormatterReplace.dataTransform - The function used to transform the input data before formatting.
-   * @property inputFormatterReplace.payloadTransform - The function used to transform the payload before formatting.
-   */
-  inputFormatterReplace?: PickProp<IField<Data, Payload>, "inputFormatterReplace">;
-  /**
    * Returns the "description" property value of the given field object.
    *
    * @template IField - The type of the field object.
@@ -316,11 +272,6 @@ export const TextField = ({
   trailingIconClick,
   inputRows = 1,
   placeholder = "",
-  inputAutocomplete = "off",
-  inputFormatter,
-  inputFormatterSymbol,
-  inputFormatterAllowed,
-  inputFormatterTemplate,
   dirty,
   loading,
   onChange,
@@ -349,11 +300,6 @@ export const TextField = ({
     trailingIconClick={trailingIconClick}
     inputRows={inputRows}
     placeholder={placeholder}
-    inputAutocomplete={inputAutocomplete}
-    inputFormatter={inputFormatter}
-    inputFormatterSymbol={inputFormatterSymbol}
-    inputFormatterAllowed={inputFormatterAllowed}
-    inputFormatterTemplate={inputFormatterTemplate}
     dirty={dirty}
     loading={loading}
     onChange={onChange}

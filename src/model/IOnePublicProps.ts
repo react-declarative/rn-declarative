@@ -48,22 +48,6 @@ export interface IOnePublicProps<Data = IAnything, Payload = IAnything, Field = 
      */
     onBlur?: IOneProps<Data, Payload, Field>['blur'];
     /**
-     * Represents the optional 'onMenu' property of type `IOneProps<Data, Payload, Field>['menu']`.
-     * This property is used to define the event handler function when a menu action is triggered.
-     * The event handler will receive three arguments: `data`, `payload`, and `field`.
-     *
-     * @typeParam Data - The data type for the menu.
-     * @typeParam Payload - The payload type for the menu.
-     * @typeParam Field - The field type for the menu.
-     *
-     * @param data - The data associated with the menu.
-     * @param payload - The payload associated with the menu.
-     * @param field - The field associated with the menu.
-     *
-     * @returns
-     */
-    onMenu?: IOneProps<Data, Payload, Field>['menu'];
-    /**
      * Represents the `onReady` property of `IOneProps`.
      *
      * @template Data - The type of the data being handled.

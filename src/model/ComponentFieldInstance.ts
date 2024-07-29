@@ -51,18 +51,6 @@ export type ComponentFieldInstance<Data = any, Payload = any> = Data & {
    */
   context: Record<string, any>;
   /**
-   * Represents whether an outline paper is present.
-   *
-   * @type {boolean}
-   */
-  outlinePaper: boolean;
-  /**
-   * Represents whether the paper is transparent.
-   *
-   * @type {boolean}
-   */
-  transparentPaper: boolean;
-  /**
    * Represents a payload object.
    *
    * @class

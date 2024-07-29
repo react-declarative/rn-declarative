@@ -12,9 +12,7 @@ import IField from "../../../model/IField";
 interface IContext {
   focusMap: Map<IField, IField['focus']>;
   blurMap: Map<IField, IField['blur']>;
-  menuMap: Map<IField, IField['menu']>;
   clickMap: Map<IField, IField['click']>;
-  baselineMap: Map<IField, boolean>;
   fieldsMap: Map<IField[], IField[]>;
   statefullMap: Map<IField[], number>;
   trMap: Map<IField, IField['tr']>;
@@ -39,7 +37,6 @@ interface ICacheProviderProps {
  * @property cacheMap.blurMap - Map for blurring fields.
  * @property cacheMap.menuMap - Map for field menus.
  * @property cacheMap.clickMap - Map for field click events.
- * @property cacheMap.baselineMap - Map for field baselines.
  * @property cacheMap.fieldsMap - Map for field arrays.
  * @property cacheMap.statefullMap - Map for stateful fields.
  * @property cacheMap.trMap - Map for translational fields.
@@ -52,9 +49,6 @@ export const CacheProvider = ({ children }: ICacheProviderProps) => {
    * @typedef CacheMap
    * @property focusMap - Map for focusing fields.
    * @property blurMap - Map for blurring fields.
-   * @property menuMap - Map for field menus.
-   * @property clickMap - Map for field click events.
-   * @property baselineMap - Map for field baselines.
    * @property fieldsMap - Map for field arrays.
    * @property statefullMap - Map for stateful fields.
    * @property trMap - Map for translational fields.
@@ -65,9 +59,7 @@ export const CacheProvider = ({ children }: ICacheProviderProps) => {
     Object.assign(fnMap, {
       focusMap: new Map<IField, IField['focus']>(),
       blurMap: new Map<IField, IField['blur']>(),
-      menuMap: new Map<IField, IField['menu']>(),
       clickMap: new Map<IField, IField['click']>(),
-      baselineMap: new Map<IField, boolean>(),
       fieldsMap: new Map<IField[], IField[]>(),
       statefullMap: new Map<IField[], number>(),
       trMap: new Map<IField, IField['tr']>(),

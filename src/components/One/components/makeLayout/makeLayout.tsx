@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { memo, cloneElement, useEffect, useMemo } from 'react';
 
-import { makeStyles } from '../../../../styles';
-
 import { useOnePayload } from '../../context/PayloadProvider';
 import { useOneState } from '../../context/StateProvider';
 
@@ -11,27 +9,6 @@ import useMediaContext from '../../../../hooks/useMediaContext';
 
 import IAnything from '../../../../model/IAnything';
 import IEntity from '../../../../model/IEntity';
-
-import classNames from '../../../../utils/classNames';
-
-/**
- * Creates and returns an object with CSS styles using the `makeStyles` function from Material-UI.
- * The returned object contains different style classes for different situations.
- *
- * @returns The object with CSS style classes.
- *
- */
-const useStyles = makeStyles()({
-    hidden: {
-        display: 'none !important',
-    },
-    disabled: {
-        pointerEvents: 'none',
-    },
-    readonly: {
-        pointerEvents: 'none',
-    },
-});
 
 /**
  * Represents the layout of a component.
@@ -78,7 +55,6 @@ export function makeLayout<T extends ILayout<any>>(
      * @returns - The rendered component or null if not visible
      */
     const component = <Data extends IAnything = IAnything>({
-        className,
         children,
         object: upperObject,
         isVisible = DEFAULT_IS_VISIBLE,
@@ -92,8 +68,6 @@ export function makeLayout<T extends ILayout<any>>(
         ready,
         ...otherProps
     }: ILayout<Data>) => {
-        
-        const { classes } = useStyles();
 
         const payload = useOnePayload();
         const { object: stateObject } = useOneState<Data>();
@@ -174,11 +148,6 @@ export function makeLayout<T extends ILayout<any>>(
 
         return (
             <Component
-                className={classNames(className, {
-                    [classes.disabled]: disabled || upperDisabled,
-                    [classes.readonly]: readonly || upperReadonly,
-                    [classes.hidden]: !visible,
-                })}
                 ready={ready}
                 object={object}
                 {...otherProps}

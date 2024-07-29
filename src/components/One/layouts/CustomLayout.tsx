@@ -8,8 +8,6 @@ import Box from "@mui/material/Box";
 import { useOneState } from "../context/StateProvider";
 import { useOnePayload } from "../context/PayloadProvider";
 
-import classNames from "../../../utils/classNames";
-
 import IField from "../../../model/IField";
 import IEntity from "../../../model/IEntity";
 import IAnything from "../../../model/IAnything";
@@ -19,7 +17,6 @@ import makeLayout from "../components/makeLayout/makeLayout";
 
 export interface ICustomLayoutProps<Data = IAnything, Payload = IAnything>
   extends IWrappedLayout<Data, Payload> {
-  className?: PickProp<IField<Data, Payload>, "className">;
   style?: PickProp<IField<Data, Payload>, "style">;
   sx?: PickProp<IField<Data, Payload>, "sx">;
   customLayout?: PickProp<IField<Data, Payload>, "customLayout">;
@@ -86,7 +83,6 @@ const Fragment = ({ children }: React.PropsWithChildren<{}>) => <>{children}</>;
  */
 export const CustomLayout = <Data extends IAnything = IAnything>({
   children,
-  className,
   style,
   sx,
   testId,
@@ -113,7 +109,7 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
   }, [object]);
 
   return (
-    <Box className={classNames(className, classes.root)} data-testid={testId} style={style} sx={sx}>
+    <Box className={classes.root} data-testid={testId} style={style} sx={sx}>
         <CustomLayout {...props}>
             {children}
         </CustomLayout>
