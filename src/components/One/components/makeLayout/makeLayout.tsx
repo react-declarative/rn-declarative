@@ -72,20 +72,18 @@ export function makeLayout<T extends ILayout<any>>(
         const payload = useOnePayload();
         const { object: stateObject } = useOneState<Data>();
 
-        const { phoneHidden, tabletHidden, desktopHidden, hasHiddenConstraint } = useMemo(() => {
+        const { phoneHidden, tabletHidden, desktopHidden } = useMemo(() => {
             const phoneHidden = typeof upperPhoneHidden === 'function' ? upperPhoneHidden(payload) : upperPhoneHidden;
             const tabletHidden = typeof upperTabletHidden === 'function' ? upperTabletHidden(payload) : upperTabletHidden;
             const desktopHidden = typeof upperDesktopHidden === 'function' ? upperDesktopHidden(payload) : upperDesktopHidden;
-            const hasHiddenConstraint = phoneHidden || tabletHidden || desktopHidden;
             return { 
                 phoneHidden,
                 tabletHidden,
                 desktopHidden,
-                hasHiddenConstraint,
             };
         }, []);
 
-        const { isPhone = false, isTablet = false, isDesktop = false } = hasHiddenConstraint ? useMediaContext() : {};
+        const { isPhone = false, isTablet = false, isDesktop = false } = useMediaContext();
 
         const object = stateObject || upperObject;
 

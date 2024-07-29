@@ -2,6 +2,7 @@ import IAnything from "../../../model/IAnything";
 import IField from "../../../model/IField";
 
 import deepFlat from "../../../utils/deepFlat";
+import get from "../../../utils/get";
 
 interface IValidationFn<Data extends IAnything = IAnything> {
     (data: Data): string | null;
@@ -28,7 +29,7 @@ export const applyValidation = <Data extends IAnything = IAnything, Field extend
         } = validation;
         if (required) {
             validations.push((data) => {
-                const value = data[name];
+                const value = get(data, name);
                 if (value === false) {
                     return null;
                 }
@@ -43,7 +44,7 @@ export const applyValidation = <Data extends IAnything = IAnything, Field extend
         }
         if (numeric) {
             validations.push((data) => {
-                if (isNaN(data[name])) {
+                if (isNaN(get(data, name))) {
                     return "Must be a number";
                 }
                 return null;
@@ -51,10 +52,10 @@ export const applyValidation = <Data extends IAnything = IAnything, Field extend
         }
         if (maxNum) {
             validations.push((data) => {
-                if (isNaN(data[name])) {
+                if (isNaN(get(data, name))) {
                     return "Must be a number";
                 }
-                if (parseInt(data[name]) > maxNum) {
+                if (parseInt(get(data, name)) > maxNum) {
                     return "Maximum value reached";
                 }
                 return null;
@@ -62,10 +63,10 @@ export const applyValidation = <Data extends IAnything = IAnything, Field extend
         }
         if (minNum) {
             validations.push((data) => {
-                if (isNaN(data[name])) {
+                if (isNaN(get(data, name))) {
                     return "Must be a number";
                 }
-                if (parseInt(data[name]) < minNum) {
+                if (parseInt(get(data, name)) < minNum) {
                     return "Minimum value reached";
                 }
                 return null;
@@ -74,7 +75,7 @@ export const applyValidation = <Data extends IAnything = IAnything, Field extend
         if (pattern) {
             validations.push((data) => {
                 const expr = new RegExp(pattern.source, pattern.flags);
-                if (!expr.test(data[name])) {
+                if (!expr.test(get(data, name))) {
                     return 'Pattern does not match';
                 }
                 return null;
@@ -82,7 +83,7 @@ export const applyValidation = <Data extends IAnything = IAnything, Field extend
         }
         if (maxLength) {
             validations.push((data) => {
-                const count = data[name]?.length || 0;
+                const count = get(data, name)?.length || 0;
                 if (count > maxLength) {
                     return "Maximum length reached";
                 }
@@ -91,7 +92,7 @@ export const applyValidation = <Data extends IAnything = IAnything, Field extend
         }
         if (minLength) {
             validations.push((data) => {
-                const count = data[name]?.length || 0;
+                const count = get(data, name)?.length || 0;
                 if (count < minLength) {
                     return "Minimum length reached";
                 }

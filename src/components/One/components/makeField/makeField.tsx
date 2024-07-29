@@ -15,6 +15,7 @@ import { useOneState } from '../../context/StateProvider';
 
 import useDebounce from '../../hooks/useDebounce';
 
+import useMediaContext from '../../../../hooks/useMediaContext';
 import useManagedCompute from './hooks/useManagedCompute';
 import useSubject from '../../../../hooks/useSubject';
 import useFieldMemory from './hooks/useFieldMemory';
@@ -134,6 +135,8 @@ export function makeField(
         testId = name,
         ...otherProps
     }: IEntity<Data>) => {
+        const { isPhone = false, isTablet = false, isDesktop = false } = useMediaContext();
+
         const { object: stateObject, changeObject } = useOneState<Data>();
         const payload = useOnePayload();
 
@@ -167,6 +170,9 @@ export function makeField(
 
         const {
             state: {
+                phoneHidden,
+                tabletHidden,
+                desktopHidden,
                 dirty,
                 disabled,
                 fieldReadonly,
@@ -623,6 +629,18 @@ export function makeField(
         };
 
         if (!visible) {
+            return null;
+        }
+
+        if (phoneHidden && isPhone) {
+            return null;
+        }
+
+        if (tabletHidden && isTablet) {
+            return null;
+        }
+
+        if (desktopHidden && isDesktop) {
             return null;
         }
 
