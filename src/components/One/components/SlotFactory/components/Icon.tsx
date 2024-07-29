@@ -52,7 +52,7 @@ const useStyles = makeStyles()((theme) => ({
  */
 export const Icon = ({
     disabled,
-    click,
+    press,
     icon: Icon = ArrowForward,
     iconSize,
     iconColor,
@@ -77,7 +77,7 @@ export const Icon = ({
                     size={iconSize}
                     color={iconColor}
                     disabled={disabled}
-                    onClick={click}
+                    onPress={press}
                 >
                     <Icon 
                         data={data}

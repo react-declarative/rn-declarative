@@ -63,7 +63,7 @@ export const fields: TypedField[] = [
                 },
                 buttonVariant: 'contained',
                 title: 'Submit',
-                click: (name, e, data, payload) => {
+                press: (name, e, data, payload) => {
                     const errors = getInvalidFields(fields, data, payload);
                     if (errors) {
                         const [error] = errors;

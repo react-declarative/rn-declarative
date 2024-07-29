@@ -202,6 +202,6 @@ YesNoField.displayName = "YesNoField";
 export default makeField(YesNoField, {
   withApplyQueue: true,
   skipDebounce: true,
-  skipDirtyClickListener: true,
+  skipDirtyPressListener: true,
   skipFocusReadonly: true,
 });

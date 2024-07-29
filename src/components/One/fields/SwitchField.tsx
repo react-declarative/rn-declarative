@@ -95,6 +95,6 @@ SwitchField.displayName = 'SwitchField';
 export default makeField(SwitchField, {
   withApplyQueue: true,
   skipDebounce: true,
-  skipDirtyClickListener: true,
+  skipDirtyPressListener: true,
   skipFocusReadonly: true,
 });

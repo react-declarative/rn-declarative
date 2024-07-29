@@ -9,7 +9,7 @@ import { IButtonSlot } from '../../../slots/ButtonSlot';
  */
 export const Button = ({
     disabled,
-    click,
+    press,
     icon: Icon,
     title,
     value,
@@ -24,7 +24,7 @@ export const Button = ({
         color={buttonColor}
         startIcon={Icon && <Icon />}
         disabled={disabled}
-        onClick={click}
+        onPress={press}
     >
         {value || title || placeholder}
     </ActionButton>

@@ -6,7 +6,7 @@ import { FIELD_DEBOUNCE } from "../../config/config";
  * @interface IConfig
  */
 export interface IConfig {
-    WITH_DIRTY_CLICK_LISTENER: boolean;
+    WITH_DIRTY_PRESS_LISTENER: boolean;
     WITH_DISMOUNT_LISTENER: boolean;
     WITH_SYNC_COMPUTE: boolean;
     CUSTOM_FIELD_DEBOUNCE: number;
@@ -15,7 +15,7 @@ export interface IConfig {
 /**
  * Represents the initial configuration for a software module.
  * @typedef IConfig
- * @property WITH_DIRTY_CLICK_LISTENER - Whether to include a dirty click listener in the module. Default is true.
+ * @property WITH_DIRTY_PRESS_LISTENER - Whether to include a dirty press listener in the module. Default is true.
  * @property WITH_MOBILE_READONLY_FALLBACK - Whether to include a mobile readonly fallback in the module. Default is true.
  * @property WITH_WAIT_FOR_MOVE_LISTENER - Whether to include a wait for move listener in the module. Default is true.
  * @property WITH_WAIT_FOR_TAB_LISTENER - Whether to include a wait for tab listener in the module. Default is true.
@@ -26,7 +26,7 @@ export interface IConfig {
  * @property FIELD_BLUR_DEBOUNCE - The field blur debounce time for the module. Default is BLUR_DEBOUNCE.
  */
 const INITIAL_CONFIG: IConfig = {
-    WITH_DIRTY_CLICK_LISTENER: true,
+    WITH_DIRTY_PRESS_LISTENER: true,
     WITH_DISMOUNT_LISTENER: true,
     WITH_SYNC_COMPUTE: false,
     CUSTOM_FIELD_DEBOUNCE: FIELD_DEBOUNCE,

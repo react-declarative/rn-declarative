@@ -204,6 +204,6 @@ ComboField.displayName = "ComboField";
 export default makeField(ComboField, {
   withApplyQueue: true,
   skipDebounce: true,
-  skipDirtyClickListener: true,
+  skipDirtyPressListener: true,
   skipFocusReadonly: true,
 });

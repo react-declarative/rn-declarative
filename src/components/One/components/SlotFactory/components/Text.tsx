@@ -23,8 +23,8 @@ const LOADING_LABEL = "Loading";
  * @param payload - The payload object.
  * @param leadingIcon - The leading icon component.
  * @param trailingIcon - The trailing icon component.
- * @param leadingIconClick - The leading icon click handler.
- * @param trailingIconClick - The trailing icon click handler.
+ * @param leadingIconPress - The leading icon press handler.
+ * @param trailingIconPress - The trailing icon press handler.
  * @param loading - Indicates if icons are in loading state.
  * @param disabled - Indicates if the icons are disabled.
  * @param readonly - Indicates if the icons are read-only.
@@ -40,8 +40,8 @@ const icons = (
   payload: IAnything,
   leadingIcon: React.ComponentType<any> | undefined,
   trailingIcon: React.ComponentType<any> | undefined,
-  leadingIconClick: PickProp<IField, "leadingIconClick">,
-  trailingIconClick: PickProp<IField, "trailingIconClick">,
+  leadingIconPress: PickProp<IField, "leadingIconPress">,
+  trailingIconPress: PickProp<IField, "trailingIconPress">,
   loading: boolean,
   disabled: boolean,
   readonly: boolean,
@@ -59,9 +59,9 @@ const icons = (
               edge="start"
               disabled={disabled}
               disableRipple={!leadingIconRipple}
-              onClick={() => {
-                if (leadingIconClick) {
-                  leadingIconClick(
+              onPress={() => {
+                if (leadingIconPress) {
+                  leadingIconPress(
                     v as unknown as IAnything,
                     data,
                     payload,
@@ -93,9 +93,9 @@ const icons = (
               edge="end"
               disabled={disabled}
               disableRipple={!trailingIconRipple}
-              onClick={() => {
-                if (trailingIconClick) {
-                  trailingIconClick(
+              onPress={() => {
+                if (trailingIconPress) {
+                  trailingIconPress(
                     v as unknown as IAnything,
                     data,
                     payload,
@@ -161,8 +161,8 @@ const multiline = (inputRows: number) => ({
  * @property title - The title of the input.
  * @property leadingIcon - The leading icon of the input.
  * @property trailingIcon - The trailing icon of the input.
- * @property leadingIconClick - The click event handler for the leading icon.
- * @property trailingIconClick - The click event handler for the trailing icon.
+ * @property leadingIconPress - The press event handler for the leading icon.
+ * @property trailingIconPress - The press event handler for the trailing icon.
  * @property leadingIconRipple - Indicates if the leading icon should have a ripple effect. Defaults to true.
  * @property trailingIconRipple - Indicates if the trailing icon should have a ripple effect. Defaults to true.
  * @property inputRows - The number of rows for a multiline input. Defaults to 1.
@@ -193,8 +193,8 @@ export const Text = ({
   title = "",
   leadingIcon: li,
   trailingIcon: ti,
-  leadingIconClick: lic,
-  trailingIconClick: tic,
+  leadingIconPress: lic,
+  trailingIconPress: tic,
   leadingIconRipple: lir = true,
   trailingIconRipple: tir = true,
   inputRows: rows = 1,

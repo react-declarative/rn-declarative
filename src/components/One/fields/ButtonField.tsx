@@ -104,7 +104,7 @@ export interface IButtonFieldProps<Data = IAnything, Payload = IAnything> {
  */
 export interface IButtonFieldPrivate<Data = IAnything> {
   value: PickProp<IManaged<Data>, 'value'>;
-  click: PickProp<IManaged<Data>, 'click'>;
+  press: PickProp<IManaged<Data>, 'press'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
@@ -117,7 +117,7 @@ export interface IButtonFieldPrivate<Data = IAnything> {
  */
 export const ButtonField = ({
   disabled,
-  click,
+  press,
   icon,
   title,
   value,
@@ -130,7 +130,7 @@ export const ButtonField = ({
 }: IButtonFieldProps & IButtonFieldPrivate) => (
   <Button
     disabled={disabled}
-    click={click}
+    press={press}
     icon={icon}
     title={title}
     value={value}
@@ -146,8 +146,8 @@ export const ButtonField = ({
 ButtonField.displayName = 'ButtonField';
 
 export default makeField(ButtonField, {
-  skipClickListener: true,
+  skipPressListener: true,
   withApplyQueue: true,
   skipDebounce: true,
-  skipDirtyClickListener: true,
+  skipDirtyPressListener: true,
 });

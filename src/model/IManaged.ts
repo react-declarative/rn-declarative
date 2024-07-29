@@ -247,12 +247,12 @@ export interface IManagedShallow<Data = IAnything, Payload = IAnything> extends 
      */
     compute?: PickProp<IField<Data, Payload>, 'compute'>;
     /**
-     * Represents the "click" property of a specific field in a data object.
+     * Represents the "press" property of a specific field in a data object.
      *
      * @template Data - The type of the data object containing the field.
-     * @template Payload - The type of the payload associated with the click event.
+     * @template Payload - The type of the payload associated with the press event.
      */
-    click?: PickProp<IField<Data, Payload>, 'click'>;
+    press?: PickProp<IField<Data, Payload>, 'press'>;
     /**
      * Type definition for the `focus` property with pick properties.
      *
@@ -329,7 +329,7 @@ type Exclude<Data = IAnything> = {
     type: never;
     focus: never;
     blur: never;
-    click: never;
+    press: never;
     ready: never;
     check: never;
     change: never;
@@ -356,7 +356,7 @@ export interface IManaged<Data = IAnything, Value = any> extends Omit<IEntity<Da
     incorrect: string | null;
     invalid: string | null;
     object: Data;
-    click: () => void | Promise<void>;
+    press: () => void | Promise<void>;
     onChange: (v: Value, config?: {
         skipReadonly?: boolean;
     }) => void;

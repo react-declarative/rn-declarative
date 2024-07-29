@@ -132,7 +132,7 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      * Перехват клика по полю, следует использовать для копирования значения
      * у карточек просмотра без редактирования
      */
-    click?: (name: string, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void) => (void | Promise<void>);
+    press?: (name: string, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void) => (void | Promise<void>);
 
     /**
      * Флаг только на чтение и "круглой окаймовки"
@@ -213,8 +213,8 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      * окна, расположенного в коде прикладного программиста. Коллбек
      * получает на вход текущее значение поля и функцию onChange...
      */
-    leadingIconClick?: (value: Value, data: Data, payload: Payload, onValueChange: (v: Value) => void, onChange: (data: Data) => void) => void;
-    trailingIconClick?: (value: Value, data: Data, payload: Payload, onValueChange: (v: Value) => void, onChange: (data: Data) => void) => void;
+    leadingIconPress?: (value: Value, data: Data, payload: Payload, onValueChange: (v: Value) => void, onChange: (data: Data) => void) => void;
+    trailingIconPress?: (value: Value, data: Data, payload: Payload, onValueChange: (v: Value) => void, onChange: (data: Data) => void) => void;
 
     /**
      * Поле, позволяющее передавать собственные значения в FieldType.Items и FieldType.Combo

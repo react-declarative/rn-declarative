@@ -12,7 +12,7 @@ interface IMemory {
     inputUpdate: boolean;
     objectUpdate: boolean;
     initComplete: boolean;
-    clickDisabled: boolean;
+    pressDisabled: boolean;
     fieldName: string;
     isMounted: boolean;
     lastDebouncedValue: Value;
@@ -61,7 +61,7 @@ interface IMemoryData extends Omit<IMemory, keyof {
 export const useFieldMemory = ({
     prefix,
     name,
-    clickDisabled,
+    pressDisabled,
     lastDebouncedValue,
     debouncedValue$,
     fieldReadonly$,
@@ -96,7 +96,7 @@ export const useFieldMemory = ({
         fieldName: `${prefix}(${name || 'unknown'})`,
         lastDebouncedValue,
         isMounted: true,
-        clickDisabled: false,
+        pressDisabled: false,
         debouncedValue$: null as never,
         fieldReadonly$: null as never,
         focusReadonly$: null as never,
@@ -112,7 +112,7 @@ export const useFieldMemory = ({
     memory.object$ = object$;
     memory.upperReadonly$ = upperReadonly$;
     memory.value$ = value$;
-    memory.clickDisabled = clickDisabled;
+    memory.pressDisabled = pressDisabled;
     return { memory };
 }
 

@@ -16,7 +16,7 @@ const DEFAULT_SIZE = 40;
  * @typedef IActionIconProps
  * @property [onLoadStart] - A callback function triggered when the icon starts loading.
  * @property [onLoadEnd] - A callback function triggered when the icon finishes loading.
- * @property [onClick] - A callback function triggered when the icon is clicked.
+ * @property [onPress] - A callback function triggered when the icon is pressed.
  * @property [fallback] - A callback function triggered when an error occurs while loading the icon.
  * @property [throwError] - Indicates whether an error should be thrown if the icon fails to load.
  * @property [size] - The size of the icon.
@@ -24,12 +24,12 @@ const DEFAULT_SIZE = 40;
  * @property [noProgress] - Indicates whether to hide the progress indicator during loading.
  */
 interface IActionIconProps extends Omit<IconButtonProps, keyof {
-    onClick: never;
+    onPress: never;
     size: never;
 }> {
     onLoadStart?: () => void;
     onLoadEnd?: (isOk: boolean) => void;
-    onClick?: () => (void | Promise<void>);
+    onPress?: () => (void | Promise<void>);
     fallback?: (e: Error) => void;
     throwError?: boolean;
     size?: number;
@@ -48,7 +48,7 @@ interface IActionIconProps extends Omit<IconButtonProps, keyof {
  * @property disabled - Determines if the component is disabled.
  * @property onLoadStart - The callback function called when the action starts loading.
  * @property onLoadEnd - The callback function called when the action finishes loading.
- * @property onClick - The callback function called when the icon is clicked.
+ * @property onPress - The callback function called when the icon is pressed.
  * @property fallback - The fallback function called in case of an error and throwError is false.
  * @property children - The child components of the icon.
  * @property size - The size of the icon.
@@ -64,7 +64,7 @@ export const ActionIcon = ({
     disabled = false,
     onLoadStart,
     onLoadEnd,
-    onClick = () => { },
+    onPress = () => { },
     fallback,
     children,
     size = DEFAULT_SIZE,
@@ -83,13 +83,13 @@ export const ActionIcon = ({
     const loading$ = useActualValue(loading);
 
     /**
-     * Handles click events on a button element.
+     * Handles press events on a button element.
      *
-     * @param event - The click event object.
-     * @returns - A Promise that resolves when the click event is handled.
+     * @param event - The press event object.
+     * @returns - A Promise that resolves when the press event is handled.
      * @async
      */
-    const handleClick = async () => {
+    const handlePress = async () => {
         const { current: loading } = loading$;
         if (loading) {
             return;
@@ -98,7 +98,7 @@ export const ActionIcon = ({
         try {
             onLoadStart && onLoadStart();
             isMounted.current && setLoading((loading) => loading + 1);
-            await onClick();
+            await onPress();
         } catch (e: any) {
             isOk = false;
             if (!throwError) {
@@ -122,7 +122,7 @@ export const ActionIcon = ({
                 {...otherProps}
                 className={classes.container}
                 disabled={!!loading || disabled}
-                onClick={handleClick}
+                onPress={handlePress}
             >
                 {(!!loading && !noProgress) && (
                     <div className={classes.spinner}>

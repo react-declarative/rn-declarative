@@ -19,7 +19,7 @@ import createLayoutInternal from './config/createLayout';
 
 const DEFAULT_ONFOCUS = () => null;
 const DEFAULT_ONBLUR = () => null;
-const DEFAULT_ONCLICK = () => null;
+const DEFAULT_ONPRESS = () => null;
 const DEFAULT_ONREADY = () => null;
 const DEFAULT_ONCHANGE = () => null;
 const DEFAULT_ONINVALID = () => null;
@@ -41,7 +41,7 @@ const DEFAULT_WRITETRANSFORM = (value: Value) => value;
  * @param props.onFocus - The callback function for focus events.
  * @param props.onBlur - The callback function for blur events.
  * @param props.onMenu - The callback function for menu events.
- * @param props.onClick - The callback function for click events.
+ * @param props.onPress - The callback function for press events.
  * @param props.onReady - The callback function for ready events.
  * @param props.onChange - The callback function for change events.
  * @param props.onInvalid - The callback function for invalid events.
@@ -66,7 +66,7 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
 
     const onFocus = useActualCallback(props.onFocus || DEFAULT_ONFOCUS);
     const onBlur = useActualCallback(props.onBlur || DEFAULT_ONBLUR);
-    const onClick = useActualCallback(props.onClick || DEFAULT_ONCLICK);
+    const onPress = useActualCallback(props.onPress || DEFAULT_ONPRESS);
     const onReady = useActualCallback(props.onReady || DEFAULT_ONREADY);
     const onChange = useActualCallback(props.onChange || DEFAULT_ONCHANGE);
     const onInvalid = useActualCallback(props.onInvalid || DEFAULT_ONINVALID);
@@ -76,7 +76,7 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
     const {
         focus = onFocus,
         blur = onBlur,
-        click = onClick,
+        press = onPress,
         ready = onReady,
         change = onChange,
         invalidity = onInvalid,
@@ -125,7 +125,7 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
      * @property focus - A function to handle the focus event.
      * @property blur - A function to handle the blur event.
      * @property menu - A function to handle the menu event.
-     * @property click - A function to handle the click event.
+     * @property press - A function to handle the press event.
      * @property ready - A function to handle the ready event.
      * @property change - A function to handle the change event.
      * @property invalidity - A function to handle the invalidity event.
@@ -135,7 +135,7 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
     const wrappedProps = {
         focus,
         blur,
-        click,
+        press,
         ready,
         change,
         invalidity,

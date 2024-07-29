@@ -72,7 +72,7 @@ export interface IOnePublicProps<Data = IAnything, Payload = IAnything, Field = 
      */
     onChange?: IOneProps<Data, Payload, Field>['change'];
     /**
-     * Represents a callback function that gets triggered when an onClick event occurs.
+     * Represents a callback function that gets triggered when an onPress event occurs.
      *
      * @template Data - The type of data associated with the component.
      * @template Payload - The type of payload that is passed to the function.
@@ -84,7 +84,7 @@ export interface IOnePublicProps<Data = IAnything, Payload = IAnything, Field = 
      *
      * @returns
      */
-    onClick?: IOneProps<Data, Payload, Field>['click'];
+    onPress?: IOneProps<Data, Payload, Field>['press'];
     /**
      * Represents the onInvalid callback function, an optional property of the IOneProps interface.
      * This function is executed when the invalidity condition is met.

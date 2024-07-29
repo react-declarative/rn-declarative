@@ -95,5 +95,5 @@ CheckboxField.displayName = 'CheckboxField';
 export default makeField(CheckboxField, {
   withApplyQueue: true,
   skipDebounce: true,
-  skipDirtyClickListener: true,
+  skipDirtyPressListener: true,
 });

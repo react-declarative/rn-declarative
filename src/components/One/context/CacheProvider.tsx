@@ -12,7 +12,7 @@ import IField from "../../../model/IField";
 interface IContext {
   focusMap: Map<IField, IField['focus']>;
   blurMap: Map<IField, IField['blur']>;
-  clickMap: Map<IField, IField['click']>;
+  pressMap: Map<IField, IField['press']>;
   fieldsMap: Map<IField[], IField[]>;
   statefullMap: Map<IField[], number>;
   trMap: Map<IField, IField['tr']>;
@@ -36,7 +36,7 @@ interface ICacheProviderProps {
  * @property cacheMap.focusMap - Map for focusing fields.
  * @property cacheMap.blurMap - Map for blurring fields.
  * @property cacheMap.menuMap - Map for field menus.
- * @property cacheMap.clickMap - Map for field click events.
+ * @property cacheMap.pressMap - Map for field press events.
  * @property cacheMap.fieldsMap - Map for field arrays.
  * @property cacheMap.statefullMap - Map for stateful fields.
  * @property cacheMap.trMap - Map for translational fields.
@@ -59,7 +59,7 @@ export const CacheProvider = ({ children }: ICacheProviderProps) => {
     Object.assign(fnMap, {
       focusMap: new Map<IField, IField['focus']>(),
       blurMap: new Map<IField, IField['blur']>(),
-      clickMap: new Map<IField, IField['click']>(),
+      pressMap: new Map<IField, IField['press']>(),
       fieldsMap: new Map<IField[], IField[]>(),
       statefullMap: new Map<IField[], number>(),
       trMap: new Map<IField, IField['tr']>(),

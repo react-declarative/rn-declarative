@@ -118,7 +118,7 @@ const makeTr = (field: IField, payload: IAnything) => {
  * @property readonly - Whether the fields are readonly
  * @property focus - The focus callback function
  * @property blur - The blur callback function
- * @property click - The click callback function
+ * @property press - The press callback function
  * @property createField - The createField function
  * @property createLayout - The createLayout function
  * @property withNamedPlaceholders - Whether to use named placeholders
@@ -142,7 +142,7 @@ export const OneInternal = <
   writeTransform,
   focus,
   blur,
-  click,
+  press,
   createField = createFieldInternal,
   createLayout = createLayoutInternal,
   withNamedPlaceholders,
@@ -157,7 +157,7 @@ export const OneInternal = <
     focusMap,
     blurMap,
     fieldsMap,
-    clickMap,
+    pressMap,
     statefullMap,
     trMap,
     itemListMap,
@@ -260,21 +260,21 @@ export const OneInternal = <
               ? `${field.name || "unknown"}`
               : field.placeholder,
             /**
-             * Retrieves the function associated with the given field from the click map.
-             * If no function is found, returns the click map itself.
+             * Retrieves the function associated with the given field from the press map.
+             * If no function is found, returns the press map itself.
              *
-             * @param field - The field to search in the click map.
-             * @returns - The function associated with the field, or the click map.
+             * @param field - The field to search in the press map.
+             * @returns - The function associated with the field, or the press map.
              */
-            click: clickMap.has(field)
-              ? clickMap.get(field)
-              : clickMap
+            press: pressMap.has(field)
+              ? pressMap.get(field)
+              : pressMap
                   .set(field, async (name, data, payload, onValueChange, onChange) => {
-                    if (field.click) {
-                      await field.click(name, data, payload, onValueChange, onChange);
+                    if (field.press) {
+                      await field.press(name, data, payload, onValueChange, onChange);
                     }
-                    if (click) {
-                      await click(name, data, payload, onValueChange, onChange);
+                    if (press) {
+                      await press(name, data, payload, onValueChange, onChange);
                     }
                   })
                   .get(field),
@@ -358,7 +358,7 @@ export const OneInternal = <
            * @property handler - The object handler.
            * @property invalidity - Determines if the component is invalid.
            * @property focus - Determines if the component is focused.
-           * @property click - Determines if the component is clicked.
+           * @property press - Determines if the component is pressed.
            * @property menu - Determines if the component has a menu.
            * @property blur - Determines if the component is blurred.
            * @property dirty - Determines if the component is dirty.
@@ -379,7 +379,7 @@ export const OneInternal = <
             handler: object,
             invalidity,
             focus,
-            click,
+            press,
             blur,
             dirty: field.dirty || dirty,
           };

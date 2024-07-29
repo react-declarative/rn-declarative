@@ -113,32 +113,32 @@ export interface ITextFieldProps<Data = IAnything, Payload = IAnything> {
    * @typedef trailingIcon
    * @property icon - The path or class name of the trailing icon.
    * @property isVisible - Indicates whether the trailing icon is visible or hidden.
-   * @property onClick - The event handler function to be executed when the trailing icon is clicked.
+   * @property onPress - The event handler function to be executed when the trailing icon is pressed.
    */
   trailingIcon?: PickProp<IField<Data, Payload>, "trailingIcon">;
   /**
-   * Represents the leading icon click event handler for a field in a form.
+   * Represents the leading icon press event handler for a field in a form.
    *
-   * @typedef leadingIconClick
-   * @param leadingIconClick - The leadingIconClick prop of the field.
+   * @typedef leadingIconPress
+   * @param leadingIconPress - The leadingIconPress prop of the field.
    * @returns - Nothing is returned from this function.
    */
-  leadingIconClick?: PickProp<IField<Data, Payload>, "leadingIconClick">;
+  leadingIconPress?: PickProp<IField<Data, Payload>, "leadingIconPress">;
   /**
-   * The `trailingIconClick` property is an optional property
+   * The `trailingIconPress` property is an optional property
    * that represents a callback function to be executed when
-   * the trailing icon of a field is clicked.
+   * the trailing icon of a field is pressed.
    *
-   * This property is of type `PickProp<IField<Data, Payload>, "trailingIconClick">`,
+   * This property is of type `PickProp<IField<Data, Payload>, "trailingIconPress">`,
    * where `IField<Data, Payload>` is a generic type representing a field with
    * `Data` and `Payload` types.
    *
-   * @typedef trailingIconClick
+   * @typedef trailingIconPress
    *
    * @param args - The arguments passed to the callback function.
    * @returns
    */
-  trailingIconClick?: PickProp<IField<Data, Payload>, "trailingIconClick">;
+  trailingIconPress?: PickProp<IField<Data, Payload>, "trailingIconPress">;
   /**
    * Represents the number of input rows required for a field.
    *
@@ -220,12 +220,12 @@ export interface ITextFieldPrivate<Data = IAnything> {
  * @param outlined - Indicates if the input field is outlined
  * @param labelShrink - Indicates if the label should shrink when focused
  * @param title - The title or tooltip for the input field
- * @param leadingIconRipple - Indicates if clicking the leading icon should trigger a ripple effect
- * @param trailingIconRipple - Indicates if clicking the trailing icon should trigger a ripple effect
+ * @param leadingIconRipple - Indicates if pressing the leading icon should trigger a ripple effect
+ * @param trailingIconRipple - Indicates if pressing the trailing icon should trigger a ripple effect
  * @param leadingIcon - The icon component to display at the start of the input field
  * @param trailingIcon - The icon component to display at the end of the input field
- * @param leadingIconClick - The function to call when the leading icon is clicked
- * @param trailingIconClick - The function to call when the trailing icon is clicked
+ * @param leadingIconPress - The function to call when the leading icon is pressed
+ * @param trailingIconPress - The function to call when the trailing icon is pressed
  * @param inputRows - The number of rows for a textarea input field (default: 1)
  * @param placeholder - The placeholder text for the input field
  * @param inputAutocomplete - The autocomplete behavior for the input field (default: "off")
@@ -255,8 +255,8 @@ export const TextField = ({
   trailingIconRipple,
   leadingIcon,
   trailingIcon,
-  leadingIconClick,
-  trailingIconClick,
+  leadingIconPress,
+  trailingIconPress,
   inputRows = 1,
   placeholder = "",
   dirty,
@@ -283,8 +283,8 @@ export const TextField = ({
     leadingIcon={leadingIcon}
     trailingIcon={trailingIcon}
     labelShrink={labelShrink}
-    leadingIconClick={leadingIconClick}
-    trailingIconClick={trailingIconClick}
+    leadingIconPress={leadingIconPress}
+    trailingIconPress={trailingIconPress}
     inputRows={inputRows}
     placeholder={placeholder}
     dirty={dirty}

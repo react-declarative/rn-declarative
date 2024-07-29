@@ -44,12 +44,12 @@ const ProgressDefault = ({
  * @interface
  */
 interface IActionButtonProps extends Omit<ButtonProps, keyof {
-    onClick: never;
+    onPress: never;
 }> {
     Progress?: typeof ProgressDefault;
     onLoadStart?: () => void;
     onLoadEnd?: (isOk: boolean) => void;
-    onClick?: () => (void | Promise<void>);
+    onPress?: () => (void | Promise<void>);
     fallback?: (e: Error) => void;
     throwError?: boolean;
 };
@@ -60,7 +60,7 @@ interface IActionButtonProps extends Omit<ButtonProps, keyof {
  * @component
  * @param props - The component props.
  * @param [props.Progress=ProgressDefault] - The progress component to show when the button is loading.
- * @param [props.onClick=()=>{}] - The function to be called when the button is clicked.
+ * @param [props.onPress=()=>{}] - The function to be called when the button is pressed.
  * @param [props.onLoadStart] - The function to be called when the loading starts.
  * @param [props.onLoadEnd] - The function to be called when the loading ends.
  * @param [props.fallback] - The function to be called when an error occurs and throwError is false.
@@ -73,7 +73,7 @@ interface IActionButtonProps extends Omit<ButtonProps, keyof {
  */
 export const ActionButton = ({
     Progress = ProgressDefault,
-    onClick = () => { },
+    onPress = () => { },
     onLoadStart,
     onLoadEnd,
     fallback,
@@ -95,12 +95,12 @@ export const ActionButton = ({
     const loading$ = useActualValue(loading);
 
     /**
-     * Handles click event for a button.
+     * Handles press event for a button.
      *
-     * @param event - The click event.
-     * @returns - Promise that resolves when the click handling is completed.
+     * @param event - The press event.
+     * @returns - Promise that resolves when the press handling is completed.
      */
-    const handleClick = async () => {
+    const handlePress = async () => {
         const { current: loading } = loading$;
         if (loading) {
             return;
@@ -109,7 +109,7 @@ export const ActionButton = ({
         try {
             onLoadStart && onLoadStart();
             isMounted.current && setLoading((loading) => loading + 1);
-            await onClick();
+            await onPress();
         } catch (e: any) {
             isOk = false;
             if (!throwError) {
@@ -126,7 +126,7 @@ export const ActionButton = ({
     return (
         <Button
             {...otherProps}
-            onClick={handleClick}
+            onPress={handlePress}
             disabled={!!loading || disabled}
             variant={variant}
         >

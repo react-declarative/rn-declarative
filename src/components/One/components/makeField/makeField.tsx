@@ -48,10 +48,10 @@ const APPLY_DELAY = 10;
 interface IConfig<Data = IAnything> {
     withApplyQueue?: boolean;
     skipDebounce?: boolean;
-    skipDirtyClickListener?: boolean;
+    skipDirtyPressListener?: boolean;
     skipFocusReadonly?: boolean;
     skipFocusBlurCall?: boolean;
-    skipClickListener?: boolean;
+    skipPressListener?: boolean;
     defaultProps?: Partial<Omit<IField<Data>, keyof {
         fields: never;
         child: never;
@@ -70,7 +70,7 @@ const DEFAULT_CHANGE = (v: IAnything) => console.log({ v });
 const DEFAULT_FALLBACK = () => null;
 const DEFAULT_READY = () => null;
 const DEFAULT_MAP = (data: IAnything) => data;
-const DEFAULT_CLICK = () => {};
+const DEFAULT_PRESS = () => {};
 const DEFAULT_READTRANSFORM = (value: Value) => value;
 const DEFAULT_WRITETRANSFORM = (value: Value) => value;
 
@@ -83,8 +83,8 @@ export function makeField(
     originalComponent: React.FC<IManaged>,
     fieldConfig: IConfig = {
         withApplyQueue: false,
-        skipDirtyClickListener: false,
-        skipClickListener: false,
+        skipDirtyPressListener: false,
+        skipPressListener: false,
         skipFocusReadonly: false,
         skipFocusBlurCall: false,
         skipDebounce: false,
@@ -113,7 +113,7 @@ export function makeField(
         ready = DEFAULT_READY,
         compute: upperCompute,
         shouldRecompute,
-        click = DEFAULT_CLICK,
+        press = DEFAULT_PRESS,
         map = DEFAULT_MAP,
         object: upperObject,
         name = '',
@@ -218,7 +218,7 @@ export function makeField(
         const { memory } = useFieldMemory({
             prefix,
             name,
-            clickDisabled: fieldDisabled || disabled,
+            pressDisabled: fieldDisabled || disabled,
             lastDebouncedValue: debouncedValue,
             debouncedValue$: debouncedValue,
             fieldReadonly$: fieldReadonly,
@@ -409,8 +409,8 @@ export function makeField(
          * Если всплытие события клика не сработает, флаг dirty уберется при
          * первом изменени значения
          */
-        oneConfig.WITH_DIRTY_CLICK_LISTENER && useEffect(() => {
-            if (!fieldConfig.skipDirtyClickListener) {
+        oneConfig.WITH_DIRTY_PRESS_LISTENER && useEffect(() => {
+            if (!fieldConfig.skipDirtyPressListener) {
                 return focusSubject.once(() => setDirty(true));
             }
             return undefined;
@@ -530,11 +530,11 @@ export function makeField(
          * Коллбек для перехвата клика из поля. Используется только
          * для FieldType.Button и FieldType.Icon
          */
-        const handleExternalClick = useCallback(async () => {
-            if (memory.clickDisabled) {
+        const handleExternalPress = useCallback(async () => {
+            if (memory.pressDisabled) {
                 return;
             }
-            await click(name, memory.object$, payload, (value) => managedProps.onChange(value, {
+            await press(name, memory.object$, payload, (value) => managedProps.onChange(value, {
                 skipReadonly: true,
             }), changeObject);
         }, []);
@@ -575,7 +575,7 @@ export function makeField(
             onChange: fieldConfig.withApplyQueue ? handleChange : handleChangeSync,
             onFocus: () => focusSubject.next(),
             onBlur: () => blurSubject.next(),
-            click: handleExternalClick,
+            press: handleExternalPress,
             fallback,
             disabled: fieldDisabled || disabled,
             readonly: computeReadonly(),

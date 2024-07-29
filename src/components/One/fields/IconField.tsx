@@ -81,7 +81,7 @@ export interface IIconFieldProps<Data = IAnything, Payload = IAnything> {
  * @template Data - The type of data associated with the Icon field.
  */
 export interface IIconFieldPrivate<Data = IAnything> {
-  click: PickProp<IManaged<Data>, 'click'>;
+  press: PickProp<IManaged<Data>, 'press'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
@@ -94,7 +94,7 @@ export interface IIconFieldPrivate<Data = IAnything> {
  */
 export const IconField = ({
   disabled,
-  click,
+  press,
   icon,
   iconSize,
   iconColor,
@@ -106,7 +106,7 @@ export const IconField = ({
     iconSize={iconSize}
     iconColor={iconColor}
     iconBackground={iconBackground}
-    click={click}
+    press={press}
     disabled={disabled}
     icon={icon}
     onFocus={onFocus}
@@ -117,8 +117,8 @@ export const IconField = ({
 IconField.displayName = 'IconField';
 
 export default makeField(IconField, {
-  skipClickListener: true,
+  skipPressListener: true,
   withApplyQueue: true,
   skipDebounce: true,
-  skipDirtyClickListener: true,
+  skipDirtyPressListener: true,
 });
