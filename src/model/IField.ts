@@ -119,12 +119,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     inputMultiline?: boolean;
 
     /**
-     * Ripple эффект для иконок
-     */
-    leadingIconRipple?: boolean;
-    trailingIconRipple?: boolean;
-
-    /**
      * Иконки для MatTextField
      */
     leadingIcon?: React.ComponentType<any>;

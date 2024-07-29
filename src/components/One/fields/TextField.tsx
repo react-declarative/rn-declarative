@@ -52,20 +52,6 @@ export interface ITextFieldProps<Data = IAnything, Payload = IAnything> {
    */
   title?: PickProp<IField<Data, Payload>, "title">;
   /**
-   * Represents the configuration for the leading icon ripple effect.
-   *
-   * @typedef LeadingIconRipple
-   * @property leadingIconRipple.enable - Indicates whether the leading icon ripple effect is enabled.
-   * @property leadingIconRipple.duration - The duration of the leading icon ripple effect in milliseconds.
-   */
-  leadingIconRipple?: PickProp<IField<Data, Payload>, 'leadingIconRipple'>;
-  /**
-   * Represents the option to enable or disable the trailing icon ripple effect.
-   * @property trailingIconRipple - Set to true to enable the trailing icon ripple effect,
-   *     or false to disable it
-   */
-  trailingIconRipple?: PickProp<IField<Data, Payload>, 'trailingIconRipple'>;
-  /**
    * The leadingIcon property represents the leading icon of a field.
    *
    * @typedef leadingIcon
@@ -169,8 +155,6 @@ export interface ITextFieldPrivate<Data = IAnything> {
  * @param readonly - Indicates if the input field is read-only
  * @param description - The description or helper text for the input field
  * @param title - The title or tooltip for the input field
- * @param leadingIconRipple - Indicates if pressing the leading icon should trigger a ripple effect
- * @param trailingIconRipple - Indicates if pressing the trailing icon should trigger a ripple effect
  * @param leadingIcon - The icon component to display at the start of the input field
  * @param trailingIcon - The icon component to display at the end of the input field
  * @param leadingIconPress - The function to call when the leading icon is pressed
@@ -196,8 +180,6 @@ export const TextField = ({
   readonly,
   description = "",
   title = "",
-  leadingIconRipple,
-  trailingIconRipple,
   leadingIcon,
   trailingIcon,
   leadingIconPress,
@@ -221,8 +203,6 @@ export const TextField = ({
     disabled={disabled}
     description={description}
     title={title}
-    leadingIconRipple={leadingIconRipple}
-    trailingIconRipple={trailingIconRipple}
     leadingIcon={leadingIcon}
     trailingIcon={trailingIcon}
     leadingIconPress={leadingIconPress}

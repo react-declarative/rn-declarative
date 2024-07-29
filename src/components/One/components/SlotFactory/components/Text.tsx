@@ -1,4 +1,7 @@
 import * as React from "react";
+import { useMemo } from "react";
+
+import { TouchableOpacity } from "react-native";
 
 import { Input } from '@ui-kitten/components';
 
@@ -6,7 +9,8 @@ import { useOnePayload } from "../../../context/PayloadProvider";
 import { useOneState } from "../../../context/StateProvider";
 
 import { ITextSlot } from "../../../slots/TextSlot";
-import { TouchableOpacity, View } from "react-native";
+
+import makeTestId from "../../../helpers/makeTestId";
 
 const LOADING_LABEL = "Loading";
 
@@ -24,16 +28,8 @@ const LOADING_LABEL = "Loading";
  * @property trailingIcon - The trailing icon of the input.
  * @property leadingIconPress - The press event handler for the leading icon.
  * @property trailingIconPress - The press event handler for the trailing icon.
- * @property leadingIconRipple - Indicates if the leading icon should have a ripple effect. Defaults to true.
- * @property trailingIconRipple - Indicates if the trailing icon should have a ripple effect. Defaults to true.
  * @property inputMultiline - The number of rows for a multiline input. Defaults to 1.
  * @property placeholder - The placeholder text for the input.
- * @property inputAutocomplete - The autocomplete attribute for the input. Defaults to "off".
- * @property inputFormatterSymbol - The symbol used for formatting the input. Defaults to "0".
- * @property inputFormatterAllowed - An array of characters that are allowed in the formatted input.
- * @property inputFormatterReplace - An array of characters that should be replaced in the formatted input.
- * @property inputFormatterTemplate - The template for formatting the input.
- * @property inputFormatter - A formatter function for the input value.
  * @property dirty - Indicates if the input value has been changed.
  * @property loading - Indicates if the input is currently loading.
  * @property onChange - The change event handler for the input.
@@ -50,19 +46,26 @@ export const Text = ({
   trailingIcon: TrailingIcon,
   leadingIconPress: lic,
   trailingIconPress: tic,
-  leadingIconRipple: lir = true,
-  trailingIconRipple: tir = true,
   inputMultiline = false,
   placeholder = "",
   dirty,
   loading,
   onChange,
+  onFocus,
+  onBlur,
+  testId,
+  style,
 }: ITextSlot) => {
   const payload = useOnePayload();
   const { object, changeObject: handleChange } = useOneState<object>();
-
+  const error = useMemo(() => dirty && (invalid !== null || incorrect !== null), [dirty, invalid, incorrect]);
   return (
     <Input
+      {...makeTestId(testId)}
+      style={style}
+      label={title}
+      value={loading ? LOADING_LABEL : value}
+      disabled={disabled || loading}
       multiline={inputMultiline}
       accessoryRight={TrailingIcon ? (
         <TouchableOpacity onPress={() => tic && tic(value, object, payload, onChange, handleChange)}>
@@ -74,6 +77,16 @@ export const Text = ({
           <LeadingIcon />
         </TouchableOpacity>
       ) : undefined}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      onChangeText={(text) => {
+        if (!readonly) {
+          onChange(text);
+        }
+      }}
+      caption={(dirty && (invalid || incorrect)) || description}
+      placeholder={placeholder}
+      status={error ? "danger" : undefined}
     />
   );
 };
