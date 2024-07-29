@@ -1,35 +1,23 @@
 import * as React from "react";
 import { useMemo, useState, useEffect, useRef } from "react";
 
-import {
-  AutocompleteRenderInputParams,
-  AutocompleteRenderOptionState,
-} from "@mui/material/Autocomplete";
-
-import CircularProgress from "@mui/material/CircularProgress";
-import Autocomplete from "@mui/material/Autocomplete";
-import MatTextField from "@mui/material/TextField";
-import Radio from "@mui/material/Radio";
+import { Icon, IndexPath, Select, SelectItem } from "@ui-kitten/components";
 
 import { useOnePayload } from "../../../context/PayloadProvider";
 import { useOneProps } from "../../../context/PropsProvider";
 import { useOneState } from "../../../context/StateProvider";
 
 import { useAsyncAction } from "../../../../../hooks/useAsyncAction";
-import { useActualValue } from "../../../../../hooks/useActualValue";
-
-import RadioIcon from "@mui/icons-material/RadioButtonChecked";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
 import { IYesNoSlot } from "../../../slots/YesNoSlot";
-
-const icon = <RadioButtonUncheckedIcon fontSize="small" />;
-const checkedIcon = <RadioIcon fontSize="small" />;
+import { TouchableOpacity } from "react-native";
 
 const OPTIONS = [
   "Yes",
   "No",
 ];
+
+const DEFAULT_INDEX = new IndexPath(0);
 
 /**
  * Represents a YesNoField component.
@@ -65,28 +53,17 @@ export const YesNoField = ({
 
   const initComplete = useRef(false);
 
-  const labels$ = useActualValue(labels);
-
   const payload = useOnePayload();
   const { object } = useOneState();
 
-  /**
-   * A memoized value based on the value of `upperValue`.
-   * If `upperValue` is `true`, the memoized value is "Yes".
-   * If `upperValue` is `false`, the memoized value is "No".
-   * If `upperValue` is neither `true` nor `false`, the memoized value is `null`.
-   * The memoized value is recalculated whenever `upperValue` changes.
-   *
-   * @type {string|null}
-   */
   const value = useMemo(() => {
     if (upperValue === true) {
-      return "Yes";
+      return new IndexPath(0);
     }
     if (upperValue === false) {
-      return "No";
+      return new IndexPath(1);
     }
-    return null;
+    return undefined;
   }, [upperValue]);
 
   const { fallback } = useOneProps();
@@ -107,98 +84,12 @@ export const YesNoField = ({
       fallback,
     }
   );
+  
+  const error = useMemo(() => dirty && (invalid !== null || incorrect !== null), [dirty, invalid, incorrect]);
 
   useEffect(() => {
     execute();
   }, []);
-
-  /**
-   * Retrieves the label associated with a given value.
-   *
-   * @param v - The value for which to retrieve the label.
-   * @returns - The label associated with the given value, or the value itself if no label is found.
-   */
-  const getOptionLabel = (v: string) => {
-    const { current: labels } = labels$;
-    return labels[v] || v;
-  };
-
-  /**
-   * Generates a render input function for an autocomplete component.
-   *
-   * @param loading - Indicates if the autocomplete is loading.
-   * @param readonly - Indicates if the autocomplete is in readonly mode.
-   * @returns - A render input function.
-   *
-   * @param params - Render input parameters.
-   * @returns - The rendered input component.
-   */
-  const createRenderInput =
-    (loading: boolean, readonly: boolean) =>
-    (params: AutocompleteRenderInputParams) =>
-      (
-        <MatTextField
-          {...params}
-          sx={{
-            ...(!outlined && {
-              position: "relative",
-              mt: 1,
-              "& .MuiFormHelperText-root": {
-                position: "absolute",
-                top: "100%",
-              },
-            }),
-          }}
-          variant={outlined ? "outlined" : "standard"}
-          placeholder={loading ? undefined : placeholder}
-          label={title}
-          helperText={(dirty && (invalid || incorrect)) || description}
-          error={dirty && (invalid !== null || incorrect !== null)}
-          InputProps={{
-            ...params.InputProps,
-            readOnly: readonly,
-            endAdornment: (
-              <>
-                {loading ? (
-                  <CircularProgress color="inherit" size={20} />
-                ) : null}
-                {params.InputProps.endAdornment}
-              </>
-            ),
-          }}
-          InputLabelProps={{
-            ...params.InputLabelProps,
-            ...(labelShrink && { shrink: true }),
-          }}
-        />
-      );
-
-  /**
-   * Renders an option for the Autocomplete component.
-   *
-   * @param props - The props to be applied to the li element.
-   * @param option - The option object to be rendered.
-   * @param state - The state of the render option.
-   * @returns - The rendered li element.
-   */
-  const renderOption = (
-    props: React.HTMLAttributes<HTMLLIElement>,
-    option: any,
-    state: AutocompleteRenderOptionState
-  ) => {
-    const { current: labels } = labels$;
-    return (
-      <li {...props}>
-        <Radio
-          icon={icon}
-          checkedIcon={checkedIcon}
-          style={{ marginRight: 8 }}
-          checked={state.selected}
-        />
-        {labels[option] || option}
-      </li>
-    );
-  };
 
   /**
    * Handles the change in value.
@@ -206,39 +97,54 @@ export const YesNoField = ({
    * @param value - The new value.
    */
   const handleChange = (value: any) => {
+    if (readonly) {
+      return;
+    }
+    if (disabled) {
+      return;
+    }
     onChange(value === "Yes" ? true : value === "No" ? false : null);
   };
 
   if (loading || !initComplete.current) {
     return (
-      <Autocomplete
-        disableCloseOnSelect
-        disableClearable={noDeselect}
+      <Select
+        key={"loading"}
+        selectedIndex={DEFAULT_INDEX}
+        caption={(dirty && (invalid || incorrect)) || description}
+        placeholder={placeholder}
+        label={title}
+        status={error ? "danger" : undefined}
         disabled
-        loading
-        value={null}
-        options={OPTIONS}
-        onChange={() => null}
-        getOptionLabel={getOptionLabel}
-        renderInput={createRenderInput(true, true)}
-        renderOption={renderOption}
-      />
+      >
+        <SelectItem title='Loading' />
+      </Select>
     );
   }
 
   return (
-    <Autocomplete
-      disableCloseOnSelect
-      disableClearable={noDeselect}
-      value={value || null}
-      onChange={({}, v) => handleChange(v)}
-      options={OPTIONS}
+    <Select
       disabled={disabled}
-      readOnly={readonly}
-      getOptionLabel={getOptionLabel}
-      renderInput={createRenderInput(false, readonly)}
-      renderOption={renderOption}
-    />
+      selectedIndex={value}
+      caption={(dirty && (invalid || incorrect)) || description}
+      placeholder={placeholder}
+      label={title}
+      status={error ? "danger" : undefined}
+      onSelect={(index) => {
+        if (index instanceof IndexPath) {
+          handleChange(OPTIONS[index.row]);
+        }
+      }}
+      accessoryRight={!noDeselect ? (
+        <TouchableOpacity onPress={() => handleChange(null)}>
+          <Icon name="close" />
+        </TouchableOpacity >
+      ) : undefined}
+    >
+      {OPTIONS.map((value) => (
+        <SelectItem key={value} title={labels[value] || value} />
+      ))}
+    </Select>
   );
 };
 
