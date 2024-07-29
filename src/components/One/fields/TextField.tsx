@@ -142,9 +142,9 @@ export interface ITextFieldProps<Data = IAnything, Payload = IAnything> {
   /**
    * Represents the number of input rows required for a field.
    *
-   * @typedef InputRows
+   * @typedef inputMultiline
    */
-  inputRows?: PickProp<IField<Data, Payload>, "inputRows">;
+  inputMultiline?: PickProp<IField<Data, Payload>, "inputMultiline">;
   /**
    * A type definition representing the `placeholder` property of a given field.
    *
@@ -226,7 +226,7 @@ export interface ITextFieldPrivate<Data = IAnything> {
  * @param trailingIcon - The icon component to display at the end of the input field
  * @param leadingIconPress - The function to call when the leading icon is pressed
  * @param trailingIconPress - The function to call when the trailing icon is pressed
- * @param inputRows - The number of rows for a textarea input field (default: 1)
+ * @param inputMultiline - The number of rows for a textarea input field (default: 1)
  * @param placeholder - The placeholder text for the input field
  * @param inputAutocomplete - The autocomplete behavior for the input field (default: "off")
  * @param inputFormatter - A function used to format the input value
@@ -257,7 +257,7 @@ export const TextField = ({
   trailingIcon,
   leadingIconPress,
   trailingIconPress,
-  inputRows = 1,
+  inputMultiline = 1,
   placeholder = "",
   dirty,
   loading,
@@ -285,7 +285,7 @@ export const TextField = ({
     labelShrink={labelShrink}
     leadingIconPress={leadingIconPress}
     trailingIconPress={trailingIconPress}
-    inputRows={inputRows}
+    inputMultiline={inputMultiline}
     placeholder={placeholder}
     dirty={dirty}
     loading={loading}

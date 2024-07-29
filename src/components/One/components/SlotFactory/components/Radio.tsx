@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
-import FormControlLabel from "@mui/material/FormControlLabel";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormGroup from "@mui/material/FormGroup";
-import MatRadio from "@mui/material/Radio";
+import { Radio as UiRadio } from '@ui-kitten/components';
 
 import { useOneRadio } from '../../../context/RadioProvider';
 
@@ -33,6 +30,10 @@ export const Radio = ({
 }: IRadioSlot) => {
     const [radioMap, setRadioMap] = useOneRadio();
     const radioMap$ = useActualValue(radioMap);
+
+    const checked = useMemo(() => {
+        return value === radioValue;
+    }, [value]);
 
     /**
      * Sets the value of a radio map.
@@ -65,20 +66,13 @@ export const Radio = ({
     }, [value]);
 
     return (
-        <FormGroup>
-            <RadioGroup
-                value={value}
-                onChange={(_, value) => {
-                    handleChange(value || null);
-                }}
-            >
-                <FormControlLabel 
-                    value={radioValue}
-                    control={<MatRadio disabled={disabled} />}
-                    label={title || ''}
-                />
-            </RadioGroup>
-        </FormGroup>
+        <UiRadio
+            checked={checked}
+            disabled={disabled}
+            onChange={() => handleChange(radioValue || null)}
+        >
+            {title}
+        </UiRadio>
     );
 };
 

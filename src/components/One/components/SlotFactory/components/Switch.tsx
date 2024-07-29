@@ -1,9 +1,6 @@
 import * as React from "react";
-import { useMemo } from "react";
 
-import Box from "@mui/material/Box";
-import MatSwitch from "@mui/material/Switch";
-import Typography from "@mui/material/Typography";
+import { Toggle } from '@ui-kitten/components';
 
 import { ISwitchSlot } from "../../../slots/SwitchSlot";
 
@@ -23,34 +20,15 @@ export const Switch = ({
   value,
   onChange,
   title,
-  switchNoColor,
-  switchActiveLabel,
 }: ISwitchSlot) => {
-  const override = useMemo(() => (switchNoColor ? classes : undefined), []);
-
   return (
-    <Box display="flex" alignItems="center">
-      <Box
-        sx={{
-          flex: switchActiveLabel ? undefined : 1,
-          whiteSpace: "nowrap",
-          textAlign: switchActiveLabel ? "right" : undefined,
-        }}
-      >
-        <Typography variant="body1">{title}</Typography>
-      </Box>
-      <MatSwitch
-        disabled={disabled}
-        classes={override}
-        checked={Boolean(value)}
-        onChange={(_, checked) => onChange(checked)}
-      />
-      {!!switchActiveLabel && (
-        <Box sx={{ flex: 1, whiteSpace: "nowrap", textAlign: "left" }}>
-          <Typography variant="body1">{switchActiveLabel}</Typography>
-        </Box>
-      )}
-    </Box>
+    <Toggle
+      checked={Boolean(value)}
+      disabled={disabled}
+      onChange={() => onChange(!value)}
+    >
+      {title}  
+    </Toggle>
   );
 };
 

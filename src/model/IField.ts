@@ -181,10 +181,9 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     };
 
     /**
-     * Делает TextField многострочным, если
-     * inputRows больше единицы
+     * Делает TextField многострочным
      */
-    inputRows?: number;
+    inputMultiline?: boolean;
 
     /**
      * Ripple эффект для иконок

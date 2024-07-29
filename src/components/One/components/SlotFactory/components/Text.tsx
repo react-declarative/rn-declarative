@@ -1,148 +1,13 @@
 import * as React from "react";
 
-import IconButton from "@mui/material/IconButton";
-import MatTextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Input } from '@ui-kitten/components';
 
 import { useOnePayload } from "../../../context/PayloadProvider";
 import { useOneState } from "../../../context/StateProvider";
 
 import { ITextSlot } from "../../../slots/TextSlot";
 
-import IManaged, { PickProp } from "../../../../../model/IManaged";
-import { IField } from "../../../../../model/IField";
-import IAnything from "../../../../../model/IAnything";
-
 const LOADING_LABEL = "Loading";
-
-/**
- * Represents a set of icons.
- *
- * @param data - The data object.
- * @param payload - The payload object.
- * @param leadingIcon - The leading icon component.
- * @param trailingIcon - The trailing icon component.
- * @param leadingIconPress - The leading icon press handler.
- * @param trailingIconPress - The trailing icon press handler.
- * @param loading - Indicates if icons are in loading state.
- * @param disabled - Indicates if the icons are disabled.
- * @param readonly - Indicates if the icons are read-only.
- * @param v - The v value.
- * @param c - The onChange function.
- * @param cc - The cc function.
- * @param leadingIconRipple - Indicates if the leading icon has ripple effect.
- * @param trailingIconRipple - Indicates if the trailing icon has ripple effect.
- * @returns - The icons object with their respective properties.
- */
-const icons = (
-  data: IAnything,
-  payload: IAnything,
-  leadingIcon: React.ComponentType<any> | undefined,
-  trailingIcon: React.ComponentType<any> | undefined,
-  leadingIconPress: PickProp<IField, "leadingIconPress">,
-  trailingIconPress: PickProp<IField, "trailingIconPress">,
-  loading: boolean,
-  disabled: boolean,
-  readonly: boolean,
-  v: string,
-  c: PickProp<IManaged, "onChange">,
-  cc: (data: IAnything) => void,
-  leadingIconRipple: boolean,
-  trailingIconRipple: boolean
-) => ({
-  ...(leadingIcon
-    ? {
-        startAdornment: (
-          <InputAdornment sx={{ position: "relative" }} position="start">
-            <IconButton
-              edge="start"
-              disabled={disabled}
-              disableRipple={!leadingIconRipple}
-              onPress={() => {
-                if (leadingIconPress) {
-                  leadingIconPress(
-                    v as unknown as IAnything,
-                    data,
-                    payload,
-                    (v) =>
-                      c(v, {
-                        skipReadonly: true,
-                      }),
-                    cc
-                  );
-                }
-              }}
-            >
-              {React.createElement(leadingIcon, {
-                data,
-                payload,
-                disabled,
-                readonly,
-              })}
-            </IconButton>
-          </InputAdornment>
-        ),
-      }
-    : {}),
-  ...(trailingIcon && !loading
-    ? {
-        endAdornment: (
-          <InputAdornment sx={{ position: "relative" }} position="end">
-            <IconButton
-              edge="end"
-              disabled={disabled}
-              disableRipple={!trailingIconRipple}
-              onPress={() => {
-                if (trailingIconPress) {
-                  trailingIconPress(
-                    v as unknown as IAnything,
-                    data,
-                    payload,
-                    (v) =>
-                      c(v, {
-                        skipReadonly: true,
-                      }),
-                    cc
-                  );
-                }
-              }}
-            >
-              {React.createElement(trailingIcon, {
-                data,
-                payload,
-                disabled,
-                readonly,
-              })}
-            </IconButton>
-          </InputAdornment>
-        ),
-      }
-    : {}),
-  ...(loading
-    ? {
-        endAdornment: (
-          <InputAdornment sx={{ position: "relative" }} position="end">
-            <IconButton disabled={disabled} edge="end">
-              <CircularProgress color="inherit" size={20} />
-            </IconButton>
-          </InputAdornment>
-        ),
-      }
-    : {}),
-});
-
-/**
- * Creates an object representing a multiline based on the number of input rows.
- *
- * @param inputRows - The number of input rows.
- * @returns - The multiline object.
- *
- */
-const multiline = (inputRows: number) => ({
-  multiline: inputRows > 1,
-  rows: inputRows,
-});
 
 /**
  * Variable representing a text input component with various properties and functionalities.
@@ -165,7 +30,7 @@ const multiline = (inputRows: number) => ({
  * @property trailingIconPress - The press event handler for the trailing icon.
  * @property leadingIconRipple - Indicates if the leading icon should have a ripple effect. Defaults to true.
  * @property trailingIconRipple - Indicates if the trailing icon should have a ripple effect. Defaults to true.
- * @property inputRows - The number of rows for a multiline input. Defaults to 1.
+ * @property inputMultiline - The number of rows for a multiline input. Defaults to 1.
  * @property placeholder - The placeholder text for the input.
  * @property inputAutocomplete - The autocomplete attribute for the input. Defaults to "off".
  * @property inputFormatterSymbol - The symbol used for formatting the input. Defaults to "0".
@@ -191,13 +56,13 @@ export const Text = ({
   description = "",
   outlined = false,
   title = "",
-  leadingIcon: li,
-  trailingIcon: ti,
+  leadingIcon: LeadingIcon,
+  trailingIcon: TrailingIcon,
   leadingIconPress: lic,
   trailingIconPress: tic,
   leadingIconRipple: lir = true,
   trailingIconRipple: tir = true,
-  inputRows: rows = 1,
+  inputMultiline = false,
   placeholder = "",
   dirty,
   loading,
@@ -208,61 +73,10 @@ export const Text = ({
   const { object, changeObject: handleChange } = useOneState<object>();
 
   return (
-    <MatTextField
-      sx={{
-        ...(!outlined && {
-          position: "relative",
-          mt: 1,
-          "& .MuiFormHelperText-root": {
-            position: "absolute",
-            top: "100%",
-          },
-        }),
-      }}
-      variant={outlined ? "outlined" : "standard"}
-      helperText={(dirty && (invalid || incorrect)) || description}
-      error={dirty && (invalid !== null || incorrect !== null)}
-      InputProps={{
-        readOnly: readonly,
-        inputMode,
-        autoFocus,
-        ...icons(
-          object,
-          payload,
-          li,
-          ti,
-          lic,
-          tic,
-          loading,
-          disabled,
-          !!readonly,
-          (value || "").toString(),
-          onChange,
-          handleChange,
-          lir,
-          tir
-        ),
-      }}
-      inputProps={{
-        pattern: inputPattern,
-      }}
-      InputLabelProps={
-        labelShrink
-          ? {
-              shrink: labelShrink,
-            }
-          : undefined
-      }
-      type={inputType}
-      focused={autoFocus}
-      value={loading ? LOADING_LABEL : String(value || "")}
-      placeholder={placeholder}
-      onChange={(e: any) => {
-        onChange(e.target.value);
-      }}
-      label={title}
-      disabled={disabled}
-      {...multiline(rows)}
+    <Input
+      multiline={inputMultiline}
+      accessoryRight={TrailingIcon ? <TrailingIcon /> : undefined}
+      accessoryLeft={LeadingIcon ? <LeadingIcon /> : undefined}
     />
   );
 };
