@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "@eva-design/eva": "^2.2.0",
+    "@expo/metro-runtime": "~3.2.1",
+    "@ui-kitten/components": "^5.3.1",
+    "@ui-kitten/eva-icons": "^5.3.1",
+    "expo": "^51.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.74.1",
+    "react-native-svg": "^9.13.6",
+    "react-native-web": "~0.19.6",
+    "rn-declarative": "^0.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@types/react": "~18.2.14",
+    "@types/react-native": "~0.70.6",
+    "typescript": "~5.3.3"
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "version": "1.0.0",
+  "private": true,
+  "name": "demo"
+}
