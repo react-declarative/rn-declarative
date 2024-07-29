@@ -4,6 +4,8 @@ import ActionButton from '../../../../ActionButton';
 
 import { IButtonSlot } from '../../../slots/ButtonSlot';
 
+import makeTestId from '../../../helpers/makeTestId';
+
 /**
  * Represents a button component.
  */
@@ -15,12 +17,20 @@ export const Button = ({
     placeholder,
     buttonApperance,
     buttonSize,
+    onFocus,
+    onBlur,
+    style,
+    testId,
 }: IButtonSlot) => (
     <ActionButton
         appearance={buttonApperance}
         size={buttonSize}
         disabled={disabled}
         onPress={press}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        style={style}
+        {...makeTestId(testId)}
     >
         {value || title || placeholder}
     </ActionButton>

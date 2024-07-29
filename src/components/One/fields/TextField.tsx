@@ -202,6 +202,8 @@ export interface ITextFieldPrivate<Data = IAnything> {
   disabled: PickProp<IManaged<Data>, "disabled">;
   dirty: PickProp<IManaged<Data>, "dirty">;
   name: PickProp<IManaged<Data>, "name">;
+  testId: PickProp<IManaged<Data>, 'testId'>;
+  style: PickProp<IManaged<Data>, 'style'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
@@ -257,8 +259,10 @@ export const TextField = ({
   trailingIcon,
   leadingIconPress,
   trailingIconPress,
-  inputMultiline = 1,
+  inputMultiline = true,
   placeholder = "",
+  style,
+  testId,
   dirty,
   loading,
   onChange,
@@ -292,6 +296,8 @@ export const TextField = ({
     onChange={onChange}
     onFocus={onFocus}
     onBlur={onBlur}
+    style={style}
+    testId={testId}
     name={name}
   />
 );

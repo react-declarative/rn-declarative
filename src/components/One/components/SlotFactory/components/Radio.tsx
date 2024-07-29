@@ -9,6 +9,8 @@ import useActualValue from '../../../../../hooks/useActualValue';
 
 import { IRadioSlot } from '../../../slots/RadioSlot';
 
+import makeTestId from '../../../helpers/makeTestId';
+
 /**
  * Represents a radio component.
  *
@@ -23,9 +25,13 @@ import { IRadioSlot } from '../../../slots/RadioSlot';
 export const Radio = ({
     disabled,
     onChange,
+    onFocus,
+    onBlur,
     title,
     radioValue,
     value,
+    style,
+    testId,
     name = '',
 }: IRadioSlot) => {
     const [radioMap, setRadioMap] = useOneRadio();
@@ -70,6 +76,10 @@ export const Radio = ({
             checked={checked}
             disabled={disabled}
             onChange={() => handleChange(radioValue || null)}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            style={style}
+            {...makeTestId(testId)}
         >
             {title}
         </UiRadio>

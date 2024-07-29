@@ -4,6 +4,8 @@ import { Toggle } from '@ui-kitten/components';
 
 import { ISwitchSlot } from "../../../slots/SwitchSlot";
 
+import makeTestId from "../../../helpers/makeTestId";
+
 /**
  * Represents a Switch component.
  * @param props - The properties of the Switch component.
@@ -19,13 +21,21 @@ export const Switch = ({
   disabled,
   value,
   onChange,
+  onFocus,
+  onBlur,
   title,
+  style,
+  testId,
 }: ISwitchSlot) => {
   return (
     <Toggle
       checked={Boolean(value)}
       disabled={disabled}
       onChange={() => onChange(!value)}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      style={style}
+      {...makeTestId(testId)}
     >
       {title}  
     </Toggle>

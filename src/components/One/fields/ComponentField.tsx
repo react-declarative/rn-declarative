@@ -89,6 +89,8 @@ interface IComponentFieldPrivate<Data = IAnything> {
   invalid: PickProp<IManaged<Data>, "invalid">;
   incorrect: PickProp<IManaged<Data>, "incorrect">;
   readonly: PickProp<IManaged<Data>, "readonly">;
+  testId: PickProp<IManaged<Data>, 'testId'>;
+  style: PickProp<IManaged<Data>, 'style'>;
   onChange: PickProp<IManaged<Data>, "onChange">;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
@@ -127,6 +129,10 @@ export const ComponentField = ({
   watchOneContext,
   element: Element = () => <Fragment />,
   object,
+  onFocus,
+  onBlur,
+  style,
+  testId,
   onChange: onValueChange,
   ...otherProps
 }: IComponentFieldProps & IComponentFieldPrivate) => {
@@ -144,6 +150,10 @@ export const ComponentField = ({
       ...object,
       onChange: handleChange,
       onValueChange,
+      onFocus,
+      onBlur,
+      style,
+      testId,
       _fieldParams,
       _fieldData: object,
       invalid,

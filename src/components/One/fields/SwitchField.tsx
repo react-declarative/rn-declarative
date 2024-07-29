@@ -52,6 +52,8 @@ export interface ISwitchFieldProps<Data = IAnything, Payload = IAnything>  {
 export interface ISwitchFieldPrivate<Data = IAnything>  {
   onChange: PickProp<IManaged<Data>, 'onChange'>;
   value: PickProp<IManaged<Data>, 'value'>;
+  testId: PickProp<IManaged<Data>, 'testId'>;
+  style: PickProp<IManaged<Data>, 'style'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
@@ -76,6 +78,8 @@ export const SwitchField = ({
   readonly,
   onChange,
   title,
+  style,
+  testId,
   onFocus,
   onBlur,
 }: ISwitchFieldProps & ISwitchFieldPrivate) => (
@@ -87,6 +91,8 @@ export const SwitchField = ({
     onFocus={onFocus}
     onBlur={onBlur}
     title={title}
+    style={style}
+    testId={testId}
   />
 );
 

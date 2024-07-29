@@ -1,8 +1,9 @@
 import * as React from "react";
 import { useRef, useMemo, useState, useCallback } from "react";
 
+import { View } from "react-native";
+
 import OneInternal from "../OneInternal";
-import Group from "../Group";
 
 import IOneProps from "../../../../model/IOneProps";
 import IAnything from "../../../../model/IAnything";
@@ -23,6 +24,8 @@ import SlotFactory from "../SlotFactory";
 
 import useSingleton from "../../../../hooks/useSingleton";
 import useActualValue from "../../../../hooks/useActualValue";
+
+import makeTestId from "../../helpers/makeTestId";
 
 const BASE_CLASS = "react-declarative__oneGenesis";
 const READY_CLASS = "react-declarative__oneGenesisReady";
@@ -158,6 +161,8 @@ export const OneGenesis = <
     rendered,
   };
 
+  const testId = rendered ? READY_CLASS : BASE_CLASS;
+
   return (
     <CacheProvider>
       <DebounceProvider payload={fieldDebounce}>
@@ -180,12 +185,12 @@ export const OneGenesis = <
               <PayloadProvider payload={payload}>
                 <StateProvider<Data, Payload, Field> {...stateParams}>
                   <SlotFactory {...slots}>
-                    <Group
-                      testId={rendered ? READY_CLASS : BASE_CLASS}
+                    <View
                       style={style}
+                      {...makeTestId(testId)}
                     >
                       <OneInternal<Data, Payload, Field> {...viewParams} />
-                    </Group>
+                    </View>
                   </SlotFactory>
                 </StateProvider>
               </PayloadProvider>

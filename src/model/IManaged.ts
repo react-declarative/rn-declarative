@@ -1,3 +1,5 @@
+import CompiledStyles from './CompiledStyles';
+
 import IField from './IField';
 import IEntity from './IEntity';
 import IAnything from './IAnything';
@@ -352,10 +354,12 @@ export interface IManaged<Data = IAnything, Value = any> extends Omit<IEntity<Da
     disabled: boolean;
     loading: boolean;
     readonly: boolean;
+    testId: string;
     fieldReadonly: boolean;
     incorrect: string | null;
     invalid: string | null;
     object: Data;
+    style: CompiledStyles;
     press: () => void | Promise<void>;
     onChange: (v: Value, config?: {
         skipReadonly?: boolean;

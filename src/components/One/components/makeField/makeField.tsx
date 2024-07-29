@@ -16,6 +16,7 @@ import { useOneState } from '../../context/StateProvider';
 import useDebounce from '../../hooks/useDebounce';
 
 import useMediaContext from '../../../../hooks/useMediaContext';
+import useManagedStyle from '../../hooks/useManagedStyle';
 import useManagedCompute from './hooks/useManagedCompute';
 import useSubject from '../../../../hooks/useSubject';
 import useFieldMemory from './hooks/useFieldMemory';
@@ -539,13 +540,19 @@ export function makeField(
             }), changeObject);
         }, []);
 
-        const groupProps: IGroupProps<Data> = {
-            ...fieldConfig.defaultProps,
-            style,
-            phoneStyle,
-            tabletStyle,
-            desktopStyle,
-        };
+        const computedStyle = useManagedStyle(
+            {
+              isPhone,
+              isTablet,
+              isDesktop,
+            },
+            {
+              style,
+              phoneStyle,
+              tabletStyle,
+              desktopStyle,
+            }
+        );
 
         const computeReadonly = useCallback(() => {
             const { fieldReadonly$: fieldReadonly } = memory;
@@ -580,6 +587,7 @@ export function makeField(
             disabled: fieldDisabled || disabled,
             readonly: computeReadonly(),
             dirty: dirty || upperDirty,
+            style: computedStyle,
             autoFocus,
             invalid,
             incorrect,
@@ -588,6 +596,7 @@ export function makeField(
             loading,
             object,
             prefix,
+            testId,
             ...otherProps,
             fieldReadonly: computeFieldReadonly(),
         };
@@ -624,12 +633,7 @@ export function makeField(
         }
 
         return (
-            <Group
-                testId={testId}
-                {...groupProps}
-            >
-                <Component {...componentProps as IManaged} />
-            </Group>
+            <Component {...componentProps as IManaged} />
         );
     };
 

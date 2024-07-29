@@ -82,6 +82,8 @@ export interface IButtonFieldProps<Data = IAnything, Payload = IAnything> {
 export interface IButtonFieldPrivate<Data = IAnything> {
   value: PickProp<IManaged<Data>, 'value'>;
   press: PickProp<IManaged<Data>, 'press'>;
+  testId: PickProp<IManaged<Data>, 'testId'>;
+  style: PickProp<IManaged<Data>, 'style'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
@@ -100,6 +102,8 @@ export const ButtonField = ({
   buttonSize,
   buttonApperance,
   placeholder,
+  style,
+  testId,
   onFocus,
   onBlur,
 }: IButtonFieldProps & IButtonFieldPrivate) => (
@@ -113,6 +117,8 @@ export const ButtonField = ({
     placeholder={placeholder}
     onFocus={onFocus}
     onBlur={onBlur}
+    style={style}
+    testId={testId}
   />
 );
 

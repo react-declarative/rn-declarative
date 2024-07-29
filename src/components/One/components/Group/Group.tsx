@@ -1,12 +1,14 @@
 import * as React from "react";
 
+import { View } from "react-native";
+
 import { IManagedLayout, PickProp } from "../../../../model/IManaged";
 import IAnything from "../../../../model/IAnything";
 import IField from "../../../../model/IField";
 
-import { StyleSheet, View } from "react-native";
-import { useMemo } from "react";
 import useMediaContext from "../../../../hooks/useMediaContext";
+import useManagedStyle from "../../hooks/useManagedStyle";
+
 import makeTestId from "../../helpers/makeTestId";
 
 /**
@@ -45,39 +47,36 @@ interface IGroupPrivate {
  */
 export const Group = ({
   testId,
-  style: upperStyle,
-  phoneStyle: upperPhoneStyle = upperStyle,
-  tabletStyle: upperTabletStyle = upperStyle,
-  desktopStyle: upperDesktopStyle = upperStyle,
+  style,
+  phoneStyle,
+  tabletStyle,
+  desktopStyle,
+  children,
 }: IGroupProps & IGroupPrivate) => {
 
   const { isPhone, isTablet, isDesktop } = useMediaContext();
 
-  const {
-    phoneStyle,
-    tabletStyle,
-    desktopStyle,
-  } = useMemo(() => ({
-    phoneStyle: upperPhoneStyle ? StyleSheet.create(upperPhoneStyle) : undefined,
-    tabletStyle: upperTabletStyle ? StyleSheet.create(upperTabletStyle) : undefined,
-    desktopStyle: upperDesktopStyle ? StyleSheet.create(upperDesktopStyle) : undefined,
-  }), []);
-
-  const style = useMemo(() => {
-    if (isPhone) {
-      return phoneStyle;
+  const computedStyle = useManagedStyle(
+    {
+      isPhone,
+      isTablet,
+      isDesktop,
+    },
+    {
+      style,
+      phoneStyle,
+      tabletStyle,
+      desktopStyle,
     }
-    if (isTablet) {
-      return tabletStyle;
-    }
-    return desktopStyle;
-  }, [isPhone, isTablet, isDesktop]);
+  );
 
   return (
     <View
-      style={style}
+      style={computedStyle}
       {...makeTestId(testId)}
-    />
+    >
+      {children}
+    </View>
   )
 };
 

@@ -4,6 +4,8 @@ import { CheckBox as UiCheckBox } from '@ui-kitten/components';
 
 import { ICheckBoxSlot } from '../../../slots/CheckBoxSlot';
 
+import makeTestId from '../../../helpers/makeTestId';
+
 /**
  * Represents a checkbox component.
  *
@@ -16,14 +18,21 @@ import { ICheckBoxSlot } from '../../../slots/CheckBoxSlot';
 export const CheckBox = ({
     disabled,
     onChange,
+    onFocus,
+    onBlur,
     title,
     value,
+    style,
+    testId,
 }: ICheckBoxSlot) => (
     <UiCheckBox
-
         disabled={disabled}
         checked={Boolean(value)}
         onChange={() => onChange(!value)}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        style={style}
+        {...makeTestId}
     >
         {title}
     </UiCheckBox>
