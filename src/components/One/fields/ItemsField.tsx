@@ -46,18 +46,6 @@ export interface IItemsFieldProps<Data = IAnything, Payload = IAnything> {
    */
   placeholder?: PickProp<IField<Data, Payload>, "placeholder">;
   /**
-   * Picks the specified property "outlined" from the given object type "IField<Data, Payload>".
-   *
-   * @template Data - The type of data for the field.
-   * @template Payload - The type of payload for the field.
-   * @template T - The resulting type after picking the property.
-   *
-   * @param field - The object from which to pick the property.
-   *
-   * @returns - The value of the "outlined" property.
-   */
-  outlined?: PickProp<IField<Data, Payload>, "outlined">;
-  /**
    * Represents the itemList property of a field in the Data object.
    * @typedef itemList
    * @property [itemList] - The value of the itemList property.
@@ -120,14 +108,6 @@ export interface IItemsFieldProps<Data = IAnything, Payload = IAnything> {
    */
   tr?: PickProp<IField<Data, Payload>, "tr">;
   /**
-   * Represents the optional "labelShrink" property of an object that implements the `IField<Data>` interface.
-   * The "labelShrink" property is of type `PickProp<IField<Data>, "labelShrink">`, which picks the "labelShrink" property
-   * from the `IField<Data>` interface.
-   *
-   * @typedef labelShrink
-   */
-  labelShrink?: PickProp<IField<Data>, "labelShrink">;
-  /**
    * Represents a variable watchItemList.
    * @typedef watchItemList
    * @property watchItemList - The watchItemList property of type PickProp<IField<Data>, "watchItemList">
@@ -163,10 +143,8 @@ export interface IItemsFieldPrivate<Data = IAnything> {
  * @param [props.readonly=false] - Whether the component is readonly or not.
  * @param [props.description] - The description for the component.
  * @param [props.placeholder] - The placeholder text for the component.
- * @param [props.outlined=false] - Whether the component is outlined or not.
  * @param [props.itemList=[]] - The list of items to display.
  * @param [props.freeSolo=false] - Whether the component allows free text input or not.
- * @param [props.labelShrink] - Whether the label should shrink when there is a value or not.
  * @param [props.watchItemList] - A function to watch the itemList property for changes.
  * @param [props.noDeselect] - Whether to prevent deselecting an item or not.
  * @param [props.dirty] - Whether the component's value is dirty or not.
@@ -184,10 +162,8 @@ export const ItemsField = ({
   readonly,
   description,
   placeholder,
-  outlined = false,
   itemList = [],
   freeSolo = false,
-  labelShrink,
   watchItemList,
   noDeselect,
   dirty,
@@ -209,10 +185,8 @@ export const ItemsField = ({
     fieldReadonly={fieldReadonly}
     description={description}
     placeholder={placeholder}
-    outlined={outlined}
     itemList={itemList}
     noDeselect={noDeselect}
-    labelShrink={labelShrink}
     watchItemList={watchItemList}
     freeSolo={freeSolo}
     dirty={dirty}

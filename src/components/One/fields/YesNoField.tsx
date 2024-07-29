@@ -47,15 +47,6 @@ export interface IYesNoFieldProps<Data = IAnything, Payload = IAnything> {
    */
   placeholder?: PickProp<IField<Data, Payload>, "placeholder">;
   /**
-   * Type declaration for the `outlined` property of the `PickProp` utility.
-   * This utility allows you to pick a specific property from a given type and create a new type with only that property.
-   *
-   * @template T - The original type from which we want to pick a property.
-   * @template K - A string literal representing the property we want to pick from the original type.
-   *
-   */
-  outlined?: PickProp<IField<Data, Payload>, "outlined">;
-  /**
    * Represents an optional property "noDeselect" of a PickProp object.
    *
    * @template T - The type of the field.
@@ -104,12 +95,6 @@ export interface IYesNoFieldProps<Data = IAnything, Payload = IAnything> {
    */
   disabled?: PickProp<IField<Data, Payload>, "disabled">;
   /**
-   * Represents the optional property to shrink the label of a field.
-   *
-   * @typedef LabelShrink
-   */
-  labelShrink?: PickProp<IField<Data>, "labelShrink">;
-  /**
    * Returns the value of the "title" property from an object of type IField<Data, Payload>.
    *
    * @template Data - The type of the data object.
@@ -149,9 +134,7 @@ export interface IYesNoFieldPrivate<Data = IAnything>  {
  * @param props.readonly - Determines if the field is read-only.
  * @param props.description - The description or tooltip text for the field.
  * @param props.placeholder - The text to display when the field is empty.
- * @param props.outlined - Determines if the field is outlined.
  * @param props.noDeselect - Determines if the field allows deselecting the value.
- * @param props.labelShrink - Determines if the label should shrink when the field has a value.
  * @param props.title - The title attribute of the field.
  * @param props.tr - The translate map function
  * @param props.dirty - Determines if the field has been modified.
@@ -167,9 +150,7 @@ export const YesNoField = ({
   readonly,
   description = "",
   placeholder = "",
-  outlined = false,
   noDeselect,
-  labelShrink,
   title = "",
   tr,
   style,
@@ -187,9 +168,7 @@ export const YesNoField = ({
     readonly={readonly}
     description={description}
     placeholder={placeholder}
-    outlined={outlined}
     noDeselect={noDeselect}
-    labelShrink={labelShrink}
     tr={tr}
     title={title}
     dirty={dirty}

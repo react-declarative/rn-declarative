@@ -19,22 +19,6 @@ export type Value = string | string[] | number | boolean | null;
  * Объект поля для прикладного программиста
  */
 export interface IField<Data = IAnything, Payload = IAnything> {
-
-    /**
-     * Размер иконки для FieldType.Icon
-     */
-    iconSize?: number;
-
-    /**
-     * Цвет иконки для FieldType.Icon
-     */
-    iconColor?: "inherit" | "default" | "primary" | "secondary" | "error" | "info" | "success" | "warning";
-
-    /**
-     * Цвет фона иконки для FieldType.Icon
-     */
-    iconBackground?: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
-
     /**
      * Тип заливки кнопки для FieldType.Button
      */
@@ -100,17 +84,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     features?: string[];
 
     /**
-     * Отключает нижний baseline для текущей компоновки
-     */
-    noBaseline?: boolean;
-
-    /**
-     * Флаг, удерживающий подпись текстового поля при пустом
-     * значении
-     */
-    labelShrink?: boolean;
-
-    /**
      * Коллбеки, вызываемый при фокусировке и потере фокуса.
      * Подразумевается изменение формы со стороны прикладного
      * программиста, а не работа с полем ввода
@@ -125,15 +98,13 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     press?: (name: string, data: Data, payload: Payload, onValueChange: (value: Value) => void, onChange: (data: Data) => void) => (void | Promise<void>);
 
     /**
-     * Флаг только на чтение и "круглой окаймовки"
+     * Флаг только на чтение
      */
     readonly?: boolean;
-    outlined?: boolean;
 
     /**
-     * Автофокус и постоянное отключение поля
+     * Отключение поля
      */
-    autoFocus?: boolean;
     disabled?: boolean;
 
     /**
@@ -141,44 +112,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      * задать значение при выборе элемента кликом
      */
     radioValue?: string;
-
-    /**
-     * Поле type для MatTextField
-     */
-    inputType?: keyof {
-      'text': never,
-      'color': never,
-      'date': never,
-      'email': never,
-      'month': never,
-      'number': never,
-      'password': never,
-      'search': never,
-      'tel': never,
-      'time': never,
-      'url': never,
-      'week': never,
-    };
-
-    /**
-     * Паттерн для MatTextField
-     * (inputmode: 'decimal' и pattern: '[0-9.,]+' добавят запятую на iOS клавиатуре)
-     */
-    inputPattern?: string;
-
-    /**
-     * Поле inputmode для MatTextField
-     */
-    inputMode?: keyof {
-      'none': never;
-      'text': never;
-      'tel': never;
-      'url': never;
-      'email': never;
-      'numeric': never;
-      'decimal': never;
-      'search': never;
-    };
 
     /**
      * Делает TextField многострочным
@@ -378,6 +311,6 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      * Компонент отображения else для condition
      */
     conditionElse?: React.ComponentType<{ data: Data; payload: Payload }>;
-  }
+}
 
 export default IField;

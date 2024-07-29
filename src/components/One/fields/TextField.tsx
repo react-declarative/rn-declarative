@@ -26,33 +26,6 @@ export interface ITextFieldProps<Data = IAnything, Payload = IAnything> {
    */
   validation?: PickProp<IField<Data, Payload>, 'validation'>;
   /**
-   * Represents the input type of a field.
-   *
-   * @template Data - The type of data being handled by the field.
-   * @template Payload - The type of payload associated with the field.
-   *
-   * @typedef inputType
-   *
-   * @property name - The name of the input type.
-   * @property options - Additional options for the input type.
-   */
-  inputType?: PickProp<IField<Data, Payload>, "inputType">;
-  /**
-   * The inputMode variable is an optional property that represents the input mode of a field in a form.
-   *
-   * @typedef inputMode
-   *
-   * @property [inputMode] - The input mode of the field.
-   */
-  inputMode?: PickProp<IField<Data, Payload>, "inputMode">;
-  /**
-   * Represents the input pattern for a field in a data payload.
-   *
-   * @typedef inputPattern
-   * @property [inputPattern.pattern] - The regular expression pattern that the input value of the field should match.
-   */
-  inputPattern?: PickProp<IField<Data, Payload>, "inputPattern">;
-  /**
    * Returns the "description" property value of the given field object.
    *
    * @template IField - The type of the field object.
@@ -64,13 +37,6 @@ export interface ITextFieldProps<Data = IAnything, Payload = IAnything> {
    * @returns The value of the "description" property.
    */
   description?: PickProp<IField<Data, Payload>, "description">;
-  /**
-   * Type definition to pick the `outlined` property from a given `IField` type.
-   *
-   * @template T - The type of the `IField` object.
-   * @template K - The property to be picked from `IField`.
-   */
-  outlined?: PickProp<IField<Data, Payload>, "outlined">;
   /**
    * Type definition for the `title` property of an object.
    *
@@ -165,27 +131,11 @@ export interface ITextFieldProps<Data = IAnything, Payload = IAnything> {
    */
   readonly?: PickProp<IField<Data, Payload>, "readonly">;
   /**
-   * Specifies if the field should be automatically focused.
-   *
-   * @typedef autoFocus
-   * @property [autoFocus] - Indicates if the field should receive focus automatically.
-   * @property - The interface that describes the field containing the autoFocus property.
-   *
-   */
-  autoFocus?: PickProp<IField<Data, Payload>, "autoFocus">;
-  /**
    * Represents the `disabled` property of a field in a form.
    *
    * @typedef Disabled
    */
   disabled?: PickProp<IField<Data, Payload>, "disabled">;
-  /**
-   * Shrink option for labels.
-   *
-   * @typedef labelShrink
-   * @property labelShrink - Whether to apply shrink option to labels.
-   */
-  labelShrink?: PickProp<IField<Data, Payload>, 'labelShrink'>;
 }
 
 /**
@@ -217,10 +167,7 @@ export interface ITextFieldPrivate<Data = IAnything> {
  * @param value - The current value of the input field
  * @param disabled - Indicates if the input field is disabled
  * @param readonly - Indicates if the input field is read-only
- * @param inputType - The type of input field (default: "text")
  * @param description - The description or helper text for the input field
- * @param outlined - Indicates if the input field is outlined
- * @param labelShrink - Indicates if the label should shrink when focused
  * @param title - The title or tooltip for the input field
  * @param leadingIconRipple - Indicates if pressing the leading icon should trigger a ripple effect
  * @param trailingIconRipple - Indicates if pressing the trailing icon should trigger a ripple effect
@@ -238,7 +185,6 @@ export interface ITextFieldPrivate<Data = IAnything> {
  * @param dirty - Indicates if the input value has been modified
  * @param loading - Indicates if the input field is in a loading state
  * @param onChange - The function to call when the input value changes
- * @param autoFocus - Indicates if the input field should be automatically focused
  * @param name - The name of the input field
  * @returns - The TextField component
  */
@@ -248,10 +194,7 @@ export const TextField = ({
   value,
   disabled,
   readonly,
-  inputType = "text",
   description = "",
-  outlined = false,
-  labelShrink,
   title = "",
   leadingIconRipple,
   trailingIconRipple,
@@ -266,27 +209,22 @@ export const TextField = ({
   dirty,
   loading,
   onChange,
-  autoFocus,
   name,
   onFocus,
   onBlur,
 }: ITextFieldProps & ITextFieldPrivate) => (
   <Text
-    autoFocus={autoFocus}
     invalid={invalid}
     incorrect={incorrect}
     value={value}
     readonly={readonly}
     disabled={disabled}
-    inputType={inputType}
     description={description}
-    outlined={outlined}
     title={title}
     leadingIconRipple={leadingIconRipple}
     trailingIconRipple={trailingIconRipple}
     leadingIcon={leadingIcon}
     trailingIcon={trailingIcon}
-    labelShrink={labelShrink}
     leadingIconPress={leadingIconPress}
     trailingIconPress={trailingIconPress}
     inputMultiline={inputMultiline}

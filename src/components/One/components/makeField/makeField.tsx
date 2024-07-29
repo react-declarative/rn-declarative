@@ -129,7 +129,6 @@ export function makeField(
         dirty: upperDirty = false,
         disabled: fieldDisabled = false,
         readonly: upperReadonly = false,
-        autoFocus,
         testId = name,
         ...otherProps
     }: IEntity<Data>) => {
@@ -601,7 +600,6 @@ export function makeField(
             readonly: computeReadonly(),
             dirty: dirty || upperDirty,
             style: computedStyle,
-            autoFocus,
             invalid,
             incorrect,
             value,

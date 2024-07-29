@@ -18,12 +18,7 @@ const LOADING_LABEL = "Loading";
  * @property value - The current value of the input.
  * @property disabled - Indicates if the input is disabled.
  * @property readonly - Indicates if the input is read-only.
- * @property inputType - The type of the input. Defaults to "text".
- * @property inputMode - The mode of the input. Defaults to "text".
- * @property inputPattern - The pattern of the input.
- * @property labelShrink - Indicates if the label should shrink.
  * @property description - The description of the input.
- * @property outlined - Indicates if the input is outlined.
  * @property title - The title of the input.
  * @property leadingIcon - The leading icon of the input.
  * @property trailingIcon - The trailing icon of the input.
@@ -41,7 +36,6 @@ const LOADING_LABEL = "Loading";
  * @property inputFormatter - A formatter function for the input value.
  * @property dirty - Indicates if the input value has been changed.
  * @property loading - Indicates if the input is currently loading.
- * @property autoFocus - Indicates if the input should be focused automatically.
  * @property onChange - The change event handler for the input.
  */
 export const Text = ({
@@ -50,12 +44,7 @@ export const Text = ({
   value,
   disabled,
   readonly,
-  inputType = "text",
-  inputMode = "text",
-  inputPattern = undefined,
-  labelShrink,
   description = "",
-  outlined = false,
   title = "",
   leadingIcon: LeadingIcon,
   trailingIcon: TrailingIcon,
@@ -67,7 +56,6 @@ export const Text = ({
   placeholder = "",
   dirty,
   loading,
-  autoFocus,
   onChange,
 }: ITextSlot) => {
   const payload = useOnePayload();
@@ -77,11 +65,15 @@ export const Text = ({
     <Input
       multiline={inputMultiline}
       accessoryRight={TrailingIcon ? (
-        <TouchableOpacity  onPress={}>
+        <TouchableOpacity onPress={() => tic && tic(value, object, payload, onChange, handleChange)}>
           <TrailingIcon />
         </TouchableOpacity >
       ) : undefined}
-      accessoryLeft={LeadingIcon ? <LeadingIcon /> : undefined}
+      accessoryLeft={LeadingIcon ? (
+        <TouchableOpacity onPress={() => lic && lic(value, object, payload, onChange, handleChange)}>
+          <LeadingIcon />
+        </TouchableOpacity>
+      ) : undefined}
     />
   );
 };

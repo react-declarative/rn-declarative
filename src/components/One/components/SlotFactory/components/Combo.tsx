@@ -56,10 +56,8 @@ interface IState {
  * @param readonly - Whether the Combo is readonly or not.
  * @param description - The description of the Combo.
  * @param placeholder - The placeholder text of the Combo input.
- * @param outlined - Whether the Combo is outlined or not.
  * @param itemList - The list of items/options for the Combo.
  * @param watchItemList - Whether to watch the itemList for changes or not.
- * @param labelShrink - Whether to shrink the label of the Combo or not.
  * @param noDeselect - Whether to allow deselecting an item or not.
  * @param freeSolo - Whether to allow free text input or not.
  * @param title - The title/label of the Combo.
@@ -76,10 +74,8 @@ export const Combo = ({
   readonly,
   description = "",
   placeholder = "",
-  outlined = false,
   itemList = [],
   watchItemList,
-  labelShrink,
   noDeselect,
   freeSolo,
   title = "",

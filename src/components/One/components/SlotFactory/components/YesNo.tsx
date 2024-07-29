@@ -39,8 +39,6 @@ const OPTIONS = [
  * @property readonly - Indicates whether the YesNoField is readonly.
  * @property description - The description of the YesNoField.
  * @property placeholder - The placeholder text of the YesNoField.
- * @property outlined - Indicates whether the YesNoField is outlined.
- * @property labelShrink - Indicates whether the label should shrink for the YesNoField.
  * @property noDeselect - Indicates whether deselection is allowed for the YesNoField.
  * @property title - The title of the YesNoField.
  * @property tr - The translation function for the YesNoField.
@@ -55,8 +53,6 @@ export const YesNoField = ({
   readonly,
   description = "",
   placeholder = "",
-  outlined = false,
-  labelShrink,
   noDeselect,
   title = "",
   tr = (v) => v,

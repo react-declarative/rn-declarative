@@ -51,12 +51,10 @@ interface IState {
  * @param Items.readonly - Determines whether the autocomplete field is readonly or not.
  * @param Items.description - The description of the autocomplete field.
  * @param Items.placeholder - The placeholder text of the autocomplete field.
- * @param Items.outlined - Determines whether the autocomplete field has an outlined style or not.
  * @param Items.itemList - The list of items to be populated in the autocomplete dropdown.
  * @param Items.freeSolo - Determines whether the user can input values that are not in the itemList.
  * @param Items.noDeselect - Determines whether the user can deselect values in the autocomplete field.
  * @param Items.watchItemList - Determines whether to watch for changes in the itemList.
- * @param Items.labelShrink - Determines whether to shrink the label when the autocomplete field has a value.
  * @param Items.dirty - Determines whether the autocomplete field has been modified.
  * @param Items.invalid - Determines whether the autocomplete field has an invalid value.
  * @param Items.incorrect - Determines whether the autocomplete field has an incorrect value.
@@ -71,12 +69,10 @@ export const Items = ({
     readonly,
     description,
     placeholder,
-    outlined = false,
     itemList = [],
     freeSolo,
     noDeselect,
     watchItemList,
-    labelShrink,
     dirty,
     invalid,
     incorrect,

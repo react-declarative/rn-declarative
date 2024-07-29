@@ -38,15 +38,6 @@ export interface IComboFieldProps<Data = IAnything, Payload = IAnything> {
    */
   placeholder?: PickProp<IField<Data, Payload>, "placeholder">;
   /**
-   * Type outlined defenition
-   *
-   * @template T - The type of the input object.
-   * @template K - The name of the property to pick from the input object.
-   *
-   * @typedef PickProp
-   */
-  outlined?: PickProp<IField<Data, Payload>, "outlined">;
-  /**
    * Represents a list of items from a specific field's data payload.
    *
    * @typedef itemList
@@ -96,12 +87,6 @@ export interface IComboFieldProps<Data = IAnything, Payload = IAnything> {
    */
   disabled?: PickProp<IField<Data, Payload>, "disabled">;
   /**
-   * Represents the property `labelShrink` which is an optional pick property of type `PickProp<IField<Data>, "labelShrink">`.
-   *
-   * @typedef labelShrink
-   */
-  labelShrink?: PickProp<IField<Data>, "labelShrink">;
-  /**
    * Retrieves the "title" property for a field
    */
   title?: PickProp<IField<Data, Payload>, "title">;
@@ -140,12 +125,10 @@ export interface IComboFieldPrivate<Data = IAnything>  {
  * @param [props.readonly=false] - Specifies whether the ComboField is readonly.
  * @param [props.description=""] - The description of the ComboField.
  * @param [props.placeholder=""] - The placeholder text of the ComboField.
- * @param [props.outlined=false] - Specifies whether the ComboField should be outlined.
  * @param [props.itemList=[]] - The list of items for the ComboField.
  * @param [props.freeSolo=false] - Specifies whether the ComboField allows free text input.
  * @param [props.watchItemList] - Specifies whether to watch changes in the itemList prop.
  * @param [props.noDeselect] - Specifies whether the ComboField should prevent deselecting options.
- * @param [props.labelShrink] - Specifies whether the label of the ComboField should shrink when there is a value.
  * @param [props.title=""] - The title of the ComboField.
  * @param [props.dirty] - Specifies whether the ComboField has been modified.
  * @param [props.invalid] - Specifies whether the ComboField is invalid.
@@ -161,12 +144,10 @@ export const ComboField = ({
   readonly,
   description = "",
   placeholder = "",
-  outlined = false,
   itemList = [],
   freeSolo = false,
   watchItemList,
   noDeselect,
-  labelShrink,
   title = "",
   dirty,
   style,
@@ -185,11 +166,9 @@ export const ComboField = ({
     readonly={readonly}
     description={description}
     placeholder={placeholder}
-    outlined={outlined}
     itemList={itemList}
     noDeselect={noDeselect}
     watchItemList={watchItemList}
-    labelShrink={labelShrink}
     freeSolo={freeSolo}
     title={title}
     dirty={dirty}
