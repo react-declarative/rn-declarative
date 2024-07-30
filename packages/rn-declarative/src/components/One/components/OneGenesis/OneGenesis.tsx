@@ -2,6 +2,7 @@ import * as React from "react";
 import { useRef, useMemo, useState, useCallback } from "react";
 
 import OneInternal from "../OneInternal";
+import OneConfig, { GET_REF_SYMBOL } from "../OneConfig";
 
 import IOneProps from "../../../../model/IOneProps";
 import IAnything from "../../../../model/IAnything";
@@ -34,11 +35,6 @@ const READY_CLASS = "rn-declarative__oneGenesisReady";
 const DEFAULT_READY = () => null;
 const DEFAULT_CHANGE = (data: IAnything) => console.log({ data });
 
-const defaultStyle = {
-  width: '100%',
-  paddingLeft: 8,
-} as const;
-
 /**
  * Represents the OneGenesis component.
  * @param props - The props for the component.
@@ -66,6 +62,8 @@ export const OneGenesis = <
 
   const [rendered, setRendered] = useState(false);
 
+  const oneConfig = useSingleton(OneConfig[GET_REF_SYMBOL]);
+
   const {
     change = DEFAULT_CHANGE,
     ready = DEFAULT_READY,
@@ -78,6 +76,11 @@ export const OneGenesis = <
   } = props;
 
   const payload = useSingleton(upperPayload);
+
+  const defaultStyle = useMemo(() => ({
+    width: '100%',
+    paddingLeft: oneConfig.MARGINS.mr,
+  }), []);
 
   const { style = defaultStyle } = props;
 
