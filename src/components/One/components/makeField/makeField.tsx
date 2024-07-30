@@ -99,6 +99,7 @@ export function makeField(
     const oneConfig = OneConfig[GET_REF_SYMBOL]();
     const component = <Data extends IAnything = IAnything>({
         style,
+        type,
         phoneStyle,
         tabletStyle,
         desktopStyle,
@@ -196,6 +197,7 @@ export function makeField(
             dirty: upperDirty,
         }, {
             compute,
+            type,
             readTransform,
             config: oneConfig,
             name,
