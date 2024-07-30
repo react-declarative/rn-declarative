@@ -1,0 +1,93 @@
+{
+  "name": "rn-declarative-eva",
+  "version": "0.0.37",
+  "description": "A lighter version of the react-declarative which exports the <One /> component and dependencies only and as such makes the library slightly faster and smaller. Unlike react-declarative, it doesn't provide any additional overhead like state management. For a note, that library should be used when you want to use <One /> forms in existing app",
+  "private": false,
+  "author": {
+    "name": "Petr Tripolsky",
+    "email": "tripolskypetr@gmail.com",
+    "url": "https://github.com/tripolskypetr"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "http://paypal.me/tripolskypetr"
+  },
+  "license": "MIT",
+  "homepage": "https://react-declarative-playground.github.io",
+  "keywords": [
+    "react",
+    "typescript",
+    "state-management",
+    "frontend",
+    "material-ui",
+    "MUI",
+    "declarative",
+    "form-validation",
+    "layout-engine",
+    "grid-system",
+    "declarative-programming",
+    "json-endpoint",
+    "standalone",
+    "nested-grids",
+    "layout-grid",
+    "intellisense",
+    "code-autocomplete",
+    "form-builder"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-declarative/react-declarative-lite",
+    "documentation": "https://github.com/react-declarative/react-declarative/tree/master/docs"
+  },
+  "bugs": {
+    "url": "https://github.com/react-declarative/react-declarative-lite/issues"
+  },
+  "main": "dist/index.modern.js",
+  "module": "dist/index.modern.js",
+  "source": "src/index.ts",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.modern.js",
+    "default": "./dist/index.modern.js"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "rimraf dist && node ./scripts/build.js && npm run typedef",
+    "build:docker": "docker-compose up",
+    "typedef": "tsc --emitDeclarationOnly --outDir ./dist/types && node ./scripts/dts.js",
+    "postinstall": "node ./scripts/postinstall.js",
+    "lint": "eslint --fix --ext .ts,.tsx --ignore-pattern .d.ts ./src"
+  },
+  "files": [
+    "dist",
+    "scripts",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "rn-declarative": "*"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.21",
+    "@typescript-eslint/eslint-plugin": "6.5.0",
+    "@typescript-eslint/parser": "6.5.0",
+    "dts-bundle": "0.7.3",
+    "dts-minify": "0.3.0",
+    "esbuild-node-externals": "1.6.0",
+    "esbuild-wasm": "0.17.12",
+    "eslint": "8.57.0",
+    "eslint-plugin-jsdoc": "48.2.1",
+    "prettier": "3.2.5",
+    "react": "18.2.0",
+    "react-native": "0.71.6",
+    "typescript": "4.6.2",
+    "rn-declarative": "0.0.37"
+  },
+  "dependencies": {
+    "rimraf": "3.0.2"
+  }
+}

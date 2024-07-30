@@ -1,0 +1,1 @@
+export { OneSlotFactory } from './OneSlotFactory';
