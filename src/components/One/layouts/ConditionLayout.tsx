@@ -43,6 +43,7 @@ interface IConditionLayoutPrivate<Data = IAnything> extends IEntity<Data> {
   fallback: PickProp<IEntity<Data>, "fallback">;
   ready: PickProp<IEntity<Data>, "ready">;
   object: PickProp<IEntity<Data>, "object">;
+  isBaselineAlign: PickProp<IEntity<Data>, "isBaselineAlign">;
 }
 
 /**

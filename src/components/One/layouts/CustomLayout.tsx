@@ -41,6 +41,7 @@ const FIELD_INTERNAL_PARAMS: FieldIgnoreParam[] = [
  */
 interface ICustomLayoutPrivate<Data = IAnything> extends IEntity<Data> {
   children?: React.ReactNode;
+  isBaselineAlign: PickProp<IEntity<Data>, "isBaselineAlign">;
 }
 
 const Fragment = ({ children }: React.PropsWithChildren<{}>) => <>{children}</>;
@@ -64,6 +65,7 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
   children,
   style,
   testId,
+  isBaselineAlign,
   customLayout: CustomLayout = Fragment,
   ...otherProps
 }: ICustomLayoutProps<Data> & ICustomLayoutPrivate<Data>) => {
@@ -83,6 +85,7 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
       _fieldData: object,
       _payload,
       testId,
+      isBaselineAlign,
     };
   }, [object]);
 

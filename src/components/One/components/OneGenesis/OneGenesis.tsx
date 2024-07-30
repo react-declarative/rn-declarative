@@ -18,13 +18,15 @@ import RadioProvider from "../../context/RadioProvider";
 import DebounceProvider from "../../context/DebounceProvider";
 import OneContextProvider from "../../context/OneContextProvider";
 
+import isBaseline from "../../config/isBaseline";
+
 import SlotFactory from "../SlotFactory";
+import Container from "../Container";
 
 import useSingleton from "../../../../hooks/useSingleton";
 import useActualValue from "../../../../hooks/useActualValue";
 
 import makeTestId from "../../helpers/makeTestId";
-import Container from "../Container";
 
 const BASE_CLASS = "rn-declarative__oneGenesis";
 const READY_CLASS = "rn-declarative__oneGenesisReady";
@@ -167,6 +169,13 @@ export const OneGenesis = <
 
   const testId = rendered ? READY_CLASS : BASE_CLASS;
 
+  /**
+   * Determines if the baseline alignment is true.
+   *
+   * @typedef isBaselineAlign
+   */
+  const isBaselineAlign = useMemo(() => fieldsSnapshot.some(isBaseline), []);
+
   return (
     <CacheProvider>
       <DebounceProvider payload={fieldDebounce}>
@@ -191,6 +200,7 @@ export const OneGenesis = <
                   <SlotFactory {...slots}>
                     <Container
                       style={style}
+                      isBaselineAlign={isBaselineAlign}
                       {...makeTestId(testId)}
                     >
                       <OneInternal<Data, Payload, Field> {...viewParams} />

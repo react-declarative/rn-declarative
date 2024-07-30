@@ -15,7 +15,6 @@ import useManagedStyle from "../../hooks/useManagedStyle";
 import makeTestId from "../../helpers/makeTestId";
 
 const defaultStyle =  {
-  alignItems: 'flex-end',
   flexDirection: 'row',
   flexWrap: 'wrap',
 } as const;
@@ -39,6 +38,7 @@ export interface IGroupProps<Data = IAnything, Payload = IAnything> extends IMan
  */
 interface IGroupPrivate {
   children: React.ReactNode;
+  isBaselineAlign?: boolean;
 }
 
 /**
@@ -60,6 +60,7 @@ export const Group = ({
   phoneStyle,
   tabletStyle,
   desktopStyle,
+  isBaselineAlign,
   children,
 }: IGroupProps & IGroupPrivate) => {
 
@@ -79,7 +80,10 @@ export const Group = ({
       tabletStyle,
       desktopStyle,
     },
-    defaultStyle,
+    {
+      ...defaultStyle,
+      alignItems: isBaselineAlign ? 'flex-end': 'flex-start',
+    },
   );
 
   return (

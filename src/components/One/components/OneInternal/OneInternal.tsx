@@ -2,8 +2,9 @@ import * as React from "react";
 import { memo, useRef, useCallback, useEffect, Fragment, useMemo } from "react";
 
 import isStatefull, { isLayout } from "../../config/isStatefull";
-import createFieldInternal from "../../config/createField";
 import createLayoutInternal from "../../config/createLayout";
+import createFieldInternal from "../../config/createField";
+import isBaseline from "../../config/isBaseline";
 
 import { useOneState } from "../../context/StateProvider";
 import { useOneCache } from "../../context/CacheProvider";
@@ -158,6 +159,7 @@ export const OneInternal = <
     blurMap,
     fieldsMap,
     pressMap,
+    baselineMap,
     statefullMap,
     trMap,
     itemListMap,
@@ -255,6 +257,20 @@ export const OneInternal = <
             change: handleChange,
             ready: handleReady,
             fallback,
+            /**
+             * Checks if a given field is baseline aligned.
+             *
+             * @param field - The field object to check.
+             * @param baselineMap - The map containing the baseline information.
+             * @param fields - The array of fields to check for baselines.
+             * @returns Returns true if the field is baseline aligned, false otherwise.
+             */
+            isBaselineAlign:
+              baselineMap.get(field) === undefined
+                ? !!baselineMap
+                    .set(field, !field.noBaseline && fields.some(isBaseline))
+                    .get(field)
+                : !!baselineMap.get(field),
             ...field,
             placeholder: withNamedPlaceholders
               ? `${field.name || "unknown"}`

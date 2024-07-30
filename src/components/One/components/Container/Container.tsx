@@ -12,22 +12,29 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     content: {
-        alignItems: 'flex-end',
         flexDirection: 'row',
         flexWrap: 'wrap',
+    },
+    withBaseline: {
+        alignItems: 'flex-end',
+    },
+    noBaseline: {
+        alignItems: 'flex-start',
     },
 });
 
 interface IContainerProps {
     style?: CompiledStyles;
+    isBaselineAlign?: boolean;
     children: React.ReactNode;
 }
 
 export const Container = ({
+    isBaselineAlign,
     style,
     children,
 }: IContainerProps) => (
-    <View style={[styles.root, style]}>
+    <View style={[styles.root, isBaselineAlign ? styles.withBaseline : styles.noBaseline, style]}>
         <View style={styles.content}>
             {children} 
         </View>

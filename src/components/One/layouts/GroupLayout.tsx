@@ -2,7 +2,10 @@ import * as React from "react";
 
 import Group, { IGroupProps } from "../components/Group";
 
+import { PickProp } from "../../../model/IManaged";
+
 import IAnything from "../../../model/IAnything";
+import IEntity from "../../../model/IEntity";
 
 import makeLayout from "../components/makeLayout/makeLayout";
 
@@ -21,6 +24,7 @@ export interface IGroupLayoutProps<Data = IAnything, Payload = IAnything> extend
  */
 interface IGroupLayoutPrivate {
   children?: React.ReactNode;
+  isBaselineAlign?: PickProp<IEntity, 'isBaselineAlign'>;
 }
 
 /**
@@ -40,6 +44,7 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
   phoneStyle,
   tabletStyle,
   desktopStyle,
+  isBaselineAlign,
   testId,
   children,
 }: IGroupLayoutProps<Data> & IGroupLayoutPrivate) => {
@@ -50,6 +55,7 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
       phoneStyle={phoneStyle}
       tabletStyle={tabletStyle}
       desktopStyle={desktopStyle}
+      isBaselineAlign={isBaselineAlign}
     >
       {children}
     </Group>

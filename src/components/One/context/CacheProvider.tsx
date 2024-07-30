@@ -14,6 +14,7 @@ interface IContext {
   blurMap: Map<IField, IField['blur']>;
   pressMap: Map<IField, IField['press']>;
   fieldsMap: Map<IField[], IField[]>;
+  baselineMap: Map<IField, boolean>;
   statefullMap: Map<IField[], number>;
   trMap: Map<IField, IField['tr']>;
   itemListMap: Map<IField, IField['itemList']>;
@@ -37,6 +38,7 @@ interface ICacheProviderProps {
  * @property cacheMap.blurMap - Map for blurring fields.
  * @property cacheMap.menuMap - Map for field menus.
  * @property cacheMap.pressMap - Map for field press events.
+ * @property cacheMap.baselineMap - Map for field baselines.
  * @property cacheMap.fieldsMap - Map for field arrays.
  * @property cacheMap.statefullMap - Map for stateful fields.
  * @property cacheMap.trMap - Map for translational fields.
@@ -51,6 +53,7 @@ export const CacheProvider = ({ children }: ICacheProviderProps) => {
    * @property blurMap - Map for blurring fields.
    * @property fieldsMap - Map for field arrays.
    * @property statefullMap - Map for stateful fields.
+   * @property baselineMap - Map for field baselines.
    * @property trMap - Map for translational fields.
    * @property itemListMap - Map for items list updates.
    */
@@ -61,6 +64,7 @@ export const CacheProvider = ({ children }: ICacheProviderProps) => {
       blurMap: new Map<IField, IField['blur']>(),
       pressMap: new Map<IField, IField['press']>(),
       fieldsMap: new Map<IField[], IField[]>(),
+      baselineMap: new Map<IField, boolean>(),
       statefullMap: new Map<IField[], number>(),
       trMap: new Map<IField, IField['tr']>(),
       itemListMap: new Map<IField, IField['shouldUpdateItemList']>(),

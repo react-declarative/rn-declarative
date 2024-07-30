@@ -69,6 +69,11 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     desktopHidden?: boolean | ((payload: Payload) => boolean);
 
     /**
+     * Отключает нижний baseline для текущей компоновки
+     */
+    noBaseline?: boolean;
+
+    /**
      * Список бизнес-функций, необходимых для отображения поля
      */
     features?: string[];

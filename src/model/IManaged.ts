@@ -85,6 +85,17 @@ export interface IWrappedLayout<Data = IAnything, Payload = IAnything> {
      * @typedef Hidden
      */
     hidden?: PickProp<IField<Data, Payload>, 'hidden'>;
+    /**
+     * Represents an optional property `noBaseline` that is picked from the interface `IField` using the `PickProp` utility type.
+     *
+     * @template Data - The type of data associated with the field.
+     * @template Payload - The type of payload associated with the field.
+     *
+     * @typedef noBaseline
+     *
+     * @property [noBaseline] - Specifies whether the field has a baseline or not.
+     */
+    noBaseline?: PickProp<IField<Data, Payload>, 'noBaseline'>;
 }
 
 /**
