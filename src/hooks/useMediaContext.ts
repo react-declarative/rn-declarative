@@ -6,9 +6,11 @@ import BehaviorSubject from '../utils/rx/BehaviorSubject';
 
 import singleshot from '../utils/hof/singleshot';
 
+import IBreakpoints from '../model/IBreakpoints';
+
 import useSingleton from './useSingleton';
 
-const BREAKPOINTS: IBreakpoints = {
+export const BREAKPOINTS: IBreakpoints = {
     xs: 0,
     sm: 600,
     md: 960,
@@ -26,13 +28,6 @@ interface IConstraint {
     isMobile: boolean;
 }
 
-export interface IBreakpoints {
-    xs: number;
-    sm: number;
-    md: number;
-    lg: number;
-    xl: number;
-}
 
 /**
  * Represents a function that returns a boolean value indicating whether a given width falls within a specified range.

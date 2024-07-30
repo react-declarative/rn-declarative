@@ -1,6 +1,7 @@
-import { IBreakpoints } from "../../../../hooks/useMediaContext";
+import IBreakpoints from "../../../../model/IBreakpoints";
+import IFieldMargins from "../../../../model/IFieldMargins";
 
-import { FIELD_DEBOUNCE } from "../../config/config";
+import { FIELD_DEBOUNCE, DEFAULT_BREAKPOINTS, DEFAULT_MARGINS } from "../../config/config";
 
 /**
  * Represents a configuration object for the one component.
@@ -13,7 +14,8 @@ export interface IConfig {
     WITH_DISMOUNT_LISTENER: boolean;
     WITH_SYNC_COMPUTE: boolean;
     CUSTOM_FIELD_DEBOUNCE: number;
-    BREAKPOINTS: IBreakpoints | undefined;
+    BREAKPOINTS: IBreakpoints;
+    MARGINS: IFieldMargins;
 }
 
 /**
@@ -35,7 +37,8 @@ const INITIAL_CONFIG: IConfig = {
     WITH_DISMOUNT_LISTENER: true,
     WITH_SYNC_COMPUTE: false,
     CUSTOM_FIELD_DEBOUNCE: FIELD_DEBOUNCE,
-    BREAKPOINTS: undefined,
+    MARGINS: DEFAULT_MARGINS,
+    BREAKPOINTS: DEFAULT_BREAKPOINTS,
 };
 
 /**

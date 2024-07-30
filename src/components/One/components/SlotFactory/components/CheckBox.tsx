@@ -5,8 +5,6 @@ import { StyleSheet } from 'react-native';
 
 import { ICheckBoxSlot } from '../../../slots/CheckBoxSlot';
 
-import makeTestId from '../../../helpers/makeTestId';
-
 const styles = StyleSheet.create({
     root: {
         height: 45,
@@ -29,7 +27,6 @@ export const CheckBox = ({
     onBlur,
     title,
     value,
-    testId,
 }: ICheckBoxSlot) => (
     <UiCheckBox
         disabled={disabled}
@@ -38,7 +35,6 @@ export const CheckBox = ({
         onFocus={onFocus}
         onBlur={onBlur}
         style={styles.root}
-        {...makeTestId(testId)}
     >
         {title}
     </UiCheckBox>

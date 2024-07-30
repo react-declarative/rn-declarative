@@ -10,8 +10,6 @@ import useActualValue from '../../../../../hooks/useActualValue';
 
 import { IRadioSlot } from '../../../slots/RadioSlot';
 
-import makeTestId from '../../../helpers/makeTestId';
-
 const styles = StyleSheet.create({
     root: {
         height: 45,
@@ -37,7 +35,6 @@ export const Radio = ({
     title,
     radioValue,
     value,
-    testId,
     name = '',
 }: IRadioSlot) => {
     const [radioMap, setRadioMap] = useOneRadio();
@@ -85,7 +82,6 @@ export const Radio = ({
             onFocus={onFocus}
             onBlur={onBlur}
             style={styles.root}
-            {...makeTestId(testId)}
         >
             {title}
         </UiRadio>

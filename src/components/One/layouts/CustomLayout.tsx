@@ -10,6 +10,7 @@ import IAnything from "../../../model/IAnything";
 import IManaged, { IWrappedLayout, PickProp } from "../../../model/IManaged";
 
 import makeLayout from "../components/makeLayout/makeLayout";
+import FieldWrapper from "../components/FieldWrapper/FieldWrapper";
 
 export interface ICustomLayoutProps<Data = IAnything, Payload = IAnything>
   extends IWrappedLayout<Data, Payload> {
@@ -81,13 +82,16 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
       _fieldParams,
       _fieldData: object,
       _payload,
+      testId,
     };
   }, [object]);
 
   return (
-    <CustomLayout {...props}>
+    <FieldWrapper style={style}>
+      <CustomLayout {...props}>
         {children}
-    </CustomLayout>
+      </CustomLayout>
+    </FieldWrapper>
   );
 };
 

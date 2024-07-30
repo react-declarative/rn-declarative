@@ -10,8 +10,6 @@ import { useOneState } from "../../../context/StateProvider";
 
 import { ITextSlot } from "../../../slots/TextSlot";
 
-import makeTestId from "../../../helpers/makeTestId";
-
 const LOADING_LABEL = "Loading";
 
 /**
@@ -53,14 +51,12 @@ export const Text = ({
   onChange,
   onFocus,
   onBlur,
-  testId,
 }: ITextSlot) => {
   const payload = useOnePayload();
   const { object, changeObject: handleChange } = useOneState<object>();
   const error = useMemo(() => dirty && (invalid !== null || incorrect !== null), [dirty, invalid, incorrect]);
   return (
     <Input
-      {...makeTestId(testId)}
       label={title}
       size="medium"
       value={loading ? LOADING_LABEL : value}

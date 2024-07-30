@@ -42,11 +42,6 @@ import FieldWrapper from '../FieldWrapper/FieldWrapper';
 const APPLY_ATTEMPTS = 35;
 const APPLY_DELAY = 10;
 
-const defaultStyles = {
-    paddingRight: 8,
-    paddingBottom: 8,
-} as const;
-
 /**
  * Represents the configuration options for makeField hoc.
  *
@@ -570,7 +565,10 @@ export function makeField(
               tabletStyle,
               desktopStyle,
             },
-            defaultStyles,
+            {
+                paddingRight: oneConfig.MARGINS.mr,
+                paddingBottom: oneConfig.MARGINS.mb,
+            },
         );
 
         const computeReadonly = useCallback(() => {

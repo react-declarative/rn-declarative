@@ -9,8 +9,6 @@ import { IButtonSlot } from '../../../slots/ButtonSlot';
 
 import useActualValue from '../../../../../hooks/useActualValue';
 
-import makeTestId from '../../../helpers/makeTestId';
-
 const styles = StyleSheet.create({
     indicator: {
         justifyContent: 'center',
@@ -34,7 +32,6 @@ export const Button = ({
     placeholder,
     onFocus,
     onBlur,
-    testId,
 }: IButtonSlot) => {
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -65,7 +62,6 @@ export const Button = ({
             onPress={handlePress}
             onFocus={onFocus}
             onBlur={onBlur}
-            {...makeTestId(testId)}
             disabled={!!loading || disabled}
             accessoryLeft={loading ? <LoadingIndicator /> : undefined}
         >

@@ -4,6 +4,7 @@ import { TypedField as TypedFieldInternal } from './model/TypedField';
 import { IValidation as IValidationInternal } from './model/IValidation';
 import { IInvalidField as IInvalidFieldInternal } from './model/IInvalidField';
 import { StyleProperties as StylePropertiesInternal } from './model/StyleProperties';
+import { CompiledStyles as CompiledStylesInternal } from './model/CompiledStyles';
 import { IField as IFieldInternal } from './model/IField';
 import { IEntity as IEntityInternal } from './model/IEntity';
 import { IManaged as IManagedInternal } from './model/IManaged';
@@ -49,6 +50,7 @@ export type IFieldManaged<Data = IAnything, Value = IAnything> = IManagedInterna
 export type IInvalidField<Data = IAnything, Payload = IAnything> = IInvalidFieldInternal<Data, Payload>;
 export type IValidation = IValidationInternal;
 export type StyleProperties = StylePropertiesInternal;
+export type CompiledStyles = CompiledStylesInternal;
 
 export type OneHandler<Data = IAnything> = OneHandlerInternal<Data>;
 
@@ -131,7 +133,8 @@ export { trycatch } from './utils/hof/trycatch';
 export { sleep } from './utils/sleep';
 export { deepFlat } from './utils/deepFlat';
 
-export type { IBreakpoints } from './hooks/useMediaContext';
+export type { IBreakpoints } from './model/IBreakpoints';
+export type { IFieldMargins } from './model/IFieldMargins';
 
 export { BehaviorSubject } from './utils/rx/BehaviorSubject';
 export { EventEmitter } from './utils/rx/EventEmitter';
