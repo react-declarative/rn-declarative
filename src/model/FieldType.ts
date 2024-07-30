@@ -14,7 +14,6 @@ export enum FieldType {
     Init = 'init-field',
     Phony = 'phony-field',
     Button = 'button-field',
-    Complete = 'complete-field',
     Items = 'items-field',
     Fragment = 'fragment-layout',
     Condition = 'condition-layout',

@@ -8,7 +8,6 @@ import CompiledStyles from '../../../../model/CompiledStyles';
 
 const styles = StyleSheet.create({
     root: {
-        display: 'flex',
         flexDirection: 'column',
     },
     content: {

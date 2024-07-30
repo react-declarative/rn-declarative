@@ -74,6 +74,11 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     noBaseline?: boolean;
 
     /**
+     * Принудительно включает нижний baseline для текущей компоновки
+     */
+    baseline?: boolean;
+
+    /**
      * Список бизнес-функций, необходимых для отображения поля
      */
     features?: string[];

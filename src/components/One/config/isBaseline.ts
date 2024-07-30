@@ -6,23 +6,21 @@ import IField from "../../../model/IField";
  */
 export const baselineFields = new Set<FieldType>([
     FieldType.Combo,
-    FieldType.Complete,
     FieldType.Items,
     FieldType.Text,
-    FieldType.Button,
-    FieldType.Component,
+    FieldType.YesNo,
 ]);
 
 /**
  * Контейнер компоновки должен использовать flex-start для outlined
  * полей и flex-end для standard полей, чтобы выровнять нижний отчерк
  */
-export const isBaseline = ({ type, child, fields }: IField) => {
+export const isBaseline = ({ type, child, fields, baseline }: IField) => {
     if (type === FieldType.Fragment) {
         const innerFields: IField[] = child
             ? [child]
             : fields || [];
-        return innerFields.some(isBaseline);
+        return baseline || innerFields.some(isBaseline);
     }
     return baselineFields.has(type);
 };
