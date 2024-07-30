@@ -99,6 +99,7 @@ import { IComboSlot as IComboSlotInternal } from './components';
 import { IItemsSlot as IItemsSlotInternal } from './components';
 import { IRadioSlot as IRadioSlotInternal } from './components';
 import { ISwitchSlot as ISwitchSlotInternal } from './components';
+import { IButtonSlot as IButtonSlotInternal } from './components';
 import { ITextSlot as ITextSlotInternal } from './components';
 
 export type ICheckBoxSlot = ICheckBoxSlotInternal;
@@ -108,6 +109,7 @@ export type IItemsSlot = IItemsSlotInternal;
 export type IRadioSlot = IRadioSlotInternal;
 export type ISwitchSlot = ISwitchSlotInternal;
 export type ITextSlot = ITextSlotInternal;
+export type IButtonSlot = IButtonSlotInternal;
 
 export { randomString } from './utils/randomString';
 export { compareFulltext } from './utils/compareFulltext';

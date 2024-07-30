@@ -5,3 +5,4 @@ export * from './RadioSlot';
 export * from './SwitchSlot';
 export * from './TextSlot';
 export * from './YesNoSlot';
+export * from './ButtonSlot';
