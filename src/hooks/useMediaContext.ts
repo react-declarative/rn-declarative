@@ -85,7 +85,7 @@ const getConstraintSource = singleshot((breakpoints: IBreakpoints) => {
 export const useMediaContext = (breakpoints: IBreakpoints = BREAKPOINTS) => {
     const constraintSource = useSingleton(() => getConstraintSource(breakpoints));
     const [constraint, setConstraint] = useState(constraintSource.data!);
-    useEffect(constraintSource.subscribe(setConstraint), []);
+    useEffect(() => constraintSource.subscribe(setConstraint), []);
     return constraint;
 };
 
