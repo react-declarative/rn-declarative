@@ -37,6 +37,7 @@ import Subject from '../../../../utils/rx/Subject';
 import nameToTitle from '../../helpers/nameToTitle';
 
 import OneConfig, { GET_REF_SYMBOL } from '../OneConfig';
+import FieldWrapper from '../FieldWrapper/FieldWrapper';
 
 const APPLY_ATTEMPTS = 35;
 const APPLY_DELAY = 10;
@@ -605,7 +606,6 @@ export function makeField(
             disabled: fieldDisabled || disabled,
             readonly: computeReadonly(),
             dirty: dirty || upperDirty,
-            style: computedStyle,
             invalid,
             incorrect,
             value,
@@ -650,7 +650,9 @@ export function makeField(
         }
 
         return (
-            <Component {...componentProps as IManaged} />
+            <FieldWrapper style={computedStyle}>
+                <Component {...componentProps as IManaged} />
+            </FieldWrapper>
         );
     };
 

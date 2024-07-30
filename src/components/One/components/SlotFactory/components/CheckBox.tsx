@@ -29,7 +29,6 @@ export const CheckBox = ({
     onBlur,
     title,
     value,
-    style,
     testId,
 }: ICheckBoxSlot) => (
     <UiCheckBox
@@ -38,7 +37,7 @@ export const CheckBox = ({
         onChange={() => onChange(!value)}
         onFocus={onFocus}
         onBlur={onBlur}
-        style={[styles.root, style]}
+        style={styles.root}
         {...makeTestId(testId)}
     >
         {title}

@@ -54,7 +54,6 @@ export const Text = ({
   onFocus,
   onBlur,
   testId,
-  style,
 }: ITextSlot) => {
   const payload = useOnePayload();
   const { object, changeObject: handleChange } = useOneState<object>();
@@ -62,7 +61,6 @@ export const Text = ({
   return (
     <Input
       {...makeTestId(testId)}
-      style={style}
       label={title}
       size="medium"
       value={loading ? LOADING_LABEL : value}

@@ -2,37 +2,30 @@ import * as React from 'react';
 
 import { StyleSheet, View } from "react-native";
 
-import Adjust from './components/Adjust';
-
 import CompiledStyles from '../../../../model/CompiledStyles';
 
 const styles = StyleSheet.create({
     root: {
-        display: 'flex',
         flexDirection: 'column',
-    },
-    content: {
-        alignItems: 'flex-end',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
     },
 });
 
-interface IContainerProps {
+interface IFieldWrapperProps {
     style?: CompiledStyles;
     children: React.ReactNode;
 }
 
-export const Container = ({
+/**
+ * Если фон компонента не прозрачый, требуется сделать дополительный блок
+ * для `paddingRight`, `paddingBottom`.
+ */
+export const FieldWrapper = ({
     style,
     children,
-}: IContainerProps) => (
+}: IFieldWrapperProps) => (
     <View style={[styles.root, style]}>
-        <View style={styles.content}>
-            {children} 
-        </View>
-        <Adjust />
+        {children}
     </View>
 );
 
-export default Container;
+export default FieldWrapper;

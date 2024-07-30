@@ -65,7 +65,6 @@ export interface IRadioFieldPrivate<Data = IAnything> {
   onChange: PickProp<IManaged<Data>, "onChange">;
   name?: PickProp<IManaged<Data>, 'name'>;
   testId: PickProp<IManaged<Data>, 'testId'>;
-  style: PickProp<IManaged<Data>, 'style'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
 }
@@ -90,7 +89,6 @@ export const RadioField = ({
   title,
   radioValue,
   name = '',
-  style,
   testId,
   onFocus,
   onBlur,
@@ -104,7 +102,6 @@ export const RadioField = ({
     onFocus={onFocus}
     onBlur={onBlur}
     name={name}
-    style={style}
     testId={testId}
   />
 );

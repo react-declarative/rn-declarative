@@ -47,7 +47,6 @@ export const YesNoField = ({
   dirty,
   invalid,
   incorrect,
-  style,
   onChange,
 }: IYesNoSlot) => {
   const [labels, setLabels] = useState<Record<string, string>>({});
@@ -122,7 +121,6 @@ export const YesNoField = ({
       <Select
         key={"loading"}
         value="Loading"
-        style={style}
         selectedIndex={DEFAULT_INDEX}
         caption={(dirty && (invalid || incorrect)) || description}
         placeholder={placeholder}
@@ -140,7 +138,6 @@ export const YesNoField = ({
       disabled={disabled}
       selectedIndex={value}
       value={displayValue}
-      style={style}
       caption={(dirty && (invalid || incorrect)) || description}
       placeholder={placeholder}
       label={title}

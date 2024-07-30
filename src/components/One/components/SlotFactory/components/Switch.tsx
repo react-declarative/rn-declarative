@@ -24,7 +24,6 @@ export const Switch = ({
   onFocus,
   onBlur,
   title,
-  style,
   testId,
 }: ISwitchSlot) => {
   return (
@@ -34,7 +33,6 @@ export const Switch = ({
       onChange={() => onChange(!value)}
       onFocus={onFocus}
       onBlur={onBlur}
-      style={style}
       {...makeTestId(testId)}
     >
       {title}  

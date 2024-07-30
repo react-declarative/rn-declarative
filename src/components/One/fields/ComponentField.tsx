@@ -97,7 +97,6 @@ interface IComponentFieldPrivate<Data = IAnything> {
   incorrect: PickProp<IManaged<Data>, "incorrect">;
   readonly: PickProp<IManaged<Data>, "readonly">;
   testId: PickProp<IManaged<Data>, 'testId'>;
-  style: PickProp<IManaged<Data>, 'style'>;
   onChange: PickProp<IManaged<Data>, "onChange">;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;

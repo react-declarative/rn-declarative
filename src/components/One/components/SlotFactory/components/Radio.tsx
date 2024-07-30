@@ -37,7 +37,6 @@ export const Radio = ({
     title,
     radioValue,
     value,
-    style,
     testId,
     name = '',
 }: IRadioSlot) => {
@@ -85,7 +84,7 @@ export const Radio = ({
             onChange={() => handleChange(radioValue || null)}
             onFocus={onFocus}
             onBlur={onBlur}
-            style={[styles.root, style]}
+            style={styles.root}
             {...makeTestId(testId)}
         >
             {title}

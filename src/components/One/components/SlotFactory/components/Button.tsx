@@ -34,7 +34,6 @@ export const Button = ({
     placeholder,
     onFocus,
     onBlur,
-    style,
     testId,
 }: IButtonSlot) => {
 
@@ -66,7 +65,6 @@ export const Button = ({
             onPress={handlePress}
             onFocus={onFocus}
             onBlur={onBlur}
-            style={style}
             {...makeTestId(testId)}
             disabled={!!loading || disabled}
             accessoryLeft={loading ? <LoadingIndicator /> : undefined}

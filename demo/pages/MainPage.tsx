@@ -78,15 +78,15 @@ const fields: TypedField[] = [
         name: 'checkbox2',
     },
     {
-        type: FieldType.YesNo,
-        name: 'yesno',
-        placeholder: 'Unset',
-    },
-    {
         type: FieldType.Button,
         name: 'btn',
         title: 'Submit',
         press: (name, data) => console.log({ data }),
+    },
+    {
+        type: FieldType.YesNo,
+        name: 'yesno',
+        placeholder: 'Unset',
     },
 ];
 
