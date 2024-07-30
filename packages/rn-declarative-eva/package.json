@@ -67,14 +67,19 @@
     "README.md"
   ],
   "peerDependencies": {
+    "@ui-kitten/components": "*",
+    "@ui-kitten/eva-icons": "*",
     "react": "*",
     "react-native": "*",
+    "react-native-svg": "*",
     "rn-declarative": "*"
   },
   "devDependencies": {
     "@types/react": "18.0.21",
     "@typescript-eslint/eslint-plugin": "6.5.0",
     "@typescript-eslint/parser": "6.5.0",
+    "@ui-kitten/components": "5.3.1",
+    "@ui-kitten/eva-icons": "5.3.1",
     "dts-bundle": "0.7.3",
     "dts-minify": "0.3.0",
     "esbuild-node-externals": "1.6.0",
@@ -84,6 +89,7 @@
     "prettier": "3.2.5",
     "react": "18.2.0",
     "react-native": "0.71.6",
+    "react-native-svg": "9.4.0",
     "typescript": "4.6.2",
     "rn-declarative": "0.0.37"
   },

@@ -1,10 +1,11 @@
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 
+import { OneSlotFactory } from 'rn-declarative-eva';
+
 import * as eva from '@eva-design/eva';
 
 import MainPage from './pages/MainPage';
-import OneSlotFactory from './components/OneSlotFactory';
 
 export default function App() {
   return (
