@@ -155,7 +155,7 @@ export const Items = ({
                 caption={(dirty && (invalid || incorrect)) || description}
                 placeholder={placeholder}
                 label={title}
-                status={error ? "danger" : undefined}
+                status={error ? "danger" : "basic"}
                 disabled
             >
                 <SelectItem title='Loading' />
@@ -173,7 +173,7 @@ export const Items = ({
             caption={(dirty && (invalid || incorrect)) || description}
             placeholder={placeholder}
             label={title}
-            status={error ? "danger" : undefined}
+            status={error ? "danger" : "basic"}
             onSelect={(index) => {
                 if (Array.isArray(index)) {
                     handleChange(index.map(({ row }) => state.options[row]));

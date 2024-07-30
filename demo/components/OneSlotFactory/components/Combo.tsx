@@ -150,7 +150,7 @@ export const Combo = ({
         caption={(dirty && (invalid || incorrect)) || description}
         placeholder={placeholder}
         label={title}
-        status={error ? "danger" : undefined}
+        status={error ? "danger" : "basic"}
         disabled
       >
         <SelectItem title='Loading' />
@@ -167,7 +167,7 @@ export const Combo = ({
       label={title}
       size="medium"
       value={displayValue}
-      status={error ? "danger" : undefined}
+      status={error ? "danger" : "basic"}
       onSelect={(index) => {
         if (index instanceof IndexPath) {
           handleChange(state.options[index.row]);

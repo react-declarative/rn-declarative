@@ -57,7 +57,7 @@ export const Text = ({
       }}
       caption={(dirty && (invalid || incorrect)) || description}
       placeholder={placeholder}
-      status={error ? "danger" : undefined}
+      status={error ? "danger" : "basic"}
     />
   );
 };

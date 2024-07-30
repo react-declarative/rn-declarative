@@ -98,7 +98,7 @@ export const YesNoField = ({
         caption={(dirty && (invalid || incorrect)) || description}
         placeholder={placeholder}
         label={title}
-        status={error ? "danger" : undefined}
+        status={error ? "danger" : "basic"}
         disabled
       >
         <SelectItem title='Loading' />
@@ -115,7 +115,7 @@ export const YesNoField = ({
       placeholder={placeholder}
       label={title}
       size="medium"
-      status={error ? "danger" : undefined}
+      status={error ? "danger" : "basic"}
       onSelect={(index) => {
         if (index instanceof IndexPath) {
           handleChange(OPTIONS[index.row]);
