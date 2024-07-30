@@ -5,6 +5,7 @@ import { Dimensions } from 'react-native';
 import BehaviorSubject from '../utils/rx/BehaviorSubject';
 
 import singleshot from '../utils/hof/singleshot';
+import debounce from '../utils/hof/debounce';
 
 import IBreakpoints from '../model/IBreakpoints';
 
@@ -20,6 +21,8 @@ export const BREAKPOINTS: IBreakpoints = {
 
 const GRID_MAX_WIDTH = Number.POSITIVE_INFINITY;
 
+const RESIZE_DEBOUNCE = 200;
+
 interface IConstraint {
     isPhone: boolean;
     isTablet: boolean;
@@ -27,7 +30,6 @@ interface IConstraint {
     isWide: boolean;
     isMobile: boolean;
 }
-
 
 /**
  * Represents a function that returns a boolean value indicating whether a given width falls within a specified range.
@@ -60,10 +62,12 @@ const getConstraintSource = singleshot((breakpoints: IBreakpoints) => {
         };
     };
 
+    const resize = debounce((width) => result.next(compute(width)), RESIZE_DEBOUNCE);
+
     Dimensions.addEventListener(
         'change',
         ({ window }) => {
-          result.next(compute(window.width));
+            resize(window.width);
         },
     );
 
