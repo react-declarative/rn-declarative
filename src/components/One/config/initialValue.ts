@@ -37,8 +37,8 @@ type InitialValue = typeof initialValueMap;
 export const initialValue = (type: FieldType): InitialValue[keyof InitialValue] | string => {
   const initialValue = initialValueMap[type];
   if (initialValue === undefined) {
-    console.warn(`rn-declarative One initialValue unknown type ${type}`);
-    return '';
+    console.warn(`rn-declarative One initialValue unknown type ${String(type)}`);
+    return undefined as never;
   } else {
     return initialValue;
   }
