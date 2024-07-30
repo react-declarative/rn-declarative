@@ -1,8 +1,22 @@
 import { One, FieldType, TypedField, sleep } from 'rn-declarative';
 
 import { Text } from '@ui-kitten/components';
+import { ScrollView } from 'react-native';
 
 const fields: TypedField[] = [
+    {
+        type: FieldType.Component,
+        style: {
+            justifyContent: 'center',
+            width: '100%',
+            height: 125,
+        },
+        element: () => (
+            <Text category='h4'>
+                Adaptive columns
+            </Text>
+        ),
+    },
     {
         type: FieldType.Group,
         phoneStyle: {
@@ -17,6 +31,9 @@ const fields: TypedField[] = [
         fields: [
             {
                 type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
                 element: () => (
                     <Text category='h6'>
                         FieldType.Text
@@ -41,7 +58,7 @@ const fields: TypedField[] = [
                     required: true,
                 },
                 dirty: true,
-                name: 'text',
+                name: 'text_invalid',
                 title: 'Text',
                 description: 'Invalid',
             },
@@ -71,6 +88,9 @@ const fields: TypedField[] = [
         fields: [
             {
                 type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
                 element: () => (
                     <Text category='h6'>
                         FieldType.Combo
@@ -107,7 +127,7 @@ const fields: TypedField[] = [
                     required: true,
                 },
                 dirty: true,
-                name: 'combo',
+                name: 'combo_invalid',
                 title: 'Combo',
                 placeholder: 'combo',
                 description: 'Invalid',
@@ -144,6 +164,9 @@ const fields: TypedField[] = [
         fields: [
             {
                 type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
                 element: () => (
                     <Text category='h6'>
                         FieldType.Items
@@ -180,7 +203,7 @@ const fields: TypedField[] = [
                     required: true,
                 },
                 dirty: true,
-                name: 'items',
+                name: 'items_invalid',
                 title: 'Items',
                 placeholder: 'items',
                 description: 'Invalid',
@@ -217,6 +240,9 @@ const fields: TypedField[] = [
         fields: [
             {
                 type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
                 element: () => (
                     <Text category='h6'>
                         FieldType.YesNo
@@ -243,7 +269,7 @@ const fields: TypedField[] = [
                     required: true,
                 },
                 dirty: true,
-                name: 'yesno',
+                name: 'yesno_invalid',
                 title: 'YesNo',
                 placeholder: 'yesno',
                 description: 'Invalid',
@@ -275,141 +301,9 @@ const fields: TypedField[] = [
         fields: [
             {
                 type: FieldType.Component,
-                element: () => (
-                    <Text category='h6'>
-                        FieldType.Radio
-                    </Text>
-                ),
-            },
-            {
-                type: FieldType.Radio,
                 style: {
                     width: '100%',
                 },
-                name: 'radio',
-                radioValue: '1',
-                title: 'Radio 1',
-            },
-            {
-                type: FieldType.Radio,
-                style: {
-                    width: '100%',
-                },
-                name: 'radio',
-                radioValue: '2',
-                title: 'Radio 2',
-            },
-            {
-                type: FieldType.Radio,
-                style: {
-                    width: '100%',
-                },
-                name: 'radio',
-                radioValue: '3',
-                title: 'Radio 3',
-            },
-        ],
-    },
-    {
-        type: FieldType.Group,
-        phoneStyle: {
-            width: '100%',
-        },
-        tabletStyle: {
-            width: '50%',
-        },
-        desktopStyle: {
-            width: '25%',
-        },
-        fields: [
-            {
-                type: FieldType.Component,
-                element: () => (
-                    <Text category='h6'>
-                        FieldType.Switch
-                    </Text>
-                ),
-            },
-            {
-                type: FieldType.Switch,
-                style: {
-                    width: '100%',
-                },
-                name: 'switch',
-            },
-            {
-                type: FieldType.Switch,
-                style: {
-                    width: '100%',
-                },
-                name: 'switch',
-            },
-            {
-                type: FieldType.Switch,
-                style: {
-                    width: '100%',
-                },
-                name: 'switch',
-            },
-        ],
-    },
-    {
-        type: FieldType.Group,
-        phoneStyle: {
-            width: '100%',
-        },
-        tabletStyle: {
-            width: '50%',
-        },
-        desktopStyle: {
-            width: '25%',
-        },
-        fields: [
-            {
-                type: FieldType.Component,
-                element: () => (
-                    <Text category='h6'>
-                        FieldType.Checkbox
-                    </Text>
-                ),
-            },
-            {
-                type: FieldType.Checkbox,
-                style: {
-                    width: '100%',
-                },
-                name: 'checkbox1',
-            },
-            {
-                type: FieldType.Checkbox,
-                style: {
-                    width: '100%',
-                },
-                name: 'checkbox2',
-            },
-            {
-                type: FieldType.Checkbox,
-                style: {
-                    width: '100%',
-                },
-                name: 'checkbox2',
-            },
-        ],
-    },
-    {
-        type: FieldType.Group,
-        phoneStyle: {
-            width: '100%',
-        },
-        tabletStyle: {
-            width: '50%',
-        },
-        desktopStyle: {
-            width: '25%',
-        },
-        fields: [
-            {
-                type: FieldType.Component,
                 element: () => (
                     <Text category='h6'>
                         FieldType.Button
@@ -441,11 +335,242 @@ const fields: TypedField[] = [
             },
         ],
     },
+    {
+        type: FieldType.Group,
+        phoneStyle: {
+            width: '100%',
+        },
+        tabletStyle: {
+            width: '50%',
+        },
+        desktopStyle: {
+            width: '25%',
+        },
+        fields: [
+            {
+                type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
+                element: () => (
+                    <Text category='h6'>
+                        FieldType.Radio
+                    </Text>
+                ),
+            },
+            {
+                type: FieldType.Radio,
+                name: 'radio',
+                radioValue: '1',
+                title: 'Radio 1',
+            },
+            {
+                type: FieldType.Radio,
+                name: 'radio',
+                radioValue: '2',
+                title: 'Radio 2',
+            },
+            {
+                type: FieldType.Radio,
+                name: 'radio',
+                radioValue: '3',
+                title: 'Radio 3',
+            },
+        ],
+    },
+    {
+        type: FieldType.Group,
+        phoneStyle: {
+            width: '100%',
+        },
+        tabletStyle: {
+            width: '50%',
+        },
+        desktopStyle: {
+            width: '25%',
+        },
+        fields: [
+            {
+                type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
+                element: () => (
+                    <Text category='h6'>
+                        FieldType.Switch
+                    </Text>
+                ),
+            },
+            {
+                type: FieldType.Switch,
+                name: 'switch',
+            },
+            {
+                type: FieldType.Switch,
+                name: 'switch',
+            },
+            {
+                type: FieldType.Switch,
+                name: 'switch',
+            },
+        ],
+    },
+    {
+        type: FieldType.Group,
+        phoneStyle: {
+            width: '100%',
+        },
+        tabletStyle: {
+            width: '50%',
+        },
+        desktopStyle: {
+            width: '25%',
+        },
+        fields: [
+            {
+                type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
+                element: () => (
+                    <Text category='h6'>
+                        FieldType.Checkbox
+                    </Text>
+                ),
+            },
+            {
+                type: FieldType.Checkbox,
+                name: 'checkbox1',
+            },
+            {
+                type: FieldType.Checkbox,
+                name: 'checkbox2',
+            },
+            {
+                type: FieldType.Checkbox,
+                name: 'checkbox2',
+            },
+        ],
+    },
+    {
+        type: FieldType.Component,
+        style: {
+            justifyContent: 'center',
+            width: '100%',
+            height: 125,
+        },
+        element: () => (
+            <Text category='h4'>
+                Adaptive form
+            </Text>
+        ),
+    },
+    {
+        type: FieldType.Group,
+        style: {
+            width: '100%',
+        },
+        fields: [
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                inputMultiline: true,
+                name: 'text',
+                title: 'Text',
+                description: 'Multi line',
+            },
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                name: 'text',
+                title: 'Text',
+                description: 'Single line',
+            },
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                name: 'text',
+                title: 'Text',
+                description: 'Single line',
+            },
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                name: 'text',
+                title: 'Text',
+                description: 'Single line',
+            },
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                name: 'text',
+                title: 'Text',
+                description: 'Single line',
+            },
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                name: 'text',
+                title: 'Text',
+                description: 'Single line',
+            },
+        ],
+    },
 ];
 
 export const MainPage = () => {
     return (
-        <One fields={fields} onChange={console.log} />
+        <ScrollView>
+            <One fields={fields} onChange={console.log} />
+        </ScrollView>
     );
 };
 

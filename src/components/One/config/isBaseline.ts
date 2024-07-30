@@ -22,7 +22,7 @@ export const isBaseline = ({ type, child, fields, baseline }: IField) => {
             : fields || [];
         return baseline || innerFields.some(isBaseline);
     }
-    return baselineFields.has(type);
+    return baseline || baselineFields.has(type);
 };
 
 export default isBaseline;

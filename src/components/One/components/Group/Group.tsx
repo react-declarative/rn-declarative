@@ -1,12 +1,13 @@
 import * as React from "react";
 
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import { IManagedLayout, PickProp } from "../../../../model/IManaged";
 import IAnything from "../../../../model/IAnything";
 import IField from "../../../../model/IField";
 
 import OneConfig, { GET_REF_SYMBOL } from "../OneConfig";
+import Adjust from "./components/Adjust";
 
 import useMediaContext from "../../../../hooks/useMediaContext";
 import useSingleton from "../../../../hooks/useSingleton";
@@ -15,8 +16,7 @@ import useManagedStyle from "../../hooks/useManagedStyle";
 import makeTestId from "../../helpers/makeTestId";
 
 const defaultStyle =  {
-  flexDirection: 'row',
-  flexWrap: 'wrap',
+  flexDirection: 'column',
 } as const;
 
 /**
@@ -40,6 +40,19 @@ interface IGroupPrivate {
   children: React.ReactNode;
   isBaselineAlign?: boolean;
 }
+
+const styles = StyleSheet.create({
+  baseline: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-end',
+  },
+  noBaseline: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+  },
+})
 
 /**
  * Group component
@@ -82,7 +95,7 @@ export const Group = ({
     },
     {
       ...defaultStyle,
-      alignItems: isBaselineAlign ? 'flex-end': 'flex-start',
+      justifyContent: isBaselineAlign ? 'flex-end': 'flex-start',
     },
   );
 
@@ -91,7 +104,10 @@ export const Group = ({
       style={computedStyle}
       {...makeTestId(testId)}
     >
-      {children}
+      <View style={isBaselineAlign ? styles.baseline : styles.noBaseline}>
+        {children}
+      </View>
+      {!isBaselineAlign && <Adjust />}
     </View>
   )
 };

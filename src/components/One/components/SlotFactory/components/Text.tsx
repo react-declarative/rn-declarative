@@ -59,7 +59,7 @@ export const Text = ({
     <Input
       label={title}
       size="medium"
-      value={loading ? LOADING_LABEL : value}
+      value={loading ? LOADING_LABEL : value || ""}
       disabled={disabled || loading}
       multiline={inputMultiline}
       accessoryRight={TrailingIcon ? (

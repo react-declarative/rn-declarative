@@ -10,15 +10,15 @@ const styles = StyleSheet.create({
     root: {
         flexDirection: 'column',
     },
-    content: {
+    withBaseline: {
+        alignItems: 'flex-end',
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
-    withBaseline: {
-        alignItems: 'flex-end',
-    },
     noBaseline: {
         alignItems: 'flex-start',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     },
 });
 
@@ -33,11 +33,11 @@ export const Container = ({
     style,
     children,
 }: IContainerProps) => (
-    <View style={[styles.root, isBaselineAlign ? styles.withBaseline : styles.noBaseline, style]}>
-        <View style={styles.content}>
+    <View style={[styles.root, style]}>
+        <View style={isBaselineAlign ? styles.withBaseline : styles.noBaseline}>
             {children} 
         </View>
-        <Adjust />
+        {!isBaselineAlign && <Adjust />}
     </View>
 );
 
