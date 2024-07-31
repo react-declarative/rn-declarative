@@ -19,6 +19,7 @@ const fields: TypedField[] = [
     },
     {
         type: FieldType.Group,
+        baseline: true, // TODO: write yoga bug 
         style: {
             width: '100%',
         },
@@ -293,54 +294,15 @@ const fields: TypedField[] = [
                     },
                 ]
             },
-            {
-                type: FieldType.Group,
-                phoneStyle: {
-                    width: '100%',
-                },
-                tabletStyle: {
-                    width: '50%',
-                },
-                desktopStyle: {
-                    width: '25%',
-                },
-                fields: [
-                    {
-                        type: FieldType.Component,
-                        style: {
-                            width: '100%',
-                        },
-                        element: () => (
-                            <Text category='h6'>
-                                FieldType.Button
-                            </Text>
-                        ),
-                    },
-                    {
-                        type: FieldType.Button,
-                        style: {
-                            width: '100%',
-                        },
-                        name: 'button',
-                        title: 'Primary',
-                        press: async () => {
-                            await sleep(3_000);
-                        },
-                    },
-                    {
-                        type: FieldType.Button,
-                        style: {
-                            width: '100%',
-                        },
-                        name: 'button',
-                        disabled: true,
-                        title: 'Disabled',
-                        press: async () => {
-                            await sleep(3_000);
-                        },
-                    },
-                ],
-            },
+        ]
+    },
+    {
+        type: FieldType.Group,
+        baseline: true, // TODO: write yoga bug 
+        style: {
+            width: '100%',
+        },
+        fields: [
             {
                 type: FieldType.Group,
                 phoneStyle: {
