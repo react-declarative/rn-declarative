@@ -93,41 +93,60 @@ const fields: TypedField[] = [
                 },
                 element: () => (
                     <Text category='h6'>
-                        FieldType.Text
+                        FieldType.Combo
                     </Text>
                 ),
             },
             {
-                type: FieldType.Text,
+                type: FieldType.Combo,
                 style: {
                     width: '100%',
                 },
-                name: 'text',
-                title: 'Text',
-                description: 'Single line',
+                itemList: [
+                    'Test 1',
+                    'Test 2',
+                    'Test 3',
+                ],
+                name: 'combo',
+                title: 'Combo',
+                placeholder: 'combo',
+                description: 'Default',
             },
             {
-                type: FieldType.Text,
+                type: FieldType.Combo,
+                noDeselect: true,
                 style: {
                     width: '100%',
                 },
+                itemList: [
+                    'Test 1',
+                    'Test 2',
+                    'Test 3',
+                ],
                 validation: {
                     required: true,
                 },
                 dirty: true,
-                name: 'text_invalid',
-                title: 'Text',
+                name: 'combo_invalid',
+                title: 'Combo',
+                placeholder: 'combo',
                 description: 'Invalid',
             },
             {
-                type: FieldType.Text,
+                type: FieldType.Combo,
+                noDeselect: true,
                 style: {
                     width: '100%',
                 },
-                inputMultiline: true,
-                name: 'text',
-                title: 'Text',
-                description: 'Multi line',
+                itemList: [
+                    'Test 1',
+                    'Test 2',
+                    'Test 3',
+                ],
+                name: 'combo',
+                title: 'Combo',
+                placeholder: 'combo',
+                description: 'No deselect',
             },
         ],
     },
@@ -150,98 +169,60 @@ const fields: TypedField[] = [
                 },
                 element: () => (
                     <Text category='h6'>
-                        FieldType.Text
+                        FieldType.Items
                     </Text>
                 ),
             },
             {
-                type: FieldType.Text,
+                type: FieldType.Items,
                 style: {
                     width: '100%',
                 },
-                name: 'text',
-                title: 'Text',
-                description: 'Single line',
+                itemList: [
+                    'Test 1',
+                    'Test 2',
+                    'Test 3',
+                ],
+                name: 'items',
+                title: 'Items',
+                placeholder: 'items',
+                description: 'Default',
             },
             {
-                type: FieldType.Text,
+                type: FieldType.Items,
+                noDeselect: true,
                 style: {
                     width: '100%',
                 },
+                itemList: [
+                    'Test 1',
+                    'Test 2',
+                    'Test 3',
+                ],
                 validation: {
                     required: true,
                 },
                 dirty: true,
-                name: 'text_invalid',
-                title: 'Text',
+                name: 'items_invalid',
+                title: 'Items',
+                placeholder: 'items',
                 description: 'Invalid',
             },
             {
-                type: FieldType.Text,
+                type: FieldType.Items,
+                noDeselect: true,
                 style: {
                     width: '100%',
                 },
-                inputMultiline: true,
-                name: 'text',
-                title: 'Text',
-                description: 'Multi line',
-            },
-        ],
-    },
-        {
-        type: FieldType.Group,
-        phoneStyle: {
-            width: '100%',
-        },
-        tabletStyle: {
-            width: '50%',
-        },
-        desktopStyle: {
-            width: '25%',
-        },
-        fields: [
-            {
-                type: FieldType.Component,
-                style: {
-                    width: '100%',
-                },
-                element: () => (
-                    <Text category='h6'>
-                        FieldType.Text
-                    </Text>
-                ),
-            },
-            {
-                type: FieldType.Text,
-                style: {
-                    width: '100%',
-                },
-                name: 'text',
-                title: 'Text',
-                description: 'Single line',
-            },
-            {
-                type: FieldType.Text,
-                style: {
-                    width: '100%',
-                },
-                validation: {
-                    required: true,
-                },
-                dirty: true,
-                name: 'text_invalid',
-                title: 'Text',
-                description: 'Invalid',
-            },
-            {
-                type: FieldType.Text,
-                style: {
-                    width: '100%',
-                },
-                inputMultiline: true,
-                name: 'text',
-                title: 'Text',
-                description: 'Multi line',
+                itemList: [
+                    'Test 1',
+                    'Test 2',
+                    'Test 3',
+                ],
+                name: 'items',
+                title: 'Items',
+                placeholder: 'items',
+                description: 'No deselect',
             },
         ],
     },
