@@ -28,6 +28,11 @@ interface IContainerProps {
     children: React.ReactNode;
 }
 
+/**
+ * В Yoga layout есть баг, если корневой компонент не baseline,
+ * часть компоновок не покажется. Не зависит от UI kit, в будущем, нужно
+ * добавить ветвление стилей и убрать `<Adjust />` для `noBaseline`
+ */
 export const Container = ({
     style,
     children,
