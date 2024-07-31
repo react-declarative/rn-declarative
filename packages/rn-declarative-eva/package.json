@@ -1,7 +1,7 @@
 {
   "name": "rn-declarative-eva",
-  "version": "0.0.39",
-  "description": "A lighter version of the react-declarative which exports the <One /> component and dependencies only and as such makes the library slightly faster and smaller. Unlike react-declarative, it doesn't provide any additional overhead like state management. For a note, that library should be used when you want to use <One /> forms in existing app",
+  "version": "0.0.40",
+  "description": "A responsive layout for the react-native",
   "private": false,
   "author": {
     "name": "Petr Tripolsky",
@@ -15,32 +15,18 @@
   "license": "MIT",
   "homepage": "https://react-declarative-playground.github.io",
   "keywords": [
-    "react",
-    "typescript",
-    "state-management",
-    "frontend",
-    "material-ui",
-    "MUI",
-    "declarative",
-    "form-validation",
-    "layout-engine",
-    "grid-system",
-    "declarative-programming",
-    "json-endpoint",
-    "standalone",
-    "nested-grids",
-    "layout-grid",
-    "intellisense",
-    "code-autocomplete",
-    "form-builder"
+    "react-native",
+    "ui-kitten",
+    "ui-kit",
+    "responsive"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/react-declarative/react-declarative-lite",
+    "url": "https://github.com/react-declarative/rn-declarative",
     "documentation": "https://github.com/react-declarative/react-declarative/tree/master/docs"
   },
   "bugs": {
-    "url": "https://github.com/react-declarative/react-declarative-lite/issues"
+    "url": "https://github.com/react-declarative/rn-declarative/issues"
   },
   "main": "dist/index.modern.js",
   "module": "dist/index.modern.js",

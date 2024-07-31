@@ -1,8 +1,8 @@
 # ⚛️ rn-declarative
 
-> Adaptive layout for the `react-native`
+> Responsive layout for the `react-native`
 
-![screencast](./assets/screencast.gif)
+![screencast](https://github.com/react-declarative/rn-declarative/blob/HEAD/assets/screencast.gif)
 
 ## Installation
 
@@ -32,7 +32,7 @@ FieldType.Group, FieldType.Fragment, FieldType.Layout, FieldType.Condition
 
 ## Code sample
 
-> Adaptive Forms for the React Native
+> Responsive Forms for the React Native
 
 ```tsx
 import { One, FieldType, TypedField } from 'rn-declarative';
