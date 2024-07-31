@@ -1,27 +1,14 @@
 import * as React from "react";
 
-import { Toggle } from '@ui-kitten/components';
-import { ISwitchSlot } from 'rn-declarative';
+import { Text } from '@ui-kitten/components';
 
-export const Switch = ({
-  disabled,
-  value,
-  onChange,
-  onFocus,
-  onBlur,
-  title,
-}: ISwitchSlot) => {
-  return (
-    <Toggle
-      checked={Boolean(value)}
-      disabled={disabled}
-      onChange={() => onChange(!value)}
-      onFocus={onFocus}
-      onBlur={onBlur}
-    >
-      {title}  
-    </Toggle>
-  );
-};
+import { ISwitchSlot } from "rn-declarative";
+
+export const Switch = ({}: ISwitchSlot) => (
+  <Text>
+    FieldType.Switch is not provided (see OneSlotFactory)
+  </Text>
+);
+
 
 export default Switch;
