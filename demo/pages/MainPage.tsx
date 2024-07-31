@@ -288,6 +288,531 @@ const fields: TypedField[] = [
         ]
     },
     {
+        type: FieldType.Group,
+        phoneStyle: {
+            width: '100%',
+        },
+        tabletStyle: {
+            width: '50%',
+        },
+        desktopStyle: {
+            width: '25%',
+        },
+        fields: [
+            {
+                type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
+                element: () => (
+                    <Text category='h6'>
+                        FieldType.YesNo
+                    </Text>
+                ),
+            },
+            {
+                type: FieldType.YesNo,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Default',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                validation: {
+                    required: true,
+                },
+                dirty: true,
+                name: 'yesno_invalid',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Invalid',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'No deselect',
+            },
+        ]
+    },
+    {
+        type: FieldType.Group,
+        phoneStyle: {
+            width: '100%',
+        },
+        tabletStyle: {
+            width: '50%',
+        },
+        desktopStyle: {
+            width: '25%',
+        },
+        fields: [
+            {
+                type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
+                element: () => (
+                    <Text category='h6'>
+                        FieldType.YesNo
+                    </Text>
+                ),
+            },
+            {
+                type: FieldType.YesNo,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Default',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                validation: {
+                    required: true,
+                },
+                dirty: true,
+                name: 'yesno_invalid',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Invalid',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'No deselect',
+            },
+        ]
+    },
+    {
+        type: FieldType.Group,
+        phoneStyle: {
+            width: '100%',
+        },
+        tabletStyle: {
+            width: '50%',
+        },
+        desktopStyle: {
+            width: '25%',
+        },
+        fields: [
+            {
+                type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
+                element: () => (
+                    <Text category='h6'>
+                        FieldType.YesNo
+                    </Text>
+                ),
+            },
+            {
+                type: FieldType.YesNo,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Default',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                validation: {
+                    required: true,
+                },
+                dirty: true,
+                name: 'yesno_invalid',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Invalid',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'No deselect',
+            },
+        ]
+    },
+    {
+        type: FieldType.Group,
+        phoneStyle: {
+            width: '100%',
+        },
+        tabletStyle: {
+            width: '50%',
+        },
+        desktopStyle: {
+            width: '25%',
+        },
+        fields: [
+            {
+                type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
+                element: () => (
+                    <Text category='h6'>
+                        FieldType.YesNo
+                    </Text>
+                ),
+            },
+            {
+                type: FieldType.YesNo,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Default',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                validation: {
+                    required: true,
+                },
+                dirty: true,
+                name: 'yesno_invalid',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Invalid',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'No deselect',
+            },
+        ]
+    },
+    {
+        type: FieldType.Group,
+        phoneStyle: {
+            width: '100%',
+        },
+        tabletStyle: {
+            width: '50%',
+        },
+        desktopStyle: {
+            width: '25%',
+        },
+        fields: [
+            {
+                type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
+                element: () => (
+                    <Text category='h6'>
+                        FieldType.YesNo
+                    </Text>
+                ),
+            },
+            {
+                type: FieldType.YesNo,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Default',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                validation: {
+                    required: true,
+                },
+                dirty: true,
+                name: 'yesno_invalid',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Invalid',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'No deselect',
+            },
+        ]
+    },
+    {
+        type: FieldType.Group,
+        phoneStyle: {
+            width: '100%',
+        },
+        tabletStyle: {
+            width: '50%',
+        },
+        desktopStyle: {
+            width: '25%',
+        },
+        fields: [
+            {
+                type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
+                element: () => (
+                    <Text category='h6'>
+                        FieldType.YesNo
+                    </Text>
+                ),
+            },
+            {
+                type: FieldType.YesNo,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Default',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                validation: {
+                    required: true,
+                },
+                dirty: true,
+                name: 'yesno_invalid',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'Invalid',
+            },
+            {
+                type: FieldType.YesNo,
+                noDeselect: true,
+                style: {
+                    width: '100%',
+                },
+                name: 'yesno',
+                title: 'YesNo',
+                placeholder: 'yesno',
+                description: 'No deselect',
+            },
+        ]
+    },
+    {
+        type: FieldType.Group,
+        phoneStyle: {
+            width: '100%',
+        },
+        tabletStyle: {
+            width: '50%',
+        },
+        desktopStyle: {
+            width: '25%',
+        },
+        fields: [
+            {
+                type: FieldType.Component,
+                style: {
+                    width: '100%',
+                },
+                element: () => (
+                    <Text category='h6'>
+                        FieldType.Checkbox
+                    </Text>
+                ),
+            },
+            {
+                type: FieldType.Checkbox,
+                baseline: true,
+                style: {
+                    width: '100%',
+                },
+                name: 'checkbox1',
+            },
+            {
+                type: FieldType.Checkbox,
+                style: {
+                    width: '100%',
+                },
+                name: 'checkbox2',
+            },
+            {
+                type: FieldType.Checkbox,
+                style: {
+                    width: '100%',
+                },
+                name: 'checkbox2',
+            },
+        ],
+    },
+    {
+        type: FieldType.Component,
+        style: {
+            justifyContent: 'center',
+            width: '100%',
+            height: 125,
+        },
+        element: () => (
+            <Text category='h4'>
+                Adaptive form
+            </Text>
+        ),
+    },
+    {
+        type: FieldType.Group,
+        style: {
+            width: '100%',
+        },
+        fields: [
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                inputMultiline: true,
+                name: 'text',
+                title: 'Text',
+                description: 'Multi line',
+            },
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                name: 'text',
+                title: 'Text',
+                description: 'Single line',
+            },
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                name: 'text',
+                title: 'Text',
+                description: 'Single line',
+            },
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                name: 'text',
+                title: 'Text',
+                description: 'Single line',
+            },
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                name: 'text',
+                title: 'Text',
+                description: 'Single line',
+            },
+            {
+                type: FieldType.Text,
+                phoneStyle: {
+                    width: '100%',
+                },
+                tabletStyle: {
+                    width: '50%',
+                },
+                desktopStyle: {
+                    width: '33%',
+                },
+                name: 'text',
+                title: 'Text',
+                description: 'Single line',
+            },
+        ],
+    },
+    {
         type: FieldType.Component,
         style: {
             justifyContent: 'center',
