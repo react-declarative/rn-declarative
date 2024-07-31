@@ -65,6 +65,8 @@ export { One, OneTyped, OneConfig } from './components';
 
 export { OneSlotFactory, OneDefaultSlots } from './components';
 
+export { isBaseline, isBaselineSimple, isBaselineForRoot } from './components';
+
 export { createField, makeField } from './components';
 export { createLayout, makeLayout } from './components';
 

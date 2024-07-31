@@ -27,21 +27,24 @@ interface IContainerProps {
     isBaselineAlign?: boolean;
     children: React.ReactNode;
 }
-
 /**
  * В Yoga layout есть баг, если корневой компонент не baseline,
- * часть компоновок не покажется. Не зависит от UI kit, в будущем, нужно
- * добавить ветвление стилей и убрать `<Adjust />` для `noBaseline`
+ * часть компоновок не покажется. Не зависит от UI kit
+ * 
+ * Поэтому, вместо `isBaseline` используется `isBaselineSimple`, которая включает
+ * baseline всегда, если не указано `noBaseline`
  */
+const isBaselineAlign = true;
+
 export const Container = ({
     style,
     children,
 }: IContainerProps) => (
     <View style={[styles.root, style]}>
-        <View style={styles.withBaseline}>
+        <View style={isBaselineAlign ? styles.withBaseline : styles.noBaseline}>
             {children} 
         </View>
-        <Adjust />
+        {!isBaselineAlign && <Adjust />}
     </View>
 );
 

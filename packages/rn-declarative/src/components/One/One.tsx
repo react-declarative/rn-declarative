@@ -17,6 +17,8 @@ import useManagedProps from './hooks/useManagedProps';
 import createFieldInternal from './config/createField';
 import createLayoutInternal from './config/createLayout';
 
+import isBaselineInternal from './config/isBaselineSimple';
+
 const DEFAULT_ONFOCUS = () => null;
 const DEFAULT_ONBLUR = () => null;
 const DEFAULT_ONPRESS = () => null;
@@ -58,6 +60,8 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
     const {
         createField = createFieldInternal,
         createLayout = createLayoutInternal,
+        isBaseline = isBaselineInternal,
+        isBaselineForRoot = isBaselineInternal,
         apiRef,
         changeSubject,
         reloadSubject,
@@ -193,6 +197,8 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
         ...memoizedProps,
         createField,
         createLayout,
+        isBaseline,
+        isBaselineForRoot,
         features,
     } as unknown as IOneProps<Data, IField<Data>>;
 

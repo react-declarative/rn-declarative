@@ -65,6 +65,7 @@ export const OneGenesis = <
   const oneConfig = useSingleton(OneConfig[GET_REF_SYMBOL]);
 
   const {
+    isBaselineForRoot = isBaselineForField,
     change = DEFAULT_CHANGE,
     ready = DEFAULT_READY,
     fields = [],
@@ -176,7 +177,7 @@ export const OneGenesis = <
    * Корневой компонент привязывает поля к нижнему краю только если
    * нет ни одной компоновки
    */
-  const isBaselineAlign = useMemo(() => fieldsSnapshot.every(isBaselineForField), []);
+  const isBaselineAlign = useMemo(() => fieldsSnapshot.every(isBaselineForRoot), []);
 
   return (
     <CacheProvider>

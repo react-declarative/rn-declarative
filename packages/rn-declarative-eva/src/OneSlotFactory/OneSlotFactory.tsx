@@ -15,7 +15,7 @@ interface IOneSlotFactoryProps {
     children: React.ReactNode;
 }
 
-const defaultSlots = {
+export const defaultSlots = {
     CheckBox,
     Combo,
     Items,

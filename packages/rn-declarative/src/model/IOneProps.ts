@@ -49,6 +49,16 @@ export interface IOneProps<Data = IAnything, Payload = IAnything, Field = IField
    */
   updateSubject?: TSubject<Data>;
   /**
+   * Функция, определяющая, нужно ли включить baseline зависимо от
+   * расположения поля в иерархии композиции потомков
+   */
+  isBaseline?: (field: IField) => boolean;
+  /**
+   * Корневой компонент привязывает поля к нижнему краю только если
+   * нет ни одной компоновки
+   */
+  isBaselineForRoot?: (field: IField) => boolean;
+  /**
    * Фабрика для создания полей пользователя
    */
   createField?: (entity: IEntity<Data>, currentPath: string) => React.ReactElement;

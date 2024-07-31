@@ -2,9 +2,9 @@ import * as React from "react";
 import { memo, useRef, useCallback, useEffect, Fragment, useMemo } from "react";
 
 import isStatefull, { isLayout } from "../../config/isStatefull";
+import isBaselineInternal from "../../config/isBaselineSimple";
 import createLayoutInternal from "../../config/createLayout";
 import createFieldInternal from "../../config/createField";
-import isBaseline from "../../config/isBaseline";
 
 import { useOneState } from "../../context/StateProvider";
 import { useOneCache } from "../../context/CacheProvider";
@@ -135,6 +135,7 @@ export const OneInternal = <
   dirty,
   ready = DEFAULT_READY_CALLBACK,
   prefix = "root",
+  isBaseline = isBaselineInternal,
   invalidity = DEFAULT_INVALIDITY_CALLBACK,
   fallback = DEFAULT_FALLBACK,
   readonly,

@@ -1,5 +1,8 @@
 export * from './One';
 export * from './slots';
+export { isBaseline } from './config/isBaseline';
+export { isBaselineSimple } from './config/isBaselineSimple';
+export { isBaselineForField as isBaselineForRoot } from './config/isBaseline'; 
 export { makeTestId } from './helpers/makeTestId';
 export { OneConfig } from './components/OneConfig';
 export { createField } from './config/createField';
