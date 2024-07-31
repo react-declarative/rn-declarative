@@ -9,6 +9,11 @@ export const baselineFields = new Set<FieldType>([
     FieldType.Items,
     FieldType.Text,
     FieldType.YesNo,
+    FieldType.Switch,
+    FieldType.Radio,
+    FieldType.Checkbox,
+    FieldType.Component,
+    FieldType.Button,
 ]);
 
 /**
