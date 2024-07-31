@@ -1,6 +1,6 @@
 # ⚛️ rn-declarative
 
-> Adaptive layout for `react-native`
+> Adaptive layout for the `react-native`
 
 ![screencast](./assets/screencast.gif)
 
@@ -21,16 +21,18 @@ npm i @ui-kitten/components @eva-design/eva react-native-svg rn-declarative rn-d
 The `rn-declarative` contains the following fields
 
 ```tsx
-FieldType.Combo, FieldType.Items, FieldType.Text, FieldType.YesNo, FieldType.Switch, FieldType.Radio, FieldType.Checkbox, FieldType.Component, FieldType.Button,
+FieldType.Combo, FieldType.Items, FieldType.Text, FieldType.YesNo, FieldType.Switch, FieldType.Radio, FieldType.Checkbox, FieldType.Component, FieldType.Button
 ```
 
 And layouts
 
 ```tsx
-FieldType.Group, FieldType.Fragment, FieldType.Layout, FieldType.Condition,
+FieldType.Group, FieldType.Fragment, FieldType.Layout, FieldType.Condition
 ```
 
-## Adaptive Forms for React Native
+## Code sample
+
+> Adaptive Forms for the React Native
 
 ```tsx
 import { One, FieldType, TypedField } from 'rn-declarative';
