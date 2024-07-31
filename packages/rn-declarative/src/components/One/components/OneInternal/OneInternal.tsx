@@ -268,7 +268,7 @@ export const OneInternal = <
             isBaselineAlign:
               baselineMap.get(field) === undefined
                 ? !!baselineMap
-                    .set(field, !field.noBaseline && fields.some(isBaseline))
+                    .set(field, isBaseline(field))
                     .get(field)
                 : !!baselineMap.get(field),
             ...field,

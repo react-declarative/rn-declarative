@@ -1,6 +1,8 @@
 import FieldType from "../../../model/FieldType";
 import IField from "../../../model/IField";
 
+import { isLayout } from "./isStatefull";
+
 /**
  * Set of FieldType values representing the baseline fields.
  */
@@ -20,14 +22,27 @@ export const baselineFields = new Set<FieldType>([
  * Контейнер компоновки должен использовать flex-start для outlined
  * полей и flex-end для standard полей, чтобы выровнять нижний отчерк
  */
-export const isBaseline = ({ type, child, fields, baseline }: IField) => {
-    if (type === FieldType.Fragment) {
-        const innerFields: IField[] = child
-            ? [child]
-            : fields || [];
-        return baseline || innerFields.some(isBaseline);
+export const isBaseline = ({ type, noBaseline, child, fields, baseline }: IField) => {
+    const innerFields: IField[] = child ? [child] : fields || [];
+    if (noBaseline) {
+        return false;
     }
-    return baseline || baselineFields.has(type);
+    if (baseline) {
+        return true;
+    }
+    if (isLayout(type)) {
+        return innerFields
+            .some(({ noBaseline, baseline, type }) => {
+                if (noBaseline) {
+                    return false;
+                }
+                if (baseline) {
+                    return true;
+                }
+                return baselineFields.has(type);
+            });
+    }
+    return baselineFields.has(type);
 };
 
 export default isBaseline;
