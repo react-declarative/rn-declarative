@@ -1,6 +1,6 @@
 {
   "name": "rn-declarative",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "A lighter version of the react-declarative which exports the <One /> component and dependencies only and as such makes the library slightly faster and smaller. Unlike react-declarative, it doesn't provide any additional overhead like state management. For a note, that library should be used when you want to use <One /> forms in existing app",
   "private": false,
   "author": {

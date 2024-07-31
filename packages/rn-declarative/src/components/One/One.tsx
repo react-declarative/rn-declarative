@@ -29,6 +29,7 @@ const DEFAULT_ONLOADSTART = () => null;
 const DEFAULT_ONLOADEND = () => null;
 const DEFAULT_READTRANSFORM = (value: Value) => value;
 const DEFAULT_WRITETRANSFORM = (value: Value) => value;
+const DEFAULT_ROOT_BASELINE = () => true;
 
 /**
  * Creates a json template engine called `One` with the given props.
@@ -61,7 +62,7 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
         createField = createFieldInternal,
         createLayout = createLayoutInternal,
         isBaseline = isBaselineInternal,
-        isBaselineForRoot = isBaselineInternal,
+        isBaselineForRoot = DEFAULT_ROOT_BASELINE,
         apiRef,
         changeSubject,
         reloadSubject,
