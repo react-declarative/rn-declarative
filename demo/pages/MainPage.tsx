@@ -6,7 +6,6 @@ import { ScrollView } from 'react-native';
 const fields: TypedField[] = [
     {
         type: FieldType.Component,
-        baseline: true,
         style: {
             justifyContent: 'center',
             width: '100%',
@@ -20,6 +19,7 @@ const fields: TypedField[] = [
     },
     {
         type: FieldType.Group,
+        baseline: true, // TODO: write yoga bug 
         style: {
             width: '100%',
         },
@@ -765,7 +765,6 @@ const fields: TypedField[] = [
                     },
                     {
                         type: FieldType.Checkbox,
-                        baseline: true,
                         name: 'checkbox1',
                     },
                     {
@@ -782,7 +781,6 @@ const fields: TypedField[] = [
     },
     {
         type: FieldType.Component,
-        noBaseline: true,
         style: {
             justifyContent: 'center',
             width: '100%',
