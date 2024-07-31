@@ -151,6 +151,7 @@ export { getAvailableFields } from './utils/getAvailableFields';
 export { getInitialData } from './utils/getInitialData';
 export { getInvalidFields } from './utils/getInvalidFields';
 export { getFieldsError } from './utils/getFieldsError';
+export { getFieldsVariant } from './utils/getFieldsVariant';
 
 export { isInvalidFieldData } from './utils/isInvalidFieldData';
 
