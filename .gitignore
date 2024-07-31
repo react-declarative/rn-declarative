@@ -1,8 +1,2 @@
 node_modules
-packages
-dist/**/*.d.ts
-dist/**/*.js.map
-dist/**/*.js
-dist/**/*.txt
 .DS_Store
-.vscode
