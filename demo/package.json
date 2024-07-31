@@ -10,7 +10,7 @@
     "react-native": "0.74.1",
     "react-native-svg": "15.2.0",
     "react-native-web": "~0.19.6",
-    "rn-declarative": "^0.0.43",
+    "rn-declarative": "^0.0.44",
     "rn-declarative-eva": "^0.0.37"
   },
   "devDependencies": {
