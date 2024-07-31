@@ -23,7 +23,6 @@ export const baselineFields = new Set<FieldType>([
  * полей и flex-end для standard полей, чтобы выровнять нижний отчерк
  */
 export const isBaseline = ({ type, noBaseline, child, fields, baseline }: IField) => {
-    const innerFields: IField[] = child ? [child] : fields || [];
     if (noBaseline) {
         return false;
     }
@@ -31,7 +30,9 @@ export const isBaseline = ({ type, noBaseline, child, fields, baseline }: IField
         return true;
     }
     if (isLayout(type)) {
+        const innerFields: IField[] = child ? [child] : fields || [];
         return innerFields
+            .filter(({ type }) => type === FieldType.Fragment || type === FieldType.Condition)
             .some(({ noBaseline, baseline, type }) => {
                 if (noBaseline) {
                     return false;
