@@ -19,31 +19,41 @@ export const baselineFields = new Set<FieldType>([
 ]);
 
 /**
- * Контейнер компоновки должен использовать flex-start для outlined
- * полей и flex-end для standard полей, чтобы выровнять нижний отчерк
+ * Для поля нужно проверить флаги и наличие в списке
  */
-export const isBaseline = ({ type, noBaseline, child, fields, baseline }: IField) => {
+export const isBaselineForField = ({ type, noBaseline, baseline }: IField) => {
     if (noBaseline) {
         return false;
     }
     if (baseline) {
         return true;
     }
-    if (isLayout(type)) {
-        const innerFields: IField[] = child ? [child] : fields || [];
-        return innerFields
-            .filter(({ type }) => type === FieldType.Fragment || type === FieldType.Condition)
-            .some(({ noBaseline, baseline, type }) => {
-                if (noBaseline) {
-                    return false;
-                }
-                if (baseline) {
-                    return true;
-                }
-                return baselineFields.has(type);
-            });
-    }
     return baselineFields.has(type);
+}
+
+/**
+ * Для компоновки все дочерние поля должны быть не компоновками
+ * на один уровень вложенности без рекурсии
+ *                             ^^^^^^^^^^^^
+ */
+const isBaselineForLayout = ({ noBaseline, baseline, child, fields }: IField) => {
+    if (noBaseline) {
+        return false;
+    }
+    if (baseline) {
+        return true;
+    }
+    const innerFields: IField[] = child
+        ? [child]
+        : fields || [];
+    return innerFields.every(isBaselineForField);
 };
+
+export const isBaseline = (field: IField) => {
+    if (isLayout(field.type)) {
+        return isBaselineForLayout(field)
+    }
+    return isBaselineForField(field);
+}
 
 export default isBaseline;

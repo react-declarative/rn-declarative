@@ -19,7 +19,7 @@ import RadioProvider from "../../context/RadioProvider";
 import DebounceProvider from "../../context/DebounceProvider";
 import OneContextProvider from "../../context/OneContextProvider";
 
-import isBaseline from "../../config/isBaseline";
+import { isBaselineForField } from "../../config/isBaseline";
 
 import SlotFactory from "../SlotFactory";
 import Container from "../Container";
@@ -173,11 +173,10 @@ export const OneGenesis = <
   const testId = rendered ? READY_CLASS : BASE_CLASS;
 
   /**
-   * Determines if the baseline alignment is true.
-   *
-   * @typedef isBaselineAlign
+   * Корневой компонент привязывает поля к нижнему краю только если
+   * нет ни одной компоновки
    */
-  const isBaselineAlign = useMemo(() => fieldsSnapshot.some(isBaseline), []);
+  const isBaselineAlign = useMemo(() => fieldsSnapshot.every(isBaselineForField), []);
 
   return (
     <CacheProvider>
