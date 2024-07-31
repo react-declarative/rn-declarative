@@ -29,15 +29,14 @@ interface IContainerProps {
 }
 
 export const Container = ({
-    isBaselineAlign,
     style,
     children,
 }: IContainerProps) => (
     <View style={[styles.root, style]}>
-        <View style={isBaselineAlign ? styles.withBaseline : styles.noBaseline}>
+        <View style={styles.withBaseline}>
             {children} 
         </View>
-        {!isBaselineAlign && <Adjust />}
+        <Adjust />
     </View>
 );
 
