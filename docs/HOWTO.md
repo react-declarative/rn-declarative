@@ -2,7 +2,7 @@
 
 > The challenges encountered when porting a classic React application to React Native are discussed in this article. It focuses on supporting various device form factors, including the Galaxy Fold.
 
-## Проблема
+## The problem
 
 Some time ago, I started developing a mobile application with React Native. The issue is that the application needs to support both the Galaxy Fold and Samsung DeX.
 
