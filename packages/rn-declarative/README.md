@@ -1,6 +1,6 @@
 # ⚛️ rn-declarative
 
-> Responsive layout for the `react-native`
+> Responsive layout for the `react-native`. Documentation published in [this article](https://github.com/react-declarative/rn-declarative/blob/master/docs/HOWTO.md)
 
 ![screencast](https://github.com/react-declarative/rn-declarative/blob/HEAD/assets/screencast.gif)
 
