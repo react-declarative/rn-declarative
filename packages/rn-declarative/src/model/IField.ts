@@ -133,6 +133,40 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     trailingIconPress?: (value: Value, data: Data, payload: Payload, onValueChange: (v: Value) => void, onChange: (data: Data) => void) => void;
 
     /**
+     * Поля, специфичные для SliderField
+     */
+    minSlider?: number;
+    maxSlider?: number;
+    stepSlider?: number;
+    labelFormatSlider?: (v: number) => string | number;
+
+    /**
+     * Максимальное число для высчитывания процента
+     * (минимальное число всегда ноль)
+     */
+    maxPercent?: number;
+
+    /**
+     * Отключает отчерк у линии
+     */
+    lineTransparent?: boolean;
+
+    /**
+     * Показывает процент числом слева
+     */
+    showPercentLabel?: boolean;
+
+    /**
+     * Подсказки для CompleteField
+     */
+    tip?: string[] | ((value: string, data: Data, payload: Payload) => (string[] | Promise<string[]>));
+
+    /**
+     * Коллбек выбора элемента из CompleteField
+     */
+    tipSelect?: (value: string, data: Data, payload: Payload, onChange: (data: Data) => void) => void;
+
+    /**
      * Поле, позволяющее передавать собственные значения в FieldType.Items и FieldType.Combo
      */
     freeSolo?: boolean;

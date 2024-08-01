@@ -24,6 +24,12 @@ const initialValueMap = {
   [FieldType.Component]: null,
   [FieldType.Init]: null,
   [FieldType.YesNo]: null,
+  [FieldType.Complete]: '',
+  [FieldType.Date]: null,
+  [FieldType.Progress]: '',
+  [FieldType.Rating]: null,
+  [FieldType.Slider]: 0,
+  [FieldType.Time]: null,
 };
 
 type InitialValue = typeof initialValueMap;

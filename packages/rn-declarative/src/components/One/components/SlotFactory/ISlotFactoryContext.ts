@@ -9,6 +9,13 @@ import { ISwitchSlot } from '../../slots/SwitchSlot';
 import { IYesNoSlot } from '../../slots/YesNoSlot';
 import { IButtonSlot } from '../../slots/ButtonSlot';
 
+import { ICompleteSlot } from '../../slots/CompleteSlot';
+import { IDateSlot } from '../../slots/DateSlot';
+import { IProgressSlot } from '../../slots/ProgressSlot';
+import { IRatingSlot } from '../../slots/RatingSlot';
+import { ISliderSlot } from '../../slots/SliderSlot';
+import { ITimeSlot } from '../../slots/TimeSlot';
+
 /**
  * A context object that provides access to various component types used by the slot factory.
  * @typedef ISlotFactoryContext
@@ -30,6 +37,12 @@ export interface ISlotFactoryContext {
     Radio: ComponentType<IRadioSlot>;
     Text: ComponentType<ITextSlot>;
     Switch: ComponentType<ISwitchSlot>;
+    Complete: ComponentType<ICompleteSlot>;
+    Date: ComponentType<IDateSlot>;
+    Progress: ComponentType<IProgressSlot>;
+    Rating: ComponentType<IRatingSlot>;
+    Slider: ComponentType<ISliderSlot>;
+    Time: ComponentType<ITimeSlot>;
 }
 
 export default ISlotFactoryContext;

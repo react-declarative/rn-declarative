@@ -104,6 +104,13 @@ import { ISwitchSlot as ISwitchSlotInternal } from './components';
 import { IButtonSlot as IButtonSlotInternal } from './components';
 import { ITextSlot as ITextSlotInternal } from './components';
 
+import { ICompleteSlot as ICompleteSlotInternal } from './components';
+import { IDateSlot as IDateSlotInternal } from './components';
+import { IProgressSlot as IProgressSlotInternal } from './components';
+import { IRatingSlot as IRatingSlotInternal } from './components';
+import { ISliderSlot as ISliderSlotInternal } from './components';
+import { ITimeSlot as ITimeSlotInternal } from './components';
+
 export type ICheckBoxSlot = ICheckBoxSlotInternal;
 export type IComboSlot = IComboSlotInternal;
 export type IYesNoSlot = IYesNoSlotInternal;
@@ -112,6 +119,13 @@ export type IRadioSlot = IRadioSlotInternal;
 export type ISwitchSlot = ISwitchSlotInternal;
 export type ITextSlot = ITextSlotInternal;
 export type IButtonSlot = IButtonSlotInternal;
+
+export type ICompleteSlot = ICompleteSlotInternal;
+export type IDateSlot = IDateSlotInternal;
+export type IProgressSlot = IProgressSlotInternal;
+export type IRatingSlot = IRatingSlotInternal;
+export type ISliderSlot = ISliderSlotInternal;
+export type ITimeSlot = ITimeSlotInternal;
 
 export { randomString } from './utils/randomString';
 export { compareFulltext } from './utils/compareFulltext';

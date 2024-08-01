@@ -9,6 +9,13 @@ import Text from './components/Text';
 import Switch from './components/Switch';
 import YesNo from './components/YesNo';
 
+import Complete from './components/Complete';
+import Date from './components/Date';
+import Progress from './components/Progress';
+import Rating from './components/Rating';
+import Slider from './components/Slider';
+import Time from './components/Time';
+
 import ISlotFactoryContext from './ISlotFactoryContext';
 
 /**
@@ -31,6 +38,12 @@ export const defaultSlots: ISlotFactoryContext = {
     Text,
     Switch,
     YesNo,
+    Complete,
+    Date,
+    Progress,
+    Rating,
+    Slider,
+    Time,
 };
 
 export const SlotContext = createContext<ISlotFactoryContext>(defaultSlots);

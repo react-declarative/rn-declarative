@@ -16,6 +16,12 @@ export const baselineFields = new Set<FieldType>([
     FieldType.Checkbox,
     FieldType.Component,
     FieldType.Button,
+    FieldType.Complete,
+    FieldType.Date,
+    FieldType.Progress,
+    FieldType.Rating,
+    FieldType.Slider,
+    FieldType.Time,
 ]);
 
 /**

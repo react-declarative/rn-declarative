@@ -15,6 +15,13 @@ import InitField from "../fields/InitField";
 import YesNoField from "../fields/YesNoField";
 import ButtonField from "../fields/ButtonField";
 
+import CompleteField from "../fields/CompleteField";
+import DateField from "../fields/DateField";
+import ProgressField from "../fields/ProgressField";
+import RatingField from "../fields/RatingField";
+import SliderField from "../fields/SliderField";
+import TimeField from "../fields/TimeField";
+
 const fieldMap: { [key in FieldType]?: React.ComponentType<IEntity> } = Object.create(null);
 
 /**
@@ -43,6 +50,12 @@ Object.assign(fieldMap, {
   [FieldType.YesNo]: YesNoField,
   [FieldType.Init]: InitField,
   [FieldType.Button]: ButtonField,
+  [FieldType.Complete]: CompleteField,
+  [FieldType.Date]: DateField,
+  [FieldType.Progress]: ProgressField,
+  [FieldType.Rating]: RatingField,
+  [FieldType.Slider]: SliderField,
+  [FieldType.Time]: TimeField,
 });
 
 /**
