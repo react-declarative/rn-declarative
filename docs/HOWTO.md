@@ -1,36 +1,35 @@
 # Адаптивная верстка на React Native
 
-> Описание проблем, возникших при портировании классического React приложения в React Native можно прочитать в этой статье. Речь идет о поддержке различных форм факторов устройств, в том числе, Galaxy Fold
+> The challenges encountered when porting a classic React application to React Native are discussed in this article. It focuses on supporting various device form factors, including the Galaxy Fold.
 
 ## Проблема
 
-Некоторое время назад начал разработку мобильного приложения на React Native. Проблема в том, что требованием к приложению является Galaxy Fold и Samsung DeX
+Some time ago, I started developing a mobile application with React Native. The issue is that the application needs to support both the Galaxy Fold and Samsung DeX.
 
 ![fold](../assets/fold.png)
 
-Как следствие, встал вопрос реализации адаптивной верстки форм.Одно и тоже приложение должно рисовать формы в одну колонку в режиме телефона и две колонки в режиме планшета. Если писать разный код компоновок, придется дублировать логику форм, как минимум, новое поле добавляется два раза.
-
+As a result, the question of implementing adaptive layout forms arose. The same application needs to render forms in a single column mode on phones and two columns in tablet mode. If different layout codes are written, it would require duplicating form logic; at the very least, a new field would be added twice.
 ![dex](../assets/dex.png)
 
-Yoga Layout, движок верстки из React Native, поддерживает только flexbox. В результате, грамотно реализовать верстку, избегая излишней вложенности View, является нетривиальной задачей: вложенные группы должны отображаться от верхнего края родителя, поля ввода должны равняться на нижний край строки отображения (baseline)
+Yoga Layout, the layout engine from React Native, only supports flexbox. Consequently, implementing layouts correctly while avoiding excessive nesting of Views is a non-trivial task: nested groups must be displayed from the top edge of the parent, and input fields must align to the bottom edge of the display line (baseline).
 
 ![top_baseline](../assets/top_baseline.png)
 
-Если принебречь правилом привязки групп полей к верхнему краю, получится уродство
+Ignoring the rule of binding field groups to the top edge results in an ugly layout.
 
 ![bottom_baseline_issue](../assets/bottom_baseline_issue.png)
 
-Поля внутри группы должны быть привязаны к нижнему краю строки
+Fields within a group should be bound to the bottom edge of the row.
 
 ![bottom_baseline](../assets/bottom_baseline.png)
 
-Уродство при верхнем baseline для полей не очевидно с первого взгляда, но очень бросается при использование standard полей из Material 1 на Android 4
+The ugliness of having a top baseline for fields is not immediately obvious but becomes very noticeable when using standard fields from Material 1 on Android 4.
 
 ![top_baseline_issue](../assets/top_baseline_issue.png)
 
-## Решение проблемы
+## Solution
 
-Для того, чтобы делегировать сложную задачу грамотной компоновки форм более дешевому специалисту, был разработан шаблонизатор, генерирующий верстку по указанным выше правилам из JSON шаблона. Пример шаблона в блоке кода ниже
+To delegate the complex task of proper form layout to a less specialized developer, a templating system was developed that generates layouts according to the rules mentioned above from a JSON template. An example template is shown in the code block below:
 
 ```tsx
 import { One, FieldType, TypedField } from 'rn-declarative';
@@ -131,7 +130,7 @@ export const MainPage = () => {
 export default MainPage;
 ```
 
-Библиотека разделена на два модуля: [rn-declarative](https://www.npmjs.com/package/rn-declarative) и [rn-declarative-eva](https://www.npmjs.com/package/rn-declarative-eva). Первая содержит базовую логику и не зависит от UI kit: может быть установлена в любом проекте не зависимо от версии `react-native` или фреймворка (поддерживается как `Expo`, так и starter kit от `react-native-community`). Кроме `react` и `react-native` других зависимостей нет.
+The library is divided into two modules: [rn-declarative](https://www.npmjs.com/package/rn-declarative)  and [rn-declarative-eva](https://www.npmjs.com/package/rn-declarative-eva) . The first contains the core logic and does not depend on a UI kit: it can be installed in any project regardless of the `react-native` version or framework (both `Expo` and `react-native-community` starter kits are supported). Besides `react` and `react-native`, there are no other dependencies.
 
 ```tsx
 import { useMediaContext } from 'rn-declarative'
@@ -141,7 +140,7 @@ import { useMediaContext } from 'rn-declarative'
 const { isPhone, isTablet, isDesktop } = useMediaContext();
 ```
 
-Настройка ширины компоновок и полей осуществляется через свойства объектов `phoneStyle`, `tabletStyle` и `desktopStyle`. Если не хотим менять стиль исходя из форм-фактора устройства, можно написать просто `style`. Подключение UI Kit осуществляется через контекст с слотами `<OneSlotFactory />` для подключения реализации `FieldType`.
+Layout and field widths are configured using `phoneStyle`, `tabletStyle`, and `desktopStyle` properties. If you don't want to change the style based on the device form factor, you can just use `style`. Connecting a UI Kit is done through the context with slots `<OneSlotFactory />` for implementing `FieldType`.
 
 ```tsx
 import { Toggle } from '@ui-kitten/components';
@@ -190,7 +189,7 @@ const defaultSlots = {
 </OneSlotFactory>
 ```
 
-P.S. Любой другой компонент или пользовательскую верстку можно прозрачно интегрировать через `FieldType.Component` (есть `onChange` и `value`) или `FieldType.Layout`
+P.S. Any other component or custom layout can be seamlessly integrated through `FieldType.Component` (with `onChange` and `value`) or `FieldType.Layout`.
 
 ```tsx
 {
@@ -214,7 +213,7 @@ P.S. Любой другой компонент или пользователь�
 },
 ```
 
-Код компонента опубликован на Github, посмотреть можно по ссылке:
-[https://github.com/react-declarative/rn-declarative/](https://github.com/react-declarative/rn-declarative/)
+The component code is published on GitHub and can be viewed at:
+[https://github.com/react-declarative/rn-declarative/](https://github.com/react-declarative/rn-declarative/) 
 
-Спасибо за внимание!
+Thank you for your attention!
