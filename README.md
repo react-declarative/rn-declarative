@@ -4,6 +4,8 @@
 
 ![screencast](./assets/screencast.gif)
 
+The howto guide available [by the link](https://github.com/react-declarative/rn-declarative/tree/master/docs/HOWTO.md)
+
 ## Installation
 
 The package is split into two parts: [rn-declarative](https://www.npmjs.com/package/rn-declarative) and [rn-declarative-eva](https://www.npmjs.com/package/rn-declarative-eva). The `rn-declarative` manage the core part: It independent from any UI Kit and can be easely installed to any project. The `rn-declarative-eva` contains bindings to the [UI Kitten](https://akveo.github.io/react-native-ui-kitten/) - an open source ui components for `react-native` build on top of [Eva Design](https://eva.design/). By replacing `rn-declarative-eva` package you can connect the `rn-declarative` to any UI kit, for example, [react-native-paper](https://reactnativepaper.com/)
