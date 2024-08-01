@@ -27,6 +27,13 @@ import { ITextFieldProps } from '../components/One/fields/TextField';
 import { IYesNoFieldProps } from '../components/One/fields/YesNoField';
 import { IInitFieldProps } from '../components/One/fields/InitField';
 
+import { ICompleteFieldProps } from '../components/One/fields/CompleteField';
+import { IDateFieldProps } from '../components/One/fields/DateField';
+import { IProgressFieldProps } from '../components/One/fields/ProgressField';
+import { IRatingFieldProps } from '../components/One/fields/RatingField';
+import { ISliderFieldProps } from '../components/One/fields/SliderField';
+import { ITimeFieldProps } from '../components/One/fields/TimeField';
+
 /**
  * Исключения из правила
  */
@@ -93,6 +100,15 @@ type YesNo<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<Fie
 type Init<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Init, IInitFieldProps, Data, Payload>;
 type Phony<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Phony, IPhonyField, Data, Payload>;
 
+
+type Complete<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Complete, ICompleteFieldProps<Data, Payload>, Data, Payload>;
+type Date<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Date, IDateFieldProps<Data, Payload>, Data, Payload>;
+type Progress<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Progress, IProgressFieldProps<Data, Payload>, Data, Payload>;
+type Rating<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Rating, IRatingFieldProps<Data, Payload>, Data, Payload>;
+type Slider<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Slider, ISliderFieldProps<Data, Payload>, Data, Payload>;
+type Time<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Time, ITimeFieldProps<Data, Payload>, Data, Payload>;
+
+
 /**
  * Логическое ветвление компонентов
  * Typescript type-guard
@@ -102,6 +118,12 @@ export type TypedFieldRegistry<Data = IAnything, Payload = IAnything, Target = a
   : Target extends Checkbox<Data, Payload> ? Checkbox<Data, Payload>
   : Target extends Button<Data, Payload> ? Button<Data, Payload>
   : Target extends Combo<Data, Payload> ? Combo<Data, Payload>
+  : Target extends Complete<Data, Payload> ? Complete<Data, Payload>
+  : Target extends Date<Data, Payload> ? Date<Data, Payload>
+  : Target extends Progress<Data, Payload> ? Progress<Data, Payload>
+  : Target extends Rating<Data, Payload> ? Rating<Data, Payload>
+  : Target extends Slider<Data, Payload> ? Slider<Data, Payload>
+  : Target extends Time<Data, Payload> ? Time<Data, Payload>
   : Target extends Component<Data, Payload> ? Component<Data, Payload>
   : Target extends Items<Data, Payload> ? Items<Data, Payload>
   : Target extends Radio<Data, Payload> ? Radio<Data, Payload>

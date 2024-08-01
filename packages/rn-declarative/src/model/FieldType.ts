@@ -17,6 +17,14 @@ export enum FieldType {
     Items = 'items-field',
     Fragment = 'fragment-layout',
     Condition = 'condition-layout',
+
+    Complete = 'complete-field',
+    Date = 'date-field',
+    Progress = 'progress-field',
+    Rating = 'rating-field',
+    Slider = 'slider-field',
+    Time = 'time-field',
+
 };
 
 Object.entries(FieldType).forEach(([key, value]) => {
