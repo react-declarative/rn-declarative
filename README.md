@@ -334,7 +334,7 @@ const fields: TypedField[] = [
     },
     {
         type: FieldType.Group,
-        baseline: true, // TODO: write yoga bug 
+        baseline: true,
         style: {
             width: '100%',
         },
