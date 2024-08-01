@@ -1,4 +1,4 @@
-# Адаптивная верстка на React Native
+# Responsive Layout in React Native
 
 > The challenges encountered when porting a classic React application to React Native are discussed in this article. It focuses on supporting various device form factors, including the Galaxy Fold.
 
