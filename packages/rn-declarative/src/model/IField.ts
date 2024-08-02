@@ -339,6 +339,12 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      * Компонент отображения else для condition
      */
     conditionElse?: React.ComponentType<{ data: Data; payload: Payload }>;
+
+    /**
+     * Функция для выбора документа из справочника
+     * для useSearchModal
+     */
+    choose?: (data: Data, payload: Payload) => (Promise<string | string[] | null> | string | string[] | null);
 }
 
 export default IField;

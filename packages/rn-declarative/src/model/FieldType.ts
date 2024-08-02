@@ -24,7 +24,7 @@ export enum FieldType {
     Rating = 'rating-field',
     Slider = 'slider-field',
     Time = 'time-field',
-
+    Choose = 'choose-field',
 };
 
 Object.entries(FieldType).forEach(([key, value]) => {

@@ -15,6 +15,7 @@ import { IProgressSlot } from '../../slots/ProgressSlot';
 import { IRatingSlot } from '../../slots/RatingSlot';
 import { ISliderSlot } from '../../slots/SliderSlot';
 import { ITimeSlot } from '../../slots/TimeSlot';
+import { IChooseSlot } from '../../slots/ChooseSlot';
 
 /**
  * A context object that provides access to various component types used by the slot factory.
@@ -43,6 +44,7 @@ export interface ISlotFactoryContext {
     Rating: ComponentType<IRatingSlot>;
     Slider: ComponentType<ISliderSlot>;
     Time: ComponentType<ITimeSlot>;
+    Choose: ComponentType<IChooseSlot>;
 }
 
 export default ISlotFactoryContext;

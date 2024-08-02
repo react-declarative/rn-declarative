@@ -33,6 +33,7 @@ import { IProgressFieldProps } from '../components/One/fields/ProgressField';
 import { IRatingFieldProps } from '../components/One/fields/RatingField';
 import { ISliderFieldProps } from '../components/One/fields/SliderField';
 import { ITimeFieldProps } from '../components/One/fields/TimeField';
+import { IChooseFieldProps } from '../components/One/fields/ChooseField';
 
 /**
  * Исключения из правила
@@ -107,6 +108,7 @@ type Progress<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<
 type Rating<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Rating, IRatingFieldProps<Data, Payload>, Data, Payload>;
 type Slider<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Slider, ISliderFieldProps<Data, Payload>, Data, Payload>;
 type Time<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Time, ITimeFieldProps<Data, Payload>, Data, Payload>;
+type Choose<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Choose, IChooseFieldProps<Data, Payload>, Data, Payload>;
 
 
 /**
@@ -124,6 +126,7 @@ export type TypedFieldRegistry<Data = IAnything, Payload = IAnything, Target = a
   : Target extends Rating<Data, Payload> ? Rating<Data, Payload>
   : Target extends Slider<Data, Payload> ? Slider<Data, Payload>
   : Target extends Time<Data, Payload> ? Time<Data, Payload>
+  : Target extends Choose<Data, Payload> ? Choose<Data, Payload>
   : Target extends Component<Data, Payload> ? Component<Data, Payload>
   : Target extends Items<Data, Payload> ? Items<Data, Payload>
   : Target extends Radio<Data, Payload> ? Radio<Data, Payload>

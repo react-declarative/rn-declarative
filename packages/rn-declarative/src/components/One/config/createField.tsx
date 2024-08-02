@@ -21,6 +21,7 @@ import ProgressField from "../fields/ProgressField";
 import RatingField from "../fields/RatingField";
 import SliderField from "../fields/SliderField";
 import TimeField from "../fields/TimeField";
+import ChooseField from "../fields/ChooseField";
 
 const fieldMap: { [key in FieldType]?: React.ComponentType<IEntity> } = Object.create(null);
 
@@ -56,6 +57,7 @@ Object.assign(fieldMap, {
   [FieldType.Rating]: RatingField,
   [FieldType.Slider]: SliderField,
   [FieldType.Time]: TimeField,
+  [FieldType.Choose]: ChooseField,
 });
 
 /**
