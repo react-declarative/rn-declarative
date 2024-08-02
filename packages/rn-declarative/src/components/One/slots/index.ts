@@ -12,3 +12,4 @@ export * from './ProgressSlot';
 export * from './RatingSlot';
 export * from './SliderSlot';
 export * from './TimeSlot';
+export * from './ChooseSlot';

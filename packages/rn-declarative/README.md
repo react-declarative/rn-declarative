@@ -1,6 +1,6 @@
 # ⚛️ rn-declarative
 
-> Responsive layout for the `react-native`
+> Responsive layout for `react-native`
 
 ![screencast](./assets/screencast.gif)
 

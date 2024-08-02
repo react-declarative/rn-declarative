@@ -30,6 +30,7 @@ const initialValueMap = {
   [FieldType.Rating]: null,
   [FieldType.Slider]: 0,
   [FieldType.Time]: null,
+  [FieldType.Choose]: null,
 };
 
 type InitialValue = typeof initialValueMap;

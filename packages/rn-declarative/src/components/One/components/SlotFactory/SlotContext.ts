@@ -15,6 +15,7 @@ import Progress from './components/Progress';
 import Rating from './components/Rating';
 import Slider from './components/Slider';
 import Time from './components/Time';
+import Choose from './components/Choose';
 
 import ISlotFactoryContext from './ISlotFactoryContext';
 
@@ -44,6 +45,7 @@ export const defaultSlots: ISlotFactoryContext = {
     Rating,
     Slider,
     Time,
+    Choose,
 };
 
 export const SlotContext = createContext<ISlotFactoryContext>(defaultSlots);
