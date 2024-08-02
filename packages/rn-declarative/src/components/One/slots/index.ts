@@ -14,3 +14,4 @@ export * from './SliderSlot';
 export * from './TimeSlot';
 export * from './ChooseSlot';
 export * from './TypographySlot';
+export * from './TreeSlot';

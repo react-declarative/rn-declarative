@@ -32,6 +32,7 @@ const initialValueMap = {
   [FieldType.Time]: null,
   [FieldType.Choose]: null,
   [FieldType.Typography]: "",
+  [FieldType.Tree]: null,
 };
 
 type InitialValue = typeof initialValueMap;
