@@ -2,6 +2,7 @@ export type { ISize } from './model/ISize';
 
 import { TypedField as TypedFieldInternal } from './model/TypedField';
 import { IValidation as IValidationInternal } from './model/IValidation';
+import { ITreeNode as ITreeNodeInternal } from './model/ITreeNode';
 import { IInvalidField as IInvalidFieldInternal } from './model/IInvalidField';
 import { StyleProperties as StylePropertiesInternal } from './model/StyleProperties';
 import { CompiledStyles as CompiledStylesInternal } from './model/CompiledStyles';
@@ -49,6 +50,7 @@ export type IFieldEntity<Data = IAnything, Payload = IAnything> = IEntityInterna
 export type IFieldManaged<Data = IAnything, Value = IAnything> = IManagedInternal<Data, Value>;
 export type IInvalidField<Data = IAnything, Payload = IAnything> = IInvalidFieldInternal<Data, Payload>;
 export type IValidation = IValidationInternal;
+export type ITreeNode = ITreeNodeInternal;
 export type StyleProperties = StylePropertiesInternal;
 export type CompiledStyles = CompiledStylesInternal;
 
@@ -112,6 +114,8 @@ import { ISliderSlot as ISliderSlotInternal } from './components';
 import { ITimeSlot as ITimeSlotInternal } from './components';
 import { IChooseSlot as IChooseSlotInternal } from './components';
 import { ITypographySlot as ITypographySlotInternal } from './components';
+import { ITreeSlot as ITreeSlotInternal } from './components';
+
 
 export type ICheckBoxSlot = ICheckBoxSlotInternal;
 export type IComboSlot = IComboSlotInternal;
@@ -130,6 +134,7 @@ export type ISliderSlot = ISliderSlotInternal;
 export type ITimeSlot = ITimeSlotInternal;
 export type IChooseSlot = IChooseSlotInternal;
 export type ITypographySlot = ITypographySlotInternal;
+export type ITreeSlot = ITreeSlotInternal;
 
 export { randomString } from './utils/randomString';
 export { compareFulltext } from './utils/compareFulltext';

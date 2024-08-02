@@ -35,6 +35,7 @@ import { ISliderFieldProps } from '../components/One/fields/SliderField';
 import { ITimeFieldProps } from '../components/One/fields/TimeField';
 import { IChooseFieldProps } from '../components/One/fields/ChooseField';
 import { ITypographyFieldProps } from '../components/One/fields/TypographyField';
+import { ITreeFieldProps } from '../components/One/fields/TreeField';
 
 /**
  * Исключения из правила
@@ -111,7 +112,7 @@ type Slider<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<Fi
 type Time<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Time, ITimeFieldProps<Data, Payload>, Data, Payload>;
 type Choose<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Choose, IChooseFieldProps<Data, Payload>, Data, Payload>;
 type Typography<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Typography, ITypographyFieldProps<Data, Payload>, Data, Payload>;
-
+type Tree<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Tree, ITreeFieldProps<Data, Payload>, Data, Payload>;
 
 /**
  * Логическое ветвление компонентов
@@ -130,6 +131,7 @@ export type TypedFieldRegistry<Data = IAnything, Payload = IAnything, Target = a
   : Target extends Time<Data, Payload> ? Time<Data, Payload>
   : Target extends Choose<Data, Payload> ? Choose<Data, Payload>
   : Target extends Typography<Data, Payload> ? Typography<Data, Payload>
+  : Target extends Tree<Data, Payload> ? Tree<Data, Payload>
   : Target extends Component<Data, Payload> ? Component<Data, Payload>
   : Target extends Items<Data, Payload> ? Items<Data, Payload>
   : Target extends Radio<Data, Payload> ? Radio<Data, Payload>

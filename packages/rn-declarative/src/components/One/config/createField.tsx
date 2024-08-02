@@ -23,6 +23,7 @@ import SliderField from "../fields/SliderField";
 import TimeField from "../fields/TimeField";
 import ChooseField from "../fields/ChooseField";
 import TypographyField from "../fields/TypographyField";
+import TreeField from "../fields/TreeField";
 
 const fieldMap: { [key in FieldType]?: React.ComponentType<IEntity> } = Object.create(null);
 
@@ -60,6 +61,7 @@ Object.assign(fieldMap, {
   [FieldType.Time]: TimeField,
   [FieldType.Choose]: ChooseField,
   [FieldType.Typography]: TypographyField,
+  [FieldType.Tree]: TreeField,
 });
 
 /**

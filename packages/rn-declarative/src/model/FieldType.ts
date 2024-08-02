@@ -26,6 +26,7 @@ export enum FieldType {
     Time = 'time-field',
     Choose = 'choose-field',
     Typography = 'typography-field',
+    Tree = 'Tree-field',
 };
 
 Object.entries(FieldType).forEach(([key, value]) => {

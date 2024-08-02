@@ -24,6 +24,7 @@ export const baselineFields = new Set<FieldType>([
     FieldType.Time,
     FieldType.Choose,
     FieldType.Typography,
+    FieldType.Tree,
 ]);
 
 /**

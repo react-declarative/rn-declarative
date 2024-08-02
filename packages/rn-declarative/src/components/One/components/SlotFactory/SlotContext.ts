@@ -17,6 +17,7 @@ import Slider from './components/Slider';
 import Time from './components/Time';
 import Choose from './components/Choose';
 import Typography from './components/Typography';
+import Tree from './components/Tree';
 
 import ISlotFactoryContext from './ISlotFactoryContext';
 
@@ -48,6 +49,7 @@ export const defaultSlots: ISlotFactoryContext = {
     Time,
     Choose,
     Typography,
+    Tree,
 };
 
 export const SlotContext = createContext<ISlotFactoryContext>(defaultSlots);

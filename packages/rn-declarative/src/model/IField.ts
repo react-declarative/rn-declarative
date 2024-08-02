@@ -6,6 +6,8 @@ import type { IDebug }  from './ComponentFieldInstance';
 import FieldType from './FieldType';
 import IAnything from './IAnything';
 import IValidation from './IValidation';
+import ITreeNode from './ITreeNode';
+
 import StyleProperties from './StyleProperties';
 
 /**
@@ -175,6 +177,11 @@ export interface IField<Data = IAnything, Payload = IAnything> {
      * Варианты выбора для ComboField и ItemsField
      */
     itemList?: string[] | ((data: Data, payload: Payload) => string[]) | ((data: Data, payload: Payload) => Promise<string[]>),
+
+    /**
+     * Вариант выбора для TreeField
+     */
+    itemTree?: ITreeNode[] | ((data: Data, payload: Payload) => ITreeNode[]) | ((data: Data, payload: Payload) => Promise<ITreeNode[]>);
 
     /**
      * Отключает возможность сброса выбора значения для Items и Combo
