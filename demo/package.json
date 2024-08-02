@@ -10,8 +10,8 @@
     "react-native": "0.74.1",
     "react-native-svg": "15.2.0",
     "react-native-web": "~0.19.6",
-    "rn-declarative": "^0.0.59",
-    "rn-declarative-eva": "^0.0.47"
+    "rn-declarative": "^0.0.60",
+    "rn-declarative-eva": "^0.0.48"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
