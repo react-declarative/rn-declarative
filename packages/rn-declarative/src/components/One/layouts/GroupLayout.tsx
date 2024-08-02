@@ -25,6 +25,9 @@ export interface IGroupLayoutProps<Data = IAnything, Payload = IAnything> extend
 interface IGroupLayoutPrivate {
   children?: React.ReactNode;
   isBaselineAlign?: PickProp<IEntity, 'isBaselineAlign'>;
+  isPhone?: boolean;
+  isTablet?: boolean;
+  isDesktop?: boolean;
 }
 
 /**
@@ -45,6 +48,9 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
   tabletStyle,
   desktopStyle,
   isBaselineAlign,
+  isPhone,
+  isTablet,
+  isDesktop,
   testId,
   children,
 }: IGroupLayoutProps<Data> & IGroupLayoutPrivate) => {
@@ -56,6 +62,9 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
       tabletStyle={tabletStyle}
       desktopStyle={desktopStyle}
       isBaselineAlign={isBaselineAlign}
+      isPhone={isPhone}
+      isTablet={isTablet}
+      isDesktop={isDesktop}
     >
       {children}
     </Group>

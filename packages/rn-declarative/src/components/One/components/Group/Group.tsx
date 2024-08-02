@@ -6,11 +6,8 @@ import { IManagedLayout, PickProp } from "../../../../model/IManaged";
 import IAnything from "../../../../model/IAnything";
 import IField from "../../../../model/IField";
 
-import OneConfig, { GET_REF_SYMBOL } from "../OneConfig";
 import Adjust from "./components/Adjust";
 
-import useMediaContext from "../../../../hooks/useMediaContext";
-import useSingleton from "../../../../hooks/useSingleton";
 import useManagedStyle from "../../hooks/useManagedStyle";
 
 import makeTestId from "../../helpers/makeTestId";
@@ -39,6 +36,9 @@ export interface IGroupProps<Data = IAnything, Payload = IAnything> extends IMan
 interface IGroupPrivate {
   children: React.ReactNode;
   isBaselineAlign?: boolean;
+  isPhone?: boolean;
+  isTablet?: boolean;
+  isDesktop?: boolean;
 }
 
 const styles = StyleSheet.create({
@@ -74,12 +74,11 @@ export const Group = ({
   tabletStyle,
   desktopStyle,
   isBaselineAlign,
+  isPhone = false,
+  isTablet = false,
+  isDesktop = false,
   children,
 }: IGroupProps & IGroupPrivate) => {
-
-  const oneConfig = useSingleton(OneConfig[GET_REF_SYMBOL]);
-
-  const { isPhone, isTablet, isDesktop } = useMediaContext(oneConfig.BREAKPOINTS);
 
   const computedStyle = useManagedStyle(
     {

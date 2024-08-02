@@ -19,6 +19,9 @@ import IEntity from '../../../../model/IEntity';
  */
 export interface ILayout<Data extends IAnything = IAnything> extends IEntity<Data> {
     children: React.ReactElement[];
+    isPhone?: boolean;
+    isTablet?: boolean;
+    isDesktop?: boolean;
 }
 
 const DEFAULT_IS_VISIBLE = () => true;
@@ -152,6 +155,9 @@ export function makeLayout<T extends ILayout<any>>(
             <Component
                 ready={ready}
                 object={object}
+                isPhone={isPhone}
+                isTablet={isTablet}
+                isDesktop={isDesktop}
                 {...otherProps}
             >
                 {renderInner()}

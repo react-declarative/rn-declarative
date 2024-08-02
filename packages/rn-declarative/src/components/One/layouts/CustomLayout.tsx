@@ -1,8 +1,12 @@
 import * as React from "react";
 import { useMemo } from "react";
 
+import FieldWrapper from "../components/FieldWrapper/FieldWrapper";
+
 import { useOneState } from "../context/StateProvider";
 import { useOnePayload } from "../context/PayloadProvider";
+
+import useManagedStyle from "../hooks/useManagedStyle";
 
 import IField from "../../../model/IField";
 import IEntity from "../../../model/IEntity";
@@ -10,7 +14,6 @@ import IAnything from "../../../model/IAnything";
 import IManaged, { IWrappedLayout, PickProp } from "../../../model/IManaged";
 
 import makeLayout from "../components/makeLayout/makeLayout";
-import FieldWrapper from "../components/FieldWrapper/FieldWrapper";
 
 export interface ICustomLayoutProps<Data = IAnything, Payload = IAnything>
   extends IWrappedLayout<Data, Payload> {
@@ -42,6 +45,9 @@ const FIELD_INTERNAL_PARAMS: FieldIgnoreParam[] = [
 interface ICustomLayoutPrivate<Data = IAnything> extends IEntity<Data> {
   children?: React.ReactNode;
   isBaselineAlign: PickProp<IEntity<Data>, "isBaselineAlign">;
+  isPhone?: boolean;
+  isTablet?: boolean;
+  isDesktop?: boolean;
 }
 
 const Fragment = ({ children }: React.PropsWithChildren<{}>) => <>{children}</>;
@@ -64,13 +70,33 @@ const Fragment = ({ children }: React.PropsWithChildren<{}>) => <>{children}</>;
 export const CustomLayout = <Data extends IAnything = IAnything>({
   children,
   style,
+  phoneStyle = style,
+  tabletStyle = style,
+  desktopStyle = style,
   testId,
   isBaselineAlign,
+  isPhone = false,
+  isTablet = false,
+  isDesktop = false,
   customLayout: CustomLayout = Fragment,
   ...otherProps
 }: ICustomLayoutProps<Data> & ICustomLayoutPrivate<Data>) => {
   const { object, changeObject: handleChange } = useOneState<any>();
   const _payload = useOnePayload();
+
+  const computedStyle = useManagedStyle(
+    {
+      isPhone,
+      isTablet,
+      isDesktop,
+    },
+    {
+      phoneStyle,
+      tabletStyle,
+      desktopStyle,
+      style,
+    }
+  );
 
   const props = useMemo(() => {
     const _fieldParams = Object.entries(otherProps as IField)
@@ -90,7 +116,7 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
   }, [object]);
 
   return (
-    <FieldWrapper style={style}>
+    <FieldWrapper style={computedStyle}>
       <CustomLayout {...props}>
         {children}
       </CustomLayout>
