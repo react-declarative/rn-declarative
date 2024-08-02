@@ -111,6 +111,7 @@ import { IRatingSlot as IRatingSlotInternal } from './components';
 import { ISliderSlot as ISliderSlotInternal } from './components';
 import { ITimeSlot as ITimeSlotInternal } from './components';
 import { IChooseSlot as IChooseSlotInternal } from './components';
+import { ITypographySlot as ITypographySlotInternal } from './components';
 
 export type ICheckBoxSlot = ICheckBoxSlotInternal;
 export type IComboSlot = IComboSlotInternal;
@@ -128,6 +129,7 @@ export type IRatingSlot = IRatingSlotInternal;
 export type ISliderSlot = ISliderSlotInternal;
 export type ITimeSlot = ITimeSlotInternal;
 export type IChooseSlot = IChooseSlotInternal;
+export type ITypographySlot = ITypographySlotInternal;
 
 export { randomString } from './utils/randomString';
 export { compareFulltext } from './utils/compareFulltext';

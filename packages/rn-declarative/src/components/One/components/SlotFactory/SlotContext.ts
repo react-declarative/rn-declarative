@@ -16,6 +16,7 @@ import Rating from './components/Rating';
 import Slider from './components/Slider';
 import Time from './components/Time';
 import Choose from './components/Choose';
+import Typography from './components/Typography';
 
 import ISlotFactoryContext from './ISlotFactoryContext';
 
@@ -46,6 +47,7 @@ export const defaultSlots: ISlotFactoryContext = {
     Slider,
     Time,
     Choose,
+    Typography,
 };
 
 export const SlotContext = createContext<ISlotFactoryContext>(defaultSlots);

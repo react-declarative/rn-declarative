@@ -31,6 +31,7 @@ const initialValueMap = {
   [FieldType.Slider]: 0,
   [FieldType.Time]: null,
   [FieldType.Choose]: null,
+  [FieldType.Typography]: "",
 };
 
 type InitialValue = typeof initialValueMap;
