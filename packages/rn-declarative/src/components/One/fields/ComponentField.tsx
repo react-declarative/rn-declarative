@@ -100,6 +100,7 @@ interface IComponentFieldPrivate<Data = IAnything> {
   onChange: PickProp<IManaged<Data>, "onChange">;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
+  press: PickProp<IManaged<Data>, 'press'>;
 }
 
 const ComponentContextInstance = ({
@@ -137,6 +138,7 @@ export const ComponentField = ({
   object,
   onFocus,
   onBlur,
+  press: onPress,
   style,
   testId,
   onChange: onValueChange,
@@ -158,6 +160,7 @@ export const ComponentField = ({
       onValueChange,
       onFocus,
       onBlur,
+      onPress,
       style,
       testId,
       _fieldParams,

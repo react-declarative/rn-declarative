@@ -11,6 +11,7 @@ import type IManaged from "./IManaged";
 export type ComponentFieldInstance<Data = any, Payload = any> = Data & {
   onFocus: () => void;
   onBlur: () => void;
+  onPress: () => void | Promise<void>;
   style: CompiledStyles;
   testId: string;
   /**
