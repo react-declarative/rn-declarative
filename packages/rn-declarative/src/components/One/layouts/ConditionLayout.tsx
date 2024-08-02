@@ -2,6 +2,7 @@ import * as React from "react";
 import { useMemo, useCallback } from "react";
 
 import If from "../../If";
+import FieldWrapper from "../components/FieldWrapper";
 
 import { useOnePayload } from "../context/PayloadProvider";
 
@@ -14,6 +15,8 @@ import {
 } from "../../../model/IManaged";
 
 import makeLayout from "../components/makeLayout/makeLayout";
+
+import useManagedStyle from "../hooks/useManagedStyle";
 
 import cached from "../../../utils/hof/cached";
 
@@ -44,6 +47,9 @@ interface IConditionLayoutPrivate<Data = IAnything> extends IEntity<Data> {
   ready: PickProp<IEntity<Data>, "ready">;
   object: PickProp<IEntity<Data>, "object">;
   isBaselineAlign: PickProp<IEntity<Data>, "isBaselineAlign">;
+  isPhone?: boolean;
+  isTablet?: boolean;
+  isDesktop?: boolean;
 }
 
 /**
@@ -62,6 +68,10 @@ interface IConditionLayoutPrivate<Data = IAnything> extends IEntity<Data> {
  */
 export const ConditionLayout = <Data extends IAnything = IAnything>({
   children,
+  style,
+  phoneStyle = style,
+  tabletStyle = style,
+  desktopStyle = style,
   condition = () => true,
   shouldCondition = () => false,
   conditionLoading: ConditionLoading,
@@ -69,6 +79,9 @@ export const ConditionLayout = <Data extends IAnything = IAnything>({
   fallback = (e: Error) => {
     throw e;
   },
+  isPhone = false,
+  isTablet = false,
+  isDesktop = false,
   object,
 }: IConditionLayoutProps<Data> & IConditionLayoutPrivate<Data>) => {
   const payload = useOnePayload();
@@ -76,20 +89,36 @@ export const ConditionLayout = <Data extends IAnything = IAnything>({
   const handler = useMemo(() => cached((prevArgs, currentArgs) =>
     shouldCondition(prevArgs[0], currentArgs[0], payload), condition), []);
 
+  const computedStyle = useManagedStyle(
+    {
+      isPhone,
+      isTablet,
+      isDesktop,
+    },
+    {
+      phoneStyle,
+      tabletStyle,
+      desktopStyle,
+      style,
+    }
+  );
+
   const handleCondition = useCallback(async (data: Data) => {
     return await handler(data, payload);
   }, []);
 
   return (
-    <If 
-      condition={handleCondition}
-      Loading={ConditionLoading && <ConditionLoading data={object} payload={payload} />}
-      Else={ConditionElse && <ConditionElse data={object} payload={payload} />}
-      fallback={fallback}
-      payload={object}
-    >
-      {children}
-    </If>
+    <FieldWrapper style={computedStyle}>
+      <If 
+        condition={handleCondition}
+        Loading={ConditionLoading && <ConditionLoading data={object} payload={payload} />}
+        Else={ConditionElse && <ConditionElse data={object} payload={payload} />}
+        fallback={fallback}
+        payload={object}
+      >
+        {children}
+      </If>
+    </FieldWrapper>
   );
 };
 
