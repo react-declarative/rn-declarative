@@ -23,6 +23,7 @@ export const baselineFields = new Set<FieldType>([
     FieldType.Slider,
     FieldType.Time,
     FieldType.Choose,
+    FieldType.Typography,
 ]);
 
 /**
