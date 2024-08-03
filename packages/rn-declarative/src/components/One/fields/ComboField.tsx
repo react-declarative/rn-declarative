@@ -113,6 +113,9 @@ export interface IComboFieldPrivate<Data = IAnything>  {
   testId: PickProp<IManaged<Data>, 'testId'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -157,6 +160,9 @@ export const ComboField = ({
   onChange,
   onFocus,
   onBlur,
+  isPhone,
+  isTablet,
+  isDesktop,
 }: IComboFieldProps & IComboFieldPrivate) => (
   <Combo
     value={value}
@@ -177,6 +183,9 @@ export const ComboField = ({
     onChange={onChange}
     onFocus={onFocus}
     onBlur={onBlur}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
     testId={testId}
   />
 );

@@ -131,6 +131,9 @@ export interface IItemsFieldPrivate<Data = IAnything> {
   testId: PickProp<IManaged<Data>, 'testId'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -171,6 +174,9 @@ export const ItemsField = ({
   title,
   testId,
   fieldReadonly,
+  isPhone,
+  isTablet,
+  isDesktop,
   tr = (s) => s.toString(),
   onChange,
   onFocus,
@@ -196,6 +202,9 @@ export const ItemsField = ({
     onFocus={onFocus}
     onBlur={onBlur}
     testId={testId}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
   />
 );
 

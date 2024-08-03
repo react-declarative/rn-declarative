@@ -125,6 +125,9 @@ export interface ICompleteFieldPrivate<Data = IAnything> {
   fieldReadonly: PickProp<IManaged<Data>, "fieldReadonly">;
   dirty: PickProp<IManaged<Data>, "dirty">;
   name: PickProp<IManaged<Data>, "name">;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -176,6 +179,9 @@ export const CompleteField = ({
   loading,
   onChange,
   name,
+  isPhone,
+  isTablet,
+  isDesktop,
   fieldReadonly,
 }: ICompleteFieldProps & ICompleteFieldPrivate) => (
   <Complete
@@ -194,6 +200,9 @@ export const CompleteField = ({
     dirty={dirty}
     loading={loading}
     onChange={onChange}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
     name={name}
   />
 );

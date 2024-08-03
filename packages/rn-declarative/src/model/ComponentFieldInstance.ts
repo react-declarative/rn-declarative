@@ -1,5 +1,3 @@
-import type CompiledStyles from "./CompiledStyles";
-
 import type IField from "./IField";
 import type IManaged from "./IManaged";
 
@@ -12,7 +10,6 @@ export type ComponentFieldInstance<Data = any, Payload = any> = Data & {
   onFocus: () => void;
   onBlur: () => void;
   onPress: () => void | Promise<void>;
-  style: CompiledStyles;
   testId: string;
   /**
    * A callback function type that is called when a change event occurs.
@@ -99,6 +96,9 @@ export type ComponentFieldInstance<Data = any, Payload = any> = Data & {
   invalid: IManaged<Data, Payload>['invalid'];
   value: IManaged<Data, Payload>['value'];
   features: string[];
+  isPhone: boolean;
+  isTable: boolean;
+  isDesktop: boolean;
 };
 
 /**

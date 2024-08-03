@@ -614,6 +614,9 @@ export function makeField(
             object,
             prefix,
             testId,
+            isPhone,
+            isTablet,
+            isDesktop,
             ...otherProps,
             fieldReadonly: computeFieldReadonly(),
         };

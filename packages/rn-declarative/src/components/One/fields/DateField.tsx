@@ -79,6 +79,9 @@ export interface IDateFieldPrivate<Data = IAnything> {
   disabled: PickProp<IManaged<Data>, "disabled">;
   dirty: PickProp<IManaged<Data>, "dirty">;
   name: PickProp<IManaged<Data>, "name">;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -114,6 +117,9 @@ export const DateField = ({
   placeholder = title,
   dirty,
   onChange,
+  isPhone,
+  isTablet,
+  isDesktop,
   name,
 }: IDateFieldPrivate & IDateFieldProps) => (
   <Date
@@ -128,6 +134,9 @@ export const DateField = ({
     dirty={dirty}
     onChange={onChange}
     name={name}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
   />
 );
 

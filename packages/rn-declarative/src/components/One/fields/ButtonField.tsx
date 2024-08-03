@@ -61,6 +61,9 @@ export interface IButtonFieldPrivate<Data = IAnything> {
   testId: PickProp<IManaged<Data>, 'testId'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -78,6 +81,9 @@ export const ButtonField = ({
   testId,
   onFocus,
   onBlur,
+  isPhone,
+  isTablet,
+  isDesktop,
 }: IButtonFieldProps & IButtonFieldPrivate) => (
   <Button
     disabled={disabled}
@@ -88,6 +94,9 @@ export const ButtonField = ({
     onFocus={onFocus}
     onBlur={onBlur}
     testId={testId}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
   />
 );
 

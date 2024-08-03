@@ -72,16 +72,6 @@ export interface IComponentFieldProps<Data = IAnything, Payload = IAnything> {
    * @typedef watchOneContext?
    */
   watchOneContext?: PickProp<IField<Data, Payload>, "watchOneContext">;
-  /**
-   * Returns the style property of the given variable.
-   *
-   * @template T - The type of the variable.
-   * @template K - The type of the property to be picked.
-   * @param obj - The variable from which to pick the property.
-   * @param prop - The property to pick from the variable.
-   * @returns - The picked property value.
-   */
-  style?: PickProp<IField<Data, Payload>, "style">;
 }
 
 /**
@@ -101,6 +91,9 @@ interface IComponentFieldPrivate<Data = IAnything> {
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
   press: PickProp<IManaged<Data>, 'press'>;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 const ComponentContextInstance = ({
@@ -139,8 +132,10 @@ export const ComponentField = ({
   onFocus,
   onBlur,
   press: onPress,
-  style,
   testId,
+  isPhone,
+  isTablet,
+  isDesktop,
   onChange: onValueChange,
   ...otherProps
 }: IComponentFieldProps & IComponentFieldPrivate) => {
@@ -161,7 +156,6 @@ export const ComponentField = ({
       onFocus,
       onBlur,
       onPress,
-      style,
       testId,
       _fieldParams,
       _fieldData: object,
@@ -171,9 +165,19 @@ export const ComponentField = ({
       disabled,
       readonly,
       features,
+      isPhone,
+      isTablet,
+      isDesktop,
     } as const;
   }, [
-    object, disabled, invalid, incorrect, readonly, style
+    object,
+    disabled,
+    invalid,
+    incorrect,
+    readonly,
+    isPhone,
+    isTablet,
+    isDesktop,
   ]);
 
   if (watchOneContext) {

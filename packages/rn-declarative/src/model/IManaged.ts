@@ -374,6 +374,9 @@ export interface IManaged<Data = IAnything, Value = any> extends Omit<IEntity<Da
     }) => void;
     onFocus: () => void;
     onBlur: () => void;
+    isPhone: boolean;
+    isTablet: boolean;
+    isDesktop: boolean;
 }
 
 export default IManaged;

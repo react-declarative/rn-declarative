@@ -122,6 +122,9 @@ export interface IYesNoFieldPrivate<Data = IAnything>  {
   testId: PickProp<IManaged<Data>, 'testId'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -156,6 +159,9 @@ export const YesNoField = ({
   dirty,
   invalid,
   incorrect,
+  isPhone,
+  isTablet,
+  isDesktop,
   onChange,
   onFocus,
   onBlur,
@@ -176,6 +182,9 @@ export const YesNoField = ({
     onFocus={onFocus}
     onBlur={onBlur}
     testId={testId}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
   />
 );
 

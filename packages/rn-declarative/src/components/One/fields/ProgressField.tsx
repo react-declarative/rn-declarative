@@ -39,6 +39,9 @@ export interface IProgressFieldProps<Data = IAnything, Payload = IAnything> {
  */
 export interface IProgressFieldPrivate<Data = IAnything> {
   value: PickProp<IManaged<Data>, "value">;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -60,11 +63,17 @@ export const ProgressField = ({
   maxPercent = 1.0,
   showPercentLabel,
   value,
+  isPhone,
+  isTablet,
+  isDesktop,
 }: IProgressFieldProps & IProgressFieldPrivate) => (
   <Progress
     showPercentLabel={showPercentLabel}
     maxPercent={maxPercent}
     value={value}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
   />
 );
 

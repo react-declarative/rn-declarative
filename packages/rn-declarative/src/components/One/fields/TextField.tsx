@@ -141,6 +141,9 @@ export interface ITextFieldPrivate<Data = IAnything> {
   testId: PickProp<IManaged<Data>, 'testId'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -188,6 +191,9 @@ export const TextField = ({
   testId,
   dirty,
   loading,
+  isPhone,
+  isTablet,
+  isDesktop,
   onChange,
   name,
   onFocus,
@@ -214,6 +220,9 @@ export const TextField = ({
     onBlur={onBlur}
     testId={testId}
     name={name}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
   />
 );
 

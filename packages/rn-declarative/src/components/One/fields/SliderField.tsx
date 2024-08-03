@@ -94,6 +94,9 @@ export interface ISliderFieldProps<Data = IAnything, Payload = IAnything>  {
 export interface ISliderFieldPrivate<Data = IAnything>  {
   value: PickProp<IManaged<Data>, 'value'>;
   onChange: PickProp<IManaged<Data>, 'onChange'>;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -123,6 +126,9 @@ export const SliderField = ({
   stepSlider,
   maxSlider,
   minSlider,
+  isPhone,
+  isTablet,
+  isDesktop,
   labelFormatSlider,
 }: ISliderFieldProps & ISliderFieldPrivate) => (
   <Slider
@@ -136,6 +142,9 @@ export const SliderField = ({
     stepSlider={stepSlider}
     maxSlider={maxSlider}
     minSlider={minSlider}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
   />
 );
 

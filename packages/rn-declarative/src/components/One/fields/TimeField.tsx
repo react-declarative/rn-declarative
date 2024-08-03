@@ -85,6 +85,9 @@ export interface ITimeFieldPrivate<Data = IAnything> {
   disabled: PickProp<IManaged<Data>, "disabled">;
   dirty: PickProp<IManaged<Data>, "dirty">;
   name: PickProp<IManaged<Data>, "name">;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -118,6 +121,9 @@ export const TimeField = ({
   title = "",
   placeholder = title,
   dirty,
+  isPhone,
+  isTablet,
+  isDesktop,
   onChange,
   name,
 }: ITimeFieldPrivate & ITimeFieldProps) => (
@@ -133,6 +139,9 @@ export const TimeField = ({
     dirty={dirty}
     onChange={onChange}
     name={name}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
   />
 );
 

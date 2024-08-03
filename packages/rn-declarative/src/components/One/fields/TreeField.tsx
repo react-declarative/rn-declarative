@@ -104,6 +104,9 @@ export interface ITreeFieldPrivate<Data = IAnything> {
   disabled: PickProp<IManaged<Data>, "disabled">;
   dirty: PickProp<IManaged<Data>, "dirty">;
   name: PickProp<IManaged<Data>, "name">;
+  isPhone: PickProp<IManaged<Data>, 'isPhone'>;
+  isTablet: PickProp<IManaged<Data>, 'isTablet'>;
+  isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
 }
 
 /**
@@ -140,6 +143,9 @@ export const TreeField = ({
   itemTree,
   dirty,
   loading,
+  isPhone,
+  isTablet,
+  isDesktop,
   onChange,
   name,
 }: ITreeFieldProps & ITreeFieldPrivate) => (
@@ -157,6 +163,9 @@ export const TreeField = ({
     loading={loading}
     onChange={onChange}
     name={name}
+    isPhone={isPhone}
+    isTablet={isTablet}
+    isDesktop={isDesktop}
   />
 );
 
