@@ -74,6 +74,8 @@ export const OneGenesis = <
     fieldDebounce = 0,
     features,
     context,
+    baseline,
+    noBaseline,
   } = props;
 
   const payload = useSingleton(upperPayload);
@@ -169,6 +171,8 @@ export const OneGenesis = <
     features,
     payload,
     rendered,
+    baseline,
+    noBaseline,
   };
 
   const testId = rendered ? READY_CLASS : BASE_CLASS;
@@ -177,7 +181,15 @@ export const OneGenesis = <
    * Корневой компонент привязывает поля к нижнему краю только если
    * нет ни одной компоновки
    */
-  const isBaselineAlign = useMemo(() => fieldsSnapshot.every(isBaselineForRoot), []);
+  const isBaselineAlign = useMemo(() => {
+    if (baseline) {
+      return true;
+    }
+    if (noBaseline) {
+      return false;
+    }
+    return fieldsSnapshot.every(isBaselineForRoot);
+  }, []);
 
   return (
     <CacheProvider>

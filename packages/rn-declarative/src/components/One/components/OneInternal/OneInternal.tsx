@@ -140,6 +140,8 @@ export const OneInternal = <
   fallback = DEFAULT_FALLBACK,
   readonly,
   disabled,
+  baseline,
+  noBaseline,
   readTransform,
   writeTransform,
   focus,
@@ -269,7 +271,7 @@ export const OneInternal = <
             isBaselineAlign:
               baselineMap.get(field) === undefined
                 ? !!baselineMap
-                    .set(field, isBaseline(field))
+                    .set(field, baseline ? true : noBaseline ? false : isBaseline(field))
                     .get(field)
                 : !!baselineMap.get(field),
             ...field,
@@ -389,6 +391,8 @@ export const OneInternal = <
             readonly: readonly || field.readonly,
             disabled: disabled || field.disabled,
             withNamedPlaceholders,
+            baseline,
+            noBaseline,
             createField,
             createLayout,
             fields,

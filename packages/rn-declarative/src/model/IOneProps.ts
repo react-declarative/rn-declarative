@@ -24,6 +24,14 @@ export type OneHandler<Data = IAnything, Payload = IAnything> = Data | ((payload
  */
 export interface IOneProps<Data = IAnything, Payload = IAnything, Field = IField<Data, Payload>> {
   /**
+   * Привязывет поля к нижнему краю
+   */
+  baseline?: boolean;
+  /**
+   * Привязывает поля и компоновки к верхнему краю
+   */
+  noBaseline?: boolean;
+  /**
    * Ссылка на объект API
    */
   apiRef?: React.Ref<IOneApi>;
