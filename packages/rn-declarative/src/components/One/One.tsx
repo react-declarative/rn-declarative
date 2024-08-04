@@ -17,8 +17,6 @@ import useManagedProps from './hooks/useManagedProps';
 import createFieldInternal from './config/createField';
 import createLayoutInternal from './config/createLayout';
 
-import isBaselineInternal from './config/isBaselineSimple';
-
 const DEFAULT_ONFOCUS = () => null;
 const DEFAULT_ONBLUR = () => null;
 const DEFAULT_ONPRESS = () => null;
@@ -29,7 +27,15 @@ const DEFAULT_ONLOADSTART = () => null;
 const DEFAULT_ONLOADEND = () => null;
 const DEFAULT_READTRANSFORM = (value: Value) => value;
 const DEFAULT_WRITETRANSFORM = (value: Value) => value;
-const DEFAULT_ROOT_BASELINE = () => true;
+
+/**
+ * TODO: YogaLayout не поддерживает сочетание верхних и нижних
+ * baseline на одной форме. Для обхода ставим флаг noBaseline
+ * на формах с карточками, ждем обновления и заменяем на 
+ * isBaselineForField для рута
+ * isBaseline для рекурсии
+ */
+const DEFAULT_BASELINE = () => true;
 
 /**
  * Creates a json template engine called `One` with the given props.
@@ -61,8 +67,8 @@ export const One = <Data extends IAnything = IAnything, Payload = IAnything, Fie
     const {
         createField = createFieldInternal,
         createLayout = createLayoutInternal,
-        isBaseline = isBaselineInternal,
-        isBaselineForRoot = DEFAULT_ROOT_BASELINE,
+        isBaseline = DEFAULT_BASELINE,
+        isBaselineForRoot = DEFAULT_BASELINE,
         apiRef,
         changeSubject,
         reloadSubject,
