@@ -31,17 +31,20 @@ export const baselineFields = new Set<FieldType>([
  * Для поля нужно проверить флаги и наличие в списке. Флаги baseline компоновок
  * действуют только на потомков и на родительский элемент не распространяются
  */
-export const isBaselineForField = ({ type, noBaseline, baseline }: IField) => {
-    if (isLayout(type)) {
+export const isBaselineForField = (field: IField): boolean => {
+    if (field.type === FieldType.Fragment) {
+        return isBaselineForLayout(field);
+    }
+    if (isLayout(field.type)) {
         return false;
     }
-    if (noBaseline) {
+    if (field.noBaseline) {
         return false;
     }
-    if (baseline) {
+    if (field.baseline) {
         return true;
     }
-    return baselineFields.has(type);
+    return baselineFields.has(field.type);
 }
 
 /**
