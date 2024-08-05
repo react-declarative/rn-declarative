@@ -30,12 +30,12 @@ const DEFAULT_WRITETRANSFORM = (value: Value) => value;
 
 /**
  * TODO: YogaLayout не поддерживает сочетание верхних и нижних
- * baseline на одной форме. Для обхода ставим флаг noBaseline
- * на формах с карточками, ждем обновления и заменяем на 
+ * baseline на одной форме. Для обхода ставим флаг baseline
+ * на формах с нижним отчерком, ждем обновления и заменяем на 
  * isBaselineForField для рута
  * isBaseline для рекурсии
  */
-const DEFAULT_BASELINE = () => true;
+const DEFAULT_BASELINE = () => false;
 
 /**
  * Creates a json template engine called `One` with the given props.
