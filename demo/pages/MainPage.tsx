@@ -539,7 +539,7 @@ const fields: TypedField[] = [
 export const MainPage = () => {
     return (
         <ScrollView>
-            <One fields={fields} onChange={console.log} />
+            <One noBaseline fields={fields} onChange={console.log} />
         </ScrollView>
     );
 };

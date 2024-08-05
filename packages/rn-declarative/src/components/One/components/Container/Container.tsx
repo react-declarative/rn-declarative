@@ -1,26 +1,9 @@
 import * as React from 'react';
 
-import { StyleSheet, View } from "react-native";
-
-import Adjust from './components/Adjust';
+import WithBaseline from './components/WithBaseline';
+import NoBaseline from './components/NoBaseline';
 
 import CompiledStyles from '../../../../model/CompiledStyles';
-
-const styles = StyleSheet.create({
-    root: {
-        flexDirection: 'column',
-    },
-    withBaseline: {
-        alignItems: 'flex-end',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-    },
-    noBaseline: {
-        alignItems: 'flex-start',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-    },
-});
 
 interface IContainerProps {
     style?: CompiledStyles;
@@ -29,16 +12,8 @@ interface IContainerProps {
 }
 
 export const Container = ({
-    style,
-    children,
     isBaselineAlign,
-}: IContainerProps) => (
-    <View style={[styles.root, style]}>
-        <View style={isBaselineAlign ? styles.withBaseline : styles.noBaseline}>
-            {children} 
-        </View>
-        {!isBaselineAlign && <Adjust />}
-    </View>
-);
+    ...otherProps
+}: IContainerProps) => isBaselineAlign ? <WithBaseline {...otherProps} /> : <NoBaseline {...otherProps} />
 
 export default Container;

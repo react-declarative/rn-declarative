@@ -1,20 +1,15 @@
 import * as React from "react";
 
-import { View, StyleSheet } from "react-native";
+import NoBaseline from "./components/NoBaseline";
+import WithBaseline from "./components/WithBaseline";
 
 import { IManagedLayout, PickProp } from "../../../../model/IManaged";
 import IAnything from "../../../../model/IAnything";
 import IField from "../../../../model/IField";
 
-import Adjust from "./components/Adjust";
-
 import useManagedStyle from "../../hooks/useManagedStyle";
 
 import makeTestId from "../../helpers/makeTestId";
-
-const defaultStyle =  {
-  flexDirection: 'column',
-} as const;
 
 /**
  * Represents the props for a group component.
@@ -40,19 +35,6 @@ interface IGroupPrivate {
   isTablet?: boolean;
   isDesktop?: boolean;
 }
-
-const styles = StyleSheet.create({
-  baseline: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-end',
-  },
-  noBaseline: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
-  },
-})
 
 /**
  * Group component
@@ -92,23 +74,27 @@ export const Group = ({
       tabletStyle,
       desktopStyle,
     },
-    {
-      ...defaultStyle,
-      justifyContent: isBaselineAlign ? 'flex-end': 'flex-start',
-    },
   );
 
+  if (isBaselineAlign) {
+    return (
+      <WithBaseline
+        style={computedStyle}
+        {...makeTestId}
+      >
+        {children}
+      </WithBaseline>
+    );
+  }
+
   return (
-    <View
+    <NoBaseline
       style={computedStyle}
       {...makeTestId(testId)}
     >
-      <View style={isBaselineAlign ? styles.baseline : styles.noBaseline}>
-        {children}
-      </View>
-      {!isBaselineAlign && <Adjust />}
-    </View>
-  )
+      {children}
+    </NoBaseline>
+  );
 };
 
 Group.displayName = 'Group';
