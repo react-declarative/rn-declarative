@@ -17,7 +17,7 @@ const defaultStyle = {
     wordWrap: 'break-word'
 } as const;
 
-interface IViewProps {
+interface ITextProps {
     style?: React.CSSProperties;
     children: React.ReactNode;
 }
@@ -25,10 +25,10 @@ interface IViewProps {
 /**
  * @see https://github.com/necolas/react-native-web/blob/67d52a43a9f872f1b59954f4d2720ced25205747/packages/react-native-web/src/exports/Text/index.js
  */
-export const View = ({
+export const Text = ({
     style,
     children,
-}: IViewProps) => {
+}: ITextProps) => {
     return (
         <div style={{...defaultStyle, style}}>
             {children}
@@ -36,4 +36,4 @@ export const View = ({
     );
 }
 
-export default View;
+export default Text;
