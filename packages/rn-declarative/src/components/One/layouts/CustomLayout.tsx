@@ -2,6 +2,7 @@ import * as React from "react";
 import { useMemo } from "react";
 
 import FieldWrapper from "../components/FieldWrapper/FieldWrapper";
+import Container from "../components/Container";
 
 import { useOneState } from "../context/StateProvider";
 import { useOnePayload } from "../context/PayloadProvider";
@@ -118,7 +119,9 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
   return (
     <FieldWrapper style={computedStyle}>
       <CustomLayout {...props}>
-        {children}
+        <Container isBaselineAlign={isBaselineAlign}>
+          {children}
+        </Container>
       </CustomLayout>
     </FieldWrapper>
   );
