@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useMemo } from "react";
 
-import FieldWrapper from "../components/FieldWrapper/FieldWrapper";
+import FieldWrapper from "../components/FieldWrapper";
 import Container from "../components/Container";
 
 import { useOneState } from "../context/StateProvider";

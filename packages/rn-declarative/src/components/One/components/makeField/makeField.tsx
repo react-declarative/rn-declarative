@@ -37,7 +37,7 @@ import Subject from '../../../../utils/rx/Subject';
 import nameToTitle from '../../helpers/nameToTitle';
 
 import OneConfig, { GET_REF_SYMBOL } from '../OneConfig';
-import FieldWrapper from '../FieldWrapper/FieldWrapper';
+import FieldWrapper from '../FieldWrapper';
 
 const APPLY_ATTEMPTS = 35;
 const APPLY_DELAY = 10;
