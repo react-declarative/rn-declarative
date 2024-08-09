@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useMemo } from "react";
 
+import { StyleSheet } from 'react-native';
+
 import FieldWrapper from "../components/FieldWrapper";
 import Container from "../components/Container";
 
@@ -36,6 +38,12 @@ const FIELD_INTERNAL_PARAMS: FieldIgnoreParam[] = [
   "prefix",
   "value",
 ];
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
+});
 
 /**
  * An interface representing a custom layout private.
@@ -119,7 +127,7 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
   return (
     <FieldWrapper style={computedStyle}>
       <CustomLayout {...props}>
-        <Container isBaselineAlign={isBaselineAlign}>
+        <Container style={styles.container} isBaselineAlign={isBaselineAlign}>
           {children}
         </Container>
       </CustomLayout>
