@@ -17,6 +17,7 @@ export enum FieldType {
     Items = 'items-field',
     Fragment = 'fragment-layout',
     Condition = 'condition-layout',
+    Block = 'block-layout',
 
     Complete = 'complete-field',
     Date = 'date-field',

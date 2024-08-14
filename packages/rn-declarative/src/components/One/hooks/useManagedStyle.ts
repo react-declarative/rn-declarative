@@ -41,16 +41,16 @@ export const useManagedStyle = (
         desktopStyle,
     } = useMemo(() => StyleSheet.create({
         phoneStyle: {
-            ...upperPhoneStyle,
             ...style,
+            ...upperPhoneStyle,
         },
         tabletStyle: {
-            ...upperTabletStyle,
             ...style,
+            ...upperTabletStyle,
         },
         desktopStyle: {
-            ...upperDesktopStyle,
             ...style,
+            ...upperDesktopStyle,
         },
     }), []);
     return useMemo((): CompiledStyles => {

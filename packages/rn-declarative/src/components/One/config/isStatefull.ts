@@ -9,6 +9,7 @@ const layouts: Set<FieldType> = new Set([
     FieldType.Fragment,
     FieldType.Layout,
     FieldType.Condition,
+    FieldType.Block,
 ]);
 
 /**

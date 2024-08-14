@@ -12,6 +12,7 @@ import { IFragmentLayoutProps } from '../components/One/layouts/FragmentLayout';
 import { IGroupLayoutProps } from '../components/One/layouts/GroupLayout';
 import { IConditionLayoutProps } from '../components/One/layouts/ConditionLayout';
 import { ICustomLayoutProps } from '../components/One/layouts/CustomLayout';
+import { IBlockLayoutProps } from '../components/One/layouts/BlockLayout';
 
 /**
  * Поля ввода
@@ -90,6 +91,7 @@ type Group<Data = IAnything, Payload = IAnything> = TypedFieldFactory<FieldType.
 type Custom<Data = IAnything, Payload = IAnything> = TypedFieldFactory<FieldType.Layout, ICustomLayoutProps<Data, Payload>, Data, Payload>;
 type Fragment<Data = IAnything, Payload = IAnything>  = TypedFieldFactory<FieldType.Fragment, IFragmentLayoutProps<Data, Payload>, Data, Payload>;
 type Condition<Data = IAnything, Payload = IAnything> = TypedFieldFactory<FieldType.Condition, IConditionLayoutProps<Data, Payload>, Data, Payload>;
+type Block<Data = IAnything, Payload = IAnything> = TypedFieldFactory<FieldType.Block, IBlockLayoutProps<Data, Payload>, Data, Payload>;
 
 type Checkbox<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Checkbox, ICheckboxFieldProps<Data, Payload>, Data, Payload>;
 type Button<Data = IAnything, Payload = IAnything> = TypedFieldFactoryShallow<FieldType.Button, IButtonFieldProps<Data, Payload>, Data, Payload>;
@@ -141,6 +143,7 @@ export type TypedFieldRegistry<Data = IAnything, Payload = IAnything, Target = a
   : Target extends Fragment<Data, Payload> ? Fragment<Data, Payload>
   : Target extends Custom<Data, Payload> ? Custom<Data, Payload>
   : Target extends Condition<Data, Payload> ? Condition<Data, Payload>
+  : Target extends Block<Data, Payload> ? Block<Data, Payload>
   : Target extends Init<Data, Payload> ? Init<Data, Payload>
   : Target extends Phony<Data, Payload> ? Phony<Data, Payload>
   : never;

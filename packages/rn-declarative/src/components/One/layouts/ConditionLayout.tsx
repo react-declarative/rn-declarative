@@ -10,7 +10,7 @@ import IField from "../../../model/IField";
 import IEntity from "../../../model/IEntity";
 import IAnything from "../../../model/IAnything";
 import {
-  IWrappedLayout,
+  IManagedLayout,
   PickProp,
 } from "../../../model/IManaged";
 
@@ -27,7 +27,7 @@ import cached from "../../../utils/hof/cached";
  * @template Payload - The payload type associated with the layout component.
  */
 export interface IConditionLayoutProps<Data = IAnything, Payload = IAnything>
-  extends IWrappedLayout<Data, Payload> {
+  extends IManagedLayout<Data, Payload> {
   condition?: PickProp<IField<Data, Payload>, "condition">;
   shouldCondition?: PickProp<IField<Data, Payload>, "shouldCondition">;
   conditionLoading?: PickProp<IField<Data, Payload>, "conditionLoading">;

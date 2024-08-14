@@ -14,13 +14,12 @@ import useManagedStyle from "../hooks/useManagedStyle";
 import IField from "../../../model/IField";
 import IEntity from "../../../model/IEntity";
 import IAnything from "../../../model/IAnything";
-import IManaged, { IWrappedLayout, PickProp } from "../../../model/IManaged";
+import IManaged, { IManagedLayout, PickProp } from "../../../model/IManaged";
 
 import makeLayout from "../components/makeLayout/makeLayout";
 
 export interface ICustomLayoutProps<Data = IAnything, Payload = IAnything>
-  extends IWrappedLayout<Data, Payload> {
-  style?: PickProp<IField<Data, Payload>, "style">;
+  extends IManagedLayout<Data, Payload> {
   customLayout?: PickProp<IField<Data, Payload>, "customLayout">;
   hidden?: PickProp<IField<Data, Payload>, 'hidden'>;
 }
