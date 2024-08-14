@@ -8,6 +8,7 @@ import GroupLayout from "../layouts/GroupLayout";
 import FragmentLayout from "../layouts/FragmentLayout";
 import ConditionLayout from "../layouts/ConditionLayout";
 import CustomLayout from "../layouts/CustomLayout";
+import BlockLayout from "../layouts/BlockLayout";
 
 type Layout = (props: React.PropsWithChildren<IEntity>) => React.ReactElement;
 
@@ -27,6 +28,7 @@ Object.assign(layoutMap, {
   [FieldType.Fragment]: FragmentLayout,
   [FieldType.Condition]: ConditionLayout,
   [FieldType.Layout]: CustomLayout,
+  [FieldType.Block]: BlockLayout,
 });
 
 /**
