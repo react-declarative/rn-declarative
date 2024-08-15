@@ -1,7 +1,8 @@
 import IBreakpoints from "../../../../model/IBreakpoints";
 import IFieldMargins from "../../../../model/IFieldMargins";
+import IRootMargins from "../../../../model/IRootMargins";
 
-import { FIELD_DEBOUNCE, DEFAULT_BREAKPOINTS, DEFAULT_MARGINS } from "../../config/config";
+import { FIELD_DEBOUNCE, DEFAULT_BREAKPOINTS, DEFAULT_MARGINS, DEFAULT_ROOT_MARGINS } from "../../config/config";
 
 /**
  * Represents a configuration object for the one component.
@@ -16,6 +17,7 @@ export interface IConfig {
     CUSTOM_FIELD_DEBOUNCE: number;
     BREAKPOINTS: IBreakpoints;
     MARGINS: IFieldMargins;
+    ROOT_MARGINS: IRootMargins;
 }
 
 /**
@@ -38,6 +40,7 @@ const INITIAL_CONFIG: IConfig = {
     WITH_SYNC_COMPUTE: false,
     CUSTOM_FIELD_DEBOUNCE: FIELD_DEBOUNCE,
     MARGINS: DEFAULT_MARGINS,
+    ROOT_MARGINS: DEFAULT_ROOT_MARGINS,
     BREAKPOINTS: DEFAULT_BREAKPOINTS,
 };
 

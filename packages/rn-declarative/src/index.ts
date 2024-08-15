@@ -162,6 +162,7 @@ export { deepFlat } from './utils/deepFlat';
 
 export type { IBreakpoints } from './model/IBreakpoints';
 export type { IFieldMargins } from './model/IFieldMargins';
+export type { IRootMargins } from './model/IRootMargins';
 
 export { BehaviorSubject } from './utils/rx/BehaviorSubject';
 export { EventEmitter } from './utils/rx/EventEmitter';

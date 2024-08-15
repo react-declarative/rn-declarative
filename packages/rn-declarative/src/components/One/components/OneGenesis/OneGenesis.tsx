@@ -72,6 +72,7 @@ export const OneGenesis = <
     slots = {},
     payload: upperPayload = {} as Payload,
     fieldDebounce = 0,
+    noRootMargin,
     features,
     context,
     baseline,
@@ -82,7 +83,8 @@ export const OneGenesis = <
 
   const defaultStyle = useMemo(() => ({
     width: '100%',
-    paddingLeft: oneConfig.MARGINS.mr,
+    paddingLeft: noRootMargin ? undefined : oneConfig.ROOT_MARGINS.ml,
+    paddingTop: noRootMargin ? undefined : oneConfig.ROOT_MARGINS.mt,
   }), []);
 
   const { style = defaultStyle } = props;

@@ -24,6 +24,10 @@ export type OneHandler<Data = IAnything, Payload = IAnything> = Data | ((payload
  */
 export interface IOneProps<Data = IAnything, Payload = IAnything, Field = IField<Data, Payload>> {
   /**
+   * Выключить отступ слева сверху по-умолчанию
+   */
+  noRootMargin?: boolean;
+  /**
    * Привязывет поля к нижнему краю
    */
   baseline?: boolean;
