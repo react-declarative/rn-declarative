@@ -34,6 +34,7 @@ const READY_CLASS = "rn-declarative__oneGenesisReady";
 
 const DEFAULT_READY = () => null;
 const DEFAULT_CHANGE = (data: IAnything) => console.log({ data });
+const DEFAULT_OUTGOING_TRANSFORM = (data: IAnything) => data;
 
 /**
  * Represents the OneGenesis component.
@@ -66,6 +67,7 @@ export const OneGenesis = <
 
   const {
     isBaselineForRoot = isBaselineForField,
+    outgoingTransform = DEFAULT_OUTGOING_TRANSFORM,
     change = DEFAULT_CHANGE,
     ready = DEFAULT_READY,
     fields = [],
@@ -130,7 +132,7 @@ export const OneGenesis = <
       }
     });
     if (isValid) {
-      change(newData, initial);
+      change(outgoingTransform(newData, payload), initial);
     }
   }, []);
 
