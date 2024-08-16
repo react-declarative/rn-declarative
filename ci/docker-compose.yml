@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "npx -y expo prebuild --platform android &&
+             cd android &&
+             ./gradlew assembleRelease"
+    volumes:
+      - "./:/app"
