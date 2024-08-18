@@ -48,6 +48,17 @@ export interface IButtonFieldProps<Data = IAnything, Payload = IAnything> {
    * @returns
    */
   disabled?: PickProp<IField<Data, Payload>, "disabled">;
+  /**
+   * Retrieves the 'buttonVariant' property from the given variable.
+   *
+   * @template T - The type of the variable.
+   * @template K - The key to pick from the variable.
+   *
+   * @param variable - The variable to pick the property from.
+   *
+   * @returns - The picked property.
+   */
+  buttonVariant?: PickProp<IField<Data, Payload>, 'buttonVariant'>;
 }
 
 /**
@@ -78,6 +89,7 @@ export const ButtonField = ({
   title,
   value,
   placeholder,
+  buttonVariant,
   testId,
   onFocus,
   onBlur,
@@ -87,6 +99,7 @@ export const ButtonField = ({
 }: IButtonFieldProps & IButtonFieldPrivate) => (
   <Button
     disabled={disabled}
+    buttonVariant={buttonVariant}
     press={press}
     title={title}
     value={value}

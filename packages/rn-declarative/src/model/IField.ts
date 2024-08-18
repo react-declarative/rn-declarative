@@ -27,6 +27,14 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     dirty?: boolean;
 
     /**
+     * Вариант кнопки
+     */
+    buttonVariant?: keyof {
+      primary: 'primary',
+      secondary: 'secondary'
+    };
+
+    /**
      * Параметры фабрики для создания коллбека isInvalid
      */
     validation?: IValidation;
