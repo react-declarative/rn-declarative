@@ -1,0 +1,20 @@
+{
+  "name": "rn-declarative",
+  "version": "1.0.0",
+  "description": "> Responsive layout for `react-native`",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "monorepo": "verdaccio --config ./verdaccio.yaml",
+    "monorepo:load": "npm set registry http://localhost:4873",
+    "monorepo:unload": "npm config set registry https://registry.npmjs.org/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "verdaccio": "^5.32.1"
+  }
+}
