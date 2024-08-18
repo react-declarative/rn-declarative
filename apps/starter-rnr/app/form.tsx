@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '~/components/ui/button';
+import { FormCheckbox, FormInput, FormRadioGroup, FormRadioItemGroup, FormSelect, FormSwitch, FormTextarea } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group';
@@ -53,6 +54,7 @@ const emails = [
   { value: 'lara@croft.com', label: 'lara@croft.com' },
 ];
 
+const NopeFn = () => { };
 
 export default function FormScreen() {
   const scrollRef = React.useRef<ScrollView>(null);
@@ -75,70 +77,41 @@ export default function FormScreen() {
       contentInset={{ top: 12 }}
     >
       <View className='gap-7'>
-        <Input
-          placeholder='hello@zachnugent.ca'
-          autoCapitalize='none'
-          autoComplete='email'
-        />
-        <Input
+        <FormInput
+          label='Password'
           placeholder='********'
+          description='Use a secure password.'
           secureTextEntry
           autoComplete='password'
+          name="radio" value="staff" onFocus={NopeFn} onBlur={NopeFn} onChange={NopeFn}
         />
-        <Textarea
+        <FormTextarea
+          label='Tell me about yourself'
           placeholder='I am ...'
+          description='This will be used by AI.'
+          name="radio" value="staff" onFocus={NopeFn} onBlur={NopeFn} onChange={NopeFn}
         />
-        <RadioGroup
-          className='gap-4'
-          value='admin'
-          onValueChange={() => { }}
+        <FormRadioGroup
+          label='Account Type'
+          description='Select your account type.'
+          name="radio" value="staff" onFocus={NopeFn} onBlur={NopeFn} onChange={NopeFn}
         >
-          {(['staff', 'admin', 'owner'] as const).map((value) => {
-            return (
-              <View key={value} className={'flex-row gap-2 items-center'}>
-                <RadioGroupItem aria-labelledby={`label-for-${value}`} value={value} />
-                <Label
-                  nativeID={`label-for-${value}`}
-                  className='capitalize'
-                >
-                  {value}
-                </Label>
-              </View>
-            );
-          })}
-        </RadioGroup>
-        <Select defaultValue={{ value: 'apple', label: 'Apple' }}>
-          <SelectTrigger className='w-[250px]'>
-            <SelectValue
-              className='text-foreground text-sm native:text-lg'
-              placeholder='Select a fruit'
-            />
-          </SelectTrigger>
-          <SelectContent insets={contentInsets} className='w-[250px]'>
-            <SelectGroup>
-              <SelectLabel>Fruits</SelectLabel>
-              <SelectItem label='Apple' value='apple'>
-                Apple
-              </SelectItem>
-              <SelectItem label='Banana' value='banana'>
-                Banana
-              </SelectItem>
-              <SelectItem label='Blueberry' value='blueberry'>
-                Blueberry
-              </SelectItem>
-              <SelectItem label='Grapes' value='grapes'>
-                Grapes
-              </SelectItem>
-              <SelectItem label='Pineapple' value='pineapple'>
-                Pineapple
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        <Switch
-          checked
-          onCheckedChange={() => {}}
+          <FormRadioItemGroup radioValue='staff' name="" onFocus={NopeFn} onBlur={NopeFn} />
+          <FormRadioItemGroup radioValue='admin' name="" onFocus={NopeFn} onBlur={NopeFn} />
+          <FormRadioItemGroup radioValue='owner' name="" onFocus={NopeFn} onBlur={NopeFn} />
+        </FormRadioGroup>
+        <FormSelect
+          label='If you were an email, which one would you be?'
+          description='Hint: it is not the one you use.'
+          options={frameworks}
+          name="switch" value="next.js" onChange={NopeFn} onFocus={NopeFn} onBlur={NopeFn}
         />
+        <FormSwitch
+          label='Enable notifications'
+          description='We will send you spam.'
+          name="switch" value={true} onChange={NopeFn} onFocus={NopeFn} onBlur={NopeFn}
+        />
+        <FormCheckbox name="checkbox" value={true} onChange={NopeFn} onFocus={NopeFn} onBlur={NopeFn} label='Accept terms & conditions' />
         <Button>
           <Text>Submit</Text>
         </Button>
