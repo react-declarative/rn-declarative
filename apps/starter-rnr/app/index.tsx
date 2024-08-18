@@ -15,6 +15,8 @@ import {
 import { Progress } from '~/components/ui/progress';
 import { Text } from '~/components/ui/text';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
+import { Link } from 'expo-router';
+import { ChevronRight } from '~/lib/icons/ChevronRight';
 
 const GITHUB_AVATAR_URI =
   'https://i.pinimg.com/originals/ef/a2/8d/efa28d18a04e7fa40ed49eeb0ab660db.jpg';
@@ -90,6 +92,14 @@ export default function Screen() {
           </Button>
         </CardFooter>
       </Card>
+      <View className='items-center'>
+        <Link href='/form' asChild>
+          <Button variant='link' className='flex-row'>
+            <Text>Go To Form</Text>
+            <ChevronRight className='text-foreground' size={18} />
+          </Button>
+        </Link>
+      </View>
     </View>
   );
 }
