@@ -365,15 +365,17 @@ interface IFormRadioGroupItemProps extends Omit<React.ComponentPropsWithoutRef<t
   "aria-labelledby": never;
 }> {
   name: string;
+  label: string;
   onFocus: NoopFn;
   onBlur: NoopFn;
   radioValue: string;
+  error?: FormError;
 }
 
 const FormRadioItemGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroup>,
   IFormRadioGroupItemProps
->(({ name, radioValue, onFocus, onBlur, ...props }, ref) => {
+>(({ name, error, label, radioValue, onFocus, onBlur, ...props }, ref) => {
   return (
     <FormItem className='flex-row gap-2 items-center'>
       <RadioGroupItem
@@ -383,6 +385,12 @@ const FormRadioItemGroup = React.forwardRef<
         onBlur={onBlur}
         {...props}
       />
+      <FormLabel
+        name={name}
+        error={error}
+      >
+        {label}
+      </FormLabel>
     </FormItem>
   );
 });

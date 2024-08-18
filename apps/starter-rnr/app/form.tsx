@@ -96,9 +96,9 @@ export default function FormScreen() {
           description='Select your account type.'
           name="radio" value="staff" onFocus={NopeFn} onBlur={NopeFn} onChange={NopeFn}
         >
-          <FormRadioItemGroup radioValue='staff' name="" onFocus={NopeFn} onBlur={NopeFn} />
-          <FormRadioItemGroup radioValue='admin' name="" onFocus={NopeFn} onBlur={NopeFn} />
-          <FormRadioItemGroup radioValue='owner' name="" onFocus={NopeFn} onBlur={NopeFn} />
+          <FormRadioItemGroup radioValue='staff' label="staff" name="" onFocus={NopeFn} onBlur={NopeFn} />
+          <FormRadioItemGroup radioValue='admin' label="admin" name="" onFocus={NopeFn} onBlur={NopeFn} />
+          <FormRadioItemGroup radioValue='owner' label="owner" name="" onFocus={NopeFn} onBlur={NopeFn} />
         </FormRadioGroup>
         <FormSelect
           label='If you were an email, which one would you be?'
