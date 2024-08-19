@@ -156,7 +156,6 @@ ChooseField.displayName = 'ChooseField';
 export default makeField(ChooseField, {
   withApplyQueue: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
   skipFocusBlurCall: true,
   skipDebounce: true,
 });

@@ -86,5 +86,4 @@ export default makeField(RatingField, {
   withApplyQueue: true,
   skipDebounce: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
 });

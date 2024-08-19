@@ -174,6 +174,5 @@ TreeField.displayName = 'TreeField';
 export default makeField(TreeField, {
   withApplyQueue: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
   skipDebounce: true,
 });

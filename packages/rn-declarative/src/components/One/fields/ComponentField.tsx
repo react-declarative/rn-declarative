@@ -198,7 +198,6 @@ ComponentField.displayName = "ComponentField";
 export default makeField(ComponentField, {
   withApplyQueue: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
   skipFocusBlurCall: true,
   skipDebounce: false,
 });

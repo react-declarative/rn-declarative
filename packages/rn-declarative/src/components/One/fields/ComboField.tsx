@@ -199,5 +199,4 @@ export default makeField(ComboField, {
   withApplyQueue: true,
   skipDebounce: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
 });

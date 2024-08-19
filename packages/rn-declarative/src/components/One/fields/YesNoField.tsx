@@ -197,5 +197,4 @@ export default makeField(YesNoField, {
   withApplyQueue: true,
   skipDebounce: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
 });

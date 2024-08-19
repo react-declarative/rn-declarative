@@ -18,7 +18,6 @@ interface IMemory {
     lastDebouncedValue: Value;
     fieldReadonly$: boolean;
     upperReadonly$: boolean;
-    focusReadonly$: boolean;
     debouncedValue$: Value;
     invalid$: string | null;
     object$: IAnything;
@@ -51,7 +50,6 @@ interface IMemoryData extends Omit<IMemory, keyof {
  * @param memoryData.lastDebouncedValue - The last debounced value of the memory field.
  * @param memoryData.debouncedValue$ - The observable for the debounced value of the memory field.
  * @param memoryData.fieldReadonly$ - The observable for the readonly state of the memory field.
- * @param memoryData.focusReadonly$ - The observable for the readonly state of the focus.
  * @param memoryData.invalid$ - The observable for the invalid state of the memory field.
  * @param memoryData.object$ - The observable for the object of the memory field.
  * @param memoryData.upperReadonly$ - The observable for the readonly state of the upper field.
@@ -65,7 +63,6 @@ export const useFieldMemory = ({
     lastDebouncedValue,
     debouncedValue$,
     fieldReadonly$,
-    focusReadonly$,
     invalid$,
     object$,
     upperReadonly$,
@@ -83,7 +80,6 @@ export const useFieldMemory = ({
      * @property isMounted - Represents whether the component is mounted.
      * @property debouncedValue$ - Represents the debounced value.
      * @property fieldReadonly$ - Represents the field readonly value.
-     * @property focusReadonly$ - Represents the focus readonly value.
      * @property invalid$ - Represents the invalid value.
      * @property object$ - Represents the object value.
      * @property upperReadonly$ - Represents the upper readonly value.
@@ -99,7 +95,6 @@ export const useFieldMemory = ({
         pressDisabled: false,
         debouncedValue$: null as never,
         fieldReadonly$: null as never,
-        focusReadonly$: null as never,
         invalid$: null as never,
         object$: null as never,
         upperReadonly$: null as never,
@@ -107,7 +102,6 @@ export const useFieldMemory = ({
     }), []);
     memory.debouncedValue$ = debouncedValue$;
     memory.fieldReadonly$ = fieldReadonly$;
-    memory.focusReadonly$ = focusReadonly$;
     memory.invalid$ = invalid$;
     memory.object$ = object$;
     memory.upperReadonly$ = upperReadonly$;

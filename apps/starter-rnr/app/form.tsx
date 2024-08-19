@@ -74,8 +74,8 @@ const fields: TypedField[] = [
     type: FieldType.Component,
     style: {
       width: '100%',
-      marginTop: 10,
-      marginBottom: 10,
+      marginTop: 16,
+      marginBottom: 8,
     },
     element: () => (
       <FormGroup
@@ -83,6 +83,70 @@ const fields: TypedField[] = [
         description='Select your account type.'
       />
     ),
+  },
+  {
+    type: FieldType.Block,
+    style: {
+      marginBottom: 12,
+      width: '100%',
+    },
+    fields: [
+      {
+        type: FieldType.Radio,
+        radioValue: 'staff',
+        title: 'Staff',
+        name: 'account',
+      },
+      {
+        type: FieldType.Radio,
+        radioValue: 'admin',
+        title: 'Admin',
+        name: 'account',
+      },
+      {
+        type: FieldType.Radio,
+        radioValue: 'owner',
+        title: 'Owner',
+        name: 'account',
+      },
+    ],
+  },
+  {
+    type: FieldType.Combo,
+    name: 'framework',
+    title: 'Favorite Framework',
+    placeholder: 'Select framework',
+    description: 'More important than your skills.',
+    style: {
+      width: '100%',
+    },
+    itemList: frameworks.map(({ value }) => value),
+    tr: (value) => {
+      const framework = frameworks.find((framework) => framework.value === value);
+      if (framework) {
+        return framework.label;
+      }
+      return value;
+    }
+  },
+  {
+    type: FieldType.Switch,
+    style: {
+      width: '100%',
+      marginTop: 8,
+    },
+    title: 'Enable notifications',
+    description: 'We will send you spam.',
+    name: 'notify',
+  },
+  {
+    type: FieldType.Checkbox,
+    style: {
+      width: '100%',
+      marginBottom: 8,
+    },
+    title: 'Accept terms & conditions',
+    name: 'agree',
   },
   {
     type: FieldType.Button,

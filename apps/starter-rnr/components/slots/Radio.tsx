@@ -31,6 +31,7 @@ export const Radio = ({
         disabled={disabled}
         radioValue={radioValue!}
         error={error}
+        onPress={() => onChange(radioValue)}
         onFocus={onFocus}
         onBlur={onBlur}
       />

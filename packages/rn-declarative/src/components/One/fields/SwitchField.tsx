@@ -133,5 +133,4 @@ export default makeField(SwitchField, {
   withApplyQueue: true,
   skipDebounce: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
 });

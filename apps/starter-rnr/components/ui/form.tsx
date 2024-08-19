@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useMemo } from 'react';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
 import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
@@ -68,7 +68,7 @@ const FormDescription = React.forwardRef<
 >(({ className, style, error, children, ...props }, ref) => (
   <Text
     ref={ref}
-    className={cn('text-sm text-muted-foreground pt-1', !!error && 'text-destructive', className)}
+    className={cn('text-sm text-muted-foreground', !!error && 'text-destructive', className)}
     style={style}
     {...props}
   >
@@ -212,7 +212,6 @@ const FormTextarea = React.forwardRef<
           {label}
         </FormLabel>
       )}
-
       <Textarea
         ref={textareaRef}
         onChangeText={onChange}
@@ -345,13 +344,13 @@ const FormSelect = React.forwardRef<
         onOpenChange={(open) => open ? onFocus && onFocus() : onBlur && onBlur()}
         {...props}
       >
-        <SelectTrigger className='w-[250px]'>
+        <SelectTrigger>
           <SelectValue
             className='text-foreground text-sm native:text-lg'
             placeholder={placeholder}
           />
         </SelectTrigger>
-        <SelectContent insets={contentInsets} className='w-[250px]'>
+        <SelectContent insets={contentInsets}>
           <SelectGroup>
             <SelectLabel>{label}</SelectLabel>
             {options.map(({ label, value }, idx) => (
@@ -375,6 +374,7 @@ interface IFormRadioGroupItemProps extends Omit<React.ComponentPropsWithoutRef<t
   "aria-labelledby": never;
 }> {
   style?: StyleProperties;
+  onPress?: NoopFn;
   name: string;
   label: string;
   description?: string;
@@ -387,7 +387,7 @@ interface IFormRadioGroupItemProps extends Omit<React.ComponentPropsWithoutRef<t
 const FormRadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroup>,
   IFormRadioGroupItemProps
->(({ className, style, name, error, label, description, radioValue, onFocus, onBlur, ...props }, ref) => {
+>(({ className, style, name, error, label, description, radioValue, onFocus, onBlur, onPress, ...props }, ref) => {
   return (
     <FormItem className={className} style={style}>
       <View className="flex-row gap-2 items-center">
@@ -401,6 +401,7 @@ const FormRadioGroupItem = React.forwardRef<
         <FormLabel
           name={name}
           error={error}
+          onPress={onPress}
         >
           {label}
         </FormLabel>

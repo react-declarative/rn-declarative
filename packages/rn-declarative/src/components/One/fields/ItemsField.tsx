@@ -217,5 +217,4 @@ export default makeField(ItemsField, {
   withApplyQueue: true,
   skipDebounce: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
 });
