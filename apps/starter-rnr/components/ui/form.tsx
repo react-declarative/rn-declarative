@@ -19,6 +19,7 @@ import { Textarea } from '~/components/ui/textarea';
 import { cn } from '~/lib/utils';
 import { Checkbox } from './checkbox';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleProperties } from 'rn-declarative';
 
 type FormError = string | null;
 type NoopFn = () => void;
@@ -29,8 +30,8 @@ interface IFormItemProps extends React.ComponentPropsWithoutRef<typeof View> {
 const FormItem = React.forwardRef<
   React.ElementRef<typeof View>,
   IFormItemProps
->(({ className, ...props }, ref) => (
-  <View ref={ref} className={cn('space-y-2', className)} {...props} />
+>(({ className, style, ...props }, ref) => (
+  <View ref={ref} className={cn('space-y-2', className)} style={style} {...props} />
 ));
 FormItem.displayName = 'FormItem';
 
@@ -44,11 +45,12 @@ interface IFormLabelProps extends Omit<React.ComponentPropsWithoutRef<typeof Lab
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof Label>,
   IFormLabelProps
->(({ className, error, name, children, ...props }, ref) => (
+>(({ className, style, error, name, children, ...props }, ref) => (
   <Label
     ref={ref}
     nativeID={name}
     className={cn(!!error && 'text-destructive', className)}
+    style={style}
     {...props}
   >
     {children}
@@ -63,10 +65,11 @@ interface IFormDescriptionProps extends React.ComponentPropsWithoutRef<typeof Te
 const FormDescription = React.forwardRef<
   React.ElementRef<typeof Text>,
   IFormDescriptionProps
->(({ className, error, children, ...props }, ref) => (
+>(({ className, style, error, children, ...props }, ref) => (
   <Text
     ref={ref}
     className={cn('text-sm text-muted-foreground pt-1', !!error && 'text-destructive', className)}
+    style={style}
     {...props}
   >
     {error ? error : children}
@@ -81,7 +84,7 @@ interface IFormMessageProps extends React.ComponentPropsWithoutRef<typeof Animat
 const FormMessage = React.forwardRef<
   React.ElementRef<typeof Animated.Text>,
   IFormMessageProps
->(({ className, error, children, ...props }, ref) => {
+>(({ className, style, error, children, ...props }, ref) => {
   const body = error ? error : children;
   return body ? (
     <Animated.Text
@@ -89,6 +92,7 @@ const FormMessage = React.forwardRef<
       exiting={FadeOut.duration(275)}
       ref={ref}
       className={cn('text-sm font-medium text-destructive', className)}
+      style={style}
       {...props}
     >
       {body}
@@ -101,8 +105,8 @@ type Override<T, U> = Omit<T, keyof U> & U;
 
 interface FormFieldFieldProps<T> {
   name: string;
-  onBlur: NoopFn;
-  onFocus: NoopFn;
+  onBlur?: NoopFn;
+  onFocus?: NoopFn;
   onChange: (val: T) => void;
   value: T;
   disabled?: boolean;
@@ -123,7 +127,7 @@ interface IFormInputProps extends FormItemProps<typeof Input, string> {
 const FormInput = React.forwardRef<
   React.ElementRef<typeof Input>,
   IFormInputProps
->(({ label, name, description, error, onChange, onFocus, onBlur, ...props }, ref) => {
+>(({ label, name, className, style, description, error, onChange, onFocus, onBlur, ...props }, ref) => {
   const inputRef = React.useRef<React.ComponentRef<typeof Input>>(null);
 
   React.useImperativeHandle(
@@ -149,7 +153,7 @@ const FormInput = React.forwardRef<
   }
 
   return (
-    <FormItem>
+    <FormItem className={className} style={style}>
       {!!label && (
         <FormLabel name={name} error={error} onPress={handleOnLabelPress}>
           {label}
@@ -176,7 +180,7 @@ interface IFormTextareaProps extends FormItemProps<typeof Textarea, string> {
 const FormTextarea = React.forwardRef<
   React.ElementRef<typeof Textarea>,
   IFormTextareaProps
->(({ label, name, error, description, onChange, onFocus, onBlur, ...props }, ref) => {
+>(({ label, className, style, name, error, description, onChange, onFocus, onBlur, ...props }, ref) => {
   const textareaRef = React.useRef<React.ComponentRef<typeof Textarea>>(null);
 
   React.useImperativeHandle(
@@ -202,7 +206,7 @@ const FormTextarea = React.forwardRef<
   }
 
   return (
-    <FormItem>
+    <FormItem className={className} style={style}>
       {!!label && (
         <FormLabel name={name} error={error} onPress={handleOnLabelPress}>
           {label}
@@ -226,14 +230,16 @@ FormTextarea.displayName = 'FormTextarea';
 interface IFormCheckboxProps extends Omit<FormItemProps<typeof Checkbox, boolean>, keyof {
   onCheckedChange: never;
   checked: never;
+  style: never;
 }> {
   error?: FormError;
+  style?: StyleProperties;
 }
 
 const FormCheckbox = React.forwardRef<
   React.ElementRef<typeof Checkbox>,
   IFormCheckboxProps
->(({ label, error, name, description, value, onChange, onFocus, onBlur, ...props }, ref) => {
+>(({ className, style, label, error, name, description, value, onChange, onFocus, onBlur, ...props }, ref) => {
   const checkboxRef = React.useRef<React.ComponentRef<typeof Checkbox>>(null);
 
   React.useImperativeHandle(
@@ -252,7 +258,7 @@ const FormCheckbox = React.forwardRef<
   }
 
   return (
-    <FormItem className='px-1'>
+    <FormItem className={className} style={style}>
       <View className='flex-row gap-3 items-center'>
         <Checkbox
           ref={checkboxRef}
@@ -285,9 +291,9 @@ interface IFormRadioGroupProps extends Omit<FormItemProps<typeof RadioGroup, str
 const FormRadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroup>,
   IFormRadioGroupProps
->(({ label, name, description, error, onChange, onFocus, onBlur, ...props }, ref) => {
+>(({ className, style, label, name, description, error, onChange, onFocus, onBlur, ...props }, ref) => {
   return (
-    <FormItem className='gap-3'>
+    <FormItem className={cn(className, 'gap-3')}>
       <View>
         {!!label && <FormLabel name={name} error={error}>{label}</FormLabel>}
         {!!description && <FormDescription className='pt-0'>{description}</FormDescription>}
@@ -321,7 +327,7 @@ interface IFormSelectProps extends Omit<FormItemProps<typeof Select, string | nu
 const FormSelect = React.forwardRef<
   React.ElementRef<typeof Select>,
   IFormSelectProps
->(({ label, value, name, description, options, error, placeholder = label, onChange, onFocus, onBlur, ...props }, ref) => {
+>(({ className, style, label, value, name, description, options, error, placeholder = label, onChange, onFocus, onBlur, ...props }, ref) => {
   const selectedOption = useMemo(() => options.find((option) => option.value === value), [value, options]);
   const insets = useSafeAreaInsets();
   const contentInsets = {
@@ -331,12 +337,12 @@ const FormSelect = React.forwardRef<
     right: 12,
   };
   return (
-    <FormItem>
+    <FormItem className={className} style={style}>
       {!!label && <FormLabel name={name} error={error}>{label}</FormLabel>}
       <Select 
         value={selectedOption}
         onValueChange={(option) => onChange(option ? option.value : null)}
-        onOpenChange={(open) => open ? onFocus() : onBlur()}
+        onOpenChange={(open) => open ? onFocus && onFocus() : onBlur && onBlur()}
         {...props}
       >
         <SelectTrigger className='w-[250px]'>
@@ -365,13 +371,15 @@ FormSelect.displayName = 'FormSelect';
 
 interface IFormRadioGroupItemProps extends Omit<React.ComponentPropsWithoutRef<typeof RadioGroupItem>, keyof {
   value: never;
+  style: never;
   "aria-labelledby": never;
 }> {
+  style?: StyleProperties;
   name: string;
   label: string;
   description?: string;
-  onFocus: NoopFn;
-  onBlur: NoopFn;
+  onFocus?: NoopFn;
+  onBlur?: NoopFn;
   radioValue: string;
   error?: FormError;
 }
@@ -379,9 +387,9 @@ interface IFormRadioGroupItemProps extends Omit<React.ComponentPropsWithoutRef<t
 const FormRadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroup>,
   IFormRadioGroupItemProps
->(({ name, error, label, description, radioValue, onFocus, onBlur, ...props }, ref) => {
+>(({ className, style, name, error, label, description, radioValue, onFocus, onBlur, ...props }, ref) => {
   return (
-    <FormItem>
+    <FormItem className={className} style={style}>
       <View className="flex-row gap-2 items-center">
         <RadioGroupItem
           aria-labelledby={name}
@@ -407,14 +415,16 @@ FormRadioGroupItem.displayName = 'FormRadioGroupItem';
 interface IFormSwitchProps extends Omit<FormItemProps<typeof Switch, boolean>, keyof {
   onCheckedChange: never;
   checked: never;
+  style: never;
 }> {
   error?: FormError;
+  style?: StyleProperties;
 }
 
 const FormSwitch = React.forwardRef<
   React.ElementRef<typeof Switch>,
   IFormSwitchProps
->(({ label, name, description, error, value, onChange, onFocus, onBlur, ...props }, ref) => {
+>(({ className, style, label, name, description, error, value, onChange, onFocus, onBlur, ...props }, ref) => {
   const switchRef = React.useRef<React.ComponentRef<typeof Switch>>(null);
 
   React.useImperativeHandle(
@@ -433,7 +443,7 @@ const FormSwitch = React.forwardRef<
   }
 
   return (
-    <FormItem className='px-1'>
+    <FormItem className={cn(className, 'px-1')} style={style}>
       <View className='flex-row gap-3 items-center'>
         <Switch
           ref={switchRef}
@@ -457,6 +467,35 @@ const FormSwitch = React.forwardRef<
 
 FormSwitch.displayName = 'FormSwitch';
 
+
+interface IFormGroupProps extends Omit<React.ComponentPropsWithoutRef<typeof FormLabel>, keyof {
+  name: never;
+  value: never;
+  "aria-labelledby": never;
+}> {
+  name?: string;
+  label?: string;
+  description?: string;
+  onFocus?: NoopFn;
+  onBlur?: NoopFn;
+  error?: FormError;
+}
+
+const FormGroup = React.forwardRef<
+  React.ElementRef<typeof FormItem>,
+  IFormGroupProps
+>(({ className, style, name, error, label, description, onFocus, onBlur, ...props }, ref) => {
+  const uniqueId = React.useId();
+  return (
+    <FormItem className={className} style={style} ref={ref}>
+      {!!label && <FormLabel name={name || uniqueId} error={error} {...props}>{label}</FormLabel>}
+      {!!description && <FormDescription className='pt-0'>{description}</FormDescription>}
+    </FormItem>
+  );
+});
+
+FormGroup.displayName = 'FormGroup';
+
 export {
   FormCheckbox,
   FormDescription,
@@ -469,4 +508,5 @@ export {
   FormSelect,
   FormSwitch,
   FormTextarea,
+  FormGroup,
 };

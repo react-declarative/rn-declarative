@@ -51,11 +51,13 @@ export const GroupLayout = <Data extends IAnything = IAnything>({
   isPhone,
   isTablet,
   isDesktop,
+  className,
   testId,
   children,
 }: IGroupLayoutProps<Data> & IGroupLayoutPrivate) => {
   return (
     <Group
+      className={className}
       testId={testId}
       style={style}
       phoneStyle={phoneStyle}

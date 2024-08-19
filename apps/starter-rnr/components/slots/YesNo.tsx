@@ -53,16 +53,6 @@ export const YesNoField = ({
     return null;
   }, [upperValue]);
 
-  const displayValue = useMemo(() => {
-    if (upperValue === true) {
-      return OPTIONS[0];
-    }
-    if (upperValue === false) {
-      return OPTIONS[1];
-    }
-    return undefined;
-  }, [value]);
-
   const { fallback } = useOneProps();
 
   const { loading, execute } = useAsyncAction(

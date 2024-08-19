@@ -19,14 +19,22 @@ const styles = StyleSheet.create({
 
 interface IWithBaselineProps {
     style?: CompiledStyles;
+    className?: string;
     children: React.ReactNode;
+}
+
+declare module "react-native" {
+    interface ViewProps {
+        className?: string;
+    }
 }
 
 export const WithBaseline = ({
     style,
     children,
+    className,
 }: IWithBaselineProps) => (
-    <View style={[styles.root, style]}>
+    <View className={className} style={[styles.root, style]}>
         <View style={styles.withBaseline}>
             {children} 
         </View>

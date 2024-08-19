@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ScrollView } from 'react-native';
 import { FieldType, One, TypedField } from 'rn-declarative';
+import { FormGroup, FormLabel } from '~/components/ui/form';
 
 import { Text } from '~/components/ui/text';
 
@@ -29,6 +30,61 @@ const frameworks = [
 
 const fields: TypedField[] = [
   {
+    type: FieldType.Text,
+    style: {
+      width: '100%',
+    },
+    validation: {
+      required: true,
+    },
+    name: 'email',
+    title: 'Email',
+    placeholder: 'tripolskypetr@gmail.com',
+    description: 'This will not be shared.',
+  },
+  {
+    type: FieldType.Text,
+    textVariant: "password",
+    style: {
+      width: '100%',
+    },
+    validation: {
+      required: true,
+    },
+    name: 'email',
+    title: 'Password',
+    placeholder: 'Password',
+    description: 'Use a secure password.',
+  },
+  {
+    type: FieldType.Text,
+    inputMultiline: true,
+    style: {
+      width: '100%',
+    },
+    validation: {
+      required: true,
+    },
+    name: 'bio',
+    title: 'Tell me about yourself',
+    placeholder: 'I am ...',
+    description: 'This will be used by AI.',
+  },
+  {
+    type: FieldType.Component,
+    style: {
+      width: '100%',
+      marginTop: 10,
+      marginBottom: 10,
+    },
+    element: () => (
+      <FormGroup
+        label="Account Type"
+        description='Select your account type.'
+      />
+    ),
+  },
+  {
     type: FieldType.Button,
     style: {
       width: '100%',
@@ -39,7 +95,6 @@ const fields: TypedField[] = [
 ];
 
 export default function FormScreen() {
-  
   return (
     <ScrollView
       contentContainerClassName='p-6 mx-auto w-full max-w-xl'

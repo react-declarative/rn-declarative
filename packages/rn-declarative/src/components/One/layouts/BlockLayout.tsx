@@ -53,6 +53,7 @@ interface IBlockLayoutPrivate<Data = IAnything> extends IEntity<Data> {
 export const BlockLayout = <Data extends IAnything = IAnything>({
   children,
   style,
+  className,
   phoneStyle = style,
   tabletStyle = style,
   desktopStyle = style,
@@ -77,7 +78,7 @@ export const BlockLayout = <Data extends IAnything = IAnything>({
   );
 
   return (
-    <View style={computedStyle} {...makeTestId(testId)}>
+    <View className={className} style={computedStyle} {...makeTestId(testId)}>
       {children}
     </View>
   );

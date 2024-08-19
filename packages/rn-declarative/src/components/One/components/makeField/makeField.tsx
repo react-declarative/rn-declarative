@@ -121,6 +121,7 @@ export function makeField(
         press = DEFAULT_PRESS,
         map = DEFAULT_MAP,
         object: upperObject,
+        className,
         name = '',
         title = nameToTitle(name) || undefined,
         debug,
@@ -655,7 +656,7 @@ export function makeField(
         }
 
         return (
-            <FieldWrapper style={computedStyle}>
+            <FieldWrapper className={className} style={computedStyle}>
                 <Component {...componentProps as IManaged} />
             </FieldWrapper>
         );

@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import { H1, H2, H3, H4, P, Large, Small } from '~/components/ui/typography';
 
-import { IField, ITypographySlot } from 'rn-declarative';
+import { ITypographySlot } from 'rn-declarative';
 
 const componentMap = {
     'h1': H1,

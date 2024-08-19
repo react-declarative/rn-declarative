@@ -16,6 +16,16 @@ import IField from "../../../model/IField";
  */
 export interface ITextFieldProps<Data = IAnything, Payload = IAnything> {
   /**
+   * Returns the "textVariant" property value of the given field object.
+   *
+   * @template IField - Type representing the field object.
+   * @template Data - Type representing the data object.
+   * @template Payload - Type representing the payload object.
+   * 
+   * @returns The value of the "validation" property.
+   */
+  textVariant?: PickProp<IField<Data, Payload>, 'textVariant'>;
+  /**
    * Validation factory config
    *
    * @template IField - Type representing the field object.
@@ -184,6 +194,7 @@ export const TextField = ({
   title = "",
   leadingIcon,
   trailingIcon,
+  textVariant,
   leadingIconPress,
   trailingIconPress,
   inputMultiline = false,
@@ -218,6 +229,7 @@ export const TextField = ({
     onChange={onChange}
     onFocus={onFocus}
     onBlur={onBlur}
+    textVariant={textVariant}
     testId={testId}
     name={name}
     isPhone={isPhone}

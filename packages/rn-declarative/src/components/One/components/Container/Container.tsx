@@ -6,6 +6,7 @@ import NoBaseline from './components/NoBaseline';
 import CompiledStyles from '../../../../model/CompiledStyles';
 
 interface IContainerProps {
+    className?: string;
     style?: CompiledStyles;
     isBaselineAlign?: boolean;
     children: React.ReactNode;
@@ -14,6 +15,6 @@ interface IContainerProps {
 export const Container = ({
     isBaselineAlign,
     ...otherProps
-}: IContainerProps) => isBaselineAlign ? <WithBaseline {...otherProps} /> : <NoBaseline {...otherProps} />
+}: IContainerProps) => isBaselineAlign ? <WithBaseline  {...otherProps} /> : <NoBaseline {...otherProps} />
 
 export default Container;

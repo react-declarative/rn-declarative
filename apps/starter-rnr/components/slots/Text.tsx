@@ -17,6 +17,7 @@ export const Text = ({
   title = "",
   inputMultiline = false,
   placeholder = "",
+  textVariant,
   dirty,
   loading,
   onChange,
@@ -34,6 +35,7 @@ export const Text = ({
         onFocus={onFocus}
         onBlur={onBlur}
         onChange={onChange}
+        secureTextEntry={textVariant === "password"}
         value={loading ? LOADING_LABEL : value || ""}
         error={error}
         placeholder={placeholder}
@@ -51,6 +53,7 @@ export const Text = ({
       onFocus={onFocus}
       onBlur={onBlur}
       onChange={onChange}
+      secureTextEntry={textVariant === "password"}
       value={loading ? LOADING_LABEL : value || ""}
       error={error}
       placeholder={placeholder}

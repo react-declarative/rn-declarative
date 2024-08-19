@@ -76,6 +76,7 @@ const Fragment = ({ children }: React.PropsWithChildren<{}>) => <>{children}</>;
  * @returns The rendered custom layout component.
  */
 export const CustomLayout = <Data extends IAnything = IAnything>({
+  className,
   children,
   style,
   phoneStyle = style,
@@ -124,7 +125,7 @@ export const CustomLayout = <Data extends IAnything = IAnything>({
   }, [object]);
 
   return (
-    <FieldWrapper style={computedStyle}>
+    <FieldWrapper className={className} style={computedStyle}>
       <CustomLayout {...props}>
         <Container style={styles.container} isBaselineAlign={isBaselineAlign}>
           {children}
