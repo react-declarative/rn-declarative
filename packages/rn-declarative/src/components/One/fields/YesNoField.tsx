@@ -114,6 +114,7 @@ export interface IYesNoFieldProps<Data = IAnything, Payload = IAnything> {
  */
 export interface IYesNoFieldPrivate<Data = IAnything>  {
   value: PickProp<IManaged<Data>, "value">;
+  name: PickProp<IManaged<Data>, "name">;
   readonly: PickProp<IManaged<Data>, "readonly">;
   onChange: PickProp<IManaged<Data>, "onChange">;
   dirty: PickProp<IManaged<Data>, "dirty">;
@@ -155,6 +156,7 @@ export const YesNoField = ({
   noDeselect,
   title = "",
   tr,
+  name,
   testId,
   dirty,
   invalid,
@@ -168,6 +170,7 @@ export const YesNoField = ({
 }: IYesNoFieldProps & IYesNoFieldPrivate) => (
   <YesNo
     value={value}
+    name={name}
     disabled={disabled}
     readonly={readonly}
     description={description}

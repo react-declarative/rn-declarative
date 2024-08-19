@@ -27,6 +27,17 @@ export interface ICheckboxFieldProps<Data = IAnything, Payload = IAnything> {
    */
   title?: PickProp<IField<Data, Payload>, 'title'>;
   /**
+   * Retrieves the 'description' property from the given variable.
+   *
+   * @template T - The type of the variable.
+   * @template K - The key to pick from the variable.
+   *
+   * @param variable - The variable to pick the property from.
+   *
+   * @returns - The picked property.
+   */
+  description?: PickProp<IField<Data, Payload>, 'description'>;
+  /**
    * Retrieves the value of the 'readonly' property from the given object.
    *
    * @template Data - The type of data stored in the field.
@@ -59,7 +70,11 @@ export interface ICheckboxFieldProps<Data = IAnything, Payload = IAnything> {
  */
 export interface ICheckboxFieldPrivate<Data = IAnything>  {
   value: PickProp<IManaged<Data>, 'value'>;
+  name: PickProp<IManaged<Data>, "name">;
+  invalid: PickProp<IManaged<Data>, "invalid">;
+  incorrect: PickProp<IManaged<Data>, "incorrect">;
   testId: PickProp<IManaged<Data>, 'testId'>;
+  dirty: PickProp<IManaged<Data>, "dirty">;
   onChange: PickProp<IManaged<Data>, 'onChange'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
@@ -80,7 +95,12 @@ export const CheckboxField = ({
   readonly,
   onChange,
   title,
+  description,
+  name,
+  invalid,
+  incorrect,
   testId,
+  dirty,
   onFocus,
   onBlur,
   isPhone,
@@ -90,11 +110,16 @@ export const CheckboxField = ({
   <CheckBox
     disabled={disabled}
     value={value}
+    dirty={dirty}
     readonly={readonly}
+    name={name}
+    invalid={invalid}
+    incorrect={incorrect}
     onChange={onChange}
     onFocus={onFocus}
     onBlur={onBlur}
     title={title}
+    description={description}
     testId={testId}
     isPhone={isPhone}
     isTablet={isTablet}

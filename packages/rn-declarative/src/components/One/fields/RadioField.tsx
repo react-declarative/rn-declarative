@@ -24,6 +24,17 @@ export interface IRadioFieldProps<Data = IAnything, Payload = IAnything> {
    */
   title?: PickProp<IField<Data, Payload>, "title">;
   /**
+   * Retrieves the 'description' property from the given variable.
+   *
+   * @template T - The type of the variable.
+   * @template K - The key to pick from the variable.
+   *
+   * @param variable - The variable to pick the property from.
+   *
+   * @returns - The picked property.
+   */
+  description?: PickProp<IField<Data, Payload>, 'description'>;
+  /**
    * Represents the radio value of a field.
    *
    * @typedef RadioValue
@@ -64,6 +75,9 @@ export interface IRadioFieldPrivate<Data = IAnything> {
   value: PickProp<IManaged<Data>, "value">;
   onChange: PickProp<IManaged<Data>, "onChange">;
   name?: PickProp<IManaged<Data>, 'name'>;
+  invalid: PickProp<IManaged<Data>, "invalid">;
+  dirty: PickProp<IManaged<Data>, "dirty">;
+  incorrect: PickProp<IManaged<Data>, "incorrect">;
   testId: PickProp<IManaged<Data>, 'testId'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
@@ -90,9 +104,13 @@ export const RadioField = ({
   value,
   onChange,
   title,
+  description,
   radioValue,
   name = '',
   testId,
+  invalid,
+  incorrect,
+  dirty,
   onFocus,
   onBlur,
   isPhone,
@@ -105,9 +123,13 @@ export const RadioField = ({
     onChange={onChange}
     title={title}
     radioValue={radioValue}
+    description={description}
     onFocus={onFocus}
     onBlur={onBlur}
+    dirty={dirty}
     name={name}
+    invalid={invalid}
+    incorrect={incorrect}
     testId={testId}
     isPhone={isPhone}
     isTablet={isTablet}

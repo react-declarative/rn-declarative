@@ -1,17 +1,17 @@
 import * as React from "react";
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useAsyncAction, useOnePayload, useOneProps, useOneState, useRenderWaiter } from "rn-declarative";
 
-import { Icon, IndexPath, Select, SelectItem } from "@ui-kitten/components";
-import { useOnePayload, useOneProps, useOneState, useAsyncAction, IYesNoSlot,  } from 'rn-declarative';
+import { FormInput, FormSelect } from "~/components/ui/form";
 
-import { Pressable } from "react-native";
+import { IYesNoSlot } from "rn-declarative";
+
+const LOADING_LABEL = "Loading";
 
 const OPTIONS = [
   "Yes",
   "No",
 ];
-
-const DEFAULT_INDEX = new IndexPath(0);
 
 export const YesNoField = ({
   value: upperValue,
@@ -19,7 +19,7 @@ export const YesNoField = ({
   readonly,
   description = "",
   placeholder = "",
-  noDeselect,
+  name,
   title = "",
   tr = (v) => v,
   dirty,
@@ -36,14 +36,21 @@ export const YesNoField = ({
   const payload = useOnePayload();
   const { object } = useOneState();
 
+  const options = useMemo(() => {
+    return OPTIONS.map((value) => ({
+      label: value,
+      value,
+    }));
+  }, []);
+
   const value = useMemo(() => {
     if (upperValue === true) {
-      return new IndexPath(0);
+      return OPTIONS[0];
     }
     if (upperValue === false) {
-      return new IndexPath(1);
+      return OPTIONS[1];
     }
-    return undefined;
+    return null;
   }, [upperValue]);
 
   const displayValue = useMemo(() => {
@@ -75,7 +82,7 @@ export const YesNoField = ({
     }
   );
   
-  const error = useMemo(() => dirty && (invalid !== null || incorrect !== null), [dirty, invalid, incorrect]);
+  const error = useMemo(() => dirty ? invalid || incorrect || null : null, [dirty, invalid, incorrect]);  
 
   useEffect(() => {
     execute();
@@ -91,51 +98,38 @@ export const YesNoField = ({
     onChange(value === "Yes" ? true : value === "No" ? false : null);
   };
 
-  if (loading || !initComplete.current) {
+  if (loading) {
     return (
-      <Select
-        key={"loading"}
-        value="Loading"
-        selectedIndex={DEFAULT_INDEX}
-        caption={(dirty && (invalid || incorrect)) || description}
+      <FormInput
+        name={name}
+        disabled
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onChange={onChange}
+        value={LOADING_LABEL}
+        error={error}
         placeholder={placeholder}
         label={title}
-        status={error ? "danger" : "basic"}
-        disabled
-      >
-        <SelectItem title='Loading' />
-      </Select>
+        description={description}
+      />
     );
   }
 
   return (
-    <Select
-      disabled={disabled}
-      selectedIndex={value}
-      value={displayValue}
-      caption={(dirty && (invalid || incorrect)) || description}
-      placeholder={placeholder}
+    <FormSelect
       label={title}
-      size="medium"
-      status={error ? "danger" : "basic"}
+      description={description}
+      placeholder={placeholder}
+      name={name}
       onFocus={onFocus}
       onBlur={onBlur}
-      onSelect={(index) => {
-        if (index instanceof IndexPath) {
-          handleChange(OPTIONS[index.row]);
-        }
-      }}
-      accessoryRight={!noDeselect ? (
-        <Pressable onPress={() => handleChange(null)}>
-          <Icon name="close" />
-        </Pressable >
-      ) : undefined}
-    >
-      {OPTIONS.map((value) => (
-        <SelectItem key={value} title={labels[value] || value} />
-      ))}
-    </Select>
+      value={value}
+      options={options}
+      onChange={handleChange}
+      error={error}
+    />
   );
-};
+}
+
 
 export default YesNoField;

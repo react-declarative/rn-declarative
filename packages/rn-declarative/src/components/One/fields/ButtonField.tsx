@@ -68,6 +68,7 @@ export interface IButtonFieldProps<Data = IAnything, Payload = IAnything> {
  */
 export interface IButtonFieldPrivate<Data = IAnything> {
   value: PickProp<IManaged<Data>, 'value'>;
+  name: PickProp<IManaged<Data>, "name">;
   press: PickProp<IManaged<Data>, 'press'>;
   testId: PickProp<IManaged<Data>, 'testId'>;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
@@ -93,6 +94,7 @@ export const ButtonField = ({
   testId,
   onFocus,
   onBlur,
+  name,
   isPhone,
   isTablet,
   isDesktop,
@@ -103,6 +105,7 @@ export const ButtonField = ({
     press={press}
     title={title}
     value={value}
+    name={name}
     placeholder={placeholder}
     onFocus={onFocus}
     onBlur={onBlur}

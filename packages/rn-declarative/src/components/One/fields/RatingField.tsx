@@ -37,8 +37,8 @@ export interface IRatingFieldProps<Data = IAnything, Payload = IAnything> {
  * @template Data - The type of data associated with the field.
  */
 export interface IRatingFieldPrivate<Data = IAnything> {
-  name?: string;
   value: PickProp<IManaged<Data>, "value">;
+  name: PickProp<IManaged<Data>, "name">;
   readonly: PickProp<IManaged<Data>, "readonly">;
   onChange: PickProp<IManaged<Data>, "onChange">;
   isPhone: PickProp<IManaged<Data>, 'isPhone'>;

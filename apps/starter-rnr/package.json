@@ -61,6 +61,7 @@
     "react-native-screens": "~3.31.1",
     "react-native-svg": "15.2.0",
     "react-native-web": "~0.19.6",
+    "rn-declarative": "^0.0.85",
     "tailwind-merge": "^2.2.1",
     "tailwindcss": "3.3.5",
     "tailwindcss-animate": "^1.0.7",

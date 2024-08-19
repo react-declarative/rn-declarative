@@ -306,9 +306,11 @@ FormRadioGroup.displayName = 'FormRadioGroup';
 
 interface IFormSelectProps extends Omit<FormItemProps<typeof Select, string | null>, keyof {
   onValueChange: never;
+  error: never;
 }> {
   error?: FormError;
   placeholder?: string;
+  description?: string;
   label: string;
   options: {
     value: string;
@@ -354,6 +356,7 @@ const FormSelect = React.forwardRef<
           </SelectGroup>
         </SelectContent>
       </Select>
+      {!!description && <FormDescription error={error}>{description}</FormDescription>}
     </FormItem>
   );
 });
@@ -366,36 +369,40 @@ interface IFormRadioGroupItemProps extends Omit<React.ComponentPropsWithoutRef<t
 }> {
   name: string;
   label: string;
+  description?: string;
   onFocus: NoopFn;
   onBlur: NoopFn;
   radioValue: string;
   error?: FormError;
 }
 
-const FormRadioItemGroup = React.forwardRef<
+const FormRadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroup>,
   IFormRadioGroupItemProps
->(({ name, error, label, radioValue, onFocus, onBlur, ...props }, ref) => {
+>(({ name, error, label, description, radioValue, onFocus, onBlur, ...props }, ref) => {
   return (
-    <FormItem className='flex-row gap-2 items-center'>
-      <RadioGroupItem
-        aria-labelledby={name}
-        value={radioValue}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        {...props}
-      />
-      <FormLabel
-        name={name}
-        error={error}
-      >
-        {label}
-      </FormLabel>
+    <FormItem>
+      <View className="flex-row gap-2 items-center">
+        <RadioGroupItem
+          aria-labelledby={name}
+          value={radioValue}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          {...props}
+        />
+        <FormLabel
+          name={name}
+          error={error}
+        >
+          {label}
+        </FormLabel>
+      </View>
+      {!!description && <FormDescription error={error}>{description}</FormDescription>}
     </FormItem>
   );
 });
 
-FormRadioItemGroup.displayName = 'FormRadioItemGroup';
+FormRadioGroupItem.displayName = 'FormRadioGroupItem';
 
 interface IFormSwitchProps extends Omit<FormItemProps<typeof Switch, boolean>, keyof {
   onCheckedChange: never;
@@ -458,7 +465,7 @@ export {
   FormLabel,
   FormMessage,
   FormRadioGroup,
-  FormRadioItemGroup,
+  FormRadioGroupItem,
   FormSelect,
   FormSwitch,
   FormTextarea,

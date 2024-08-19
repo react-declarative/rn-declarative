@@ -1,12 +1,10 @@
 import * as React from "react";
-import { useMemo, useState, useRef, useEffect } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useAsyncAction, useOnePayload, useOneProps, useOneState, useRenderWaiter } from "rn-declarative";
 
-import { Icon, IndexPath, Select, SelectItem } from "@ui-kitten/components";
+import { FormInput, FormSelect } from "~/components/ui/form";
 
-import { Pressable } from "react-native";
-import { IComboSlot, useOneState, useOneProps, useOnePayload, useAsyncAction, useRenderWaiter } from 'rn-declarative';
-
-const DEFAULT_INDEX = new IndexPath(0);
+import { IComboSlot } from "rn-declarative";
 
 const getArrayHash = (value: any) =>
   Object.values<string>(value || {})
@@ -18,25 +16,27 @@ interface IState {
   labels: Record<string, string>;
 }
 
+const LOADING_LABEL = "Loading";
+
 export const Combo = ({
+  invalid,
+  incorrect,
   value: upperValue,
+  name,
   disabled,
   readonly,
   description = "",
-  placeholder = "",
-  itemList = [],
-  watchItemList,
-  noDeselect,
-  freeSolo,
   title = "",
+  placeholder = "",
   dirty,
-  invalid,
-  incorrect,
+  itemList,
+  tr = (s) => s.toString(),
+  watchItemList,
+  onChange,
   onFocus,
   onBlur,
-  tr = (s) => s.toString(),
-  onChange,
 }: IComboSlot) => {
+
   const { object } = useOneState();
   const payload = useOnePayload();
 
@@ -44,6 +44,13 @@ export const Combo = ({
     options: [],
     labels: {},
   }));
+
+  const options = useMemo(() => {
+    return state.options.map((value) => ({
+      label: state.labels[value] || value,
+      value,
+    }));
+  }, [state]);
 
   const initComplete = useRef(false);
 
@@ -55,26 +62,6 @@ export const Combo = ({
       return first;
     }
     return upperValue;
-  }, [upperValue]);
-
-  const displayValue = useMemo(() => {
-    return value ? state.labels[value] || value || undefined : undefined;
-}, [value]);
-
-  const selectValue = useMemo(() => {
-    if (Array.isArray(upperValue)) {
-      const [first] = upperValue;
-      const index = state.options.findIndex((value) => value === first);
-      if (index === undefined) {
-        return undefined;
-      }
-      return first ? new IndexPath(index) : undefined;
-    }
-    const index = state.options.findIndex((value) => value === upperValue);
-    if (index === undefined) {
-      return undefined;
-    }
-    return upperValue ? new IndexPath(index) : undefined;
   }, [upperValue]);
 
   const { fallback } = useOneProps();
@@ -99,7 +86,7 @@ export const Combo = ({
         )
       );
 
-      if (freeSolo && value) {
+      if (value) {
         !options.includes(value) && options.push(value);
       }
 
@@ -130,7 +117,7 @@ export const Combo = ({
     execute(object);
   }, [valueHash, disabled, dirty, invalid, incorrect, object, readonly]);
 
-  const error = useMemo(() => dirty && (invalid !== null || incorrect !== null), [dirty, invalid, incorrect]);
+  const error = useMemo(() => dirty ? invalid || incorrect || null : null, [dirty, invalid, incorrect]);  
 
   const handleChange = (value: any) => {
     if (readonly) {
@@ -142,52 +129,37 @@ export const Combo = ({
     onChange(value || null);
   };
 
-  if (loading || !initComplete.current) {
+  if (loading) {
     return (
-      <Select
-        key={"loading"}
-        size="medium"
-        value="Loading"
-        selectedIndex={DEFAULT_INDEX}
-        caption={(dirty && (invalid || incorrect)) || description}
+      <FormInput
+        name={name}
+        disabled
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onChange={onChange}
+        value={LOADING_LABEL}
+        error={error}
         placeholder={placeholder}
         label={title}
-        status={error ? "danger" : "basic"}
-        disabled
-      >
-        <SelectItem title='Loading' />
-      </Select>
+        description={description}
+      />
     );
   }
 
   return (
-    <Select
-      disabled={disabled}
-      selectedIndex={selectValue}
-      caption={(dirty && (invalid || incorrect)) || description}
-      placeholder={placeholder}
+    <FormSelect
       label={title}
-      size="medium"
-      value={displayValue}
+      description={description}
+      placeholder={placeholder}
+      name={name}
       onFocus={onFocus}
       onBlur={onBlur}
-      status={error ? "danger" : "basic"}
-      onSelect={(index) => {
-        if (index instanceof IndexPath) {
-          handleChange(state.options[index.row]);
-        }
-      }}
-      accessoryRight={!noDeselect ? (
-        <Pressable onPress={() => handleChange(null)}>
-          <Icon name="close" />
-        </Pressable >
-      ) : undefined}
-    >
-      {state.options.map((value) => (
-        <SelectItem key={value} title={state.labels[value] || value} />
-      ))}
-    </Select>
+      value={value}
+      options={options}
+      onChange={handleChange}
+      error={error}
+    />
   );
-};
+}
 
 export default Combo;
