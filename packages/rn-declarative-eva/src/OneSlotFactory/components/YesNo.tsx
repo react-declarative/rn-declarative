@@ -26,6 +26,8 @@ export const YesNoField = ({
   invalid,
   incorrect,
   onChange,
+  onFocus,
+  onBlur,
 }: IYesNoSlot) => {
   const [labels, setLabels] = useState<Record<string, string>>({});
 
@@ -116,6 +118,8 @@ export const YesNoField = ({
       label={title}
       size="medium"
       status={error ? "danger" : "basic"}
+      onFocus={onFocus}
+      onBlur={onBlur}
       onSelect={(index) => {
         if (index instanceof IndexPath) {
           handleChange(OPTIONS[index.row]);

@@ -32,6 +32,8 @@ export const Combo = ({
   dirty,
   invalid,
   incorrect,
+  onFocus,
+  onBlur,
   tr = (s) => s.toString(),
   onChange,
 }: IComboSlot) => {
@@ -167,6 +169,8 @@ export const Combo = ({
       label={title}
       size="medium"
       value={displayValue}
+      onFocus={onFocus}
+      onBlur={onBlur}
       status={error ? "danger" : "basic"}
       onSelect={(index) => {
         if (index instanceof IndexPath) {

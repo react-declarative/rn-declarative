@@ -17,7 +17,6 @@ import initialValue from "../../../config/initialValue";
  * @interface
  */
 interface IState {
-  focusReadonly: boolean;
   fieldReadonly: boolean;
   disabled: boolean;
   invalid: string | null;
@@ -45,7 +44,6 @@ interface IInitialData
     IState,
     keyof {
       fieldReadonly: never;
-      focusReadonly: never;
       invalid: never;
       incorrect: never;
       visible: never;
@@ -145,7 +143,6 @@ export const useFieldState = (initialData: IInitialData, config: IParams) => {
   const [state, setState] = useState<IState>(() => {
     const params = readState(config);
     return {
-      focusReadonly: true,
       loading: false,
       ...params,
       value: readValue(config, params.visible),
@@ -160,8 +157,6 @@ export const useFieldState = (initialData: IInitialData, config: IParams) => {
    */
   const action = useMemo(
     () => ({
-      setFocusReadonly: (focusReadonly: IState["focusReadonly"]) =>
-        setState((prevState) => ({ ...prevState, focusReadonly })),
       setFieldReadonly: (fieldReadonly: IState["fieldReadonly"]) =>
         setState((prevState) => ({ ...prevState, fieldReadonly })),
       setDisabled: (disabled: IState["disabled"]) =>

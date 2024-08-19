@@ -69,6 +69,7 @@ interface IConditionLayoutPrivate<Data = IAnything> extends IEntity<Data> {
 export const ConditionLayout = <Data extends IAnything = IAnything>({
   children,
   style,
+  className,
   phoneStyle = style,
   tabletStyle = style,
   desktopStyle = style,
@@ -108,7 +109,7 @@ export const ConditionLayout = <Data extends IAnything = IAnything>({
   }, []);
 
   return (
-    <FieldWrapper style={computedStyle}>
+    <FieldWrapper className={className} style={computedStyle}>
       <If 
         condition={handleCondition}
         Loading={ConditionLoading && <ConditionLoading data={object} payload={payload} />}

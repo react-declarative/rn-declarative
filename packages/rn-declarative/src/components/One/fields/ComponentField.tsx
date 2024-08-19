@@ -22,6 +22,8 @@ const FIELD_INTERNAL_PARAMS: FieldIgnoreParam[] = [
   "fallback",
   "readonly",
   "invalid",
+  "incorrect",
+  "dirty",
   "loading",
   "object",
   "onChange",
@@ -83,7 +85,9 @@ interface IComponentFieldPrivate<Data = IAnything> {
   object: PickProp<IManaged<Data>, "object">;
   disabled: PickProp<IManaged<Data>, "disabled">;
   value: PickProp<IManaged<Data>, "value">;
+  name: PickProp<IManaged<Data>, "name">;
   invalid: PickProp<IManaged<Data>, "invalid">;
+  dirty: PickProp<IManaged<Data>, "dirty">;
   incorrect: PickProp<IManaged<Data>, "incorrect">;
   readonly: PickProp<IManaged<Data>, "readonly">;
   testId: PickProp<IManaged<Data>, 'testId'>;
@@ -133,6 +137,7 @@ export const ComponentField = ({
   onBlur,
   press: onPress,
   testId,
+  dirty,
   isPhone,
   isTablet,
   isDesktop,
@@ -162,6 +167,7 @@ export const ComponentField = ({
       invalid,
       incorrect,
       payload,
+      dirty,
       disabled,
       readonly,
       features,
@@ -175,6 +181,7 @@ export const ComponentField = ({
     invalid,
     incorrect,
     readonly,
+    dirty,
     isPhone,
     isTablet,
     isDesktop,
@@ -191,7 +198,6 @@ ComponentField.displayName = "ComponentField";
 export default makeField(ComponentField, {
   withApplyQueue: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
   skipFocusBlurCall: true,
   skipDebounce: false,
 });

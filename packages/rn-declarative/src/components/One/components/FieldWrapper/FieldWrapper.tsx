@@ -12,7 +12,14 @@ const styles = StyleSheet.create({
 
 interface IFieldWrapperProps {
     style?: CompiledStyles;
+    className?: string;
     children: React.ReactNode;
+}
+
+declare module "react-native" {
+    interface ViewProps {
+        className?: string;
+    }
 }
 
 /**
@@ -22,8 +29,9 @@ interface IFieldWrapperProps {
 export const FieldWrapper = ({
     style,
     children,
+    className,
 }: IFieldWrapperProps) => (
-    <View style={[styles.root, style]}>
+    <View className={className} style={[styles.root, style]}>
         {children}
     </View>
 );

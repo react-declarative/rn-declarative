@@ -129,6 +129,7 @@ export interface IItemsFieldPrivate<Data = IAnything> {
   incorrect: PickProp<IManaged<Data>, "incorrect">;
   fieldReadonly: PickProp<IManaged<Data>, "fieldReadonly">;
   testId: PickProp<IManaged<Data>, 'testId'>;
+  name: PickProp<IManaged<Data>, "name">;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
   isPhone: PickProp<IManaged<Data>, 'isPhone'>;
@@ -172,6 +173,7 @@ export const ItemsField = ({
   invalid,
   incorrect,
   title,
+  name,
   testId,
   fieldReadonly,
   isPhone,
@@ -186,6 +188,7 @@ export const ItemsField = ({
     value={value}
     disabled={disabled}
     readonly={readonly}
+    name={name}
     fieldReadonly={fieldReadonly}
     description={description}
     placeholder={placeholder}
@@ -214,5 +217,4 @@ export default makeField(ItemsField, {
   withApplyQueue: true,
   skipDebounce: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
 });

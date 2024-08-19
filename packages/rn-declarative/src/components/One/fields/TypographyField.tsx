@@ -40,6 +40,7 @@ export interface ITypographyFieldProps<Data = IAnything, Payload = IAnything> {
  */
 export interface ITypographyFieldPrivate<Data = IAnything> {
   value: PickProp<IManaged<Data>, 'value'>;
+  name: PickProp<IManaged<Data>, "name">;
   isPhone: PickProp<IManaged<Data>, 'isPhone'>;
   isTablet: PickProp<IManaged<Data>, 'isTablet'>;
   isDesktop: PickProp<IManaged<Data>, 'isDesktop'>;
@@ -59,12 +60,14 @@ export const TypographyField = ({
   value = '',
   placeholder = '',
   typoVariant = 'body1',
+  name,
   isPhone,
   isTablet,
   isDesktop,
 }: ITypographyFieldProps & ITypographyFieldPrivate) => (
   <Typography
     value={value}
+    name={name}
     placeholder={placeholder}
     typoVariant={typoVariant}
     isPhone={isPhone}

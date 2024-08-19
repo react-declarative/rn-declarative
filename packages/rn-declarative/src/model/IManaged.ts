@@ -107,6 +107,17 @@ export interface IWrappedLayout<Data = IAnything, Payload = IAnything> {
      * @property [baseline] - Specifies whether the field has a baseline or not.
      */
     baseline?: PickProp<IField<Data, Payload>, 'baseline'>;
+    /**
+     * Represents an optional property `className` that is picked from the interface `IField` using the `PickProp` utility type.
+     *
+     * @template Data - The type of data associated with the field.
+     * @template Payload - The type of payload associated with the field.
+     *
+     * @typedef className
+     *
+     * @property [className] - Specifies whether the field has a className or not.
+     */
+    className?: PickProp<IField<Data, Payload>, 'className'>;
 }
 
 /**

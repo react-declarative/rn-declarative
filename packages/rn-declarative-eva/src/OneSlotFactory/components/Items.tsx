@@ -31,6 +31,8 @@ export const Items = ({
     invalid,
     incorrect,
     title,
+    onFocus,
+    onBlur,
     tr = (s) => s.toString(),
     onChange,
 }: IItemsSlot) => {
@@ -169,6 +171,8 @@ export const Items = ({
             disabled={disabled}
             selectedIndex={selectValue}
             value={displayValue}
+            onFocus={onFocus}
+            onBlur={onBlur}
             size="medium"
             caption={(dirty && (invalid || incorrect)) || description}
             placeholder={placeholder}

@@ -29,6 +29,7 @@ export interface IGroupProps<Data = IAnything, Payload = IAnything> extends IMan
  * @interface IGroupPrivate
  */
 interface IGroupPrivate {
+  className?: string;
   children: React.ReactNode;
   isBaselineAlign?: boolean;
   isPhone?: boolean;
@@ -50,6 +51,7 @@ interface IGroupPrivate {
  * @returns The rendered component
  */
 export const Group = ({
+  className,
   testId,
   style,
   phoneStyle,
@@ -79,6 +81,7 @@ export const Group = ({
   if (isBaselineAlign) {
     return (
       <WithBaseline
+        className={className}
         style={computedStyle}
         {...makeTestId}
       >
@@ -89,6 +92,7 @@ export const Group = ({
 
   return (
     <NoBaseline
+      className={className}
       style={computedStyle}
       {...makeTestId(testId)}
     >

@@ -21,6 +21,12 @@ export type Value = string | string[] | number | boolean | null;
  * Объект поля для прикладного программиста
  */
 export interface IField<Data = IAnything, Payload = IAnything> {
+
+    /**
+     * Класс компонента, если установлен NativeWind
+     */
+    className?: string;
+
     /**
      * Отменяет ожидание фокуса для валидации
      */
@@ -32,6 +38,14 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     buttonVariant?: keyof {
       primary: 'primary',
       secondary: 'secondary'
+    };
+
+    /**
+     * Вариант поля ввода
+     */
+    textVariant?: keyof {
+      text: 'text',
+      password: 'password',
     };
 
     /**

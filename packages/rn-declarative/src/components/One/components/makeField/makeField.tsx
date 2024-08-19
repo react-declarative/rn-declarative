@@ -51,7 +51,6 @@ interface IConfig<Data = IAnything> {
     withApplyQueue?: boolean;
     skipDebounce?: boolean;
     skipDirtyPressListener?: boolean;
-    skipFocusReadonly?: boolean;
     skipFocusBlurCall?: boolean;
     skipPressListener?: boolean;
     defaultProps?: Partial<Omit<IField<Data>, keyof {
@@ -89,7 +88,6 @@ export function makeField(
         withApplyQueue: false,
         skipDirtyPressListener: false,
         skipPressListener: false,
-        skipFocusReadonly: false,
         skipFocusBlurCall: false,
         skipDebounce: false,
         defaultProps: { },
@@ -121,6 +119,7 @@ export function makeField(
         press = DEFAULT_PRESS,
         map = DEFAULT_MAP,
         object: upperObject,
+        className,
         name = '',
         title = nameToTitle(name) || undefined,
         debug,
@@ -175,7 +174,6 @@ export function makeField(
                 dirty,
                 disabled,
                 fieldReadonly,
-                focusReadonly,
                 invalid,
                 incorrect,
                 loading,
@@ -186,7 +184,6 @@ export function makeField(
                 setDirty,
                 setDisabled,
                 setFieldReadonly,
-                setFocusReadonly,
                 setInvalid,
                 setIncorrect,
                 setLoading,
@@ -227,7 +224,6 @@ export function makeField(
             lastDebouncedValue: debouncedValue,
             debouncedValue$: debouncedValue,
             fieldReadonly$: fieldReadonly,
-            focusReadonly$: focusReadonly,
             invalid$: invalid,
             object$: object,
             upperReadonly$: upperReadonly,
@@ -515,10 +511,13 @@ export function makeField(
             if (!memory.isMounted) {
                 return;
             }
-            changeFocusSubject.next();
-            if (!fieldReadonly && !upperReadonly) {
-                setFocusReadonly(false);
+            if (fieldReadonly) {
+                return;
             }
+            if (upperReadonly) {
+                return;
+            }
+            changeFocusSubject.next();
             if (!fieldConfig.skipFocusBlurCall) {
                 blurSubject.once(() => {
                     if (pending()) {
@@ -529,7 +528,6 @@ export function makeField(
                             skipReadonly: true,
                         }), changeObject);
                     }
-                    setFocusReadonly(true);
                 })
                 if (focus) {
                     focus(name, memory.object$, payload, (value) => managedProps.onChange(value, {
@@ -578,12 +576,8 @@ export function makeField(
         const computeReadonly = useCallback(() => {
             const { fieldReadonly$: fieldReadonly } = memory;
             const { upperReadonly$: upperReadonly } = memory;
-            const { focusReadonly$: focusReadonly } = memory;
             let isReadonly = false;
             isReadonly = isReadonly || upperReadonly;
-            if (!fieldConfig.skipFocusReadonly) {
-                isReadonly = isReadonly || focusReadonly;
-            }
             isReadonly = isReadonly || fieldReadonly;
             isReadonly = isReadonly || !!compute;
             return isReadonly;
@@ -655,7 +649,7 @@ export function makeField(
         }
 
         return (
-            <FieldWrapper style={computedStyle}>
+            <FieldWrapper className={className} style={computedStyle}>
                 <Component {...componentProps as IManaged} />
             </FieldWrapper>
         );

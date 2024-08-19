@@ -7,6 +7,7 @@ import type IManaged from "./IManaged";
  * @template Payload - The payload type of the field.
  */
 export type ComponentFieldInstance<Data = any, Payload = any> = Data & {
+  className?: string;
   onFocus: () => void;
   onBlur: () => void;
   onPress: () => void | Promise<void>;

@@ -27,6 +27,17 @@ export interface ISwitchFieldProps<Data = IAnything, Payload = IAnything>  {
    */
   title?: PickProp<IField<Data, Payload>, 'title'>;
   /**
+   * Retrieves the 'description' property from the given variable.
+   *
+   * @template T - The type of the variable.
+   * @template K - The key to pick from the variable.
+   *
+   * @param variable - The variable to pick the property from.
+   *
+   * @returns - The picked property.
+   */
+  description?: PickProp<IField<Data, Payload>, 'description'>;
+  /**
    * Represents the readonly property of an IField object.
    *
    * @typedef readonly?
@@ -53,6 +64,10 @@ export interface ISwitchFieldPrivate<Data = IAnything>  {
   onChange: PickProp<IManaged<Data>, 'onChange'>;
   value: PickProp<IManaged<Data>, 'value'>;
   testId: PickProp<IManaged<Data>, 'testId'>;
+  name: PickProp<IManaged<Data>, "name">;
+  invalid: PickProp<IManaged<Data>, "invalid">;
+  dirty: PickProp<IManaged<Data>, "dirty">;
+  incorrect: PickProp<IManaged<Data>, "incorrect">;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
   isPhone: PickProp<IManaged<Data>, 'isPhone'>;
@@ -80,7 +95,12 @@ export const SwitchField = ({
   readonly,
   onChange,
   title,
+  description,
   testId,
+  name,
+  dirty,
+  invalid,
+  incorrect,
   isPhone,
   isTablet,
   isDesktop,
@@ -91,10 +111,15 @@ export const SwitchField = ({
     readonly={readonly}
     disabled={disabled}
     value={value}
+    name={name}
+    invalid={invalid}
+    dirty={dirty}
+    incorrect={incorrect}
     onChange={onChange}
     onFocus={onFocus}
     onBlur={onBlur}
     title={title}
+    description={description}
     testId={testId}
     isPhone={isPhone}
     isTablet={isTablet}
@@ -108,5 +133,4 @@ export default makeField(SwitchField, {
   withApplyQueue: true,
   skipDebounce: true,
   skipDirtyPressListener: true,
-  skipFocusReadonly: true,
 });
