@@ -74,8 +74,6 @@ const fields: TypedField[] = [
     type: FieldType.Component,
     style: {
       width: '100%',
-      marginTop: 16,
-      marginBottom: 8,
     },
     element: () => (
       <FormGroup
@@ -87,7 +85,6 @@ const fields: TypedField[] = [
   {
     type: FieldType.Block,
     style: {
-      marginBottom: 12,
       width: '100%',
     },
     fields: [
@@ -133,7 +130,6 @@ const fields: TypedField[] = [
     type: FieldType.Switch,
     style: {
       width: '100%',
-      marginTop: 8,
     },
     title: 'Enable notifications',
     description: 'We will send you spam.',
@@ -143,7 +139,6 @@ const fields: TypedField[] = [
     type: FieldType.Checkbox,
     style: {
       width: '100%',
-      marginBottom: 8,
     },
     title: 'Accept terms & conditions',
     name: 'agree',

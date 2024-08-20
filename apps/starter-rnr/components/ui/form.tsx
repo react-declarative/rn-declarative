@@ -25,13 +25,20 @@ type FormError = string | null;
 type NoopFn = () => void;
 
 interface IFormItemProps extends React.ComponentPropsWithoutRef<typeof View> {
+  className?: string;
+  style?: StyleProperties;
+  onPress?: NoopFn;
 }
 
 const FormItem = React.forwardRef<
   React.ElementRef<typeof View>,
   IFormItemProps
->(({ className, style, ...props }, ref) => (
-  <View ref={ref} className={cn('space-y-2', className)} style={style} {...props} />
+>(({ className, style, onPress, children, ...props }, ref) => (
+  <View ref={ref} className={cn('space-y-2', className)} style={style} {...props}>
+    <Pressable>
+      {children}
+    </Pressable>
+  </View>
 ));
 FormItem.displayName = 'FormItem';
 
@@ -153,7 +160,7 @@ const FormInput = React.forwardRef<
   }
 
   return (
-    <FormItem className={className} style={style}>
+    <FormItem className={className} style={style} onPress={handleOnLabelPress}>
       {!!label && (
         <FormLabel name={name} error={error} onPress={handleOnLabelPress}>
           {label}
@@ -166,7 +173,7 @@ const FormInput = React.forwardRef<
         onBlur={onBlur}
         {...props}
       />
-      {!!description && <FormDescription error={error}>{description}</FormDescription>}
+      {!!description && <FormDescription onPress={handleOnLabelPress} error={error}>{description}</FormDescription>}
     </FormItem>
   );
 });
@@ -206,7 +213,7 @@ const FormTextarea = React.forwardRef<
   }
 
   return (
-    <FormItem className={className} style={style}>
+    <FormItem className={className} style={style} onPress={handleOnLabelPress}>
       {!!label && (
         <FormLabel name={name} error={error} onPress={handleOnLabelPress}>
           {label}
@@ -219,7 +226,7 @@ const FormTextarea = React.forwardRef<
         onBlur={onBlur}
         {...props}
       />
-      {!!description && <FormDescription error={error}>{description}</FormDescription>}
+      {!!description && <FormDescription onPress={handleOnLabelPress} error={error}>{description}</FormDescription>}
     </FormItem>
   );
 });
@@ -257,7 +264,7 @@ const FormCheckbox = React.forwardRef<
   }
 
   return (
-    <FormItem className={className} style={style}>
+    <FormItem className={cn(className, 'h-[25px]')} onPress={handleOnLabelPress} className={className} style={style}>
       <View className='flex-row gap-3 items-center'>
         <Checkbox
           ref={checkboxRef}
@@ -274,7 +281,7 @@ const FormCheckbox = React.forwardRef<
           </FormLabel>
         )}
       </View>
-      {!!description && <FormDescription error={error}>{description}</FormDescription>}
+      {!!description && <FormDescription onPress={handleOnLabelPress} error={error}>{description}</FormDescription>}
     </FormItem>
   );
 });
@@ -389,7 +396,7 @@ const FormRadioGroupItem = React.forwardRef<
   IFormRadioGroupItemProps
 >(({ className, style, name, error, label, description, radioValue, onFocus, onBlur, onPress, ...props }, ref) => {
   return (
-    <FormItem className={className} style={style}>
+    <FormItem className={cn(className, 'h-[25px]')} onPress={onPress} style={style}>
       <View className="flex-row gap-2 items-center">
         <RadioGroupItem
           aria-labelledby={name}
@@ -444,7 +451,7 @@ const FormSwitch = React.forwardRef<
   }
 
   return (
-    <FormItem className={cn(className, 'px-1')} style={style}>
+    <FormItem  onPress={handleOnLabelPress} className={cn(className, 'px-1')} style={style}>
       <View className='flex-row gap-3 items-center'>
         <Switch
           ref={switchRef}
@@ -479,16 +486,17 @@ interface IFormGroupProps extends Omit<React.ComponentPropsWithoutRef<typeof For
   description?: string;
   onFocus?: NoopFn;
   onBlur?: NoopFn;
+  onPress?: NoopFn;
   error?: FormError;
 }
 
 const FormGroup = React.forwardRef<
   React.ElementRef<typeof FormItem>,
   IFormGroupProps
->(({ className, style, name, error, label, description, onFocus, onBlur, ...props }, ref) => {
+>(({ className, onPress, style, name, error, label, description, onFocus, onBlur, ...props }, ref) => {
   const uniqueId = React.useId();
   return (
-    <FormItem className={className} style={style} ref={ref}>
+    <FormItem onPress={onPress} className={className} style={style} ref={ref}>
       {!!label && <FormLabel name={name || uniqueId} error={error} {...props}>{label}</FormLabel>}
       {!!description && <FormDescription className='pt-0'>{description}</FormDescription>}
     </FormItem>
