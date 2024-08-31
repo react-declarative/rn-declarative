@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-import IAnything from '../../../../../model/IAnything';
 import { Value } from '../../../../../model/IField';
 
 /**
@@ -20,7 +19,6 @@ interface IMemory {
     upperReadonly$: boolean;
     debouncedValue$: Value;
     invalid$: string | null;
-    object$: IAnything;
     value$: Value;
 }
 
@@ -51,7 +49,6 @@ interface IMemoryData extends Omit<IMemory, keyof {
  * @param memoryData.debouncedValue$ - The observable for the debounced value of the memory field.
  * @param memoryData.fieldReadonly$ - The observable for the readonly state of the memory field.
  * @param memoryData.invalid$ - The observable for the invalid state of the memory field.
- * @param memoryData.object$ - The observable for the object of the memory field.
  * @param memoryData.upperReadonly$ - The observable for the readonly state of the upper field.
  * @param memoryData.value$ - The observable for the value of the memory field.
  * @returns - The memory object.
@@ -64,7 +61,6 @@ export const useFieldMemory = ({
     debouncedValue$,
     fieldReadonly$,
     invalid$,
-    object$,
     upperReadonly$,
     value$,
 }: IMemoryData) => {
@@ -81,7 +77,6 @@ export const useFieldMemory = ({
      * @property debouncedValue$ - Represents the debounced value.
      * @property fieldReadonly$ - Represents the field readonly value.
      * @property invalid$ - Represents the invalid value.
-     * @property object$ - Represents the object value.
      * @property upperReadonly$ - Represents the upper readonly value.
      * @property value$ - Represents the value.
      */
@@ -96,14 +91,12 @@ export const useFieldMemory = ({
         debouncedValue$: null as never,
         fieldReadonly$: null as never,
         invalid$: null as never,
-        object$: null as never,
         upperReadonly$: null as never,
         value$: null as never,
     }), []);
     memory.debouncedValue$ = debouncedValue$;
     memory.fieldReadonly$ = fieldReadonly$;
     memory.invalid$ = invalid$;
-    memory.object$ = object$;
     memory.upperReadonly$ = upperReadonly$;
     memory.value$ = value$;
     memory.pressDisabled = pressDisabled;
