@@ -130,6 +130,7 @@ export interface IItemsFieldPrivate<Data = IAnything> {
   fieldReadonly: PickProp<IManaged<Data>, "fieldReadonly">;
   testId: PickProp<IManaged<Data>, 'testId'>;
   name: PickProp<IManaged<Data>, "name">;
+  loading: PickProp<IManaged<Data>, "loading">;
   onFocus: PickProp<IManaged<Data>, 'onFocus'>;
   onBlur: PickProp<IManaged<Data>, 'onBlur'>;
   isPhone: PickProp<IManaged<Data>, 'isPhone'>;
@@ -169,6 +170,7 @@ export const ItemsField = ({
   freeSolo = false,
   watchItemList,
   noDeselect,
+  loading,
   dirty,
   invalid,
   incorrect,
@@ -189,6 +191,7 @@ export const ItemsField = ({
     disabled={disabled}
     readonly={readonly}
     name={name}
+    loading={loading}
     fieldReadonly={fieldReadonly}
     description={description}
     placeholder={placeholder}

@@ -106,6 +106,7 @@ export interface IComboFieldPrivate<Data = IAnything>  {
   value: PickProp<IManaged<Data>, "value">;
   name: PickProp<IManaged<Data>, "name">;
   readonly: PickProp<IManaged<Data>, "readonly">;
+  loading: PickProp<IManaged<Data>, "loading">;
   fieldReadonly: PickProp<IManaged<Data>, "fieldReadonly">;
   onChange: PickProp<IManaged<Data>, "onChange">;
   dirty: PickProp<IManaged<Data>, "dirty">;
@@ -150,6 +151,7 @@ export const ComboField = ({
   itemList = [],
   freeSolo = false,
   watchItemList,
+  loading,
   noDeselect,
   title = "",
   dirty,
@@ -176,6 +178,7 @@ export const ComboField = ({
     itemList={itemList}
     noDeselect={noDeselect}
     watchItemList={watchItemList}
+    loading={loading}
     freeSolo={freeSolo}
     title={title}
     dirty={dirty}

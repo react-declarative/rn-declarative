@@ -216,6 +216,11 @@ export interface IField<Data = IAnything, Payload = IAnything> {
     watchItemList?: boolean;
 
     /**
+     * Включает change-detection для выпадающих меню. По умолчанию выключено
+     */
+    watchItemTree?: boolean;
+
+    /**
      * Включает change-detection для поля компонента. По умолчанию выключено
      */
     watchOneContext?: boolean;
