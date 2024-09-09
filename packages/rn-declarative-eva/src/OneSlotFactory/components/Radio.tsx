@@ -17,6 +17,7 @@ export const Radio = ({
     onFocus,
     onBlur,
     title,
+    readonly,
     radioValue,
     value,
     name = '',
@@ -49,7 +50,12 @@ export const Radio = ({
         <UiRadio
             checked={checked}
             disabled={disabled}
-            onChange={() => handleChange(radioValue || null)}
+            onChange={() => {
+                if (readonly) {
+                    return;
+                }
+                handleChange(radioValue || null);
+            }}
             onFocus={onFocus}
             onBlur={onBlur}
             style={styles.root}

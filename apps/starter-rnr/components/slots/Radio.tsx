@@ -15,6 +15,7 @@ export const Radio = ({
   value,
   disabled,
   dirty,
+  readonly,
   invalid,
   incorrect,
   radioValue,
@@ -22,7 +23,12 @@ export const Radio = ({
   const error = useMemo(() => dirty ? invalid || incorrect || null : null, [dirty, invalid, incorrect]);  
   return (
     <RadioGroup
-      onValueChange={onChange}
+      onValueChange={(value) => {
+        if (readonly) {
+          return;
+        }
+        onChange(value);
+      }}
       value={value}
     >
       <FormRadioGroupItem
@@ -31,7 +37,12 @@ export const Radio = ({
         disabled={disabled}
         radioValue={radioValue!}
         error={error}
-        onPress={() => onChange(radioValue)}
+        onPress={() => {
+          if (readonly) {
+            return;
+          }
+          onChange(radioValue)
+        }}
         onFocus={onFocus}
         onBlur={onBlur}
       />

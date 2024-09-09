@@ -106,6 +106,7 @@ export const RadioField = ({
   title,
   description,
   radioValue,
+  readonly,
   name = '',
   testId,
   invalid,
@@ -122,6 +123,7 @@ export const RadioField = ({
     disabled={disabled}
     onChange={onChange}
     title={title}
+    readonly={readonly}
     radioValue={radioValue}
     description={description}
     onFocus={onFocus}
