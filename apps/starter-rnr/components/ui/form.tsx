@@ -265,22 +265,24 @@ const FormCheckbox = React.forwardRef<
 
   return (
     <FormItem className={cn(className, 'h-[25px]')} onPress={handleOnLabelPress} className={className} style={style}>
-      <View className='flex-row gap-3 items-center'>
-        <Checkbox
-          ref={checkboxRef}
-          aria-invalid={!!error}
-          onCheckedChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          checked={value}
-          {...props}
-        />
-        {!!label && (
-          <FormLabel name={name} error={error} onPress={handleOnLabelPress}>
-            {label}
-          </FormLabel>
-        )}
-      </View>
+      <Pressable onPress={handleOnLabelPress}>
+        <View className='flex-row gap-3 items-center'>
+          <Checkbox
+            ref={checkboxRef}
+            aria-invalid={!!error}
+            onCheckedChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            checked={value}
+            {...props}
+          />
+          {!!label && (
+            <FormLabel className="w-100%" name={name} error={error} onPress={handleOnLabelPress}>
+              {label}
+            </FormLabel>
+          )}
+        </View>
+      </Pressable>
       {!!description && <FormDescription onPress={handleOnLabelPress} error={error}>{description}</FormDescription>}
     </FormItem>
   );
@@ -397,22 +399,25 @@ const FormRadioGroupItem = React.forwardRef<
 >(({ className, style, name, error, label, description, radioValue, onFocus, onBlur, onPress, ...props }, ref) => {
   return (
     <FormItem className={cn(className, 'h-[25px]')} onPress={onPress} style={style}>
-      <View className="flex-row gap-2 items-center">
-        <RadioGroupItem
-          aria-labelledby={name}
-          value={radioValue}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          {...props}
-        />
-        <FormLabel
-          name={name}
-          error={error}
-          onPress={onPress}
-        >
-          {label}
-        </FormLabel>
-      </View>
+      <Pressable onPress={onPress}>
+        <View className="flex-row gap-2 items-center">
+          <RadioGroupItem
+            aria-labelledby={name}
+            value={radioValue}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            {...props}
+          />
+          <FormLabel
+            className="w-100%"
+            name={name}
+            error={error}
+            onPress={onPress}
+          >
+            {label}
+          </FormLabel>
+        </View>
+      </Pressable>
       {!!description && <FormDescription error={error}>{description}</FormDescription>}
     </FormItem>
   );
@@ -452,22 +457,24 @@ const FormSwitch = React.forwardRef<
 
   return (
     <FormItem  onPress={handleOnLabelPress} className={cn(className, 'px-1')} style={style}>
-      <View className='flex-row gap-3 items-center'>
-        <Switch
-          ref={switchRef}
-          aria-invalid={!!error}
-          onCheckedChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          checked={value}
-          {...props}
-        />
-        {!!label && (
-          <FormLabel name={name} error={error} onPress={handleOnLabelPress}>
-            {label}
-          </FormLabel>
-        )}
-      </View>
+      <Pressable onPress={handleOnLabelPress}>
+        <View className='flex-row gap-3 items-center'>
+          <Switch
+            ref={switchRef}
+            aria-invalid={!!error}
+            onCheckedChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            checked={value}
+            {...props}
+          />
+          {!!label && (
+            <FormLabel className="w-100%" name={name} error={error} onPress={handleOnLabelPress}>
+              {label}
+            </FormLabel>
+          )}
+        </View>
+      </Pressable>
       {!!description && <FormDescription error={error}>{description}</FormDescription>}
     </FormItem>
   );
