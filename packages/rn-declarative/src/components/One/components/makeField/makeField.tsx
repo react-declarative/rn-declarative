@@ -161,7 +161,7 @@ export function makeField(
 
         const compute = useManagedCompute({
             compute: upperCompute,
-            object,
+            getObjectRef,
             payload,
             shouldRecompute,
         });
